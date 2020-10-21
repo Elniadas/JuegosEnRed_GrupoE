@@ -103,7 +103,28 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
 > - Ajustes: para configurar sonidos…
 > - Salir: para salir y volver a la pantalla principal.
+
 ![Diagrama](/Images/Pausa.png)
+
+> ## 4. Pruebas
+
+> - GüinDeReis está formado por 4 pruebas que deberán completarse lo más rápido posible con ayuda de power ups que se obtienen a lo largo del mapa, o bien realizando las pruebas secundarias como ha mencionado anteriormente. 
+
+> ### 4.1. Prueba de las flechas
+
+> - Para comenzar con este nivel, el jugador comenzará en un mapa con forma de copo de nieve gigante que contiene plataformas, como se puede ver en la imagen. Para comenzar la prueba tendrá que saltar y encontrar una esfera plateada. Una vez se pose en la plataforma donde se encuentre la esfera la prueba de las flechas comenzará. 
+
+
+> - La prueba se compone de una placa de hielo con forma circular girando constantemente y con el número de flechas restantes que hay que clavar.
+El objetivo de esta prueba es incrustar el número de flechas que se solicita ( mientras la placa esté dando vueltas) en los huecos disponibles sin que ninguna flecha se choque con ningún otro pulsando el botón de accion correspondiente a cada jugador. 
+> - Si una flecha se choca con una que ya está clavada, la prueba se reiniciará eliminando todas las flechas ya clavadas y teniendo que volver a empezar. 
+
+> - Una vez conseguir clavar todas las fechas, se le ofrece al jugador la opción de realizar la prueba secundaria: que consta de clavar en esta ocasión 15 flechas en una placa giratoria que ya tiene objetos clavados (por lo que no se podrán clavar en ese mismo sitio). 
+
+> - Una vez superada la prueba opcional, el jugador obtendrá el power up King of the Frost Giants, que congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
+
+![Diagrama](/Images/prueba pinchos.jpg)
+
 
 
 
