@@ -71,7 +71,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
 
 
-![Diagrama](/Images/Diagrama1.jpeg)
+![Diagrama](/Images/Diagrama1.jpeg = 250 x 250)
 ![Diagrama](/Images/Diagrama2.jpeg)
 
 > ### 2.3 Cámara
@@ -151,5 +151,27 @@ El objetivo de esta prueba es incrustar el número de flechas que se solicita ( 
 ![contador](/Images/contador.jpg)
 
 ![contador](/Images/Cronometro.png)
+
+
+> ### 4.4. Prueba de correr
+> - El jugador se acercará a la cinta eléctrica que está colocada en el centro de un gimnasio.
+
+> - El objetivo de esta prueba es presionar 50 veces 2 teclas simultáneamente reflejando que se está corriendo en una cinta eléctrica. 
+
+> - El jugador tiene 2 opciones (se indicarán con una señal al lado de la cinta eléctrica):
+
+> - Realizar la prueba principal: será más sencilla y rápida de realizar, ya que consiste en presionar lo más rápido posible 2 teclas cercanas a su alcance (por ejemplo A y D / izquierda derecha). Si se supera de este modo no se obtendrá un power up para pifiar al contrincante. 
+
+> - Realizar la prueba secundaria: Será realizar la misma prueba sólo que el jugador deberá de realizar un número mayor de pulsaciones. Si se supera de este modo se obtendrá el power up Zeus que hará que a lo largo del próximo circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida, por lo que irá más lento por un tiempo determinado. 
+
+![contador](/Images/Pruebagimnasio.jpg)
+![contador](/Images/Pruebacinta.jpg)
+
+
+Referencias
+
+Estructura de un GDD:
+https://github.com/dsaltares/sion-tower/blob/master/doc/gdd/gdd.pdf
+https://www.youtube.com/watch?v=z97ys0TDwDI
 
 
