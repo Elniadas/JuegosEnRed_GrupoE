@@ -123,8 +123,8 @@ El objetivo de esta prueba es incrustar el número de flechas que se solicita ( 
 
 > - Una vez superada la prueba opcional, el jugador obtendrá el power up King of the Frost Giants, que congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
 
-![Diagrama](/Images/pruebapinchos.jpg)
-![Diagrama](/Images/Flechas.png)
+![pruebapinchos](/Images/pruebapinchos.jpg)
+![Flecchas](/Images/Flechas.png)
 
 > ### 4.2. Prueba de electricidad 
 
@@ -136,6 +136,20 @@ El objetivo de esta prueba es incrustar el número de flechas que se solicita ( 
 > - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará completamente la visión del jugador rival por unos instantes.
 
 ![Electrica](/Images/Eléctrica.jpg)
+![Electrica](/Images/Electricidad_2.png)
 
+> ### 4.3. Prueba del contador
+> - El jugador se acercará al pulsador que está en el medio de la sala con un público a modo de espectadores. 
+
+> - Aparecerá una pantalla con el número 7.00 y en más pequeño los números 0.00. Los números 0.00 empiezan a contarse hacia arriba como si fuese un cronómetro y cuando llegue al 4.5 la pantalla se cierra. 
+
+> - El objetivo es que el jugador lleve la cuenta del cronómetro en su cabeza y que intente acercarse al número 7.00 (qué es el que aparece en grande) pulsando las teclas E y 0. Las respuestas válidas son las que se encuentran entre el 6.5 y el 7.5. 
+
+> - Si el jugador lo clava y hace 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
+
+
+![contador](/Images/contador.jpg)
+
+![contador](/Images/Cronometro.png)
 
 
