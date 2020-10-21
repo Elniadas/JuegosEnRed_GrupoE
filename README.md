@@ -99,10 +99,10 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de abajo la del 2. Ambas tienen el tiempo que llevan consumido. Arriba a la derecha hay un botón para poder pausar el juego. 
 ![Diagrama](/Images/Juego.png)
 > - Pantalla de pausa: aparece cuando se decide pausar el juego y contiene los botones: 
-  - Continuar: para salir y continuar con la partida
-   - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
-   - Ajustes: para configurar sonidos…
-   - Salir: para salir y volver a la pantalla principal.
+- Continuar: para salir y continuar con la partida
++ Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
++ Ajustes: para configurar sonidos…
++ Salir: para salir y volver a la pantalla principal.
 
 
 
