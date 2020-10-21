@@ -54,7 +54,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Time++: Suma tiempo al contador del jugador contrario.
 > - King of the Frost Giants: congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
 
-> 2.2 Flujo del Juego
+> ### 2.2 Flujo del Juego
 
 > - En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
 
