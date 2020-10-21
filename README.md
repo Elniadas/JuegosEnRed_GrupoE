@@ -73,7 +73,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 ![Diagrama](/Images/Diagrama1.jpeg = 250 x 250)
 ![Diagrama](/Images/Diagrama2.jpeg)
-
+<img src="https://github.com/Elniadas/JuegosEnRed_GrupoE/Images/Diagrama1.jpeg width="200" height="400" />
 > ### 2.3 Cámara
 
 > - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
