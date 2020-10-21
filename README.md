@@ -43,8 +43,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Power Ups de nivel bajo: estos se encuentran sueltos por el mapa, alrededor del circuito de pruebas (escondidos o en lo alto de plataformas). Los efectos de estos power ups afectarán en el jugador que los recoja y no en el contrincante. 
 
-+Movement speed: el jugador se mueve con mayor rapidez
--Time: el jugador podrá restar pocos segundos a su marcador
+> - +Movement speed: el jugador se mueve con mayor rapidez
+> - -Time: el jugador podrá restar pocos segundos a su marcador
 
 > - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Los jugadores pueden decidir el momento en que quieran activarlo. Algunos de estos pueden ser:
 
@@ -54,18 +54,18 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Time++: Suma tiempo al contador del jugador contrario.
 > - King of the Frost Giants: congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
 
-2.2 Flujo del Juego
+> 2.2 Flujo del Juego
 
-En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
+> - En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
 
-Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
-Si desean comenzar una partida deben acceder al botón de Jugar.
-Si desean ajustar el volumen o acceder a la configuración del juego y controles, podrán acceder a ello mediante el botón de Configuración.
-Cada vez que se finaliza una partida, se guarda la puntuación de tiempo de todos los jugadores junto a sus nombres, por tanto, si desean acceder a ver el historial de puntuaciones deberán acceder al botón de Historial de Partidas.
+> - Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
+> - Si desean comenzar una partida deben acceder al botón de Jugar.
+> - Si desean ajustar el volumen o acceder a la configuración del juego y controles, podrán acceder a ello mediante el botón de Configuración.
+> - Cada vez que se finaliza una partida, se guarda la puntuación de tiempo de todos los jugadores junto a sus nombres, por tanto, si desean acceder a ver el historial de  puntuaciones deberán acceder al botón de Historial de Partidas.
 
-Si se accionó el botón de Jugar, el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
-Ha llegado el momento de comenzar la partida, pero antes, ambos jugadores previsualizarán una pequeña guía o tutorial del juego mostrando los objetivos, controles y las reglas. Este tutorial se podrá saltar. Después del tutorial da comienzo la partida, donde cada jugador realizará sus pruebas de la manera más rápida posible. Tras ello, valorarán si entorpecer el transcurso de la partida del jugador contrario a cambio de más tiempo, resulta beneficioso.
+> - Si se accionó el botón de Jugar, el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
+> - Ha llegado el momento de comenzar la partida, pero antes, ambos jugadores previsualizarán una pequeña guía o tutorial del juego mostrando los objetivos, controles y las reglas. Este tutorial se podrá saltar. Después del tutorial da comienzo la partida, donde cada jugador realizará sus pruebas de la manera más rápida posible. Tras ello, valorarán si entorpecer el transcurso de la partida del jugador contrario a cambio de más tiempo, resulta beneficioso.
 
-Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador, guardando la puntuación en el Historial de Partidas.
+> - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador, guardando la puntuación en el Historial de Partidas.
 
-Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
+> - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
