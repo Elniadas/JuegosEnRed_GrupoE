@@ -126,5 +126,16 @@ El objetivo de esta prueba es incrustar el número de flechas que se solicita ( 
 ![Diagrama](/Images/pruebapinchos.jpg)
 ![Diagrama](/Images/Flechas.png)
 
+> ### 4.2. Prueba de electricidad 
+
+> - El objetivo de esta prueba será llevar la corriente de un punto a otro del recorrido girando las partes de los cables mal colocadas. Los jugadores podrán desplazarse a lo largo del circuito con las teclas de movimiento (W,A,S,D y las flechas) e interactuar con los cables mal orientados con las teclas E y 0.
+
+> - Una vez terminado el primer circuito se le ofrece al jugador la opción de realizar un segundo circuito (la prueba secundaria).
+> - Si decide realizarla, se le presentará al usuario un     circuito generalmente más complejo y con un objetivo extra; A lo largo del nuevo circuito se colocarán unas bombillas, y los jugadores tienen que llevar la corriente al otro extremo del circuito y además dejar las bombillas encendidas.
+
+> - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará completamente la visión del jugador rival por unos instantes.
+
+![Electrica](/Images/Eléctrica.jpg)
+
 
 
