@@ -71,4 +71,5 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
 
 
-![Contador](/Images/contador.jpg|width=100)
+![Diagrama](/Images/Diagrama1.jpeg)
+![Diagrama](/Images/Diagrama2.jpeg)
