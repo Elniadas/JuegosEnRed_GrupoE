@@ -69,3 +69,6 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador, guardando la puntuación en el Historial de Partidas.
 
 > - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
+
+
+![](JuegosEnRed_GrupoE/Images/Contador.jpg
