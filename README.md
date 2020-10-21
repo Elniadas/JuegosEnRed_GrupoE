@@ -124,7 +124,7 @@ El objetivo de esta prueba es incrustar el número de flechas que se solicita ( 
 > - Una vez superada la prueba opcional, el jugador obtendrá el power up King of the Frost Giants, que congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
 
 ![Diagrama](/Images/pruebapinchos.jpg)
-
+![Diagrama](/Images/Flechas.jpg)
 
 
 
