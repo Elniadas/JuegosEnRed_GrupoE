@@ -71,5 +71,24 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
 
 
-![Diagrama](/Images/Diagrama1.jpeg | width=100)
-![Diagrama](/Images/Diagrama2.jpeg | width=100)
+![Diagrama](/Images/Diagrama1.jpeg)
+![Diagrama](/Images/Diagrama2.jpeg)
+
+> ### 2.3 Cámara
+
+> - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
+
+> - En cuanto al movimiento del jugador y el mundo del juego, este se desarrolla horizontalmente o con un desplazamiento horizontal (propio de juegos como Mario Bros o Sonic entre otros), también denominado Scroll lateral.
+
+> ### 2.4 Controles
+
+> - Las teclas principales de movimiento del jugador son: “D” (Movimiento hacia derecha), “A” (Movimiento hacia izquierda), “W” (Salto), “E” (Interactuar con una prueba para realizarla). Para un segundo jugador, las teclas de movimiento serán: “Flecha derecha” (Movimiento hacia derecha), “Flecha izquierda” (Movimiento hacia izquierda), “Flecha arriba” (Salto), “M” (Interactuar con una prueba para realizarla)
+
+> - Dentro de las pruebas con las que se interactúe, los controles serán los mismos que los anteriores, los de movimiento servirán en este caso para desplazarnos por la prueba y el botón de interacción para realizar las distintas acciones.
+
+> ### 2.5 Puntuación
+
+> - Como se ha mencionado anteriormente, al final de cada partida se guarda el tiempo total que ambos jugadores han tardado en completar el recorrido de pruebas y el sistema decide quién es el ganador.
+
+> - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan interactuado con la puerta que lleva al siguiente nivel / siguiente prueba. 
+
