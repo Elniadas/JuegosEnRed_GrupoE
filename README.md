@@ -1,5 +1,10 @@
 # JuegosEnRed_GrupoE
 
+- Adrián Valiente González: a.valiente.2018@alumnos.urjc.es
+- Aitor García Prádanos: a.garciap.2018@alumnos.urjc.es
+- Daniel Sánchez Cánovas: d.sanchezc.2018@alumnos.urjc.es
+- Javier Morales Lasheras: j.morales.2018@alumnos.urjc.es 
+
 # GDD - JUEGOS EN RED
 
 > ## Concepto del juego
