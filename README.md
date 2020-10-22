@@ -1,9 +1,9 @@
 # JuegosEnRed_GrupoE
 
-- Adrián Valiente González: a.valiente.2018@alumnos.urjc.es
-- Aitor García Prádanos: a.garciap.2018@alumnos.urjc.es
-- Daniel Sánchez Cánovas: d.sanchezc.2018@alumnos.urjc.es
-- Javier Morales Lasheras: j.morales.2018@alumnos.urjc.es 
+- Adrián Valiente González: a.valiente.2018@alumnos.urjc.es    | Adrian-Valiente
+- Aitor García Prádanos:    a.garciap.2018@alumnos.urjc.es     | aitoorgrc
+- Daniel Sánchez Cánovas:   d.sanchezc.2018@alumnos.urjc.es    | javixmorales
+- Javier Morales Lasheras:  j.morales.2018@alumnos.urjc.es     | Elniadas
 
 # GDD - JUEGOS EN RED
 
