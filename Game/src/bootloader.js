@@ -20,7 +20,9 @@ class Bootloader extends Phaser.Scene {
         this.load.image("CintaReposo","./assets/CintaReposo.png");
         this.load.image("GimnasioBlur","./assets/GimnasioBlur.png")
         this.load.spritesheet("CintaCorrer","./assets/CintaAnimada.jpg",{frameWidth:500,frameHeight:600});
+        this.load.image("gymplatform", "./assets/GymPlat.png");
 
+        
         //Contador//
 
         this.load.image("Pulsador", "./assets/Pulsador.png");
@@ -36,7 +38,17 @@ class Bootloader extends Phaser.Scene {
 
         this.load.image("Electricidad", "./assets/NivelElectricidad.png");
 
-        
+        //Menu//
+        this.load.image("playButton","./assets/playButton.png");
+        this.load.image("menu","./assets/MainMenu.jpg");
+        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", {frameWidth:450,frameHeight:300}); //banderas
+        this.load.spritesheet("Play", "./assets/Play.png", {frameWidth:792,frameHeight:410}); //botón de play
+        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", {frameWidth:300, frameHeight:300}); //botón sonido
+
+
+
+
+
         //Otros//
         
         this.load.image("muro", "./assets/Muro.png");
@@ -370,6 +382,17 @@ class Bootloader extends Phaser.Scene {
             repeat:0,
             frameRate:8
         })
+
+
+        //banderas
+        this.anims.create({
+            key: "wave",
+            frames: this.anims.generateFrameNumbers("FlagSheet2", {frames:[0,1,2,3,4,5]}),            
+            repeat: -1,
+            frameRate: 6
+            
+        })
+        
 
         
         
