@@ -27,6 +27,10 @@ class MainMenu extends Phaser.Scene {
         //console.log(document.getElementById("contenedor").clientWidth);
         //console.log(document.getElementById("contenedor").offsetWidth);
 
+
+
+        //ESTO ES UN COMENTARIO DE PRUEBA PARA GITHUB
+
     }
 }
 export default MainMenu;
