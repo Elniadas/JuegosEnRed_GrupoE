@@ -46,9 +46,6 @@ class Bootloader extends Phaser.Scene {
         this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", {frameWidth:300, frameHeight:300}); //botón sonido
 
 
-
-
-
         //Otros//
         
         this.load.image("muro", "./assets/Muro.png");
