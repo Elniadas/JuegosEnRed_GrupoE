@@ -39,7 +39,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Electricidad", "./assets/NivelElectricidad.png");
 
         //Menu//
-        this.load.image("playButton","./assets/playButton.png");
+        //this.load.image("playButton","./assets/playButton.png");
         this.load.image("menu","./assets/MainMenu.jpg");
         this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", {frameWidth:450,frameHeight:300}); //banderas
         this.load.spritesheet("Play", "./assets/Play.png", {frameWidth:792,frameHeight:410}); //botón de play
@@ -49,8 +49,8 @@ class Bootloader extends Phaser.Scene {
         //Otros//
         
         this.load.image("muro", "./assets/Muro.png");
-        this.load.image("mainmenu","./assets/MainMenuB.jpg");
-        this.load.image("playButton","./assets/playButton.png");
+        //this.load.image("mainmenu","./assets/MainMenuB.jpg");
+        //this.load.image("playButton","./assets/playButton.png");
         this.load.image("logo","./assets/Logo.jpg")
         this.load.image("Crono","./assets/Cronometro.png")
         

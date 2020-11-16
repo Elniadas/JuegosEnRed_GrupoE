@@ -78,9 +78,11 @@ class Scene_play extends Phaser.Scene {
         this.blurGU.alpha = 0;
 
 
-        let cintaU = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "logo")
-        cintaU.displayHeight = this.game.canvas.height * 0.3;
-        cintaU.displayWidth = this.game.canvas.width * 0.13;
+        //se ha modificado la posición de la colisión de la cinta para moverla junto a un sprite
+        let cintaU = this.physics.add.image(900+ 1180 * this.escenarios[0].pos, 311, "logo") //esta no es la oficial, es para pasar más rápido al siguiente nivel
+        //let cintaU = this.physics.add.image(1030+ 1180 * this.escenarios[0].pos, 77, "logo")
+        cintaU.displayHeight = 95;
+        cintaU.displayWidth = 50;
         cintaU.setImmovable(true)
         cintaU.alpha = 0;
 
@@ -101,11 +103,179 @@ class Scene_play extends Phaser.Scene {
         this.blurGD.displayWidth = this.game.canvas.width;
         this.blurGD.alpha = 0;
 
-
-        let cintaD = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
+        //se ha modificado la posición de la colisión de la cinta para junto a un sprite
+        let cintaD = this.physics.add.image(900+ 1180 * this.escenarios[0].pos, 671, "logo") //no oficial
+        //let cintaD = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
         cintaD.displayHeight = this.game.canvas.height * 0.3;
         cintaD.displayWidth = this.game.canvas.width * 0.13;
         cintaD.alpha = 0;
+
+        //Plataformas jugador 1
+        let p1_1_1=this.physics.add.image(100,this.game.canvas.height*0.42, "gymplatform").setImmovable(true);
+        p1_1_1.displayHeight=20;
+        p1_1_1.displayWidth=80;
+
+        let p1_1_2=this.physics.add.image(220,260, "gymplatform").setImmovable(true);
+        p1_1_2.displayHeight=20;
+        p1_1_2.displayWidth=80;
+
+        let p1_1_3=this.physics.add.image(320,150, "gymplatform").setImmovable(true);
+        this.tweens.timeline({
+            targets: p1_1_3.body.velocity,
+            loop: -1,
+            tweens: [
+                {y: 80, duration: 750, ease: 'Stepped'},
+                {y:-80, duration: 750, ease:'Stepped'}
+            ]
+        })
+
+        let p1_1_4=this.physics.add.image(200,120, "gymplatform").setImmovable(true);
+        p1_1_4.displayHeight=20;
+        p1_1_4.displayWidth=80;
+
+        let p1_1_5=this.physics.add.image(85,150, "gymplatform").setImmovable(true);
+        p1_1_5.displayHeight=20;
+        p1_1_5.displayWidth=80;
+        
+        let p1_1_6=this.physics.add.image(430,185, "gymplatform").setImmovable(true);
+        p1_1_6.displayHeight=20;
+        p1_1_6.displayWidth=80;
+
+        let p1_1_7=this.physics.add.image(535,230, "gymplatform").setImmovable(true);
+        p1_1_7.displayHeight=20;
+        p1_1_7.displayWidth=80;
+
+        let p1_1_8=this.physics.add.image(650,230, "gymplatform").setImmovable(true);
+        p1_1_8.displayHeight=20;
+        p1_1_8.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p1_1_8.body.velocity,
+            loop: -1,
+            tweens: [
+                {y: -60, duration: 850, ease: 'Stepped'},
+                {y:60, duration: 850, ease:'Stepped'}
+            ]
+        })
+
+        let p1_1_9=this.physics.add.image(750,135, "gymplatform").setImmovable(true);
+        p1_1_9.displayHeight=20;
+        p1_1_9.displayWidth=80;
+
+        let p1_1_10=this.physics.add.image(950,190, "gymplatform").setImmovable(true);
+        p1_1_10.displayHeight=20;
+        p1_1_10.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p1_1_10.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -60, duration: 1700, ease: 'Stepped'},
+                {x:60, duration: 1700, ease:'Stepped'}
+            ]
+        })
+
+        let p1_1_11=this.physics.add.image(1020,135, "gymplatform").setImmovable(true);
+        p1_1_11.displayHeight=20;
+        p1_1_11.displayWidth=80;
+
+
+        let grupoP1_gym=this.add.group();
+        grupoP1_gym.add(p1_1_1);
+        grupoP1_gym.add(p1_1_2);
+        grupoP1_gym.add(p1_1_3);
+        grupoP1_gym.add(p1_1_4);
+        grupoP1_gym.add(p1_1_5);
+        grupoP1_gym.add(p1_1_6);
+        grupoP1_gym.add(p1_1_7);
+        grupoP1_gym.add(p1_1_8);
+        grupoP1_gym.add(p1_1_9);
+        grupoP1_gym.add(p1_1_10);
+        grupoP1_gym.add(p1_1_11);
+
+        //Plataformas jugador 2
+        let p2_1_1=this.physics.add.image(100,this.game.canvas.height*0.42+360, "gymplatform").setImmovable(true);
+        p2_1_1.displayHeight=20;
+        p2_1_1.displayWidth=80;
+
+        let p2_1_2=this.physics.add.image(220,620, "gymplatform").setImmovable(true);
+        p2_1_2.displayHeight=20;
+        p2_1_2.displayWidth=80;
+
+        let p2_1_3=this.physics.add.image(320,510, "gymplatform").setImmovable(true);
+        this.tweens.timeline({
+            targets: p2_1_3.body.velocity,
+            loop: -1,
+            tweens: [
+                {y: 80, duration: 750, ease: 'Stepped'},
+                {y:-80, duration: 750, ease:'Stepped'}
+            ]
+        })
+
+        let p2_1_4=this.physics.add.image(200,480, "gymplatform").setImmovable(true);
+        p2_1_4.displayHeight=20;
+        p2_1_4.displayWidth=80;
+
+        let p2_1_5=this.physics.add.image(85,510, "gymplatform").setImmovable(true);
+        p2_1_5.displayHeight=20;
+        p2_1_5.displayWidth=80;
+        
+        let p2_1_6=this.physics.add.image(430,545, "gymplatform").setImmovable(true);
+        p2_1_6.displayHeight=20;
+        p2_1_6.displayWidth=80;
+
+        let p2_1_7=this.physics.add.image(535,590, "gymplatform").setImmovable(true);
+        p2_1_7.displayHeight=20;
+        p2_1_7.displayWidth=80;
+
+        let p2_1_8=this.physics.add.image(650,590, "gymplatform").setImmovable(true);
+        p2_1_8.displayHeight=20;
+        p2_1_8.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p2_1_8.body.velocity,
+            loop: -1,
+            tweens: [
+                {y: -60, duration: 850, ease: 'Stepped'},
+                {y:60, duration: 850, ease:'Stepped'}
+            ]
+        })
+
+        let p2_1_9=this.physics.add.image(750,495, "gymplatform").setImmovable(true);
+        p2_1_9.displayHeight=20;
+        p2_1_9.displayWidth=80;
+
+        let p2_1_10=this.physics.add.image(950,550, "gymplatform").setImmovable(true);
+        p2_1_10.displayHeight=20;
+        p2_1_10.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p2_1_10.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -60, duration: 1700, ease: 'Stepped'},
+                {x:60, duration: 1700, ease:'Stepped'}
+            ]
+        })
+
+        let p2_1_11=this.physics.add.image(1020,495, "gymplatform").setImmovable(true);
+        p2_1_11.displayHeight=20;
+        p2_1_11.displayWidth=80;
+
+
+        let grupoP2_gym=this.add.group();
+        grupoP2_gym.add(p2_1_1);
+        grupoP2_gym.add(p2_1_2);
+        grupoP2_gym.add(p2_1_3);
+        grupoP2_gym.add(p2_1_4);
+        grupoP2_gym.add(p2_1_5);
+        grupoP2_gym.add(p2_1_6);
+        grupoP2_gym.add(p2_1_7);
+        grupoP2_gym.add(p2_1_8);
+        grupoP2_gym.add(p2_1_9);
+        grupoP2_gym.add(p2_1_10);
+        grupoP2_gym.add(p2_1_11);
+
 
 
 
@@ -131,6 +301,76 @@ class Scene_play extends Phaser.Scene {
         this.escBU2.displayHeight = this.game.canvas.height / 2;
         this.escBU2.displayWidth = this.game.canvas.width;
         this.escBU2.alpha = 0;
+
+        //Plataformas jugador 1
+        let p1_2_1=this.physics.add.image( 100 + 1180 * this.escenarios[1].pos,this.game.canvas.height*0.42, "gymplatform").setImmovable(true);
+        p1_2_1.displayHeight=20;
+        p1_2_1.displayWidth=80;
+        p1_2_1.alpha=0;
+
+        this.tweens.timeline({
+            targets: p1_2_1.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: 60, duration: 2000, ease: 'Stepped'},
+                {x:-60, duration: 2000, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p1_2_2=this.physics.add.image( 275 + 1180 * this.escenarios[1].pos,210, "gymplatform").setImmovable(true);
+        p1_2_2.displayHeight=20;
+        p1_2_2.displayWidth=80;
+        p1_2_2.alpha=0;
+
+        this.tweens.timeline({
+            targets: p1_2_2.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -80, duration: 1200, ease: 'Stepped'},
+                {x: 80, duration: 1200, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p1_2_3=this.physics.add.image( 75 + 1180 * this.escenarios[1].pos,150, "gymplatform").setImmovable(true);
+        p1_2_3.displayHeight=20;
+        p1_2_3.displayWidth=80;
+
+        let p1_2_4=this.physics.add.image( 200 + 1180 * this.escenarios[1].pos,100, "gymplatform").setImmovable(true);
+        p1_2_4.displayHeight=20;
+        p1_2_4.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p1_2_4.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: 70, duration: 1200, ease: 'Stepped'},
+                {x: -70, duration: 1200, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p1_2_5=this.physics.add.image( 390 + 1180 * this.escenarios[1].pos,100, "gymplatform").setImmovable(true);
+        p1_2_5.displayHeight=20;
+        p1_2_5.displayWidth=80;
+        
+
+        let grupoP1_cont=this.add.group();
+        grupoP1_cont.add(p1_2_1);
+        grupoP1_cont.add(p1_2_2);
+        grupoP1_cont.add(p1_2_3);
+        //plataforma 3 desaparece
+        var intermitence=setInterval(()=>{
+            p1_2_3.alpha=p1_2_3.alpha==1?0:1;
+            p1_2_3.alpha==1?grupoP1_cont.add(p1_2_3):grupoP1_cont.remove(p1_2_3);           
+          }, 2500);
+        grupoP1_cont.add(p1_2_4);
+        grupoP1_cont.add(p1_2_5);
+
+
+        
+
 
 
 
@@ -327,6 +567,13 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.collider(this.playerU, this.paredes);
         this.physics.add.collider(this.playerD, this.paredes);
 
+        //Colisión plataformas gimnasio
+        this.physics.add.collider(this.playerU, grupoP1_gym);
+        this.physics.add.collider(this.playerD, grupoP2_gym);
+
+        //Colisión plataformas contador
+        this.physics.add.collider(this.playerU, grupoP1_cont);
+
         //this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.PruebaU(0) }, null, this);
         this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
         //this.ventana2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.PruebaD(1) }, null, this);
@@ -508,7 +755,7 @@ class Scene_play extends Phaser.Scene {
             player.body.setVelocityX(0);
             player.body.setVelocityY(0);
             player.anims.stop();
-            player.x = (1180 * (factor + 1) + 100);
+            player.x = (1180 * (factor + 1) + 25);
 
 
             player.y = this.game.canvas.height / 2 - 50;
@@ -521,7 +768,7 @@ class Scene_play extends Phaser.Scene {
             player.body.setVelocityX(0);
             player.body.setVelocityY(0);
             player.anims.stop();
-            player.x = (1180 * (factor + 1) + 100);
+            player.x = (1180 * (factor + 1) + 25);
 
 
             player.y = this.game.canvas.height - 50;
