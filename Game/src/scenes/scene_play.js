@@ -79,12 +79,13 @@ class Scene_play extends Phaser.Scene {
 
 
         //se ha modificado la posición de la colisión de la cinta para moverla junto a un sprite
-        let cintaU = this.physics.add.image(900+ 1180 * this.escenarios[0].pos, 311, "logo") //esta no es la oficial, es para pasar más rápido al siguiente nivel
-        //let cintaU = this.physics.add.image(1030+ 1180 * this.escenarios[0].pos, 77, "logo")
-        cintaU.displayHeight = 95;
-        cintaU.displayWidth = 50;
-        cintaU.setImmovable(true)
-        cintaU.alpha = 0;
+        //let cintaU = this.physics.add.image(900+ 1180 * this.escenarios[0].pos, 311, "cintaSprite") //esta no es la oficial, es para pasar más rápido al siguiente nivel
+        let cintaU = this.physics.add.image(1030+ 1180 * this.escenarios[0].pos, 89, "cintaSprite")
+        //cintaU.displayHeight = 97;
+        //cintaU.displayWidth = 80;
+        cintaU.setScale(0.30);
+        cintaU.setImmovable(true);
+        
 
         let groupCintaU = this.add.group()
         groupCintaU.add(cintaU);
@@ -104,11 +105,9 @@ class Scene_play extends Phaser.Scene {
         this.blurGD.alpha = 0;
 
         //se ha modificado la posición de la colisión de la cinta para junto a un sprite
-        let cintaD = this.physics.add.image(900+ 1180 * this.escenarios[0].pos, 671, "logo") //no oficial
+        let cintaD = this.physics.add.image(1030+ 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
         //let cintaD = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
-        cintaD.displayHeight = this.game.canvas.height * 0.3;
-        cintaD.displayWidth = this.game.canvas.width * 0.13;
-        cintaD.alpha = 0;
+        cintaD.setScale(0.30);
 
         //Plataformas jugador 1
         let p1_1_1=this.physics.add.image(100,this.game.canvas.height*0.42, "gymplatform").setImmovable(true);
@@ -302,6 +301,27 @@ class Scene_play extends Phaser.Scene {
         this.escBU2.displayWidth = this.game.canvas.width;
         this.escBU2.alpha = 0;
 
+        
+        //Parte jugador 2
+
+        let escD2 = this.add.image(0 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2, "Contador").setOrigin(0, 0);
+
+        escD2.displayHeight = this.game.canvas.height / 2;
+        escD2.displayWidth = this.game.canvas.width;
+
+        let pruebaContador2 = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
+        pruebaContador2.displayHeight = this.game.canvas.height * 0.1;
+        pruebaContador2.displayWidth = this.game.canvas.width * 0.08;
+        pruebaContador2.setImmovable(true)
+        pruebaContador2.alpha = 0;
+
+        this.escBU22 = this.add.image(0 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2, "ContadorBlur").setOrigin(0, 0)
+
+        this.escBU22.displayHeight = this.game.canvas.height / 2;
+        this.escBU22.displayWidth = this.game.canvas.width;
+        this.escBU22.alpha = 0;
+
+
         //Plataformas jugador 1
         let p1_2_1=this.physics.add.image( 100 + 1180 * this.escenarios[1].pos,this.game.canvas.height*0.42, "gymplatform").setImmovable(true);
         p1_2_1.displayHeight=20;
@@ -354,6 +374,35 @@ class Scene_play extends Phaser.Scene {
         let p1_2_5=this.physics.add.image( 390 + 1180 * this.escenarios[1].pos,100, "gymplatform").setImmovable(true);
         p1_2_5.displayHeight=20;
         p1_2_5.displayWidth=80;
+
+        let p1_2_6=this.physics.add.image( 490 + 1180 * this.escenarios[1].pos,100, "gymplatform").setImmovable(true);
+        p1_2_6.displayHeight=20;
+        p1_2_6.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p1_2_6.body.velocity,
+            loop: -1,
+            tweens: [
+                {y: 40, duration: 2500, ease: 'Stepped'},
+                {y: -40, duration: 2500, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p1_2_7=this.physics.add.image( 610 + 1180 * this.escenarios[1].pos,200, "gymplatform").setImmovable(true);
+        p1_2_7.displayHeight=20;
+        p1_2_7.displayWidth=80;
+
+        //muro para que no se entre en contador directamente
+        let notCheating=this.physics.add.image( 800 + 1180 * this.escenarios[1].pos,235, "gymplatform").setImmovable(true);
+        notCheating.displayHeight=250;
+        notCheating.displayWidth=20;
+        notCheating.alpha=0;
+        
+        let p1_2_8=this.physics.add.image( 720 + 1180 * this.escenarios[1].pos,150, "gymplatform").setImmovable(true);
+        p1_2_8.displayHeight=20;
+        p1_2_8.displayWidth=80;
+
         
 
         let grupoP1_cont=this.add.group();
@@ -367,31 +416,117 @@ class Scene_play extends Phaser.Scene {
           }, 2500);
         grupoP1_cont.add(p1_2_4);
         grupoP1_cont.add(p1_2_5);
+        grupoP1_cont.add(p1_2_6);
+        grupoP1_cont.add(p1_2_7);
+        var intermitence=setInterval(()=>{
+            p1_2_7.alpha=p1_2_7.alpha==1?0:1;
+            p1_2_7.alpha==1?grupoP1_cont.add(p1_2_7):grupoP1_cont.remove(p1_2_7);           
+          }, 2000);
+        grupoP1_cont.add(notCheating);
+        grupoP1_cont.add(p1_2_8);
 
+        //Plataformas jugador 2
+        let p2_2_1=this.physics.add.image( 100 + 1180 * this.escenarios[1].pos,this.game.canvas.height*0.42+360, "gymplatform").setImmovable(true);
+        p2_2_1.displayHeight=20;
+        p2_2_1.displayWidth=80;
+        p2_2_1.alpha=0;
+
+        this.tweens.timeline({
+            targets: p2_2_1.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: 60, duration: 2000, ease: 'Stepped'},
+                {x:-60, duration: 2000, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p2_2_2=this.physics.add.image( 275 + 1180 * this.escenarios[1].pos,570, "gymplatform").setImmovable(true);
+        p2_2_2.displayHeight=20;
+        p2_2_2.displayWidth=80;
+        p2_2_2.alpha=0;
+
+        this.tweens.timeline({
+            targets: p2_2_2.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -80, duration: 1200, ease: 'Stepped'},
+                {x: 80, duration: 1200, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p2_2_3=this.physics.add.image( 75 + 1180 * this.escenarios[1].pos,510, "gymplatform").setImmovable(true);
+        p2_2_3.displayHeight=20;
+        p2_2_3.displayWidth=80;
+
+        let p2_2_4=this.physics.add.image( 200 + 1180 * this.escenarios[1].pos,460, "gymplatform").setImmovable(true);
+        p2_2_4.displayHeight=20;
+        p2_2_4.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p2_2_4.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: 70, duration: 1200, ease: 'Stepped'},
+                {x: -70, duration: 1200, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p2_2_5=this.physics.add.image( 390 + 1180 * this.escenarios[1].pos,460, "gymplatform").setImmovable(true);
+        p2_2_5.displayHeight=20;
+        p2_2_5.displayWidth=80;
+
+        let p2_2_6=this.physics.add.image( 490 + 1180 * this.escenarios[1].pos,460, "gymplatform").setImmovable(true);
+        p2_2_6.displayHeight=20;
+        p2_2_6.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p2_2_6.body.velocity,
+            loop: -1,
+            tweens: [
+                {y: 40, duration: 2500, ease: 'Stepped'},
+                {y: -40, duration: 2500, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p2_2_7=this.physics.add.image( 610 + 1180 * this.escenarios[1].pos,560, "gymplatform").setImmovable(true);
+        p2_2_7.displayHeight=20;
+        p2_2_7.displayWidth=80;
+
+        //muro para que no se entre en contador directamente
+        let notCheating2=this.physics.add.image( 800 + 1180 * this.escenarios[1].pos,595, "gymplatform").setImmovable(true);
+        notCheating2.displayHeight=250;
+        notCheating2.displayWidth=20;
+        notCheating2.alpha=0;
+        
+        let p2_2_8=this.physics.add.image( 720 + 1180 * this.escenarios[1].pos,510, "gymplatform").setImmovable(true);
+        p2_2_8.displayHeight=20;
+        p2_2_8.displayWidth=80;
 
         
 
-
-
-
-        //Parte jugador 2
-
-        let escD2 = this.add.image(0 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2, "Contador").setOrigin(0, 0);
-
-        escD2.displayHeight = this.game.canvas.height / 2;
-        escD2.displayWidth = this.game.canvas.width;
-
-        let pruebaContador2 = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
-        pruebaContador2.displayHeight = this.game.canvas.height * 0.1;
-        pruebaContador2.displayWidth = this.game.canvas.width * 0.08;
-        pruebaContador2.setImmovable(true)
-        pruebaContador2.alpha = 0;
-
-        this.escBU22 = this.add.image(0 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2, "ContadorBlur").setOrigin(0, 0)
-
-        this.escBU22.displayHeight = this.game.canvas.height / 2;
-        this.escBU22.displayWidth = this.game.canvas.width;
-        this.escBU22.alpha = 0;
+        let grupoP2_cont=this.add.group();
+        grupoP2_cont.add(p2_2_1);
+        grupoP2_cont.add(p2_2_2);
+        grupoP2_cont.add(p2_2_3);
+        //plataforma 3 desaparece
+        var intermitence=setInterval(()=>{
+            p2_2_3.alpha=p2_2_3.alpha==1?0:1;
+            p2_2_3.alpha==1?grupoP2_cont.add(p2_2_3):grupoP2_cont.remove(p2_2_3);           
+          }, 2500);
+        grupoP2_cont.add(p2_2_4);
+        grupoP2_cont.add(p2_2_5);
+        grupoP2_cont.add(p2_2_6);
+        grupoP2_cont.add(p2_2_7);
+        var intermitence=setInterval(()=>{
+            p2_2_7.alpha=p2_2_7.alpha==1?0:1;
+            p2_2_7.alpha==1?grupoP2_cont.add(p2_2_7):grupoP2_cont.remove(p2_2_7);           
+          }, 2000);
+        grupoP2_cont.add(notCheating2);
+        grupoP2_cont.add(p2_2_8);
 
 
         //Escenario 3 Nieve
@@ -543,7 +678,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height / 2)
         //Para que persiga al pj
         this.cam1.startFollow(this.playerU, true);
-        this.cam1.setZoom(1)
+        this.cam1.setZoom(2.1)
 
 
         this.cam2 = this.cameras.add(0, this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2).setName('Camara 2');
@@ -553,7 +688,7 @@ class Scene_play extends Phaser.Scene {
 
         this.cam2.startFollow(this.playerD, true);
 
-        this.cam2.setZoom(2.5)
+        this.cam2.setZoom(1)
 
 
 
@@ -573,6 +708,8 @@ class Scene_play extends Phaser.Scene {
 
         //Colisión plataformas contador
         this.physics.add.collider(this.playerU, grupoP1_cont);
+        this.physics.add.collider(this.playerD, grupoP2_cont);
+
 
         //this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.PruebaU(0) }, null, this);
         this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
@@ -819,20 +956,27 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPortalGimnasioP1() {
+        let spritePortal=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "portal");
+        spritePortal.play("portalAnim");
+        spritePortal.setScale(0.5);
         this.portal = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "logo")
-        this.portal.displayHeight = this.game.canvas.height * 0.1;
-        this.portal.displayWidth = this.game.canvas.width * 0.08;
-        this.portal.alpha = 1;
+        this.portal.displayHeight = 155; //spritePortal.height x 0.5
+        this.portal.displayWidth = 84; //spritePortal.width x 0.5
+        this.portal.alpha = 0;
+        
 
         this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[0].pos, this.cam1) }, null, this);
 
     }
 
     crearPortalPulsadorP1() {
+        let spritePortal=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.34, "portal");
+        spritePortal.play("portalAnim");
+        spritePortal.setScale(0.5);
         this.portal = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.34, "logo")
-        this.portal.displayHeight = this.game.canvas.height * 0.1;
-        this.portal.displayWidth = this.game.canvas.width * 0.08;
-        this.portal.alpha = 1;
+        this.portal.displayHeight = 155; //spritePortal.height x 0.5
+        this.portal.displayWidth = 84; //spritePortal.width x 0.5
+        this.portal.alpha = 0;
 
         this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[1].pos, this.cam1) }, null, this);
 
@@ -843,20 +987,24 @@ class Scene_play extends Phaser.Scene {
 
 
     crearPortalGimnasioP2() {
-
+        let spritePortal2=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "portal");
+        spritePortal2.play("portalAnim");
+        spritePortal2.setScale(0.5);
         this.portalD = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
-        this.portalD.displayHeight = this.game.canvas.height * 0.1;
-        this.portalD.displayWidth = this.game.canvas.width * 0.08;
+        this.portalD.displayHeight = 155; //spritePortal.height x 0.5
+        this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;
         this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[0].pos, this.cam2) }, null, this); console.log(this.portal)
     }
 
 
     crearPortalPulsadorP2() {
-
+        let spritePortal2=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "portal");
+        spritePortal2.play("portalAnim");
+        spritePortal2.setScale(0.5);
         this.portalD = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.84, "logo")
-        this.portalD.displayHeight = this.game.canvas.height * 0.1;
-        this.portalD.displayWidth = this.game.canvas.width * 0.08;
+        this.portalD.displayHeight = 155; //spritePortal.height x 0.5
+        this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;
         this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[1].pos, this.cam2) }, null, this); console.log(this.portal)
     }
