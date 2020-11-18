@@ -110,11 +110,13 @@ class CintaP1 extends Phaser.Scene {
 
         }
         if (this.puntuacion >= this.tope) {
+
             this.data.escena.escenasActivas[0] = false;
             this.data.escena.blurGU.alpha = 0;
+            this.data.escena.escenarios[0].completadoP1U=true;
             this.data.escena.completado[0] = true;
             this.data.escena.crearPortalGimnasioP1();
-
+            console.log("Saliendo klk")
             this.scene.stop(this);
         }
         //console.log(this.keyLock)

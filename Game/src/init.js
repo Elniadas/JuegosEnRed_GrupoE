@@ -5,6 +5,7 @@ import CintaP1 from './scenes/CintaP1.js';
 import CintaP2 from './scenes/CintaP2.js';
 import ContadorP1 from './scenes/ContadorP1.js';
 import ContadorP2 from './scenes/ContadorP2.js';
+import ElectricidadP1 from './scenes/ElectricidadP1.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -40,7 +41,8 @@ const config = {
         CintaP1,
         CintaP2,
         ContadorP1,
-        ContadorP2
+        ContadorP2,
+        ElectricidadP1
     ]
 }
 

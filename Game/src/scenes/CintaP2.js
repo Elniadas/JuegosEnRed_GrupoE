@@ -92,6 +92,7 @@ class CintaP2 extends Phaser.Scene {
 
         if (this.puntuacion >= this.tope) {
             this.data.escena.escenasActivas[1] = false;
+            this.data.escena.escenarios[0].completadoP2U=true;
             this.data.escena.blurGD.alpha = 0;
             this.data.escena.completado[1]=true;
 
