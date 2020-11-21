@@ -52,7 +52,7 @@ class Scene_play extends Phaser.Scene {
         this.escenarios[3] = new Escenario("Electricidad", 2);
 
         this.physics.world.setBounds(0, 0, 4520, this.game.canvas.height);
-
+        var that=this;
 
         //Factor de suma 1180 * this.escenarios[i].pos
 
@@ -110,15 +110,15 @@ class Scene_play extends Phaser.Scene {
         cintaD.setScale(0.30);
 
         //Plataformas jugador 1
-        let p1_1_1=this.physics.add.image(100,this.game.canvas.height*0.42, "gymplatform").setImmovable(true);
+        let p1_1_1=this.physics.add.image(100+1180 * this.escenarios[0].pos,this.game.canvas.height*0.42, "gymplatform").setImmovable(true);
         p1_1_1.displayHeight=20;
         p1_1_1.displayWidth=80;
 
-        let p1_1_2=this.physics.add.image(220,260, "gymplatform").setImmovable(true);
+        let p1_1_2=this.physics.add.image(220 + 1180 * this.escenarios[0].pos,260, "gymplatform").setImmovable(true);
         p1_1_2.displayHeight=20;
         p1_1_2.displayWidth=80;
 
-        let p1_1_3=this.physics.add.image(320,150, "gymplatform").setImmovable(true);
+        let p1_1_3=this.physics.add.image(320+ 1180 * this.escenarios[0].pos,150, "gymplatform").setImmovable(true);
         this.tweens.timeline({
             targets: p1_1_3.body.velocity,
             loop: -1,
@@ -128,23 +128,23 @@ class Scene_play extends Phaser.Scene {
             ]
         })
 
-        let p1_1_4=this.physics.add.image(200,120, "gymplatform").setImmovable(true);
+        let p1_1_4=this.physics.add.image(200+ 1180 * this.escenarios[0].pos,120, "gymplatform").setImmovable(true);
         p1_1_4.displayHeight=20;
         p1_1_4.displayWidth=80;
 
-        let p1_1_5=this.physics.add.image(85,150, "gymplatform").setImmovable(true);
+        let p1_1_5=this.physics.add.image(85+ 1180 * this.escenarios[0].pos,150, "gymplatform").setImmovable(true);
         p1_1_5.displayHeight=20;
         p1_1_5.displayWidth=80;
         
-        let p1_1_6=this.physics.add.image(430,185, "gymplatform").setImmovable(true);
+        let p1_1_6=this.physics.add.image(430+ 1180 * this.escenarios[0].pos,185, "gymplatform").setImmovable(true);
         p1_1_6.displayHeight=20;
         p1_1_6.displayWidth=80;
 
-        let p1_1_7=this.physics.add.image(535,230, "gymplatform").setImmovable(true);
+        let p1_1_7=this.physics.add.image(535+ 1180 * this.escenarios[0].pos,230, "gymplatform").setImmovable(true);
         p1_1_7.displayHeight=20;
         p1_1_7.displayWidth=80;
 
-        let p1_1_8=this.physics.add.image(650,230, "gymplatform").setImmovable(true);
+        let p1_1_8=this.physics.add.image(650+ 1180 * this.escenarios[0].pos,230, "gymplatform").setImmovable(true);
         p1_1_8.displayHeight=20;
         p1_1_8.displayWidth=80;
 
@@ -157,11 +157,11 @@ class Scene_play extends Phaser.Scene {
             ]
         })
 
-        let p1_1_9=this.physics.add.image(750,135, "gymplatform").setImmovable(true);
+        let p1_1_9=this.physics.add.image(750+ 1180 * this.escenarios[0].pos,135, "gymplatform").setImmovable(true);
         p1_1_9.displayHeight=20;
         p1_1_9.displayWidth=80;
 
-        let p1_1_10=this.physics.add.image(950,190, "gymplatform").setImmovable(true);
+        let p1_1_10=this.physics.add.image(950+ 1180 * this.escenarios[0].pos,190, "gymplatform").setImmovable(true);
         p1_1_10.displayHeight=20;
         p1_1_10.displayWidth=80;
 
@@ -174,7 +174,7 @@ class Scene_play extends Phaser.Scene {
             ]
         })
 
-        let p1_1_11=this.physics.add.image(1020,135, "gymplatform").setImmovable(true);
+        let p1_1_11=this.physics.add.image(1020+ 1180 * this.escenarios[0].pos,135, "gymplatform").setImmovable(true);
         p1_1_11.displayHeight=20;
         p1_1_11.displayWidth=80;
 
@@ -193,15 +193,15 @@ class Scene_play extends Phaser.Scene {
         grupoP1_gym.add(p1_1_11);
 
         //Plataformas jugador 2
-        let p2_1_1=this.physics.add.image(100,this.game.canvas.height*0.42+360, "gymplatform").setImmovable(true);
+        let p2_1_1=this.physics.add.image(100+ 1180 * this.escenarios[0].pos,this.game.canvas.height*0.42+360, "gymplatform").setImmovable(true);
         p2_1_1.displayHeight=20;
         p2_1_1.displayWidth=80;
 
-        let p2_1_2=this.physics.add.image(220,620, "gymplatform").setImmovable(true);
+        let p2_1_2=this.physics.add.image(220+ 1180 * this.escenarios[0].pos,620, "gymplatform").setImmovable(true);
         p2_1_2.displayHeight=20;
         p2_1_2.displayWidth=80;
 
-        let p2_1_3=this.physics.add.image(320,510, "gymplatform").setImmovable(true);
+        let p2_1_3=this.physics.add.image(320+ 1180 * this.escenarios[0].pos,510, "gymplatform").setImmovable(true);
         this.tweens.timeline({
             targets: p2_1_3.body.velocity,
             loop: -1,
@@ -211,23 +211,23 @@ class Scene_play extends Phaser.Scene {
             ]
         })
 
-        let p2_1_4=this.physics.add.image(200,480, "gymplatform").setImmovable(true);
+        let p2_1_4=this.physics.add.image(200+ 1180 * this.escenarios[0].pos,480, "gymplatform").setImmovable(true);
         p2_1_4.displayHeight=20;
         p2_1_4.displayWidth=80;
 
-        let p2_1_5=this.physics.add.image(85,510, "gymplatform").setImmovable(true);
+        let p2_1_5=this.physics.add.image(85+ 1180 * this.escenarios[0].pos,510, "gymplatform").setImmovable(true);
         p2_1_5.displayHeight=20;
         p2_1_5.displayWidth=80;
         
-        let p2_1_6=this.physics.add.image(430,545, "gymplatform").setImmovable(true);
+        let p2_1_6=this.physics.add.image(430+ 1180 * this.escenarios[0].pos,545, "gymplatform").setImmovable(true);
         p2_1_6.displayHeight=20;
         p2_1_6.displayWidth=80;
 
-        let p2_1_7=this.physics.add.image(535,590, "gymplatform").setImmovable(true);
+        let p2_1_7=this.physics.add.image(535+ 1180 * this.escenarios[0].pos,590, "gymplatform").setImmovable(true);
         p2_1_7.displayHeight=20;
         p2_1_7.displayWidth=80;
 
-        let p2_1_8=this.physics.add.image(650,590, "gymplatform").setImmovable(true);
+        let p2_1_8=this.physics.add.image(650+ 1180 * this.escenarios[0].pos,590, "gymplatform").setImmovable(true);
         p2_1_8.displayHeight=20;
         p2_1_8.displayWidth=80;
 
@@ -240,11 +240,11 @@ class Scene_play extends Phaser.Scene {
             ]
         })
 
-        let p2_1_9=this.physics.add.image(750,495, "gymplatform").setImmovable(true);
+        let p2_1_9=this.physics.add.image(750+ 1180 * this.escenarios[0].pos,495, "gymplatform").setImmovable(true);
         p2_1_9.displayHeight=20;
         p2_1_9.displayWidth=80;
 
-        let p2_1_10=this.physics.add.image(950,550, "gymplatform").setImmovable(true);
+        let p2_1_10=this.physics.add.image(950+ 1180 * this.escenarios[0].pos,550, "gymplatform").setImmovable(true);
         p2_1_10.displayHeight=20;
         p2_1_10.displayWidth=80;
 
@@ -257,7 +257,7 @@ class Scene_play extends Phaser.Scene {
             ]
         })
 
-        let p2_1_11=this.physics.add.image(1020,495, "gymplatform").setImmovable(true);
+        let p2_1_11=this.physics.add.image(1020+ 1180 * this.escenarios[0].pos,495, "gymplatform").setImmovable(true);
         p2_1_11.displayHeight=20;
         p2_1_11.displayWidth=80;
 
@@ -289,11 +289,11 @@ class Scene_play extends Phaser.Scene {
         escU2.displayHeight = this.game.canvas.height / 2;
         escU2.displayWidth = this.game.canvas.width;
 
-        let pruebaContador = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2 * 0.68, "logo").setOrigin(0, 0);
+        let pruebaContador = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 242, "spriteCont").setOrigin(0, 0);
         pruebaContador.displayHeight = this.game.canvas.height * 0.1;
         pruebaContador.displayWidth = this.game.canvas.width * 0.08;
         pruebaContador.setImmovable(true)
-        pruebaContador.alpha = 0;
+        
 
         this.escBU2 = this.add.image(0 + 1180 * this.escenarios[1].pos, 0, "ContadorBlur").setOrigin(0, 0)
 
@@ -309,11 +309,11 @@ class Scene_play extends Phaser.Scene {
         escD2.displayHeight = this.game.canvas.height / 2;
         escD2.displayWidth = this.game.canvas.width;
 
-        let pruebaContador2 = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
+        let pruebaContador2 = this.physics.add.image(830+ 1180 * this.escenarios[1].pos, 602, "spriteCont").setOrigin(0, 0);
         pruebaContador2.displayHeight = this.game.canvas.height * 0.1;
         pruebaContador2.displayWidth = this.game.canvas.width * 0.08;
         pruebaContador2.setImmovable(true)
-        pruebaContador2.alpha = 0;
+        
 
         this.escBU22 = this.add.image(0 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2, "ContadorBlur").setOrigin(0, 0)
 
@@ -338,7 +338,7 @@ class Scene_play extends Phaser.Scene {
             ]
           });
 
-        let p1_2_2=this.physics.add.image( 275 + 1180 * this.escenarios[1].pos,210, "gymplatform").setImmovable(true);
+        let p1_2_2=this.physics.add.image( 275 + 1180 * this.escenarios[1].pos,220, "gymplatform").setImmovable(true);
         p1_2_2.displayHeight=20;
         p1_2_2.displayWidth=80;
         p1_2_2.alpha=0;
@@ -347,8 +347,8 @@ class Scene_play extends Phaser.Scene {
             targets: p1_2_2.body.velocity,
             loop: -1,
             tweens: [
-                {x: -80, duration: 1200, ease: 'Stepped'},
-                {x: 80, duration: 1200, ease:'Stepped'}
+                {x: -80, duration: 1300, ease: 'Stepped'},
+                {x: 80, duration: 1300, ease:'Stepped'}
                             
             ]
           });
@@ -365,8 +365,8 @@ class Scene_play extends Phaser.Scene {
             targets: p1_2_4.body.velocity,
             loop: -1,
             tweens: [
-                {x: 70, duration: 1200, ease: 'Stepped'},
-                {x: -70, duration: 1200, ease:'Stepped'}
+                {x: 70, duration: 1500, ease: 'Stepped'},
+                {x: -70, duration: 1500, ease:'Stepped'}
                             
             ]
           });
@@ -422,7 +422,7 @@ class Scene_play extends Phaser.Scene {
             p1_2_7.alpha=p1_2_7.alpha==1?0:1;
             p1_2_7.alpha==1?grupoP1_cont.add(p1_2_7):grupoP1_cont.remove(p1_2_7);           
           }, 2000);
-        grupoP1_cont.add(notCheating);
+        //grupoP1_cont.add(notCheating); //descomentar, solo está comentado para hacer pruebas rápidamente
         grupoP1_cont.add(p1_2_8);
 
         //Plataformas jugador 2
@@ -441,7 +441,7 @@ class Scene_play extends Phaser.Scene {
             ]
           });
 
-        let p2_2_2=this.physics.add.image( 275 + 1180 * this.escenarios[1].pos,570, "gymplatform").setImmovable(true);
+        let p2_2_2=this.physics.add.image( 275 + 1180 * this.escenarios[1].pos,580, "gymplatform").setImmovable(true);
         p2_2_2.displayHeight=20;
         p2_2_2.displayWidth=80;
         p2_2_2.alpha=0;
@@ -468,8 +468,8 @@ class Scene_play extends Phaser.Scene {
             targets: p2_2_4.body.velocity,
             loop: -1,
             tweens: [
-                {x: 70, duration: 1200, ease: 'Stepped'},
-                {x: -70, duration: 1200, ease:'Stepped'}
+                {x: 70, duration: 1500, ease: 'Stepped'},
+                {x: -70, duration: 1500, ease:'Stepped'}
                             
             ]
           });
@@ -558,6 +558,8 @@ class Scene_play extends Phaser.Scene {
         pruebaNieveD.displayHeight = this.game.canvas.height * 0.3;
         pruebaNieveD.displayWidth = this.game.canvas.width * 0.13;
         pruebaNieveD.alpha = 0;
+
+        
         
 
         //Escenario 4 Electricidad
@@ -568,6 +570,80 @@ class Scene_play extends Phaser.Scene {
 
         escU4.displayHeight = this.game.canvas.height / 2;
         escU4.displayWidth = this.game.canvas.width;
+
+        //Plataformas jugador 
+        let p1_3_1=this.physics.add.image( 108 + 1180 * this.escenarios[3].pos,300, "gymplatform").setImmovable(true);
+        p1_3_1.displayHeight=20;
+        p1_3_1.displayWidth=80;
+
+        let p1_3_2=this.physics.add.image( 290 + 1180 * this.escenarios[3].pos,180, "gymplatform").setImmovable(true);
+        p1_3_2.displayHeight=20;
+        p1_3_2.displayWidth=80;
+
+        this.tweens.timeline({
+            targets: p1_3_2.body.velocity,
+            loop: -1,
+            tweens: [ 
+                {x:-30, y:30, duration: 2200, ease: 'Stepped'},
+                {x:30, y:-30, duration: 2200, ease: 'Stepped'}  
+                
+            ]
+          });
+
+          let p1_3_3=this.physics.add.image( 190 + 1180 * this.escenarios[3].pos,180, "gymplatform").setImmovable(true);
+          p1_3_3.displayHeight=20;
+          p1_3_3.displayWidth=80;
+  
+          this.tweens.timeline({
+              targets: p1_3_3.body.velocity,
+              loop: -1,
+              tweens: [ 
+                  {x:-30, y:-30, duration: 2200, ease: 'Stepped'},
+                  {x:30, y:30, duration: 2200, ease: 'Stepped'}  
+                  
+              ]
+            });
+
+        let p1_3_4=this.physics.add.image( 40 + 1180 * this.escenarios[3].pos,115, "gymplatform").setImmovable(true);
+        p1_3_4.displayHeight=20;
+        p1_3_4.displayWidth=80;
+
+        //let p1_3_5=this.physics.add.image( 500 ,115, "gymplatform").setImmovable(true);   
+             
+        let p1_3_5=this.physics.add.image( 500 + 1180 * this.escenarios[3].pos,200, "gymplatform").setImmovable(true).setVelocity(0,100);
+        p1_3_5.displayHeight=20;
+        p1_3_5.displayWidth=80;        
+
+        this.tweens.timeline({
+            
+            targets: p1_3_5.body.velocity,
+            loop: -1,
+            duration:1000,
+            
+            tweens: [  
+                {x:{value: -100, ease: 'Sine.easeOut'}, y:{value:0, ease: 'Sine.easeIn'}},
+                {x:{value: 0, ease: 'Sine.easeIn'}, y:{value:-100, ease: 'Sine.easeOut'}},
+                {x:{value: 100, ease: 'Sine.easeOut'}, y:{value:0, ease: 'Sine.easeIn'}},
+                {x:{value: 0, ease: 'Sine.easeIn'}, y:{value:100, ease: 'Sine.easeOut'}},                         
+                
+            ],            
+            onLoop:function(){
+                //p1_3_5.body.reset(500,115);
+                p1_3_5.body.reset(500 + 1180 * that.escenarios[3].pos,200);
+            }
+          });
+        
+        
+
+        let grupoP1_elec=this.add.group();
+        grupoP1_elec.add(p1_3_1);
+        var intermitence=setInterval(()=>{
+            p1_3_1.alpha=p1_3_1.alpha==1?0:1;
+            p1_3_1.alpha==1?grupoP1_elec.add(p1_3_1):grupoP1_elec.remove(p1_3_1);           
+          }, 1000);
+        grupoP1_elec.add(p1_3_2);
+        grupoP1_elec.add(p1_3_3);
+        grupoP1_elec.add(p1_3_4);
 
         //Parte jugador 2
 
@@ -678,7 +754,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height / 2)
         //Para que persiga al pj
         this.cam1.startFollow(this.playerU, true);
-        this.cam1.setZoom(2.1)
+        this.cam1.setZoom(1)
 
 
         this.cam2 = this.cameras.add(0, this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2).setName('Camara 2');
@@ -709,6 +785,9 @@ class Scene_play extends Phaser.Scene {
         //Colisión plataformas contador
         this.physics.add.collider(this.playerU, grupoP1_cont);
         this.physics.add.collider(this.playerD, grupoP2_cont);
+
+        //Colisión plataformas electricidad
+        this.physics.add.collider(this.playerU, grupoP1_elec);
 
 
         //this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.PruebaU(0) }, null, this);
@@ -792,7 +871,7 @@ class Scene_play extends Phaser.Scene {
         if (!this.escenasActivas[0]) {
 
             if (this.keyboardP1.W.isDown === true && this.playerU.body.touching.down) {
-                this.playerU.setVelocityY(-800);
+                this.playerU.setVelocityY(-750); //cambiar para que salte menos y poder bajar plataformas
 
             }
 
@@ -956,10 +1035,10 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPortalGimnasioP1() {
-        let spritePortal=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "portal");
+        let spritePortal=this.add.sprite(1038+ 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "portal");
         spritePortal.play("portalAnim");
         spritePortal.setScale(0.5);
-        this.portal = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "logo")
+        this.portal = this.physics.add.image(1038 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "logo")
         this.portal.displayHeight = 155; //spritePortal.height x 0.5
         this.portal.displayWidth = 84; //spritePortal.width x 0.5
         this.portal.alpha = 0;
@@ -970,10 +1049,10 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPortalPulsadorP1() {
-        let spritePortal=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.34, "portal");
+        let spritePortal=this.add.sprite(1038 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.34, "portal");
         spritePortal.play("portalAnim");
         spritePortal.setScale(0.5);
-        this.portal = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.34, "logo")
+        this.portal = this.physics.add.image(1038 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.34, "logo")
         this.portal.displayHeight = 155; //spritePortal.height x 0.5
         this.portal.displayWidth = 84; //spritePortal.width x 0.5
         this.portal.alpha = 0;
@@ -987,10 +1066,10 @@ class Scene_play extends Phaser.Scene {
 
 
     crearPortalGimnasioP2() {
-        let spritePortal2=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "portal");
+        let spritePortal2=this.add.sprite(1038 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "portal");
         spritePortal2.play("portalAnim");
         spritePortal2.setScale(0.5);
-        this.portalD = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
+        this.portalD = this.physics.add.image(1038 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
         this.portalD.displayHeight = 155; //spritePortal.height x 0.5
         this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;
@@ -999,10 +1078,10 @@ class Scene_play extends Phaser.Scene {
 
 
     crearPortalPulsadorP2() {
-        let spritePortal2=this.add.sprite(this.game.canvas.width * 0.94 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "portal");
+        let spritePortal2=this.add.sprite(1038 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.84, "portal");
         spritePortal2.play("portalAnim");
         spritePortal2.setScale(0.5);
-        this.portalD = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.84, "logo")
+        this.portalD = this.physics.add.image(1038 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.84, "logo")
         this.portalD.displayHeight = 155; //spritePortal.height x 0.5
         this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;

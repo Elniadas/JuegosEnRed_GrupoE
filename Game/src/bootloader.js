@@ -31,6 +31,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Contador","./assets/Contador2.png")
         this.load.spritesheet("PulsadorA","./assets/PulsadorAnimacion.png",{frameWidth:500,frameHeight:600});
 
+        this.load.image("spriteCont", "./assets/contadorSprite.png");
         //Nieve//
 
         this.load.image("Nieve", "./assets/NivelHelado.png");
