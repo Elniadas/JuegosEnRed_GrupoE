@@ -84,8 +84,11 @@ class ContadorP2 extends Phaser.Scene {
             setTimeout(() => {
                 this.data.escena.escenasActivas[1] = false;
                 this.data.escena.escBU22.alpha = 0;
-                this.data.escena.completado[1] = true;
+              
+                
                 if(this.completado===true){
+                    this.data.escena.escenarios[1].completadoP2U=true;
+                    this.data.escena.CoP2.destroy();
                     this.data.escena.crearPortalPulsadorP2();
                 }
                 this.scene.stop(this)

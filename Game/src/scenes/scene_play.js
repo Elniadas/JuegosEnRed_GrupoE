@@ -1,10 +1,9 @@
 import Escenario from '../gameObjects/Escenario.js';
-// import CharacterSprite from '../gameObjects/CharacterSprite.js'
 class Scene_play extends Phaser.Scene {
     constructor() {
         super({ key: "Scene_play" });
         this.escenasActivas = [false, false];
-        this.completado = [false, false];
+
         this.escenarios = [];
     }
     load() {
@@ -45,11 +44,14 @@ class Scene_play extends Phaser.Scene {
             //*/
 
 
+
+
+
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0);
-        this.escenarios[1] = new Escenario("Contador", 1);
-        this.escenarios[2] = new Escenario("Nieve", 3);
-        this.escenarios[3] = new Escenario("Electricidad", 2);
+        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[1] = new Escenario("Contador", 1, false);
+        this.escenarios[2] = new Escenario("Nieve", 3, false);
+        this.escenarios[3] = new Escenario("Electricidad", 2, true);
 
         this.physics.world.setBounds(0, 0, 4520, this.game.canvas.height);
 
@@ -88,6 +90,35 @@ class Scene_play extends Phaser.Scene {
         groupCintaU.add(cintaU);
 
 
+
+        var particles = this.add.particles('flares')
+        particles.depth = -10
+
+        /*
+        var xd = particles.createEmitter({
+            x: cintaU.x,
+            y: cintaU.y + 100,
+            lifespan: 2500,
+            speedX: { min: -100, max: +100 },
+            speedY: { min: -100, max: -150, steps: 1 },
+            scale: { start: 0.1, end: 0.8 },
+            blendMode: 'ADD'
+        });
+        //*/
+
+        let pCintaU= particles.createEmitter({
+            x: { min: cintaU.x-50, max: cintaU.x+50 },
+            y: cintaU.y+100,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame:'yellow',
+            frequency: 300,
+            blendMode: 'ADD'
+        });
+
+
         //Parte jugador 2
 
         let gimD = this.add.image(0 + 1180 * this.escenarios[0].pos, this.game.canvas.height / 2, "Gimnasio").setOrigin(0, 0);
@@ -107,7 +138,17 @@ class Scene_play extends Phaser.Scene {
         cintaD.displayWidth = this.game.canvas.width * 0.13;
         cintaD.alpha = 0;
 
-
+        let pCintaD= particles.createEmitter({
+            x: { min: cintaD.x-50, max: cintaD.x+50 },
+            y: cintaD.y+100,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame:'white',
+            frequency: 300,
+            blendMode: 'ADD'
+        });
 
 
 
@@ -183,7 +224,9 @@ class Scene_play extends Phaser.Scene {
         pruebaNieveD.displayHeight = this.game.canvas.height * 0.3;
         pruebaNieveD.displayWidth = this.game.canvas.width * 0.13;
         pruebaNieveD.alpha = 0;
-        
+
+
+
 
         //Escenario 4 Electricidad
 
@@ -194,12 +237,36 @@ class Scene_play extends Phaser.Scene {
         escU4.displayHeight = this.game.canvas.height / 2;
         escU4.displayWidth = this.game.canvas.width;
 
+
+        let pruebaElectricidadU = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 * 0.68, "logo").setOrigin(0, 0);
+        pruebaElectricidadU.displayHeight = this.game.canvas.height * 0.1;
+        pruebaElectricidadU.displayWidth = this.game.canvas.width * 0.08;
+        pruebaElectricidadU.setImmovable(true)
+        //pruebaElectricidadU.alpha = 0;
+
+        this.blurElectricidadU = this.add.image(0 + 1180 * this.escenarios[3].pos, 0, "ElectricidadBlur").setOrigin(0, 0);
+        this.blurElectricidadU.displayHeight = this.game.canvas.height / 2 - 10;
+        this.blurElectricidadU.displayWidth = this.game.canvas.width;
+        this.blurElectricidadU.alpha = 0;
+
         //Parte jugador 2
 
         let escD4 = this.add.image(0 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2, "Electricidad").setOrigin(0, 0);
 
         escD4.displayHeight = this.game.canvas.height / 2;
         escD4.displayWidth = this.game.canvas.width;
+
+        let pruebaElectricidadD = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
+        pruebaElectricidadD.displayHeight = this.game.canvas.height * 0.1;
+        pruebaElectricidadD.displayWidth = this.game.canvas.width * 0.08;
+        pruebaElectricidadD.setImmovable(true)
+        //pruebaElectricidadD.alpha = 0;
+
+        this.blurElectricidadD = this.add.image(0 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 + 10, "ElectricidadBlur").setOrigin(0, 0);
+        this.blurElectricidadD.displayHeight = this.game.canvas.height / 2;
+        this.blurElectricidadD.displayWidth = this.game.canvas.width;
+        this.blurElectricidadD.alpha = 0;
+
 
 
         //Limites//
@@ -327,25 +394,29 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.collider(this.playerU, this.paredes);
         this.physics.add.collider(this.playerD, this.paredes);
 
-        //this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.PruebaU(0) }, null, this);
-        this.ventana1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
-        //this.ventana2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.PruebaD(1) }, null, this);
-        this.ventana2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.Prueba(this.playerD) }, null, this);
 
-        //this.physics.add.overlap(this.playerU, pruebaContador, () => { this.PruebaUC(0) }, null, this);
-        this.physics.add.overlap(this.playerU, pruebaContador, () => { this.Prueba(this.playerU) }, null, this);
-        this.physics.add.overlap(this.playerD, pruebaContador2, () => { this.Prueba(this.playerD) }, null, this);
+        this.CP1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
+        this.CP2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.Prueba(this.playerD) }, null, this);
+        this.CoP1 = this.physics.add.overlap(this.playerU, pruebaContador, () => { this.Prueba(this.playerU) }, null, this);
+        this.CoP2 = this.physics.add.overlap(this.playerD, pruebaContador2, () => { this.Prueba(this.playerD) }, null, this);
+        this.EP1 = this.physics.add.overlap(this.playerU, pruebaElectricidadU, () => { this.Prueba(this.playerU) }, null, this);
+        this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, null, this);
 
 
         //Cronometro
 
         this.play = false;
         this.cro = 0;
-        this.textoCronometro = this.add.text(32, 32).setScrollFactor(0).setFontSize(32).setColor('#ffffff');
-        this.TiempoP1 = this.add.bitmapText(this.game.canvas.width - 350, 25, 'Digitalism', "00:00:00", 45);
-        let reloj = this.add.image(this.game.canvas.width - 100, 50, 'Crono')
-        reloj.scale = 0.08
 
+
+        //this.TiempoP1=this.add.bitmapText(this.cam1.midPoint.x+350, this.cam1.midPoint.y-90, 'Digitalism', "00:00:00", 20)
+        this.TiempoP1 = this.add.bitmapText(670, 110, 'Digitalism', "00 : 00 : 00", 20)
+        this.TiempoP1.setScrollFactor(0, 0)
+
+        this.TiempoP2 = this.add.bitmapText(670, 110, 'Digitalism', "00 : 00 : 00", 20)
+        this.TiempoP2.setScrollFactor(0, 0)
+        this.cam1.ignore(this.TiempoP2);
+        this.cam2.ignore(this.TiempoP1);
 
         //Ajustes
 
@@ -360,6 +431,7 @@ class Scene_play extends Phaser.Scene {
 
     }
     update() {
+        //console.log("Camara: "+this.cam2.midPoint.x)
 
         // Control personaje 2
 
@@ -408,7 +480,7 @@ class Scene_play extends Phaser.Scene {
         if (!this.escenasActivas[0]) {
 
             if (this.keyboardP1.W.isDown === true && this.playerU.body.touching.down) {
-                this.playerU.setVelocityY(-800);
+                this.playerU.setVelocityY(-700);
 
             }
 
@@ -471,39 +543,68 @@ class Scene_play extends Phaser.Scene {
     PruebaP1(code) {
         if (this.keyboardP1.E.isDown === true && !this.escenasActivas[0]) {
 
-             let p=0;
-             for (let i=0;i<this.escenarios.length;i++){
-                 if(code===this.escenarios[i].pos)
-                 p=this.escenarios[i].nombre
-                 console.log(p);
-             }
+            let p = 0;
+            let e = 0;
 
-            this.scene.launch(p + "P1", { escena: this });
-            this.escenasActivas[0] = true;
+            for (let i = 0; i < this.escenarios.length; i++) {
+                if (code === this.escenarios[i].pos) {
+                    p = this.escenarios[i].nombre
+                    e = i;
+                }
+
+            }
+
+            if (this.escenarios[e].completadoP1U === false) {
+                this.scene.launch(p + "P1", { escena: this });
+                this.escenasActivas[0] = true;
+            }
+            if (this.escenarios[e].completadoP1U === true && this.escenarios[e].doble === true) {
+                if (this.escenarios[e].completadoP1D === false) {
+                    console.log("INICIANDO PARTE 2")
+                    this.scene.launch(p + "P1V2", { escena: this });
+                    this.escenasActivas[0] = true;
+                }
+            }
 
 
         }
     }
     PruebaP2(code) {
         if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {
-            let p=0;
-            for (let i=0;i<this.escenarios.length;i++){
-                if(code===this.escenarios[i].pos)
-                p=this.escenarios[i].nombre
-                console.log(p);
+            let p = 0;
+            let e = 0;
+            for (let i = 0; i < this.escenarios.length; i++) {
+                if (code === this.escenarios[i].pos) {
+                    p = this.escenarios[i].nombre
+                    e = i;
+                }
+
             }
 
-            this.scene.launch(p+ "P2", { escena: this });
-            this.escenasActivas[1] = true;
+
+            if (this.escenarios[e].completadoP2U === false) {
+                this.scene.launch(p + "P2", { escena: this });
+                this.escenasActivas[1] = true;
+
+            }
+            if (this.escenarios[e].completadoP2U === true && this.escenarios[e].doble === true) {
+                if (this.escenarios[e].completadoP2D === false) {
+                    console.log("INICIANDO PARTE 2")
+                    this.scene.launch(p + "P2V2", { escena: this });
+                    this.escenasActivas[1] = true;
+                }
+            }
+
 
         }
+
     }
 
 
 
     teletransporte(player, factor, camara) {
 
-        if (this.keyboardP1.E.isDown === true && this.completado[0]) {
+        if (this.keyboardP1.E.isDown === true) {
 
             player.body.setVelocityX(0);
             player.body.setVelocityY(0);
@@ -517,7 +618,7 @@ class Scene_play extends Phaser.Scene {
 
     }
     teletransporteD(player, factor, camara) {
-        if (this.keyboardP2.SPACE.isDown === true && this.completado[1]) {
+        if (this.keyboardP2.SPACE.isDown === true) {
             player.body.setVelocityX(0);
             player.body.setVelocityY(0);
             player.anims.stop();
@@ -542,31 +643,45 @@ class Scene_play extends Phaser.Scene {
     }
 
     tiempo(emp) {
-        let actual = new Date();                    //Tiempo actual
-        this.cro = actual - emp;                     //Tiempo transcurrido
-        let cr = new Date();                        //Por si se para para continuar                        
+        let actual = new Date();                                   //Tiempo actual
+        this.cro = actual - emp;                                   //Tiempo transcurrido
+        let cr = new Date();                                       //Por si se para para continuar                        
         cr.setTime(this.cro);                        //Coje el tiempo actual
         //Transformar
-        let cs = cr.getMilliseconds();
-        cs = cs / 10;
-        cs = Math.round(cs);
-        let sg = cr.getSeconds();
-        let mn = cr.getMinutes();
-        let ho = cr.getHours() - 1;
-        if (cs < 10) {
-            cs = "0" + cs;
+        let cs1 = cr.getMilliseconds();
+        cs1 = cs1 / 10;
+        cs1 = Math.round(cs1);
+        let sg1 = cr.getSeconds();
+        let mn1 = cr.getMinutes();
+        let ho1 = cr.getHours() - 1;
+        if (cs1 < 10) {
+            cs1 = "0" + cs1;
         }
-        if (sg < 10) {
-            sg = "0" + sg;
+        if (sg1 < 10) {
+            sg1 = "0" + sg1;
         }
-        if (mn < 10) {
-            mn = "0" + mn;
+        if (mn1 < 10) {
+            mn1 = "0" + mn1;
         }
+        let mn2 = mn1;
+        let sg2 = sg1;
+        let cs2 = cs1;
         // this.textoCronometro.setText([
         //     'Tiempo: ' + ho + " : " + mn + " : " + sg + " : " + cs
         // ]);
+
+        /*
+        console.log(this.TiempoP2.x);
+        this.TiempoP2.x=this.cam2.midPoint.x+350-216
+        this.TiempoP2.y=this.cam2.midPoint.y-90+22,
+        //*/
+
         this.TiempoP1.setText([
-            mn + " : " + sg + " : " + cs
+            mn1 + " : " + sg1 + " : " + cs1
+        ]);
+
+        this.TiempoP2.setText([
+            mn2 + " : " + sg2 + " : " + cs2
         ]);
 
     }
@@ -576,6 +691,8 @@ class Scene_play extends Phaser.Scene {
         this.portal.displayHeight = this.game.canvas.height * 0.1;
         this.portal.displayWidth = this.game.canvas.width * 0.08;
         this.portal.alpha = 1;
+        //let pos = (player.x + 1180) / 1180
+        //pos = Math.trunc(pos) - 1
 
         this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[0].pos, this.cam1) }, null, this);
 
@@ -588,6 +705,16 @@ class Scene_play extends Phaser.Scene {
         this.portal.alpha = 1;
 
         this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[1].pos, this.cam1) }, null, this);
+
+    }
+
+    crearPortalElectricidadP1() {
+        this.portal = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.34, "logo")
+        this.portal.displayHeight = this.game.canvas.height * 0.1;
+        this.portal.displayWidth = this.game.canvas.width * 0.08;
+        this.portal.alpha = 1;
+
+        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[3].pos, this.cam1) }, null, this);
 
     }
 
@@ -613,6 +740,17 @@ class Scene_play extends Phaser.Scene {
         this.portalD.alpha = 0;
         this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[1].pos, this.cam2) }, null, this); console.log(this.portal)
     }
+
+
+    crearPortalElectricidadP2() {
+
+        this.portalD = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.84, "logo")
+        this.portalD.displayHeight = this.game.canvas.height * 0.1;
+        this.portalD.displayWidth = this.game.canvas.width * 0.08;
+        this.portalD.alpha = 0;
+        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[3].pos, this.cam2) }, null, this); console.log(this.portal)
+    }
+
 
 
 
