@@ -58,7 +58,8 @@ class Scene_play extends Phaser.Scene {
 
         //Esquema : this.add.image( PosicionX + Factor de suma, PosicionX, "Nombre")
 
-
+        //Cargar sonido
+        this.sound.play('Musica_fondo');
 
 
         //Escenario 1 Gimnasio
@@ -513,6 +514,9 @@ class Scene_play extends Phaser.Scene {
 
             player.y = this.game.canvas.height / 2 - 50;
             camara.setBounds(0 + 1180 * (factor + 1), 0, this.game.canvas.width, this.game.canvas.height / 2)
+
+            //Sonido
+            this.sound.play('TeletransporteFinal');
         }
 
     }

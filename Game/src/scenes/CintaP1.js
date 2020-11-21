@@ -92,6 +92,7 @@ class CintaP1 extends Phaser.Scene {
 
                 //this.audioCinta.play();
                 this.sound.play('Paso1');
+                this.sound.pause('Musica_fondo');
 
                 if (this.contF >= 3)
                     this.contF = 0;
