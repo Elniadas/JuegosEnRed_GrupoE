@@ -21,6 +21,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("GimnasioBlur", "./assets/GimnasioBlur.png")
         this.load.spritesheet("CintaCorrer", "./assets/CintaAnimada.jpg", { frameWidth: 500, frameHeight: 600 });
         this.load.image("gymplatform", "./assets/GymPlat.png");
+        this.load.image("cintaSprite", "./assets/CintaSprite.png");
 
 
         //Contador//
@@ -30,6 +31,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Contador", "./assets/Contador2.png")
         this.load.spritesheet("PulsadorA", "./assets/PulsadorAnimacion.png", { frameWidth: 500, frameHeight: 600 });
 
+        this.load.image("spriteCont", "./assets/contadorSprite.png");
         //Nieve//
 
         this.load.image("Nieve", "./assets/NivelHelado.png");
@@ -47,21 +49,17 @@ class Bootloader extends Phaser.Scene {
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
 
         //Menu//
-        this.load.image("playButton", "./assets/playButton.png");
-        this.load.image("menu", "./assets/MainMenu.jpg");
-        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
-        this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 792, frameHeight: 410 }); //botón de play
-        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", { frameWidth: 300, frameHeight: 300 }); //botón sonido
-
+        this.load.image("menu","./assets/MainMenu.jpg");
+        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", {frameWidth:450,frameHeight:300}); //banderas
+        this.load.spritesheet("Play", "./assets/Play.png", {frameWidth:792,frameHeight:410}); //botón de play
+        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", {frameWidth:300, frameHeight:300}); //botón sonido
 
         //Otros//
 
         this.load.image("muro", "./assets/Muro.png");
-        this.load.image("mainmenu", "./assets/MainMenuB.jpg");
-        this.load.image("playButton", "./assets/playButton.png");
-        this.load.image("logo", "./assets/Logo.jpg")
-        this.load.image("Crono", "./assets/Cronometro.png")
-
+        this.load.image("logo","./assets/Logo.jpg")
+        this.load.image("Crono","./assets/Cronometro.png")
+        
         //Efectos//
 
         this.load.atlas('flares', './assets/flares.png', './assets/flares.json');
@@ -74,12 +72,13 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("Teletransporte", "./assets/Sonidos/Teletransporte.mp3");
 
         //Animaciones//
-        this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
-        this.load.atlas("P2", "./assets/RunP2.png", "./assets/RunP2.json")
-
-
-
-
+       this.load.atlas("P1","./assets/RunP1.png","./assets/RunP1.json")
+       this.load.atlas("P2","./assets/RunP2.png","./assets/RunP2.json")
+       this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", {frameWidth:168, frameHeight:310});
+        
+        
+        
+        
         //barra de carga
 
         let loadingBar = this.add.graphics({
@@ -397,6 +396,15 @@ class Bootloader extends Phaser.Scene {
             frameRate: 6
 
         })
+
+        //portal
+        this.anims.create({
+            key: 'portalAnim',
+            frames: this.anims.generateFrameNumbers("portal", {frames:[0,1,2,3,4,5,6,7,8]}),
+            repeat: -1,
+            frameRate: 6
+        })
+        
 
 
         //Particulas
