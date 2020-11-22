@@ -67,6 +67,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.setScale(0.15).refreshBody();
         this.playerU.body.collideWorldBounds = true;
         this.playerU.id = 0;
+        this.playerU.velocidad = 300;
         this.playerU.setDepth(1000);
 
         //Player 2//
@@ -76,6 +77,7 @@ class Scene_play extends Phaser.Scene {
         this.playerD.setScale(0.15).refreshBody();
         this.playerD.body.collideWorldBounds = true;
         this.playerD.id = 1;
+        this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
 
 
@@ -161,6 +163,13 @@ class Scene_play extends Phaser.Scene {
 
         //Plataformas jugador 2
         this.crearPlataformasGimnasioP2();
+
+        //Power Up jugador 1
+        this.crearSpeedUpP1();
+
+        //Power Up jugador 2
+        this.crearSpeedUpP2();
+
 
         // let pCintaD= particles.createEmitter({
         //     x: { min: cintaD.x-50, max: cintaD.x+50 },
@@ -278,6 +287,8 @@ class Scene_play extends Phaser.Scene {
         this.blurElectricidadU.displayWidth = this.game.canvas.width;
         this.blurElectricidadU.alpha = 0;
         //Plataformas jugador 
+
+        /*
         let p1_3_1 = this.physics.add.image(108 + 1180 * this.escenarios[3].pos, 300, "gymplatform").setImmovable(true);
         p1_3_1.displayHeight = 20;
         p1_3_1.displayWidth = 80;
@@ -350,6 +361,11 @@ class Scene_play extends Phaser.Scene {
         grupoP1_elec.add(p1_3_2);
         grupoP1_elec.add(p1_3_3);
         grupoP1_elec.add(p1_3_4);
+
+
+        //Colisión plataformas electricidad
+        this.physics.add.collider(this.playerU, grupoP1_elec);
+        */
 
         //Parte jugador 2
 
@@ -473,7 +489,6 @@ class Scene_play extends Phaser.Scene {
 
         //Fisicas
 
-        this.playerUS = false;
 
         this.physics.add.collider(this.playerU, this.plataformas);
         this.physics.add.collider(this.playerD, this.plataformas);
@@ -481,8 +496,7 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.collider(this.playerD, this.paredes);
 
 
-        //Colisión plataformas electricidad
-        this.physics.add.collider(this.playerU, grupoP1_elec);
+        
 
 
         this.CP1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
@@ -528,7 +542,7 @@ class Scene_play extends Phaser.Scene {
         if (!this.escenasActivas[1]) {
 
             if (this.keyboardP2.LEFT.isDown === true) {
-                this.playerD.body.setVelocityX(-300);
+                this.playerD.body.setVelocityX(-this.playerD.velocidad);
                 if (this.playerD.body.touching.down) {
                     this.playerD.anims.play("CorrerIzquierdaP2", true);
                 } else {
@@ -538,7 +552,7 @@ class Scene_play extends Phaser.Scene {
             }
             if (this.keyboardP2.RIGHT.isDown === true) {
                 console.log("Derechaa")
-                this.playerD.body.setVelocityX(300);
+                this.playerD.body.setVelocityX(this.playerD.velocidad);
                 if (this.playerD.body.touching.down) {
                     this.playerD.anims.play("CorrerDerechaP2", true);
                 } else {
@@ -546,7 +560,7 @@ class Scene_play extends Phaser.Scene {
                 }
             }
             if (this.keyboardP2.UP.isDown === true && this.playerD.body.touching.down) {
-                this.playerD.setVelocityY(-800);
+                this.playerD.setVelocityY(-750);
             }
 
             if (this.keyboardP2.LEFT.isDown === false && this.keyboardP2.RIGHT.isDown === false && this.keyboardP2.UP.isDown === false) {
@@ -562,6 +576,7 @@ class Scene_play extends Phaser.Scene {
 
                 this.playerD.body.setVelocityX(0);
 
+
             }
 
 
@@ -575,7 +590,7 @@ class Scene_play extends Phaser.Scene {
             }
 
             if (this.keyboardP1.A.isDown === true) {
-                this.playerU.body.setVelocityX(-300);
+                this.playerU.body.setVelocityX(-this.playerU.velocidad);
                 if (this.playerU.body.touching.down) {
                     this.playerU.anims.play("CorrerIzquierdaP1", true);
                 } else {
@@ -584,7 +599,7 @@ class Scene_play extends Phaser.Scene {
 
             }
             if (this.keyboardP1.D.isDown === true) {
-                this.playerU.body.setVelocityX(300);
+                this.playerU.body.setVelocityX(this.playerU.velocidad);
                 if (this.playerU.body.touching.down) {
                     this.playerU.anims.play("CorrerDerechaP1", true);
                 } else {
@@ -775,6 +790,28 @@ class Scene_play extends Phaser.Scene {
         ]);
 
     }
+
+    crearSpeedUpP1() {
+        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100, "run").setOrigin(0, 0);
+        run.setScale(0.1)
+        this.physics.add.overlap(this.playerU, run, () => {
+            this.playerU.velocidad=500
+            run.destroy();
+            setTimeout(() => { this.playerU.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
+        }, null, this);
+    }
+
+    crearSpeedUpP2() {
+        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100+this.game.canvas.height/2, "run").setOrigin(0, 0);
+        run.setScale(0.1)
+        this.physics.add.overlap(this.playerD, run, () => {
+            this.playerD.velocidad=500
+            run.destroy();
+            setTimeout(() => { this.playerD.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
+        }, null, this);
+    }
+
+
 
     crearPortalGimnasioP1() {
         let spritePortal = this.add.sprite(1038 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.34, "portal");

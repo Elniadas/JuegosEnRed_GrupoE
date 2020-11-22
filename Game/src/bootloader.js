@@ -49,17 +49,17 @@ class Bootloader extends Phaser.Scene {
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
 
         //Menu//
-        this.load.image("menu","./assets/MainMenu.jpg");
-        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", {frameWidth:450,frameHeight:300}); //banderas
-        this.load.spritesheet("Play", "./assets/Play.png", {frameWidth:792,frameHeight:410}); //botón de play
-        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", {frameWidth:300, frameHeight:300}); //botón sonido
+        this.load.image("menu", "./assets/MainMenu.jpg");
+        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
+        this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 792, frameHeight: 410 }); //botón de play
+        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", { frameWidth: 300, frameHeight: 300 }); //botón sonido
 
         //Otros//
 
         this.load.image("muro", "./assets/Muro.png");
-        this.load.image("logo","./assets/Logo.jpg")
-        this.load.image("Crono","./assets/Cronometro.png")
-        
+        this.load.image("logo", "./assets/Logo.jpg")
+        this.load.image("Crono", "./assets/Cronometro.png")
+
         //Efectos//
 
         this.load.atlas('flares', './assets/flares.png', './assets/flares.json');
@@ -72,13 +72,16 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("Teletransporte", "./assets/Sonidos/Teletransporte.mp3");
 
         //Animaciones//
-       this.load.atlas("P1","./assets/RunP1.png","./assets/RunP1.json")
-       this.load.atlas("P2","./assets/RunP2.png","./assets/RunP2.json")
-       this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", {frameWidth:168, frameHeight:310});
-        
-        
-        
-        
+        this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
+        this.load.atlas("P2", "./assets/RunP2.png", "./assets/RunP2.json")
+        this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", { frameWidth: 168, frameHeight: 310 });
+
+        //PoweUps//
+        this.load.image('run', './assets/RUN.png');
+
+
+
+
         //barra de carga
 
         let loadingBar = this.add.graphics({
@@ -400,11 +403,11 @@ class Bootloader extends Phaser.Scene {
         //portal
         this.anims.create({
             key: 'portalAnim',
-            frames: this.anims.generateFrameNumbers("portal", {frames:[0,1,2,3,4,5,6,7,8]}),
+            frames: this.anims.generateFrameNumbers("portal", { frames: [0, 1, 2, 3, 4, 5, 6, 7, 8] }),
             repeat: -1,
             frameRate: 6
         })
-        
+
 
 
         //Particulas
