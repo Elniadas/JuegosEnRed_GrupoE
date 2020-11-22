@@ -78,6 +78,7 @@ class Bootloader extends Phaser.Scene {
 
         //PoweUps//
         this.load.image('run', './assets/RUN.png');
+        this.load.image('menosT', './assets/relojArena.png');
 
 
 

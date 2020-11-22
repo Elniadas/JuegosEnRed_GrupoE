@@ -68,6 +68,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.body.collideWorldBounds = true;
         this.playerU.id = 0;
         this.playerU.velocidad = 300;
+        this.playerU.time = 0;
         this.playerU.setDepth(1000);
 
         //Player 2//
@@ -77,6 +78,7 @@ class Scene_play extends Phaser.Scene {
         this.playerD.setScale(0.15).refreshBody();
         this.playerD.body.collideWorldBounds = true;
         this.playerD.id = 1;
+        this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
 
@@ -166,9 +168,10 @@ class Scene_play extends Phaser.Scene {
 
         //Power Up jugador 1
         this.crearSpeedUpP1();
-
+        this.crearMenosTP1();
         //Power Up jugador 2
         this.crearSpeedUpP2();
+        this.crearMenosTP2();
 
 
         // let pCintaD= particles.createEmitter({
@@ -472,7 +475,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height / 2)
         //Para que persiga al pj
         this.cam1.startFollow(this.playerU, true);
-        this.cam1.setZoom(1)
+        this.cam1.setZoom(2.5)
 
 
         this.cam2 = this.cameras.add(0, this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2).setName('Camara 2');
@@ -482,7 +485,7 @@ class Scene_play extends Phaser.Scene {
 
         this.cam2.startFollow(this.playerD, true);
 
-        this.cam2.setZoom(1)
+        this.cam2.setZoom(2.5)
 
 
 
@@ -496,7 +499,7 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.collider(this.playerD, this.paredes);
 
 
-        
+
 
 
         this.CP1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
@@ -751,26 +754,57 @@ class Scene_play extends Phaser.Scene {
         let actual = new Date();                                   //Tiempo actual
         this.cro = actual - emp;                                   //Tiempo transcurrido
         let cr = new Date();                                       //Por si se para para continuar                        
-        cr.setTime(this.cro);                        //Coje el tiempo actual
+        cr.setTime(this.cro);                                        //Coje el tiempo actual
+        let time = cr.getTime() + this.playerU.time;
+        let time2 = cr.getTime() + this.playerD.time
         //Transformar
-        let cs1 = cr.getMilliseconds();
+        let cs1 = time % 1000;
         cs1 = cs1 / 10;
         cs1 = Math.round(cs1);
-        let sg1 = cr.getSeconds();
-        let mn1 = cr.getMinutes();
-        let ho1 = cr.getHours() - 1;
+        let sg1 = time / 1000
+        sg1 = sg1 % 100;
+        sg1 = Math.trunc(sg1)
+        let mn1 = time / 60000;
+        mn1 = Math.trunc(mn1)
+
+
         if (cs1 < 10) {
             cs1 = "0" + cs1;
         }
         if (sg1 < 10) {
             sg1 = "0" + sg1;
         }
+        if (sg1 > 59) {
+            sg1 = sg1 % 60;
+            sg1 = "0" + sg1;
+        }
         if (mn1 < 10) {
             mn1 = "0" + mn1;
         }
-        let mn2 = mn1;
-        let sg2 = sg1;
-        let cs2 = cs1;
+
+
+
+        let cs2 = time2 % 1000;
+        cs2 = cs2 / 10;
+        cs2 = Math.round(cs2);
+        let sg2 = time2 / 1000
+        sg2 = Math.trunc(sg2)
+        let mn2 = time2 / 100000;
+        mn2 = Math.trunc(mn2)
+
+        if (cs2 < 10) {
+            cs2 = "0" + cs2;
+        }
+        if (sg2 < 10) {
+            sg2 = "0" + sg2;
+        }
+        if (sg2 > 59) {
+            sg2 = sg2 % 60;
+            sg2 = "0" + sg2;
+        }
+        if (mn2 < 10) {
+            mn2 = "0" + mn2;
+        }
         // this.textoCronometro.setText([
         //     'Tiempo: ' + ho + " : " + mn + " : " + sg + " : " + cs
         // ]);
@@ -795,19 +829,40 @@ class Scene_play extends Phaser.Scene {
         let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100, "run").setOrigin(0, 0);
         run.setScale(0.1)
         this.physics.add.overlap(this.playerU, run, () => {
-            this.playerU.velocidad=500
+            this.playerU.velocidad = 500
             run.destroy();
             setTimeout(() => { this.playerU.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
         }, null, this);
     }
 
+    crearMenosTP1() {
+        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        reloj.setScale(0.1)
+        this.physics.add.overlap(this.playerU, reloj, () => {
+            this.playerU.time += -3000;
+            reloj.destroy();
+        }, null, this);
+    }
+
+
+
     crearSpeedUpP2() {
-        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100+this.game.canvas.height/2, "run").setOrigin(0, 0);
+        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "run").setOrigin(0, 0);
         run.setScale(0.1)
         this.physics.add.overlap(this.playerD, run, () => {
-            this.playerD.velocidad=500
+            this.playerD.velocidad = 500
             run.destroy();
             setTimeout(() => { this.playerD.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
+        }, null, this);
+    }
+
+
+    crearMenosTP2() {
+        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100+ this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        reloj.setScale(0.1)
+        this.physics.add.overlap(this.playerD, reloj, () => {
+            this.playerD.time += -3000;
+            reloj.destroy();
         }, null, this);
     }
 
