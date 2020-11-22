@@ -21,6 +21,8 @@ class Scene_play extends Phaser.Scene {
 
     }
     create() {
+
+
         /*        
            let tamanio=escenas.length;
              let i=0;
@@ -168,11 +170,18 @@ class Scene_play extends Phaser.Scene {
 
         //Power Up jugador 1
         this.crearSpeedUpP1();
-        this.crearMenosTP1();
+
+        //this.crearMenosTP1();
+
+        //this.crearBlindP1();
+
+        this.crearFrostP1();
+
+
         //Power Up jugador 2
         this.crearSpeedUpP2();
-        this.crearMenosTP2();
-
+        //this.crearMenosTP2();
+        this.crearBlindP2();
 
         // let pCintaD= particles.createEmitter({
         //     x: { min: cintaD.x-50, max: cintaD.x+50 },
@@ -475,7 +484,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height / 2)
         //Para que persiga al pj
         this.cam1.startFollow(this.playerU, true);
-        this.cam1.setZoom(2.5)
+        this.cam1.setZoom(2.3)
 
 
         this.cam2 = this.cameras.add(0, this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2).setName('Camara 2');
@@ -485,7 +494,7 @@ class Scene_play extends Phaser.Scene {
 
         this.cam2.startFollow(this.playerD, true);
 
-        this.cam2.setZoom(2.5)
+        this.cam2.setZoom(2.3)
 
 
 
@@ -762,7 +771,7 @@ class Scene_play extends Phaser.Scene {
         cs1 = cs1 / 10;
         cs1 = Math.round(cs1);
         let sg1 = time / 1000
-        sg1 = sg1 % 100;
+        //sg1 = sg1 % 100;
         sg1 = Math.trunc(sg1)
         let mn1 = time / 60000;
         mn1 = Math.trunc(mn1)
@@ -776,7 +785,7 @@ class Scene_play extends Phaser.Scene {
         }
         if (sg1 > 59) {
             sg1 = sg1 % 60;
-            sg1 = "0" + sg1;
+            //sg1 = "0" + sg1;
         }
         if (mn1 < 10) {
             mn1 = "0" + mn1;
@@ -789,7 +798,7 @@ class Scene_play extends Phaser.Scene {
         cs2 = Math.round(cs2);
         let sg2 = time2 / 1000
         sg2 = Math.trunc(sg2)
-        let mn2 = time2 / 100000;
+        let mn2 = time2 / 60000;
         mn2 = Math.trunc(mn2)
 
         if (cs2 < 10) {
@@ -800,7 +809,7 @@ class Scene_play extends Phaser.Scene {
         }
         if (sg2 > 59) {
             sg2 = sg2 % 60;
-            sg2 = "0" + sg2;
+            //sg2 = "0" + sg2;
         }
         if (mn2 < 10) {
             mn2 = "0" + mn2;
@@ -844,6 +853,59 @@ class Scene_play extends Phaser.Scene {
         }, null, this);
     }
 
+    crearMasTP1() {
+        this.playerD.time += 13000;
+    }
+
+    crearFrostP1() {
+        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        reloj.setScale(0.1)
+        this.physics.add.overlap(this.playerU, reloj, () => {
+            this.playerD.setVelocityX(0);
+            this.escenasActivas[1] = true;
+            if (this.game.scene.isActive("CintaP2")) {
+                this.game.scene.stop("CintaP2");
+                this.blurGD.alpha = 0;
+            }
+            if (this.game.scene.isActive("CintaP2V2")) {
+                this.game.scene.stop("CintaP2V2");
+                this.blurGD.alpha = 0;
+            }
+            if (this.game.scene.isActive("ContadorP2")) {
+                this.game.scene.stop("ContadorP2");
+                this.escBU22.alpha = 0;
+            }
+            if (this.game.scene.isActive("ElectricidadP2")) {
+                this.game.scene.stop("ElectricidadP2");
+                this.blurElectricidadD.alpha = 0;
+            }
+            if (this.game.scene.isActive("ElectricidadP2V2")) {
+                this.game.scene.stop("ElectricidadP2V2");
+                this.blurElectricidadD.alpha = 0;
+            }
+            setTimeout(() => { this.escenasActivas[1] = false; }, 6000)
+            reloj.destroy();
+        }, null, this);
+    }
+
+
+
+
+    crearBlindP1() {
+        let blind = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        blind.setScale(0.1)
+        this.physics.add.overlap(this.playerU, blind, () => {
+            let ceguera = this.add.image(this.game.canvas.width / 2, 197, "Foco")
+            ceguera.scale = 0.4;
+            ceguera.setScrollFactor(0, 0)
+            ceguera.setDepth(1000000)
+            this.cam1.ignore(ceguera);
+            blind.destroy();
+            setTimeout(() => { ceguera.destroy(); console.log("Se te acabo la ceguera") }, 15000)
+
+        }, null, this);
+    }
+
 
 
     crearSpeedUpP2() {
@@ -858,13 +920,64 @@ class Scene_play extends Phaser.Scene {
 
 
     crearMenosTP2() {
-        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100+ this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
         reloj.setScale(0.1)
         this.physics.add.overlap(this.playerD, reloj, () => {
             this.playerD.time += -3000;
             reloj.destroy();
         }, null, this);
     }
+    crearMasTP2() {
+        this.playerU.time += 13000;
+    }
+
+
+    crearBlindP2() {
+        let blind = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        blind.setScale(0.1)
+        this.physics.add.overlap(this.playerD, blind, () => {
+            let ceguera = this.add.image(this.game.canvas.width / 2, 197, "Foco")
+            ceguera.scale = 0.4;
+            ceguera.setScrollFactor(0, 0)
+            ceguera.setDepth(1000000)
+            this.cam2.ignore(ceguera);
+            blind.destroy();
+            setTimeout(() => { ceguera.destroy(); console.log("Se te acabo la ceguera") }, 15000)
+
+        }, null, this);
+    }
+
+    crearFrostP2() {
+        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        reloj.setScale(0.1)
+        this.physics.add.overlap(this.playerD, reloj, () => {
+            this.playerU.setVelocityX(0);
+            this.escenasActivas[0] = true;
+            if (this.game.scene.isActive("CintaP1")) {
+                this.game.scene.stop("CintaP1");
+                this.blurGU.alpha = 0;
+            }
+            if (this.game.scene.isActive("CintaP2V1")) {
+                this.game.scene.stop("CintaP2V1");
+                this.blurGU.alpha = 0;
+            }
+            if (this.game.scene.isActive("ContadorP1")) {
+                this.game.scene.stop("ContadorP1");
+                this.escBU2.alpha = 0;
+            }
+            if (this.game.scene.isActive("ElectricidadP1")) {
+                this.game.scene.stop("ElectricidadP1");
+                this.blurElectricidadU.alpha = 0;
+            }
+            if (this.game.scene.isActive("ElectricidadP1V2")) {
+                this.game.scene.stop("ElectricidadP1V2");
+                this.blurElectricidadU.alpha = 0;
+            }
+            setTimeout(() => { this.escenasActivas[0] = false; }, 6000)
+            reloj.destroy();
+        }, null, this);
+    }
+
 
 
 
@@ -1342,13 +1455,13 @@ class Scene_play extends Phaser.Scene {
 
 
     unlockP1() {
-        console.log("unlock")
+        //console.log("unlock")
 
         this.keyLockP1 = false;
     }
 
     unlockP2() {
-        console.log("unlock")
+        //console.log("unlock")
 
         this.keyLockP2 = false;
     }

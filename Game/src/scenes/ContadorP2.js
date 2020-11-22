@@ -75,8 +75,9 @@ class ContadorP2 extends Phaser.Scene {
                 console.log("Has ganado puto un abrazo");
                 this.completado=true
             }
-            else if (this.css == 700) {
+            else if (this.css >= 698 && this.css<=702) {
                this.completado=true
+               this.data.escena.crearMasTP2(); 
             } else {
                 console.log("Vaya looser, te toca probar de nuevo")
             }
