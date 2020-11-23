@@ -175,13 +175,16 @@ class Scene_play extends Phaser.Scene {
 
         //this.crearBlindP1();
 
-        this.crearFrostP1();
-
+        //this.crearFrostP1();
+        this.crearRayosP1();
 
         //Power Up jugador 2
         this.crearSpeedUpP2();
         //this.crearMenosTP2();
-        this.crearBlindP2();
+        //this.crearBlindP2();
+        this.crearRayosP2();
+
+
 
         // let pCintaD= particles.createEmitter({
         //     x: { min: cintaD.x-50, max: cintaD.x+50 },
@@ -270,11 +273,7 @@ class Scene_play extends Phaser.Scene {
         escD3.displayHeight = this.game.canvas.height / 2;
         escD3.displayWidth = this.game.canvas.width;
 
-        let pruebaNieveD = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
-        pruebaNieveD.displayHeight = this.game.canvas.height * 0.3;
-        pruebaNieveD.displayWidth = this.game.canvas.width * 0.13;
-        pruebaNieveD.alpha = 0;
-
+  
 
 
 
@@ -484,7 +483,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height / 2)
         //Para que persiga al pj
         this.cam1.startFollow(this.playerU, true);
-        this.cam1.setZoom(2.3)
+        this.cam1.setZoom(1)
 
 
         this.cam2 = this.cameras.add(0, this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2).setName('Camara 2');
@@ -494,7 +493,7 @@ class Scene_play extends Phaser.Scene {
 
         this.cam2.startFollow(this.playerD, true);
 
-        this.cam2.setZoom(2.3)
+        this.cam2.setZoom(1)
 
 
 
@@ -906,6 +905,108 @@ class Scene_play extends Phaser.Scene {
         }, null, this);
     }
 
+    crearRayosP1() {
+        let rayos = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        rayos.setScale(0.1)
+        let pos = (this.playerD.x + 1180) / 1180
+        pos = Math.trunc(pos) - 1
+        this.physics.add.overlap(this.playerU, rayos, () => {
+            this.RayosD(0, pos);
+            rayos.destroy();
+
+        }, null, this);
+    }
+
+    RayosD(i, postion) {
+
+
+        if (i < 6) {
+            //Primero
+
+
+
+            let r1 = this.physics.add.image(this.game.canvas.width / 5 + 1180 * postion, this.game.canvas.height * 0.75, "laser")
+            r1.alpha = 0.95
+            r1.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerD, r1, () => {
+                this.playerD.velocidad = 200;
+                console.log("se rompe");
+                r1.destroy();
+            }, null, this)
+
+
+            let r2 = this.physics.add.image(this.game.canvas.width / 5 * 2 + 1180 * postion, this.game.canvas.height * 0.75, "laser")
+            r2.alpha = 0.95
+            r2.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerD, r2, () => {
+                this.playerD.velocidad = 200;
+                console.log("se rompe");
+                r2.destroy();
+            }, null, this)
+
+            let r3 = this.physics.add.image(this.game.canvas.width / 5 * 3 + 1180 * postion, this.game.canvas.height * 0.75, "laser")
+            r3.alpha = 0.95
+            r3.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerD, r3, () => {
+                this.playerD.velocidad = 200;
+                console.log("se rompe");
+                r3.destroy();
+            }, null, this)
+
+
+            let r4 = this.physics.add.image(this.game.canvas.width / 5 * 4 + 1180 * postion, this.game.canvas.height * 0.75, "laser")
+            r4.alpha = 0.95
+            r4.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerD, r4, () => {
+                this.playerD.velocidad = 200;
+                console.log("se rompe");
+                r4.destroy();
+            }, null, this)
+
+
+
+            setTimeout(() => {
+                if (r1 !== undefined) {
+                    console.log("se rompe");
+                    r1.destroy();
+                }
+                if (r2 !== undefined) {
+                    console.log("se rompe");
+                    r2.destroy();
+                }
+                if (r3 !== undefined) {
+                    console.log("se rompe");
+                    r3.destroy();
+                }
+                if (r4 !== undefined) {
+                    console.log("se rompe");
+                    r4.destroy();
+                }
+                this.playerD.velocidad = 300
+
+            }, 3000);
+
+
+
+
+            setTimeout(() => {
+                i++;
+                let postion = (this.playerD.x + 1180) / 1180
+                postion = Math.trunc(postion) - 1
+                this.RayosD(i,postion);
+
+            }, 3500);
+
+        }
+    }
+
+
+
+    
 
 
     crearSpeedUpP2() {
@@ -977,6 +1078,111 @@ class Scene_play extends Phaser.Scene {
             reloj.destroy();
         }, null, this);
     }
+
+
+    crearRayosP2() {
+        let rayos = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100+this.game.canvas.height/2, "menosT").setOrigin(0, 0);
+        rayos.setScale(0.1)
+        let pos = (this.playerU.x + 1180) / 1180
+        pos = Math.trunc(pos) - 1
+        this.physics.add.overlap(this.playerD, rayos, () => {
+            this.RayosU(0, pos);
+            rayos.destroy();
+
+        }, null, this);
+    }
+
+
+
+
+
+    RayosU(i, postion) {
+
+
+        if (i < 6) {
+            //Primero
+
+
+
+            let r1 = this.physics.add.image(this.game.canvas.width / 5 + 1180 * postion, this.game.canvas.height * 0.25, "laser")
+            r1.alpha = 0.95
+            r1.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerU, r1, () => {
+                this.playerU.velocidad = 200;
+                console.log("se rompe");
+                r1.destroy();
+            }, null, this)
+
+
+            let r2 = this.physics.add.image(this.game.canvas.width / 5 * 2 + 1180 * postion, this.game.canvas.height * 0.25, "laser")
+            r2.alpha = 0.95
+            r2.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerU, r2, () => {
+                this.playerU.velocidad = 200;
+                console.log("se rompe");
+                r2.destroy();
+            }, null, this)
+
+            let r3 = this.physics.add.image(this.game.canvas.width / 5 * 3 + 1180 * postion, this.game.canvas.height * 0.25, "laser")
+            r3.alpha = 0.95
+            r3.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerU, r3, () => {
+                this.playerU.velocidad = 200;
+                console.log("se rompe");
+                r3.destroy();
+            }, null, this)
+
+
+            let r4 = this.physics.add.image(this.game.canvas.width / 5 * 4 + 1180 * postion, this.game.canvas.height * 0.25, "laser")
+            r4.alpha = 0.95
+            r4.displayHeight = this.game.canvas.height / 2;
+
+            this.physics.add.overlap(this.playerU, r4, () => {
+                this.playerU.velocidad = 200;
+                console.log("se rompe");
+                r4.destroy();
+            }, null, this)
+
+
+
+            setTimeout(() => {
+                if (r1 !== undefined) {
+                    console.log("se rompe");
+                    r1.destroy();
+                }
+                if (r2 !== undefined) {
+                    console.log("se rompe");
+                    r2.destroy();
+                }
+                if (r3 !== undefined) {
+                    console.log("se rompe");
+                    r3.destroy();
+                }
+                if (r4 !== undefined) {
+                    console.log("se rompe");
+                    r4.destroy();
+                }
+                this.playerU.velocidad = 300
+
+            }, 3000);
+
+
+
+
+            setTimeout(() => {
+                i++;
+                let postion = (this.playerU.x + 1180) / 1180
+                postion = Math.trunc(postion) - 1
+                this.RayosU(i,postion);
+
+            }, 3500);
+
+        }
+    }
+
 
 
 
