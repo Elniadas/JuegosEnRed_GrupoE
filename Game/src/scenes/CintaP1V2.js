@@ -1,6 +1,6 @@
-class CintaP1 extends Phaser.Scene {
+class CintaP1V2 extends Phaser.Scene {
     constructor() {
-        super({ key: "CintaP1" });
+        super({ key: "CintaP1V2" });
 
     }
     init(data) {
@@ -37,10 +37,10 @@ class CintaP1 extends Phaser.Scene {
         this.contF = 0;
         this.puntuacion = 0;
         this.keyLock = false;
-        this.tope = 20;
+        this.tope = 50;
         this.texto = this.add.text(32, 32).setScrollFactor(0).setFontSize(32).setColor('#00000');
         this.keyLock = false;
-      
+        window.keylock = this.keyLock
 
     }
     unlock() {
@@ -90,8 +90,8 @@ class CintaP1 extends Phaser.Scene {
                 this.puntuacion++;
 
 
+                //this.audioCinta.play();
                 this.sound.play('Paso1');
-                
 
                 if (this.contF >= 3)
                     this.contF = 0;
@@ -113,9 +113,9 @@ class CintaP1 extends Phaser.Scene {
 
             this.data.escena.escenasActivas[0] = false;
             this.data.escena.blurGU.alpha = 0;
-            this.data.escena.escenarios[0].completadoP1U=true;
-            
-            this.data.escena.crearPortalGimnasioP1();
+            this.data.escena.escenarios[0].completadoP1D=true;
+          
+            this.data.escena.CP1.destroy()
             console.log("Saliendo klk")
             this.scene.stop(this);
         }
@@ -129,4 +129,4 @@ class CintaP1 extends Phaser.Scene {
 
 
 }
-export default CintaP1;
+export default CintaP1V2;

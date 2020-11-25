@@ -82,8 +82,11 @@ class ContadorP1 extends Phaser.Scene {
             setTimeout(() => {
                 this.data.escena.escenasActivas[0] = false;
                 this.data.escena.escBU2.alpha = 0;
-                this.data.escena.completado[0] = true;
+                
+                
                 if(this.completado===true){
+                    this.data.escena.escenarios[1].completadoP1U=true;
+                    this.data.escena.CoP1.destroy();
                     this.data.escena.crearPortalPulsadorP1();
                 }
                 this.scene.stop(this)
@@ -100,7 +103,9 @@ class ContadorP1 extends Phaser.Scene {
         if (this.play == false) {
             this.emp = new Date();                      //Fecha en la que empezamos
             this.elcrono = setInterval(() => { this.tiempo() }, 10);   //Funcion temporizador cada 10 ms llama a la funcion tiempo
-            this.play = true;                         //Reloj puesta en marcha
+            this.play = true;                           //Reloj puesta en marcha
+            this.sound.play('Reloj');                  //Poner el audio del reloj
+                 
         }
     }
 
