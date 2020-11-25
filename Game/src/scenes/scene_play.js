@@ -50,12 +50,13 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[0] = new Escenario("Cinta", 3, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 3, false);
+        this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
+        this.escenarios[4] = new Escenario("Laboratorio", 0, false);
 
-        this.physics.world.setBounds(0, 0, 4520, this.game.canvas.height);
+        this.physics.world.setBounds(0, 0, 5800, this.game.canvas.height);
         var that = this;
 
         //Factor de suma 1180 * this.escenarios[i].pos
@@ -397,6 +398,28 @@ class Scene_play extends Phaser.Scene {
         this.blurElectricidadD.alpha = 0;
 
 
+        //Escenario yiieePUm Laboratorio
+
+        let escU5 = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "Laboratorio").setOrigin(0, 0);
+
+        escU5.displayHeight = this.game.canvas.height / 2;
+        escU5.displayWidth = this.game.canvas.width;
+
+
+        let pruebaLaboratorioU = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 * 0.68, "Ordenador").setOrigin(0, 0);
+        pruebaLaboratorioU.displayHeight = this.game.canvas.height * 0.1;
+        pruebaLaboratorioU.displayWidth = this.game.canvas.width * 0.08;
+        pruebaLaboratorioU.setImmovable(true)
+        //pruebaElectricidadU.alpha = 0;
+
+        this.blurLaboratorioU = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "LaboratorioBlur").setOrigin(0, 0);
+        this.blurLaboratorioU.displayHeight = this.game.canvas.height / 2 - 10;
+        this.blurLaboratorioU.displayWidth = this.game.canvas.width;
+        this.blurLaboratorioU.alpha = 0;
+
+
+
+
 
         //Limites//
 
@@ -405,14 +428,14 @@ class Scene_play extends Phaser.Scene {
 
         let muro = this.add.image(0, this.game.canvas.height / 2, "muro").setOrigin(0, 0);
         muro.displayHeight = 1;
-        muro.displayWidth = 4320;
+        muro.displayWidth = 5800;
         muro.alpha = 0;
 
         //Suelo jugador 2
 
         let muro2 = this.add.image(0, this.game.canvas.height - 1, "muro").setOrigin(0, 0);
         muro2.displayHeight = 1;
-        muro2.displayWidth = 4320;
+        muro2.displayWidth = 5800;
         muro2.alpha = 0;
 
         //Paredes
@@ -429,6 +452,10 @@ class Scene_play extends Phaser.Scene {
         pared3.displayHeight = this.game.canvas.height;
         pared3.displayWidth = 100;
         pared3.alpha = 0;
+        let pared4 = this.add.image(4620, 0, "muro").setOrigin(0, 0);
+        pared4.displayHeight = this.game.canvas.height;
+        pared4.displayWidth = 100;
+        pared4.alpha = 0;
 
 
 
@@ -444,6 +471,7 @@ class Scene_play extends Phaser.Scene {
         this.paredes.add(pared1)
         this.paredes.add(pared2)
         this.paredes.add(pared3)
+        this.paredes.add(pared4)
 
 
 
@@ -483,7 +511,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.setBounds(0, 0, this.game.canvas.width, this.game.canvas.height / 2)
         //Para que persiga al pj
         this.cam1.startFollow(this.playerU, true);
-        this.cam1.setZoom(1)
+        this.cam1.setZoom(1.8)
 
 
         this.cam2 = this.cameras.add(0, this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2).setName('Camara 2');
@@ -493,7 +521,7 @@ class Scene_play extends Phaser.Scene {
 
         this.cam2.startFollow(this.playerD, true);
 
-        this.cam2.setZoom(1)
+        this.cam2.setZoom(2.3)
 
 
 
@@ -516,6 +544,7 @@ class Scene_play extends Phaser.Scene {
         this.CoP2 = this.physics.add.overlap(this.playerD, pruebaContador2, () => { this.Prueba(this.playerD) }, null, this);
         this.EP1 = this.physics.add.overlap(this.playerU, pruebaElectricidadU, () => { this.Prueba(this.playerU) }, null, this);
         this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, null, this);
+        this.LP1 = this.physics.add.overlap(this.playerU, pruebaLaboratorioU, () => { this.Prueba(this.playerU) }, null, this);
 
 
         //Cronometro

@@ -11,6 +11,7 @@ import ElectricidadP1 from './scenes/ElectricidadP1.js';
 import ElectricidadP2 from './scenes/ElectricidadP2.js';
 import ElectricidadP1V2 from './scenes/ElectricidadP1V2.js';
 import ElectricidadP2V2 from './scenes/ElectricidadP2V2.js';
+import LaboratorioP1 from './scenes/LaboratorioP1.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -52,7 +53,8 @@ const config = {
         CintaP1V2,
         CintaP2V2,
         ElectricidadP1V2,
-        ElectricidadP2V2
+        ElectricidadP2V2,
+        LaboratorioP1
     ]
 }
 

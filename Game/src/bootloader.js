@@ -48,6 +48,20 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Marco", "./assets/Piezas/Marco.png");
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
 
+
+        //Laboratorio//
+
+        this.load.image("Laboratorio", "./assets/Laboratorio.png");
+        this.load.image("LaboratorioBlur", "./assets/LaboratorioBlur.png");
+        this.load.image("Ordenador", "./assets/Ordenador.png");
+        this.load.image("PruebaLaboratorio", "./assets/OrdenadorPrueba.png");
+        this.load.image("PruebaLaboratorioPieza1", "./assets/PiezasLab/Simbolo1.png");
+        this.load.image("PruebaLaboratorioPieza2", "./assets/PiezasLab/Simbolo5.png");
+        this.load.image("PruebaLaboratorioPieza3", "./assets/PiezasLab/Simbolo7.png");
+        this.load.image("PruebaLaboratorioPieza4", "./assets/PiezasLab/Simbolo8.png");
+        this.load.image("PruebaLaboratorioPieza5", "./assets/PiezasLab/Simbolo9.png");
+
+
         //Menu//
         this.load.image("menu", "./assets/MainMenu.jpg");
         this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
