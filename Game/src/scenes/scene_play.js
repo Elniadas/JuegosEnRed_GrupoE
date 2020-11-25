@@ -79,8 +79,21 @@ class Scene_play extends Phaser.Scene {
         this.playerD.id = 1;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
+        
         //Cargar sonido
-        this.sound.play('Musica_fondo');
+        this.music = this.sound.add('Musica_fondo');
+
+        var musicConfig = {
+            mute: false,
+            volume: 0.0086,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false, 
+            delay: 0
+        }
+
+        this.music.play(musicConfig);
 
 
         //Escenario 1 Gimnasio

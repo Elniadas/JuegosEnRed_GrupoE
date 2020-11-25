@@ -70,7 +70,7 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
         this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
-        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg",{volume: 0.1});
+        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg");
         
         //Animaciones//
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
