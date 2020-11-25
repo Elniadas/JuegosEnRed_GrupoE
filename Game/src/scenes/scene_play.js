@@ -278,96 +278,25 @@ class Scene_play extends Phaser.Scene {
         escU4.displayWidth = this.game.canvas.width;
 
 
-        let pruebaElectricidadU = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 * 0.68, "logo").setOrigin(0, 0);
-        pruebaElectricidadU.displayHeight = this.game.canvas.height * 0.1;
-        pruebaElectricidadU.displayWidth = this.game.canvas.width * 0.08;
+        let pruebaElectricidadU = this.physics.add.image(770 + 1180 * this.escenarios[3].pos, 90, "logo").setOrigin(0, 0);
+        pruebaElectricidadU.displayHeight = 140;
+        pruebaElectricidadU.displayWidth = 140;
         pruebaElectricidadU.setImmovable(true)
-        //pruebaElectricidadU.alpha = 0;
+        pruebaElectricidadU.alpha = 0;
+
+        //AÑADIR LAS PARTÍCULAS A LA PRUEBA DE ELECTRICIDAD
 
         this.blurElectricidadU = this.add.image(0 + 1180 * this.escenarios[3].pos, 0, "ElectricidadBlur").setOrigin(0, 0);
         this.blurElectricidadU.displayHeight = this.game.canvas.height / 2 - 10;
         this.blurElectricidadU.displayWidth = this.game.canvas.width;
         this.blurElectricidadU.alpha = 0;
-        //Plataformas jugador 
 
-        /*
-        let p1_3_1 = this.physics.add.image(108 + 1180 * this.escenarios[3].pos, 300, "gymplatform").setImmovable(true);
-        p1_3_1.displayHeight = 20;
-        p1_3_1.displayWidth = 80;
+        //Plataformas jugador 1
+        this.crearPlataformasElectricidad1(that);
 
-        let p1_3_2 = this.physics.add.image(290 + 1180 * this.escenarios[3].pos, 180, "gymplatform").setImmovable(true);
-        p1_3_2.displayHeight = 20;
-        p1_3_2.displayWidth = 80;
-
-        this.tweens.timeline({
-            targets: p1_3_2.body.velocity,
-            loop: -1,
-            tweens: [
-                { x: -30, y: 30, duration: 2200, ease: 'Stepped' },
-                { x: 30, y: -30, duration: 2200, ease: 'Stepped' }
-
-            ]
-        });
-
-        let p1_3_3 = this.physics.add.image(190 + 1180 * this.escenarios[3].pos, 180, "gymplatform").setImmovable(true);
-        p1_3_3.displayHeight = 20;
-        p1_3_3.displayWidth = 80;
-
-        this.tweens.timeline({
-            targets: p1_3_3.body.velocity,
-            loop: -1,
-            tweens: [
-                { x: -30, y: -30, duration: 2200, ease: 'Stepped' },
-                { x: 30, y: 30, duration: 2200, ease: 'Stepped' }
-
-            ]
-        });
-
-        let p1_3_4 = this.physics.add.image(40 + 1180 * this.escenarios[3].pos, 115, "gymplatform").setImmovable(true);
-        p1_3_4.displayHeight = 20;
-        p1_3_4.displayWidth = 80;
-
-        //let p1_3_5=this.physics.add.image( 500 ,115, "gymplatform").setImmovable(true);   
-
-        let p1_3_5 = this.physics.add.image(500 + 1180 * this.escenarios[3].pos, 200, "gymplatform").setImmovable(true).setVelocity(0, 100);
-        p1_3_5.displayHeight = 20;
-        p1_3_5.displayWidth = 80;
-
-        this.tweens.timeline({
-
-            targets: p1_3_5.body.velocity,
-            loop: -1,
-            duration: 1000,
-
-            tweens: [
-                { x: { value: -100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
-                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: -100, ease: 'Sine.easeOut' } },
-                { x: { value: 100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
-                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: 100, ease: 'Sine.easeOut' } },
-
-            ],
-            onLoop: function () {
-                //p1_3_5.body.reset(500,115);
-                p1_3_5.body.reset(500 + 1180 * that.escenarios[3].pos, 200);
-            }
-        });
-
-
-
-        let grupoP1_elec = this.add.group();
-        grupoP1_elec.add(p1_3_1);
-        var intermitence = setInterval(() => {
-            p1_3_1.alpha = p1_3_1.alpha == 1 ? 0 : 1;
-            p1_3_1.alpha == 1 ? grupoP1_elec.add(p1_3_1) : grupoP1_elec.remove(p1_3_1);
-        }, 1000);
-        grupoP1_elec.add(p1_3_2);
-        grupoP1_elec.add(p1_3_3);
-        grupoP1_elec.add(p1_3_4);
-
-
-        //Colisión plataformas electricidad
-        this.physics.add.collider(this.playerU, grupoP1_elec);
-        */
+        //Plataformas jugador 2
+        this.crearPlataformasElectricidad2(that);
+        
 
         //Parte jugador 2
 
@@ -375,12 +304,13 @@ class Scene_play extends Phaser.Scene {
 
         escD4.displayHeight = this.game.canvas.height / 2;
         escD4.displayWidth = this.game.canvas.width;
+        escD4.setDepth(-2000);
 
-        let pruebaElectricidadD = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
-        pruebaElectricidadD.displayHeight = this.game.canvas.height * 0.1;
-        pruebaElectricidadD.displayWidth = this.game.canvas.width * 0.08;
+        let pruebaElectricidadD = this.physics.add.image(770 + 1180 * this.escenarios[3].pos, 450, "logo").setOrigin(0, 0);
+        pruebaElectricidadD.displayHeight = 140;
+        pruebaElectricidadD.displayWidth = 140;
         pruebaElectricidadD.setImmovable(true)
-        //pruebaElectricidadD.alpha = 0;
+        pruebaElectricidadD.alpha = 0;
 
         this.blurElectricidadD = this.add.image(0 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 + 10, "ElectricidadBlur").setOrigin(0, 0);
         this.blurElectricidadD.displayHeight = this.game.canvas.height / 2;
@@ -849,10 +779,13 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPortalElectricidadP1() {
-        this.portal = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.34, "logo")
-        this.portal.displayHeight = this.game.canvas.height * 0.1;
-        this.portal.displayWidth = this.game.canvas.width * 0.08;
-        this.portal.alpha = 1;
+        let spritePortal = this.add.sprite(1038 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.34, "portal");
+        spritePortal.play("portalAnim");
+        spritePortal.setScale(0.5);
+        this.portal = this.physics.add.image(1038 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.34, "logo")
+        this.portal.displayHeight = 155;
+        this.portal.displayWidth = 84;
+        this.portal.alpha = 0;
 
         this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[3].pos, this.cam1) }, null, this);
 
@@ -887,10 +820,12 @@ class Scene_play extends Phaser.Scene {
 
 
     crearPortalElectricidadP2() {
-
-        this.portalD = this.physics.add.image(this.game.canvas.width * 0.94 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.84, "logo")
-        this.portalD.displayHeight = this.game.canvas.height * 0.1;
-        this.portalD.displayWidth = this.game.canvas.width * 0.08;
+        let spritePortal = this.add.sprite(1038 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.84, "portal");
+        spritePortal.play("portalAnim");
+        spritePortal.setScale(0.5);
+        this.portalD = this.physics.add.image(1038 + 1180 * this.escenarios[3].pos, this.game.canvas.height * 0.84, "logo")
+        this.portalD.displayHeight = 155;
+        this.portalD.displayWidth = 84;
         this.portalD.alpha = 0;
         this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[3].pos, this.cam2) }, null, this); console.log(this.portal)
     }
@@ -1284,7 +1219,208 @@ class Scene_play extends Phaser.Scene {
 
     }
 
+    crearPlataformasElectricidad1(that){
+        var that_=that;
+        
+        let p1_3_1 = this.physics.add.image(108 + 1180 * this.escenarios[3].pos, 300, "gymplatform").setImmovable(true);
+        p1_3_1.displayHeight = 20;
+        p1_3_1.displayWidth = 80;
 
+        let p1_3_2 = this.physics.add.image(290 + 1180 * this.escenarios[3].pos, 180, "gymplatform").setImmovable(true);
+        p1_3_2.displayHeight = 20;
+        p1_3_2.displayWidth = 80;
+
+        this.tweens.timeline({
+            targets: p1_3_2.body.velocity,
+            loop: -1,
+            tweens: [
+                { x: -30, y: 30, duration: 2200, ease: 'Stepped' },
+                { x: 30, y: -30, duration: 2200, ease: 'Stepped' }
+
+            ]
+        });
+
+        let p1_3_3 = this.physics.add.image(190 + 1180 * this.escenarios[3].pos, 180, "gymplatform").setImmovable(true);
+        p1_3_3.displayHeight = 20;
+        p1_3_3.displayWidth = 80;
+
+        this.tweens.timeline({
+            targets: p1_3_3.body.velocity,
+            loop: -1,
+            tweens: [
+                { x: -30, y: -30, duration: 2200, ease: 'Stepped' },
+                { x: 30, y: 30, duration: 2200, ease: 'Stepped' }
+
+            ]
+        });
+
+        let p1_3_4 = this.physics.add.image(40 + 1180 * this.escenarios[3].pos, 115, "gymplatform").setImmovable(true);
+        p1_3_4.displayHeight = 20;
+        p1_3_4.displayWidth = 80;
+
+        //let p1_3_5=this.physics.add.image( 500 ,115, "gymplatform").setImmovable(true);   
+
+        let p1_3_5 = this.physics.add.image(500 + 1180 * this.escenarios[3].pos, 200, "gymplatform").setImmovable(true).setVelocity(0, 100);
+        p1_3_5.displayHeight = 20;
+        p1_3_5.displayWidth = 80;
+
+        this.tweens.timeline({
+
+            targets: p1_3_5.body.velocity,
+            loop: -1,
+            duration: 1000,
+
+            tweens: [
+                { x: { value: -100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
+                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: -100, ease: 'Sine.easeOut' } },
+                { x: { value: 100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
+                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: 100, ease: 'Sine.easeOut' } },
+
+            ],
+            onLoop: function () {
+               p1_3_5.body.reset(500 + 1180 * that_.escenarios[3].pos, 200);
+            }
+        });
+
+        let p1_3_6 = this.physics.add.image(600 + 1180 * this.escenarios[3].pos, 150, "gymplatform").setImmovable(true);
+        p1_3_6.displayHeight = 20;
+        p1_3_6.displayWidth = 80;
+
+        let notCheating = this.physics.add.image(700 + 1180 * this.escenarios[3].pos, 235, "gymplatform").setImmovable(true);
+        notCheating.displayHeight = 250;
+        notCheating.displayWidth = 20;
+        notCheating.alpha = 0;
+
+        let p1_3_7 = this.physics.add.image(840+ 1180 * this.escenarios[3].pos, 250, "gymplatform").setImmovable(true);
+        p1_3_7.displayHeight = 20;
+        p1_3_7.displayWidth = 220;
+
+
+        let grupoP1_elec = this.add.group();
+        grupoP1_elec.add(p1_3_1);
+        var intermitence = setInterval(() => {
+            p1_3_1.alpha = p1_3_1.alpha == 1 ? 0 : 1;
+            p1_3_1.alpha == 1 ? grupoP1_elec.add(p1_3_1) : grupoP1_elec.remove(p1_3_1);
+        }, 1000);
+        grupoP1_elec.add(p1_3_2);
+        grupoP1_elec.add(p1_3_3);
+        grupoP1_elec.add(p1_3_4);
+        grupoP1_elec.add(p1_3_5);
+        grupoP1_elec.add(p1_3_6);
+        var intermitence = setInterval(() => {
+            p1_3_6.alpha = p1_3_6.alpha == 1 ? 0 : 1;
+            p1_3_6.alpha == 1 ? grupoP1_elec.add(p1_3_6) : grupoP1_elec.remove(p1_3_6);
+        }, 1500);
+        grupoP1_elec.add(notCheating);
+        grupoP1_elec.add(p1_3_7);
+
+
+        //Colisión plataformas electricidad
+        this.physics.add.collider(this.playerU, grupoP1_elec);
+    }
+
+    crearPlataformasElectricidad2(that){
+        var that_=that;
+        
+        let p2_3_1 = this.physics.add.image(108 + 1180 * this.escenarios[3].pos, 660, "gymplatform").setImmovable(true);
+        p2_3_1.displayHeight = 20;
+        p2_3_1.displayWidth = 80;
+        
+                
+
+        let p2_3_2 = this.physics.add.image(290 + 1180 * this.escenarios[3].pos, 540, "gymplatform").setImmovable(true);
+        p2_3_2.displayHeight = 20;
+        p2_3_2.displayWidth = 80;
+
+        this.tweens.timeline({
+            targets: p2_3_2.body.velocity,
+            loop: -1,
+            tweens: [
+                { x: -30, y: 30, duration: 2200, ease: 'Stepped' },
+                { x: 30, y: -30, duration: 2200, ease: 'Stepped' }
+
+            ]
+        });
+
+        let p2_3_3 = this.physics.add.image(190 + 1180 * this.escenarios[3].pos, 540, "gymplatform").setImmovable(true);
+        p2_3_3.displayHeight = 20;
+        p2_3_3.displayWidth = 80;
+
+        this.tweens.timeline({
+            targets: p2_3_3.body.velocity,
+            loop: -1,
+            tweens: [
+                { x: -30, y: -30, duration: 2200, ease: 'Stepped' },
+                { x: 30, y: 30, duration: 2200, ease: 'Stepped' }
+
+            ]
+        });
+
+        let p2_3_4 = this.physics.add.image(40 + 1180 * this.escenarios[3].pos, 475, "gymplatform").setImmovable(true);
+        p2_3_4.displayHeight = 20;
+        p2_3_4.displayWidth = 80;
+
+        //let p1_3_5=this.physics.add.image( 500 ,115, "gymplatform").setImmovable(true);   
+
+        let p2_3_5 = this.physics.add.image(500 + 1180 * this.escenarios[3].pos, 560, "gymplatform").setImmovable(true).setVelocity(0, 100);
+        p2_3_5.displayHeight = 20;
+        p2_3_5.displayWidth = 80;
+
+        this.tweens.timeline({
+
+            targets: p2_3_5.body.velocity,
+            loop: -1,
+            duration: 1000,
+
+            tweens: [
+                { x: { value: -100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
+                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: -100, ease: 'Sine.easeOut' } },
+                { x: { value: 100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
+                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: 100, ease: 'Sine.easeOut' } },
+
+            ],
+            onLoop: function () {
+                //p1_3_5.body.reset(500,115);
+                p2_3_5.body.reset(500 + 1180 * that_.escenarios[3].pos, 560);
+            }
+        });
+
+        let p2_3_6 = this.physics.add.image(600 + 1180 * this.escenarios[3].pos, 510, "gymplatform").setImmovable(true);
+        p2_3_6.displayHeight = 20;
+        p2_3_6.displayWidth = 80;
+
+        let notCheating2 = this.physics.add.image(700 + 1180 * this.escenarios[3].pos, 595, "gymplatform").setImmovable(true);
+        notCheating2.displayHeight = 250;
+        notCheating2.displayWidth = 20;
+        notCheating2.alpha = 0;
+
+        let p2_3_7 = this.physics.add.image(840+ 1180 * this.escenarios[3].pos, 610, "gymplatform").setImmovable(true);
+        p2_3_7.displayHeight = 20;
+        p2_3_7.displayWidth = 220;
+
+
+        let grupoP2_elec = this.add.group();
+        grupoP2_elec.add(p2_3_1);
+        var intermitence = setInterval(() => {
+            p2_3_1.alpha = p2_3_1.alpha == 1 ? 0 : 1;
+            p2_3_1.alpha == 1 ? grupoP2_elec.add(p2_3_1) : grupoP2_elec.remove(p2_3_1);
+        }, 1000);
+        grupoP2_elec.add(p2_3_2);
+        grupoP2_elec.add(p2_3_3);
+        grupoP2_elec.add(p2_3_4);
+        grupoP2_elec.add(p2_3_5);
+        grupoP2_elec.add(p2_3_6);
+        var intermitence = setInterval(() => {
+            p2_3_6.alpha = p2_3_6.alpha == 1 ? 0 : 1;
+            p2_3_6.alpha == 1 ? grupoP2_elec.add(p2_3_6) : grupoP2_elec.remove(p2_3_6);
+        }, 1500);
+        grupoP2_elec.add(notCheating2);
+        grupoP2_elec.add(p2_3_7);
+
+
+        //Colisión plataformas electricidad
+        this.physics.add.collider(this.playerD, grupoP2_elec);
+    }
 
 
 
