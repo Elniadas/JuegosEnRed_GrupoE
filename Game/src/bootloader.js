@@ -48,6 +48,21 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Marco", "./assets/Piezas/Marco.png");
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
 
+
+        //Laboratorio//
+
+        this.load.image("Laboratorio", "./assets/Laboratorio.png");
+        this.load.image("LaboratorioBlur", "./assets/LaboratorioBlur.png");
+        this.load.image("Ordenador", "./assets/Ordenador.png");
+        this.load.image("PruebaLaboratorio", "./assets/OrdenadorPrueba.png");
+        this.load.image("FlechaSelect", "./assets/PiezasLab/FlechaSelect.png");
+        this.load.image("PruebaLaboratorioPieza1", "./assets/PiezasLab/Simbolo1.png");
+        this.load.image("PruebaLaboratorioPieza2", "./assets/PiezasLab/Simbolo5.png");
+        this.load.image("PruebaLaboratorioPieza3", "./assets/PiezasLab/Simbolo7.png");
+        this.load.image("PruebaLaboratorioPieza4", "./assets/PiezasLab/Simbolo8.png");
+        this.load.image("PruebaLaboratorioPieza5", "./assets/PiezasLab/Simbolo9.png");
+
+
         //Menu//
         this.load.image("menu", "./assets/MainMenu.jpg");
         this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
@@ -67,11 +82,10 @@ class Bootloader extends Phaser.Scene {
 
 
         //Sonidos//
-        this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
-        this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
-        this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
-        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg",{volume: 0.1});
-        
+        this.load.audio("Paso1", "./assets/Sonidos/Paso1.mp3", { instances: 10 });
+        this.load.audio("Reloj", "./assets/Sonidos/Reloj.mp3");
+        this.load.audio("Teletransporte", "./assets/Sonidos/Teletransporte.mp3");
+
         //Animaciones//
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
         this.load.atlas("P2", "./assets/RunP2.png", "./assets/RunP2.json")
@@ -79,6 +93,9 @@ class Bootloader extends Phaser.Scene {
 
         //PoweUps//
         this.load.image('run', './assets/RUN.png');
+        this.load.image('menosT', './assets/relojArena.png');
+        this.load.image('Foco', './assets/foco.png');
+        this.load.image('laser', './assets/laser.png');
 
 
 
