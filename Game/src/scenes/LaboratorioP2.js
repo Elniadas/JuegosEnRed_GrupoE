@@ -1,6 +1,6 @@
-class LaboratorioP1 extends Phaser.Scene {
+class LaboratorioP2 extends Phaser.Scene {
     constructor() {
-        super({ key: "LaboratorioP1" });
+        super({ key: "LaboratorioP2" });
 
     }
     init(data) {
@@ -8,7 +8,7 @@ class LaboratorioP1 extends Phaser.Scene {
     }
 
     preload() {
-        this.data.escena.blurLaboratorioU.alpha = 1;
+        this.data.escena.blurLaboratorioD.alpha = 1;
     }
 
 
@@ -18,7 +18,7 @@ class LaboratorioP1 extends Phaser.Scene {
 
 
 
-        this.prueba = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'PruebaLaboratorio');
+        this.prueba = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height *0.75, 'PruebaLaboratorio');
         this.prueba.displayHeight = this.prueba.height * 0.55
         this.prueba.displayWidth = this.prueba.width * 0.55
 
@@ -46,13 +46,13 @@ class LaboratorioP1 extends Phaser.Scene {
 
 
         this.pieza1 = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, this.sprites[0]);//La E
-        this.pieza1.y = 200;
+        this.pieza1.y = 200+this.game.canvas.height/2;
         this.pieza1.x = 445;
         this.pieza1.scale = 0.7
         this.pieza1.sprite = 0
 
         this.pieza2 = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, this.sprites[1]);//Beta
-        this.pieza2.y = 200;
+        this.pieza2.y = 200+this.game.canvas.height/2;
         this.pieza2.x = 490;
         this.pieza2.scale = 0.7
         this.pieza2.sprite = 1
@@ -61,13 +61,13 @@ class LaboratorioP1 extends Phaser.Scene {
 
 
         this.pieza3 = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, this.sprites[2]);// U
-        this.pieza3.y = 200;
+        this.pieza3.y = 200+this.game.canvas.height/2;
         this.pieza3.x = 530;
         this.pieza3.scale = 0.7
         this.pieza3.sprite = 2
 
         this.pieza4 = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, this.sprites[3]);//Lamda
-        this.pieza4.y = 200;
+        this.pieza4.y = 200+this.game.canvas.height/2;
         this.pieza4.x = 580;
         this.pieza4.scale = 0.7
         this.pieza4.sprite = 3
@@ -75,7 +75,7 @@ class LaboratorioP1 extends Phaser.Scene {
 
 
         this.pieza5 = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, this.sprites[4]); //Delta
-        this.pieza5.y = 200;
+        this.pieza5.y = 200+this.game.canvas.height/2;
         this.pieza5.x = 630;
         this.pieza5.scale = 0.7
         this.pieza5.sprite = 4
@@ -97,12 +97,12 @@ class LaboratorioP1 extends Phaser.Scene {
         this.marco.scale = 1;
         this.posicion = 2;
 
-        this.keyboard = this.input.stopPropagation().keyboard.addKeys('A,D,W,S,Q');
-        this.input.keyboard.on('keyup-' + 'A', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'D', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'W', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'Q', this.unlock.bind(this));
+        this.keyboard = this.input.stopPropagation().keyboard.addKeys('LEFT,RIGHT,UP,DOWN,M');
+        this.input.keyboard.on('keyup-' + 'LEFT', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'RIGHT', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'UP', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'DOWN', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'M', this.unlock.bind(this));
 
 
     }
@@ -116,7 +116,7 @@ class LaboratorioP1 extends Phaser.Scene {
     update() {
 
 
-        if (this.keyboard.A.isDown == true && this.keyLock == false) {
+        if (this.keyboard.LEFT.isDown == true && this.keyLock == false) {
             this.posicion--;
             if (this.posicion < 0) {
                 this.posicion = this.piezas.length - 1;
@@ -124,7 +124,7 @@ class LaboratorioP1 extends Phaser.Scene {
             this.actualizarMarco();
             this.keyLock = true;
         }
-        if (this.keyboard.D.isDown == true && this.keyLock == false) {
+        if (this.keyboard.RIGHT.isDown == true && this.keyLock == false) {
 
             this.posicion++;
             if (this.posicion > this.piezas.length - 1) {
@@ -139,17 +139,17 @@ class LaboratorioP1 extends Phaser.Scene {
         //Salir prueba
 
 
-        if (this.keyboard.Q.isDown === true && this.keyLock == false) {
+        if (this.keyboard.M.isDown === true && this.keyLock == false) {
             console.log("Cerrando");
-            this.data.escena.escenasActivas[0] = false;
+            this.data.escena.escenasActivas[1] = false;
             this.keyLock = true;
-            this.data.escena.blurLaboratorioU.alpha = 0;
+            this.data.escena.blurLaboratorioD.alpha = 0;
 
             this.scene.stop(this);
         }
         //*/
 
-        if (this.keyboard.W.isDown === true && this.keyLock == false) {
+        if (this.keyboard.UP.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             let sprite = this.piezas[this.posicion].sprite;
             sprite++;
@@ -161,7 +161,7 @@ class LaboratorioP1 extends Phaser.Scene {
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
 
-        if (this.keyboard.S.isDown === true && this.keyLock == false) {
+        if (this.keyboard.DOWN.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             let sprite = this.piezas[this.posicion].sprite;
             sprite--;
@@ -206,13 +206,13 @@ class LaboratorioP1 extends Phaser.Scene {
 
             setTimeout(() => {
                 this.scene.stop(this)
-                this.data.escena.escenasActivas[0] = false;
-                this.data.escena.escenarios[4].completadoP1U = true;
-                this.data.escena.LP1.destroy();
+                this.data.escena.escenasActivas[1] = false;
+                this.data.escena.escenarios[4].completadoP1D = true;
+                this.data.escena.LP2.destroy();
                 this.keyLock = true;
-                this.data.escena.blurLaboratorioU.alpha = 0;
-                this.data.escena.crearPortalLaboratorioP1();
-                this.data.escena.crearFrostP1();
+                this.data.escena.blurLaboratorioD.alpha = 0;
+                this.data.escena.crearPortalLaboratorioP2();
+                this.data.escena.crearFrostP2();
                 this.scene.stop(this)
             }, 500);
         }
@@ -225,4 +225,4 @@ class LaboratorioP1 extends Phaser.Scene {
 
 
 }
-export default LaboratorioP1;
+export default LaboratorioP2;

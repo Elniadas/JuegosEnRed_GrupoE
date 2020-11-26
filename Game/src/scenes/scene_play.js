@@ -177,13 +177,13 @@ class Scene_play extends Phaser.Scene {
         //this.crearBlindP1();
 
         //this.crearFrostP1();
-        this.crearRayosP1();
+        //this.crearRayosP1();
 
         //Power Up jugador 2
         this.crearSpeedUpP2();
         //this.crearMenosTP2();
         //this.crearBlindP2();
-        this.crearRayosP2();
+        //this.crearRayosP2();
 
 
 
@@ -258,15 +258,6 @@ class Scene_play extends Phaser.Scene {
         escU3.displayHeight = this.game.canvas.height / 2;
         escU3.displayWidth = this.game.canvas.width;
 
-
-
-        let pruebaNieveU = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[2].pos, this.game.canvas.height * 0.34, "logo")
-        pruebaNieveU.displayHeight = this.game.canvas.height * 0.3;
-        pruebaNieveU.displayWidth = this.game.canvas.width * 0.13;
-        pruebaNieveU.setImmovable(true)
-        pruebaNieveU.alpha = 0;
-
-
         //Parte jugador 2
 
         let escD3 = this.add.image(0 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2, "Nieve").setOrigin(0, 0);
@@ -274,7 +265,7 @@ class Scene_play extends Phaser.Scene {
         escD3.displayHeight = this.game.canvas.height / 2;
         escD3.displayWidth = this.game.canvas.width;
 
-  
+
 
 
 
@@ -400,6 +391,8 @@ class Scene_play extends Phaser.Scene {
 
         //Escenario yiieePUm Laboratorio
 
+        //Jugador 1
+
         let escU5 = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "Laboratorio").setOrigin(0, 0);
 
         escU5.displayHeight = this.game.canvas.height / 2;
@@ -410,7 +403,7 @@ class Scene_play extends Phaser.Scene {
         pruebaLaboratorioU.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioU.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioU.setImmovable(true)
-        //pruebaElectricidadU.alpha = 0;
+
 
         this.blurLaboratorioU = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "LaboratorioBlur").setOrigin(0, 0);
         this.blurLaboratorioU.displayHeight = this.game.canvas.height / 2 - 10;
@@ -418,6 +411,23 @@ class Scene_play extends Phaser.Scene {
         this.blurLaboratorioU.alpha = 0;
 
 
+        //Jugador 2
+
+        let escD5 = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2, "Laboratorio").setOrigin(0, 0);
+
+        escD5.displayHeight = this.game.canvas.height / 2;
+        escD5.displayWidth = this.game.canvas.width;
+
+        let pruebaLaboratorioD = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "Ordenador").setOrigin(0, 0);
+        pruebaLaboratorioD.displayHeight = this.game.canvas.height * 0.1;
+        pruebaLaboratorioD.displayWidth = this.game.canvas.width * 0.08;
+        pruebaLaboratorioD.setImmovable(true)
+        //pruebaElectricidadD.alpha = 0;
+
+        this.blurLaboratorioD = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 + 10, "LaboratorioBlur").setOrigin(0, 0);
+        this.blurLaboratorioD.displayHeight = this.game.canvas.height / 2;
+        this.blurLaboratorioD.displayWidth = this.game.canvas.width;
+        this.blurLaboratorioD.alpha = 0;
 
 
 
@@ -482,13 +492,15 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        this.keyboardP2 = this.input.keyboard.addKeys('LEFT,RIGHT,UP,DOWN,SPACE');
+        this.keyboardP2 = this.input.keyboard.addKeys('LEFT,RIGHT,UP,DOWN,SPACE,ESC');
 
         this.input.keyboard.on('keyup-' + 'LEFT', this.unlockP2.bind(this));
         this.input.keyboard.on('keyup-' + 'RIGHT', this.unlockP2.bind(this));
         this.input.keyboard.on('keyup-' + 'UP', this.unlockP2.bind(this));
         this.input.keyboard.on('keyup-' + 'DOWN', this.unlockP2.bind(this));
         this.input.keyboard.on('keyup-' + 'SPACE', this.unlockP2.bind(this));
+
+        this.input.keyboard.on('keyup-' + 'ESC', this.unlockP2.bind(this));
 
         //Player 1
 
@@ -521,7 +533,7 @@ class Scene_play extends Phaser.Scene {
 
         this.cam2.startFollow(this.playerD, true);
 
-        this.cam2.setZoom(2.3)
+        this.cam2.setZoom(1.8)
 
 
 
@@ -545,6 +557,7 @@ class Scene_play extends Phaser.Scene {
         this.EP1 = this.physics.add.overlap(this.playerU, pruebaElectricidadU, () => { this.Prueba(this.playerU) }, null, this);
         this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, null, this);
         this.LP1 = this.physics.add.overlap(this.playerU, pruebaLaboratorioU, () => { this.Prueba(this.playerU) }, null, this);
+        this.LP2 = this.physics.add.overlap(this.playerD, pruebaLaboratorioD, () => { this.Prueba(this.playerD) }, null, this);
 
 
         //Cronometro
@@ -554,10 +567,10 @@ class Scene_play extends Phaser.Scene {
 
 
         //this.TiempoP1=this.add.bitmapText(this.cam1.midPoint.x+350, this.cam1.midPoint.y-90, 'Digitalism', "00:00:00", 20)
-        this.TiempoP1 = this.add.bitmapText(670, 110, 'Digitalism', "00 : 00 : 00", 20)
+        this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP1.setScrollFactor(0, 0)
 
-        this.TiempoP2 = this.add.bitmapText(670, 110, 'Digitalism', "00 : 00 : 00", 20)
+        this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP2.setScrollFactor(0, 0)
         this.cam1.ignore(this.TiempoP2);
         this.cam2.ignore(this.TiempoP1);
@@ -602,6 +615,7 @@ class Scene_play extends Phaser.Scene {
             if (this.keyboardP2.UP.isDown === true && this.playerD.body.touching.down) {
                 this.playerD.setVelocityY(-750);
             }
+
 
             if (this.keyboardP2.LEFT.isDown === false && this.keyboardP2.RIGHT.isDown === false && this.keyboardP2.UP.isDown === false) {
                 if (this.playerD.body.velocity.x > 0) {
@@ -661,6 +675,12 @@ class Scene_play extends Phaser.Scene {
 
         }
 
+
+        /*  
+        if (this.keyboardP2.ESC.isDown === true) {
+            this.playerD.setVelocityY(-750);
+        }
+    */
 
 
 
@@ -886,9 +906,9 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearFrostP1() {
-        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
-        reloj.setScale(0.1)
-        this.physics.add.overlap(this.playerU, reloj, () => {
+        //let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        //reloj.setScale(0.1)
+        //this.physics.add.overlap(this.playerU, reloj, () => {
             this.playerD.setVelocityX(0);
             this.escenasActivas[1] = true;
             if (this.game.scene.isActive("CintaP2")) {
@@ -911,39 +931,43 @@ class Scene_play extends Phaser.Scene {
                 this.game.scene.stop("ElectricidadP2V2");
                 this.blurElectricidadD.alpha = 0;
             }
+            if (this.game.scene.isActive("LaboratorioP2")) {
+                this.game.scene.stop("LaboratorioP2");
+                this.blurLaboratorioD.alpha = 0;
+            }
             setTimeout(() => { this.escenasActivas[1] = false; }, 6000)
-            reloj.destroy();
-        }, null, this);
+            //reloj.destroy();
+        //}, null, this);
     }
 
 
 
 
     crearBlindP1() {
-        let blind = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
-        blind.setScale(0.1)
-        this.physics.add.overlap(this.playerU, blind, () => {
-            let ceguera = this.add.image(this.game.canvas.width / 2, 197, "Foco")
-            ceguera.scale = 0.4;
-            ceguera.setScrollFactor(0, 0)
-            ceguera.setDepth(1000000)
-            this.cam1.ignore(ceguera);
-            blind.destroy();
-            setTimeout(() => { ceguera.destroy(); console.log("Se te acabo la ceguera") }, 15000)
+        //let blind = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        //blind.setScale(0.1)
+        //this.physics.add.overlap(this.playerU, blind, () => {
+        let ceguera = this.add.image(this.game.canvas.width / 2, 197, "Foco")
+        ceguera.scale = 0.6;
+        ceguera.setScrollFactor(0, 0)
+        ceguera.setDepth(1000000)
+        this.cam1.ignore(ceguera);
+        //blind.destroy();
+        setTimeout(() => { ceguera.destroy(); console.log("Se te acabo la ceguera") }, 15000)
 
-        }, null, this);
+        //}, null, this);
     }
 
     crearRayosP1() {
-        let rayos = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
-        rayos.setScale(0.1)
+        //let rayos = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+        //rayos.setScale(0.1)
         let pos = (this.playerD.x + 1180) / 1180
         pos = Math.trunc(pos) - 1
-        this.physics.add.overlap(this.playerU, rayos, () => {
-            this.RayosD(0, pos);
-            rayos.destroy();
+        //this.physics.add.overlap(this.playerU, rayos, () => {
+        this.RayosD(0, pos);
+        // rayos.destroy();
 
-        }, null, this);
+        //}, null, this);
     }
 
     RayosD(i, postion) {
@@ -1026,16 +1050,12 @@ class Scene_play extends Phaser.Scene {
                 i++;
                 let postion = (this.playerD.x + 1180) / 1180
                 postion = Math.trunc(postion) - 1
-                this.RayosD(i,postion);
+                this.RayosD(i, postion);
 
             }, 3500);
 
         }
     }
-
-
-
-    
 
 
     crearSpeedUpP2() {
@@ -1063,24 +1083,24 @@ class Scene_play extends Phaser.Scene {
 
 
     crearBlindP2() {
-        let blind = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
-        blind.setScale(0.1)
-        this.physics.add.overlap(this.playerD, blind, () => {
-            let ceguera = this.add.image(this.game.canvas.width / 2, 197, "Foco")
-            ceguera.scale = 0.4;
-            ceguera.setScrollFactor(0, 0)
-            ceguera.setDepth(1000000)
-            this.cam2.ignore(ceguera);
-            blind.destroy();
-            setTimeout(() => { ceguera.destroy(); console.log("Se te acabo la ceguera") }, 15000)
+        //let blind = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        //blind.setScale(0.1)
+        //this.physics.add.overlap(this.playerD, blind, () => {
+        let ceguera = this.add.image(this.game.canvas.width / 2, 197, "Foco")
+        ceguera.scale = 0.6;
+        ceguera.setScrollFactor(0, 0)
+        ceguera.setDepth(1000000)
+        this.cam2.ignore(ceguera);
+        //blind.destroy();
+        setTimeout(() => { ceguera.destroy(); console.log("Se te acabo la ceguera") }, 15000)
 
-        }, null, this);
+        //}, null, this);
     }
 
     crearFrostP2() {
-        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
-        reloj.setScale(0.1)
-        this.physics.add.overlap(this.playerD, reloj, () => {
+       // let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        //reloj.setScale(0.1)
+        //this.physics.add.overlap(this.playerD, reloj, () => {
             this.playerU.setVelocityX(0);
             this.escenasActivas[0] = true;
             if (this.game.scene.isActive("CintaP1")) {
@@ -1103,22 +1123,26 @@ class Scene_play extends Phaser.Scene {
                 this.game.scene.stop("ElectricidadP1V2");
                 this.blurElectricidadU.alpha = 0;
             }
+            if (this.game.scene.isActive("LaboratorioP1")) {
+                this.game.scene.stop("LaboratorioP1");
+                this.blurLaboratorioU.alpha = 0;
+            }
             setTimeout(() => { this.escenasActivas[0] = false; }, 6000)
-            reloj.destroy();
-        }, null, this);
+           // reloj.destroy();
+        //}, null, this);
     }
 
 
     crearRayosP2() {
-        let rayos = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100+this.game.canvas.height/2, "menosT").setOrigin(0, 0);
-        rayos.setScale(0.1)
+        //let rayos = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100+this.game.canvas.height/2, "menosT").setOrigin(0, 0);
+        //rayos.setScale(0.1)
         let pos = (this.playerU.x + 1180) / 1180
         pos = Math.trunc(pos) - 1
-        this.physics.add.overlap(this.playerD, rayos, () => {
-            this.RayosU(0, pos);
-            rayos.destroy();
+        //this.physics.add.overlap(this.playerD, rayos, () => {
+        this.RayosU(0, pos);
+        //  rayos.destroy();
 
-        }, null, this);
+        //}, null, this);
     }
 
 
@@ -1205,7 +1229,7 @@ class Scene_play extends Phaser.Scene {
                 i++;
                 let postion = (this.playerU.x + 1180) / 1180
                 postion = Math.trunc(postion) - 1
-                this.RayosU(i,postion);
+                this.RayosU(i, postion);
 
             }, 3500);
 
@@ -1256,6 +1280,23 @@ class Scene_play extends Phaser.Scene {
 
     }
 
+
+    crearPortalLaboratorioP1() {
+        let spritePortal = this.add.sprite(1038 + 1180 * this.escenarios[4].pos, this.game.canvas.height * 0.34, "portal");
+        spritePortal.play("portalAnim");
+        spritePortal.setScale(0.5);
+        this.portal = this.physics.add.image(1038 + 1180 * this.escenarios[4].pos, this.game.canvas.height * 0.34, "logo")
+        this.portal.displayHeight = 155; //spritePortal.height x 0.5
+        this.portal.displayWidth = 84; //spritePortal.width x 0.5
+        this.portal.alpha = 0;
+
+        //let pos = (player.x + 1180) / 1180
+        //pos = Math.trunc(pos) - 1
+
+
+        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[4].pos, this.cam1) }, null, this);
+
+    }
 
 
 
@@ -1682,7 +1723,16 @@ class Scene_play extends Phaser.Scene {
 
     }
 
-
+    crearPortalLaboratorioP2() {
+        let spritePortal2 = this.add.sprite(1038 + 1180 * this.escenarios[4].pos, this.game.canvas.height * 0.84, "portal");
+        spritePortal2.play("portalAnim");
+        spritePortal2.setScale(0.5);
+        this.portalD = this.physics.add.image(1038 + 1180 * this.escenarios[4].pos, this.game.canvas.height * 0.84, "logo")
+        this.portalD.displayHeight = 155; //spritePortal.height x 0.5
+        this.portalD.displayWidth = 84; //spritePortal.width x 0.5
+        this.portalD.alpha = 0;
+        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[4].pos, this.cam2) }, null, this); console.log(this.portal)
+    }
 
 
 
@@ -1700,12 +1750,6 @@ class Scene_play extends Phaser.Scene {
 
         this.keyLockP2 = false;
     }
-
-
-
-
-
-
 
 
     delayDone() {

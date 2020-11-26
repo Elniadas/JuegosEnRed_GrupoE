@@ -115,7 +115,7 @@ class CintaP1 extends Phaser.Scene {
             this.data.escena.escenarios[0].completadoP1U=true;
             
             this.data.escena.crearPortalGimnasioP1();
-            console.log("Saliendo klk")
+            console.log("Saliendo")
             this.scene.stop(this);
         }
         //console.log(this.keyLock)
