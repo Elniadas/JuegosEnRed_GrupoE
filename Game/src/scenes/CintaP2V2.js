@@ -78,6 +78,8 @@ class CintaP2V2 extends Phaser.Scene {
                 this.cinta.setFrame(this.contF)
                 this.contF++;
                 this.puntuacion++;
+                //Sonido
+                this.sound.play('Paso1');
                 
                 if (this.contF >= 3)
                     this.contF = 0;

@@ -47,7 +47,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        //Pensar esto un pcoo mejor
+        //Pensar esto un pocoo mejor
         this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 3, false);

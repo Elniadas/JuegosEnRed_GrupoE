@@ -142,6 +142,8 @@ class ElectricidadP1V2 extends Phaser.Scene {
             this.keyLock = true;
             this.piezas[this.posicion].angle+=90;
             this.completado();
+            
+            this.sound.play('Laser1');  //Sonido cada vez que mueves la pieza
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
 

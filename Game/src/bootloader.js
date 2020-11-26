@@ -14,6 +14,11 @@ class Bootloader extends Phaser.Scene {
 
         this.load.bitmapFont('Digitalism', './assets/Digitalism.png', './assets/Digitalism.xml')
 
+
+        //Tutorial//
+        this.load.image("Tutorial","./assets/Tutorial.png");
+
+
         //Gimnasio//
 
         this.load.image("Gimnasio", "./assets/Gimnasio.png");
@@ -71,6 +76,7 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
         this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
         this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg");
+        this.load.audio("Laser1","./assets/Sonidos/Laser1.mp3");
         
         //Animaciones//
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
