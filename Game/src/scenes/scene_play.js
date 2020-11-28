@@ -50,10 +50,10 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 2, true);
+        this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 4, false);
-        this.escenarios[3] = new Escenario("Electricidad", 0, true);
+        this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
         this.physics.world.setBounds(0, 0, 5800, this.game.canvas.height);
@@ -106,7 +106,7 @@ class Scene_play extends Phaser.Scene {
 
         let cintaU = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 121, "muro")
         cintaU.displayHeight = 5;
-        cintaU.displayWidth = 80
+        cintaU.displayWidth = 78
 
 
         cinU.setScale(0.30);
@@ -150,10 +150,10 @@ class Scene_play extends Phaser.Scene {
         this.blurGD.alpha = 0;
 
         //se ha modificado la posición de la colisión de la cinta para junto a un sprite
-        let cintaD = this.physics.add.image(1030 + 1180 * this.escenarios[0].pos, 483, "muro")
+        let cintaD = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 483, "muro")
 
         cintaD.displayHeight = 5;
-        cintaD.displayWidth = 80
+        cintaD.displayWidth = 78
 
         let cinD = this.add.image(1030 + 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
 
