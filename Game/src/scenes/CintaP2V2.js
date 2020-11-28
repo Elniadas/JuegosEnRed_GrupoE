@@ -36,6 +36,7 @@ class CintaP2V2 extends Phaser.Scene {
       
         this.tope = 50;
         this.texto = this.add.text(32, this.game.canvas.height * 0.75,).setScrollFactor(0).setFontSize(32).setColor('#00000');
+        this.keyLock = false;
 
 
 
@@ -94,9 +95,11 @@ class CintaP2V2 extends Phaser.Scene {
             this.data.escena.escenasActivas[1] = false;
             this.data.escena.escenarios[0].completadoP2D=true;
             this.data.escena.blurGD.alpha = 0;
+            this.data.escena.particlesCPD.destroy()
             this.data.escena.CP2.destroy()
             this.data.escena.crearRayosP2()
             
+
             this.scene.stop(this);
         }
 

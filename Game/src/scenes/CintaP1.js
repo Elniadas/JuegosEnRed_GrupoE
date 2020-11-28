@@ -113,6 +113,7 @@ class CintaP1 extends Phaser.Scene {
             this.data.escena.escenasActivas[0] = false;
             this.data.escena.blurGU.alpha = 0;
             this.data.escena.escenarios[0].completadoP1U=true;
+            this.data.escena.PCU.tint.onChange(0xE74C3C)
             
             this.data.escena.crearPortalGimnasioP1();
             console.log("Saliendo")

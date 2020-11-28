@@ -70,11 +70,13 @@ class ContadorP1 extends Phaser.Scene {
             console.log(this.Marca)
             if (this.Marca >= 650 && this.Marca <= 750) {
                 console.log("Has ganado un abrazo");
+                this.data.escena.particlesContPU.destroy();
                 this.completado=true
             }
             else if (this.css >= 698 && this.css<=702) {
                 console.log("Practicamente clavao")
                 this.data.escena.crearMasTP1(); 
+                this.data.escena.particlesContPU.destroy();
                 this.completado=true;
             } else {
                 console.log("te toca probar de nuevo")
