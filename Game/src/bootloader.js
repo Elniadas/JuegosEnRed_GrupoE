@@ -52,7 +52,23 @@ class Bootloader extends Phaser.Scene {
         this.load.image("menu", "./assets/MainMenu1.jpg");
         this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
         this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 299, frameHeight: 137 }); //botón de play
-        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", { frameWidth: 300, frameHeight: 300 }); //botón sonido
+
+
+        //Laboratorio//
+
+        this.load.image("Laboratorio", "./assets/Laboratorio.png");
+        this.load.image("LaboratorioBlur", "./assets/LaboratorioBlur.png");
+        this.load.image("Ordenador", "./assets/Ordenador.png");
+        this.load.image("PruebaLaboratorio", "./assets/OrdenadorPrueba.png");
+        this.load.image("FlechaSelect", "./assets/PiezasLab/FlechaSelect.png");
+        this.load.image("PruebaLaboratorioPieza1", "./assets/PiezasLab/Simbolo1.png");
+        this.load.image("PruebaLaboratorioPieza2", "./assets/PiezasLab/Simbolo5.png");
+        this.load.image("PruebaLaboratorioPieza3", "./assets/PiezasLab/Simbolo7.png");
+        this.load.image("PruebaLaboratorioPieza4", "./assets/PiezasLab/Simbolo8.png");
+        this.load.image("PruebaLaboratorioPieza5", "./assets/PiezasLab/Simbolo9.png");
+
+
+      
 
         //Otros//
 
@@ -79,6 +95,9 @@ class Bootloader extends Phaser.Scene {
 
         //PoweUps//
         this.load.image('run', './assets/RUN.png');
+        this.load.image('menosT', './assets/relojArena.png');
+        this.load.image('Foco', './assets/foco.png');
+        this.load.image('laser', './assets/laser.png');
 
 
 

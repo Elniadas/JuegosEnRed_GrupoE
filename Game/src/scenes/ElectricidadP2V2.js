@@ -15,7 +15,6 @@ class ElectricidadP2V2 extends Phaser.Scene {
     create() {
 
 
-console.log("AFEITANDONOS")
         this.prueba = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height *0.75, 'PruebaElectricidad2');
         this.prueba.displayHeight = this.prueba.height * 0.55
         this.prueba.displayWidth = this.prueba.width * 0.55
@@ -86,11 +85,12 @@ console.log("AFEITANDONOS")
         this.marco.scale=0.33;
         this.posicion=2;
 
-        this.keyboard = this.input.keyboard.addKeys('LEFT,RIGHT,UP');
+        this.keyboard = this.input.keyboard.addKeys('LEFT,RIGHT,UP,DOWN');
 
         this.input.keyboard.on('keyup-'+'LEFT', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'RIGHT', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'UP', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-'+'DOWN', this.unlock.bind(this));
 
     }
     unlock() {
@@ -142,6 +142,15 @@ console.log("AFEITANDONOS")
             this.completado();
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
+
+        if (this.keyboard.DOWN.isDown === true && this.keyLock == false) {
+            this.keyLock = true;
+            this.piezas[this.posicion].angle-=90;
+            this.completado();
+            //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
+        }
+
+
         //*/
     }
 
@@ -187,6 +196,7 @@ console.log("AFEITANDONOS")
                 this.keyLock = true;
                 this.data.escena.blurElectricidadD.alpha = 0;
                 this.data.escena.EP2.destroy();
+                this.data.escena.crearBlindP2();
                 this.scene.stop(this)
             },500);
         }

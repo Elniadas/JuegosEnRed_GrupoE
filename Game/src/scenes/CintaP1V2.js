@@ -116,7 +116,8 @@ class CintaP1V2 extends Phaser.Scene {
             this.data.escena.escenarios[0].completadoP1D=true;
           
             this.data.escena.CP1.destroy()
-            console.log("Saliendo klk")
+            this.data.escena.crearRayosP1()
+            console.log("Saliendo")
             this.scene.stop(this);
         }
         //console.log(this.keyLock)

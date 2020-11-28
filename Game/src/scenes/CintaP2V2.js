@@ -95,9 +95,7 @@ class CintaP2V2 extends Phaser.Scene {
             this.data.escena.escenarios[0].completadoP2D=true;
             this.data.escena.blurGD.alpha = 0;
             this.data.escena.CP2.destroy()
-            
-            
-
+            this.data.escena.crearRayosP2()
             
             this.scene.stop(this);
         }
