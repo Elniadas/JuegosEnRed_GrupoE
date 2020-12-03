@@ -104,6 +104,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image('menosT', './assets/relojArena.png');
         this.load.image('Foco', './assets/foco.png');
         this.load.image('laser', './assets/laser.png');
+        this.load.spritesheet("time++", "./assets/Time++SSheet.png", {frameWidth: 437, frameHeight: 678});
 
 
 
@@ -432,6 +433,13 @@ class Bootloader extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers("portal", { frames: [0, 1, 2, 3, 4, 5, 6, 7, 8] }),
             repeat: -1,
             frameRate: 6
+        })
+
+        this.anims.create({
+            key: "timePlus",
+            frames: this.anims.generateFrameNumbers("time++", {frames: [0,1,2]}),
+            repeat: -1,
+            frameRate: 3
         })
 
 

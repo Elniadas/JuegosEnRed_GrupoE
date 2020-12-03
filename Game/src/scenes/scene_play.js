@@ -260,6 +260,9 @@ class Scene_play extends Phaser.Scene {
         //Plataformas jugador 2
         this.crearPlataformasContador2();
 
+        //Power Ups
+        //this.crearMasTP2();
+
         //Escenario 3 Nieve
 
         //Parte jugador 1
@@ -857,6 +860,8 @@ class Scene_play extends Phaser.Scene {
         }, null, this);
     }
 
+    
+
      
 
     crearMenosTP1() {
@@ -1045,6 +1050,9 @@ class Scene_play extends Phaser.Scene {
         }, null, this);
     }
     crearMasTP2() {
+        /*let timePLUS=this.add.sprite(50 + 1180 * this.escenarios[1].pos, 100 + this.game.canvas.height / 2,"time++");
+        timePLUS.anims.play("timePlus");
+        timePLUS.setScale(0.1);*/
         this.playerU.time += 13000;
     }
 
