@@ -18,7 +18,7 @@ class MainMenu extends Phaser.Scene {
          
          let hoverSprite=this.add.sprite(100,100,"FlagSheet2");
          hoverSprite.setVisible(false);
-         let pb2=this.add.sprite(this.sys.game.canvas.width/2, this.sys.game.canvas.height/2, "Play");
+         let pb2=this.add.sprite(200, this.sys.game.canvas.height/2, "Play");
          let soundM=this.add.sprite(950, 75, "Mute");
          //let pb= this.add.image(this.sys.game.canvas.width/2,this.sys.game.canvas.height/2,"playButton");
 
@@ -33,7 +33,7 @@ class MainMenu extends Phaser.Scene {
         })
 
          
-        pb2.setScale(0.45); 
+        pb2.setScale(1); 
         pb2.setOrigin(0.48,-0.1);
         pb2.setInteractive();
 

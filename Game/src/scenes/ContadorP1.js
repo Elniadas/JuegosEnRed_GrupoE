@@ -108,7 +108,7 @@ class ContadorP1 extends Phaser.Scene {
             this.elcrono = setInterval(() => { this.tiempo() }, 10);   //Funcion temporizador cada 10 ms llama a la funcion tiempo
             this.play = true;                           //Reloj puesta en marcha
             this.sound.play('Reloj');                  //Poner el audio del reloj
-            this.sound.pause('Musica_fondo');          //Pausar la música de fondo
+                 
         }
     }
 
