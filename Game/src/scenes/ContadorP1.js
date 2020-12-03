@@ -29,7 +29,7 @@ class ContadorP1 extends Phaser.Scene {
 
 
 
-        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,A');
+        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,S');
 
 
         this.play = false;
@@ -42,7 +42,7 @@ class ContadorP1 extends Phaser.Scene {
 
 
         this.input.keyboard.on('keyup-' + 'D', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'A', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
 
         this.keyLock = false;
 
@@ -59,7 +59,7 @@ class ContadorP1 extends Phaser.Scene {
 
     update() {
 
-        if (this.keyboard.A.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
+        if (this.keyboard.S.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
             this.keyLock = true
             this.parar();
             this.pintarTiempo();
@@ -69,21 +69,27 @@ class ContadorP1 extends Phaser.Scene {
 
             console.log(this.Marca)
             if (this.Marca >= 650 && this.Marca <= 750) {
-                console.log("Has ganado puto un abrazo");
+                console.log("Has ganado un abrazo");
+                this.data.escena.particlesContPU.destroy();
                 this.completado=true
             }
-            else if (this.css == 700) {
-                console.log("Te la has sacado hermano")
+            else if (this.css >= 698 && this.css<=702) {
+                console.log("Practicamente clavao")
+                this.data.escena.crearMasTP1(); 
+                this.data.escena.particlesContPU.destroy();
                 this.completado=true;
             } else {
-                console.log("Vaya looser, te toca probar de nuevo")
+                console.log("te toca probar de nuevo")
             }
 
             setTimeout(() => {
                 this.data.escena.escenasActivas[0] = false;
                 this.data.escena.escBU2.alpha = 0;
-                this.data.escena.completado[0] = true;
+                
+                
                 if(this.completado===true){
+                    this.data.escena.escenarios[1].completadoP1U=true;
+                    this.data.escena.CoP1.destroy();
                     this.data.escena.crearPortalPulsadorP1();
                 }
                 this.scene.stop(this)

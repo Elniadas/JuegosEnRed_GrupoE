@@ -2,9 +2,19 @@ import Bootloader from './bootloader.js';
 import Scene_play from './scenes/scene_play.js'
 import mainMenu from './scenes/mainMenu.js';
 import CintaP1 from './scenes/CintaP1.js';
+import CintaP1V2 from './scenes/CintaP1V2.js';
+import CintaP2V2 from './scenes/CintaP2V2.js';
 import CintaP2 from './scenes/CintaP2.js';
 import ContadorP1 from './scenes/ContadorP1.js';
 import ContadorP2 from './scenes/ContadorP2.js';
+import ElectricidadP1 from './scenes/ElectricidadP1.js';
+import ElectricidadP2 from './scenes/ElectricidadP2.js';
+import ElectricidadP1V2 from './scenes/ElectricidadP1V2.js';
+import ElectricidadP2V2 from './scenes/ElectricidadP2V2.js';
+import LaboratorioP1 from './scenes/LaboratorioP1.js';
+import LaboratorioP2 from './scenes/LaboratorioP2.js';
+import Pause from './scenes/Pause.js';
+import Tutorial from './scenes/Tutorial.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -40,7 +50,17 @@ const config = {
         CintaP1,
         CintaP2,
         ContadorP1,
-        ContadorP2
+        ContadorP2,
+        ElectricidadP1,
+        ElectricidadP2,
+        CintaP1V2,
+        CintaP2V2,
+        ElectricidadP1V2,
+        ElectricidadP2V2,
+        LaboratorioP1,
+        LaboratorioP2,
+        Pause,
+        Tutorial
     ]
 }
 

@@ -1,6 +1,6 @@
-class CintaP2 extends Phaser.Scene {
+class CintaP2V2 extends Phaser.Scene {
     constructor() {
-        super({ key: "CintaP2" });
+        super({ key: "CintaP2V2" });
 
     }
     init(data) {
@@ -34,7 +34,7 @@ class CintaP2 extends Phaser.Scene {
         this.contF = 0;
         this.puntuacion = 0;
       
-        this.tope = 20;
+        this.tope = 50;
         this.texto = this.add.text(32, this.game.canvas.height * 0.75,).setScrollFactor(0).setFontSize(32).setColor('#00000');
         this.keyLock = false;
 
@@ -93,11 +93,13 @@ class CintaP2 extends Phaser.Scene {
 
         if (this.puntuacion >= this.tope) {
             this.data.escena.escenasActivas[1] = false;
-            this.data.escena.escenarios[0].completadoP2U=true;
+            this.data.escena.escenarios[0].completadoP2D=true;
             this.data.escena.blurGD.alpha = 0;
-            this.data.escena.PCD.tint.onChange(0xE74C3C)
+            this.data.escena.particlesCPD.destroy()
+            this.data.escena.CP2.destroy()
+            this.data.escena.crearRayosP2()
+            
 
-            this.data.escena.crearPortalGimnasioP2();
             this.scene.stop(this);
         }
 
@@ -108,4 +110,4 @@ class CintaP2 extends Phaser.Scene {
 
 
 }
-export default CintaP2;
+export default CintaP2V2;
