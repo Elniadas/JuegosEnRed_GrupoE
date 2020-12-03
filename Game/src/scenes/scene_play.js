@@ -47,7 +47,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-
+            
 
         //Pensar esto un pcoo mejor
         this.escenarios[0] = new Escenario("Cinta", 0, true);
@@ -65,6 +65,8 @@ class Scene_play extends Phaser.Scene {
 
         //Player 1//
 
+        
+        
         this.playerU = this.physics.add.sprite(0, this.game.canvas.height / 2 - 50, 'P1');
         this.playerU.play('IdleDerechaP1');
         this.playerU.setScale(0.15).refreshBody();
@@ -72,6 +74,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.id = 0;
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
+        this.playerU.setacc
         this.playerU.setDepth(1000);
 
         //Player 2//
@@ -807,12 +810,14 @@ class Scene_play extends Phaser.Scene {
         if (cs1 < 10) {
             cs1 = "0" + cs1;
         }
-        if (sg1 < 10) {
-            sg1 = "0" + sg1;
-        }
+        
         if (sg1 > 59) {
             sg1 = sg1 % 60;
             //sg1 = "0" + sg1;
+        }
+
+        if (sg1 < 10) {
+            sg1 = "0" + sg1;
         }
         if (mn1 < 10) {
             mn1 = "0" + mn1;
@@ -831,13 +836,17 @@ class Scene_play extends Phaser.Scene {
         if (cs2 < 10) {
             cs2 = "0" + cs2;
         }
-        if (sg2 < 10) {
-            sg2 = "0" + sg2;
-        }
+       
         if (sg2 > 59) {
             sg2 = sg2 % 60;
             //sg2 = "0" + sg2;
         }
+
+        if (sg2 < 10) {
+            sg2 = "0" + sg2;
+        }
+
+
         if (mn2 < 10) {
             mn2 = "0" + mn2;
         }
