@@ -58,7 +58,7 @@ class MainMenu extends Phaser.Scene {
                 target: "Scene_Play",
                 duration:3000
             })*/
-            this.scene.start("Scene_play");
+            this.scene.start("Tutorial");
         })
 
 

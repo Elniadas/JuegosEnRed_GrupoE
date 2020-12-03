@@ -47,7 +47,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        //Pensar esto un pocoo mejor
+        //Pensar esto un poco mejor
         this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 3, false);
@@ -434,15 +434,9 @@ class Scene_play extends Phaser.Scene {
         pared3.displayWidth = 100;
         pared3.alpha = 0;
 
-
-
-
         this.plataformas = this.physics.add.staticGroup();
         this.plataformas.add(muro);
         this.plataformas.add(muro2);
-
-
-
 
         this.paredes = this.physics.add.staticGroup();
         this.paredes.add(pared1)

@@ -14,10 +14,10 @@ class Bootloader extends Phaser.Scene {
 
         this.load.bitmapFont('Digitalism', './assets/Digitalism.png', './assets/Digitalism.xml')
 
-
         //Tutorial//
-        this.load.image("Tutorial","./assets/Tutorial.png");
 
+        this.load.image("Tutorial","./assets/Tutorial.png");
+        this.load.image("TutorialBlur","./assets/ComoJugarBlur.png");
 
         //Gimnasio//
 
@@ -35,10 +35,11 @@ class Bootloader extends Phaser.Scene {
         this.load.image("ContadorBlur", "./assets/ContadorBlur.png");
         this.load.image("Contador", "./assets/Contador2.png")
         this.load.spritesheet("PulsadorA", "./assets/PulsadorAnimacion.png", { frameWidth: 500, frameHeight: 600 });
-
         this.load.image("spriteCont", "./assets/contadorSprite.png");
+
         //Nieve//
 
+        this.load.image("Bandera","./assets/Bandera.png");
         this.load.image("Nieve", "./assets/NivelHelado.png");
 
         //Electricidad//
@@ -52,6 +53,20 @@ class Bootloader extends Phaser.Scene {
         this.load.image("PruebaElectricidadPieza3", "./assets/Piezas/Pieza2.3.png");
         this.load.image("Marco", "./assets/Piezas/Marco.png");
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
+        this.load.image("Enchufe", "./assets/Enchufe.png");
+
+        //Laboratorio//
+
+        this.load.image("Ordenador","./assets/Ordenador.png");
+        this.load.image("Laboratorio", "./assets/Laboratorio.png");
+        this.load.image("LaboratorioBlur", "./assets/LaboratorioBlur.png");
+        this.load.image("PruebaLaboratorio", "./assets/OrdenadorPrueba.png");
+        this.load.image("FlechaSelect", "./assets/PiezasLab/FlechaSelect.png");
+        this.load.image("PruebaLaboratorioPieza1", "./assets/PiezasLab/Simbolo1.png");
+        this.load.image("PruebaLaboratorioPieza2", "./assets/PiezasLab/Simbolo5.png");
+        this.load.image("PruebaLaboratorioPieza3", "./assets/PiezasLab/Simbolo7.png");
+        this.load.image("PruebaLaboratorioPieza4", "./assets/PiezasLab/Simbolo8.png");
+        this.load.image("PruebaLaboratorioPieza5", "./assets/PiezasLab/Simbolo9.png");
 
         //Menu//
         this.load.image("menu", "./assets/MainMenu.jpg");
@@ -70,8 +85,8 @@ class Bootloader extends Phaser.Scene {
         this.load.atlas('flares', './assets/flares.png', './assets/flares.json');
         this.load.image('snowFlake', './assets/snowFlakeC.png');
 
-
         //Sonidos//
+
         this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
         this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
@@ -80,11 +95,13 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("electricidad","./assets/Sonidos/electricidad.mp3");
         
         //Animaciones//
+
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
         this.load.atlas("P2", "./assets/RunP2.png", "./assets/RunP2.json")
         this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", { frameWidth: 168, frameHeight: 310 });
 
         //PoweUps//
+        
         this.load.image('run', './assets/RUN.png');
 
 
