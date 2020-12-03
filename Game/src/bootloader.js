@@ -37,6 +37,7 @@ class Bootloader extends Phaser.Scene {
         //Nieve//
 
         this.load.image("Nieve", "./assets/NivelHelado.png");
+        this.load.image("snowplat", "./assets/PlataformasNieve.png");
 
         //Electricidad//
 

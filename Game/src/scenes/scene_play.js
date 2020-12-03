@@ -269,12 +269,16 @@ class Scene_play extends Phaser.Scene {
         escU3.displayHeight = this.game.canvas.height / 2;
         escU3.displayWidth = this.game.canvas.width;
 
+        this.crearPlataformasNieve1();
+
         //Parte jugador 2
 
         let escD3 = this.add.image(0 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2, "Nieve").setOrigin(0, 0);
 
         escD3.displayHeight = this.game.canvas.height / 2;
         escD3.displayWidth = this.game.canvas.width;
+
+        this.crearPlataformasNieve2();
 
 
 
@@ -1971,7 +1975,139 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.collider(this.playerD, grupoP2_Lab);
     }
 
+    crearPlataformasNieve1(){
+        let p1_5_1=this.physics.add.image(100 + 1180 * this.escenarios[2].pos, 295, "snowplat").setImmovable(true);
+        p1_5_1.displayHeight=20;
+        p1_5_1.displayWidth=80;
+        p1_5_1.body.friction.x=0.3; 
+        
 
+        this.tweens.timeline({
+            targets: p1_5_1.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: 60, duration: 1000, ease: 'Stepped'},
+                {x:-60, duration: 1000, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p1_5_2=this.physics.add.image(300 + 1180 * this.escenarios[2].pos, 225, "snowplat").setImmovable(true);
+        p1_5_2.displayHeight=20;
+        p1_5_2.displayWidth=80;
+        
+
+        let p1_5_3=this.physics.add.image(495 + 1180 * this.escenarios[2].pos, 225, "snowplat").setImmovable(true);
+        p1_5_3.displayHeight=20;
+        p1_5_3.displayWidth=80;
+        p1_5_3.body.friction.x=0.3; 
+
+        this.tweens.timeline({
+            targets: p1_5_3.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -70, duration: 1500, ease: 'Stepped'},
+                {x:70, duration: 1500, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p1_5_4=this.physics.add.image(595 + 1180 * this.escenarios[2].pos, 185, "snowplat").setImmovable(true);
+        p1_5_4.displayHeight=20;
+        p1_5_4.displayWidth=40;
+
+        let p1_5_5=this.physics.add.image(975 + 1180 * this.escenarios[2].pos, 210, "snowplat").setImmovable(true);
+        p1_5_5.displayHeight=20;
+        p1_5_5.displayWidth=80;
+        p1_5_5.body.friction.x=0.2; 
+
+        this.tweens.timeline({
+            targets: p1_5_5.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -95, duration: 2500, ease: 'Stepped'},
+                {x:95, duration: 2500, ease:'Stepped'}
+                            
+            ]
+          });
+        
+
+          let grupoP1_snow=this.add.group();
+          grupoP1_snow.add(p1_5_1);
+          grupoP1_snow.add(p1_5_2);
+          grupoP1_snow.add(p1_5_3);
+          grupoP1_snow.add(p1_5_4);
+          grupoP1_snow.add(p1_5_5);
+
+          this.physics.add.collider(this.playerU, grupoP1_snow);
+    }
+
+    crearPlataformasNieve2(){
+        let p2_5_1=this.physics.add.image(100 + 1180 * this.escenarios[2].pos, 655, "snowplat").setImmovable(true);
+        p2_5_1.displayHeight=20;
+        p2_5_1.displayWidth=80;
+        p2_5_1.body.friction.x=0.3; 
+        
+
+        this.tweens.timeline({
+            targets: p2_5_1.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: 60, duration: 1000, ease: 'Stepped'},
+                {x:-60, duration: 1000, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p2_5_2=this.physics.add.image(300 + 1180 * this.escenarios[2].pos, 585, "snowplat").setImmovable(true);
+        p2_5_2.displayHeight=20;
+        p2_5_2.displayWidth=80;
+        
+
+        let p2_5_3=this.physics.add.image(495 + 1180 * this.escenarios[2].pos, 585, "snowplat").setImmovable(true);
+        p2_5_3.displayHeight=20;
+        p2_5_3.displayWidth=80;
+        p2_5_3.body.friction.x=0.3; 
+
+        this.tweens.timeline({
+            targets: p2_5_3.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -70, duration: 1500, ease: 'Stepped'},
+                {x:70, duration: 1500, ease:'Stepped'}
+                            
+            ]
+          });
+
+        let p2_5_4=this.physics.add.image(595 + 1180 * this.escenarios[2].pos, 545, "snowplat").setImmovable(true);
+        p2_5_4.displayHeight=20;
+        p2_5_4.displayWidth=40;
+
+        let p2_5_5=this.physics.add.image(975 + 1180 * this.escenarios[2].pos, 470, "snowplat").setImmovable(true);
+        p2_5_5.displayHeight=20;
+        p2_5_5.displayWidth=80;
+        p2_5_5.body.friction.x=0.2; 
+
+        this.tweens.timeline({
+            targets: p2_5_5.body.velocity,
+            loop: -1,
+            tweens: [
+                {x: -95, duration: 2500, ease: 'Stepped'},
+                {x:95, duration: 2500, ease:'Stepped'}
+                            
+            ]
+          });
+        
+
+          let grupoP2_snow=this.add.group();
+          grupoP2_snow.add(p2_5_1);
+          grupoP2_snow.add(p2_5_2);
+          grupoP2_snow.add(p2_5_3);
+          grupoP2_snow.add(p2_5_4);
+          grupoP2_snow.add(p2_5_5);
+
+          this.physics.add.collider(this.playerD, grupoP2_snow);
+    }
 
 
 
