@@ -1,6 +1,6 @@
-class CintaP2V2 extends Phaser.Scene {
+class CintaTP2 extends Phaser.Scene {
     constructor() {
-        super({ key: "CintaP2V2" });
+        super({ key: "CintaTP2" });
 
     }
     init(data) {
@@ -11,8 +11,7 @@ class CintaP2V2 extends Phaser.Scene {
     }
 
     preload() {
-        this.data.escena.blurGD.alpha = 1;
-
+        this.data.escena.gimBD.alpha = 1;
     }
 
     create() {
@@ -34,9 +33,8 @@ class CintaP2V2 extends Phaser.Scene {
         this.contF = 0;
         this.puntuacion = 0;
       
-        this.tope = 50;
-        this.texto = this.add.text(this.game.canvas.width/2-30, 75).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
-        this.keyLock = false;
+        this.tope = 20;
+        this.texto = this.add.text(this.game.canvas.width/2-30, 75+this.game.canvas.height/2).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
 
 
 
@@ -95,13 +93,7 @@ class CintaP2V2 extends Phaser.Scene {
 
         if (this.puntuacion >= this.tope) {
             this.data.escena.escenasActivas[1] = false;
-            this.data.escena.escenarios[0].completadoP2D=true;
-            this.data.escena.blurGD.alpha = 0;
-            this.data.escena.particlesCPD.destroy()
-            this.data.escena.CP2.destroy()
-            this.data.escena.crearRayosP2()
-            
-
+            this.data.escena.gimBD.alpha = 0;
             this.scene.stop(this);
         }
 
@@ -112,4 +104,4 @@ class CintaP2V2 extends Phaser.Scene {
 
 
 }
-export default CintaP2V2;
+export default CintaTP2;

@@ -14,6 +14,11 @@ class Bootloader extends Phaser.Scene {
 
         this.load.bitmapFont('Digitalism', './assets/Digitalism.png', './assets/Digitalism.xml')
 
+        //Tutorial//
+
+        this.load.image("Tutorial","./assets/Tutorial.png");
+        this.load.image("TutorialBlur","./assets/ComoJugarBlur.png");
+
         //Gimnasio//
 
         this.load.image("Gimnasio", "./assets/Gimnasio.png");
@@ -36,6 +41,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("telon", "./assets/Telon.png");
         //Nieve//
 
+        this.load.image("Bandera","./assets/Bandera.png");
         this.load.image("Nieve", "./assets/NivelHelado.png");
         this.load.image("snowplat", "./assets/PlataformasNieve.png");
         this.load.image("flag", "./assets/Bandera.png");
@@ -52,6 +58,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Marco", "./assets/Piezas/Marco.png");
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
         this.load.image("elecplatform", "./assets/PlataformasElectricidad.png");
+        this.load.image("Enchufe", "./assets/Enchufe.png");
 
         //Menu//
         this.load.image("menu", "./assets/MainMenu1.jpg");
@@ -88,14 +95,18 @@ class Bootloader extends Phaser.Scene {
         this.load.atlas('flares', './assets/flares.png', './assets/flares.json');
         this.load.image('snowFlake', './assets/snowFlakeC.png');
 
-
         //Sonidos//
+
         this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
         this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
-        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg",{volume: 0.1});
+        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg");
+        this.load.audio("Laser1","./assets/Sonidos/Laser1.mp3");
+        this.load.audio("electricidad","./assets/Sonidos/electricidad.mp3");
+        this.load.audio("campanas","./assets/Sonidos/campanas.mp3");
         
         //Animaciones//
+
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
         this.load.atlas("P2", "./assets/RunP2.png", "./assets/RunP2.json")
         this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", { frameWidth: 168, frameHeight: 310 });

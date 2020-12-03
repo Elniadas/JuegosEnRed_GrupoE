@@ -82,6 +82,7 @@ class MainMenu extends Phaser.Scene {
 
         pbCM.on("pointerup", ()=>{
             pbCM.setFrame(0);
+            this.scene.start("Tutorial");
         })
 
         this.cjT=this.add.text(pbCM.x-145, pbCM.y+30).setScrollFactor(0).setFontSize(50).setColor("#000000");

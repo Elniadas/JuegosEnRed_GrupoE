@@ -77,7 +77,6 @@ class Scene_play extends Phaser.Scene {
         this.playerU.id = 0;
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
-        this.playerU.setacc
         this.playerU.setDepth(1000);
 
         //Player 2//
@@ -90,6 +89,21 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
+        
+        //Cargar sonido
+        this.music = this.sound.add('Musica_fondo');
+
+        var musicConfig = {
+            mute: false,
+            volume: 0.0086,
+            rate: 1,
+            detune: 0,
+            seek: 0,
+            loop: false, 
+            delay: 0
+        }
+
+        this.music.play(musicConfig);
 
 
         //Escenario 1 Gimnasio
@@ -197,6 +211,8 @@ class Scene_play extends Phaser.Scene {
         // });
 
 
+        //Power Up jugador 2
+        this.crearSpeedUpP2();
 
         this.particlesCPD = this.add.particles('flares')
         this.particlesCPD.depth = -10
@@ -214,6 +230,18 @@ class Scene_play extends Phaser.Scene {
             blendMode: 'ADD',
 
         });
+
+        // let pCintaD= particles.createEmitter({
+        //     x: { min: cintaD.x-50, max: cintaD.x+50 },
+        //     y: cintaD.y+100,
+        //     lifespan: 3000,
+        //     speedY: { min: -60, max: -100 },
+        //     scale: { start: 0.3, end: 0 },
+        //     quantity: 1,
+        //     frame:'white',
+        //     frequency: 300,
+        //     blendMode: 'ADD'
+        // });
 
 
 
@@ -264,7 +292,6 @@ class Scene_play extends Phaser.Scene {
         this.escBU2.displayWidth = this.game.canvas.width;
         this.escBU2.alpha = 0;
         this.escBU2.setDepth(11);
-
 
 
         //Parte jugador 2
@@ -416,64 +443,58 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        this.blurElectricidadD = this.add.image(0 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 + 10, "ElectricidadBlur").setOrigin(0, 0);
-        this.blurElectricidadD.displayHeight = this.game.canvas.height / 2;
-        this.blurElectricidadD.displayWidth = this.game.canvas.width;
-        this.blurElectricidadD.alpha = 0;
-
-
         //Escenario yiieePUm Laboratorio
-
+ 
         //Jugador 1
-
+ 
         let escU5 = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "Laboratorio").setOrigin(0, 0);
-
+ 
         escU5.displayHeight = this.game.canvas.height / 2;
         escU5.displayWidth = this.game.canvas.width;
-
-
+ 
+ 
         let pruebaLaboratorioU = this.physics.add.image(800 + 1180 * this.escenarios[4].pos, 185, "Ordenador").setOrigin(0, 0);
         pruebaLaboratorioU.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioU.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioU.setImmovable(true)
-
-
+ 
+ 
         this.blurLaboratorioU = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "LaboratorioBlur").setOrigin(0, 0);
         this.blurLaboratorioU.displayHeight = this.game.canvas.height / 2 - 10;
         this.blurLaboratorioU.displayWidth = this.game.canvas.width;
         this.blurLaboratorioU.alpha = 0;
-
+ 
         this.crearPlataformasLaboratorio1();
-
+ 
         //POWER UPS JUGADOR 1
         this.crearSpeedUpP1(825, 300, this.escenarios[4].pos);
-
-
+ 
+ 
         //Jugador 2
-
+ 
         let escD5 = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2, "Laboratorio").setOrigin(0, 0);
-
+ 
         escD5.displayHeight = this.game.canvas.height / 2;
         escD5.displayWidth = this.game.canvas.width;
-
+ 
         let pruebaLaboratorioD = this.physics.add.image(800 + 1180 * this.escenarios[4].pos, 545 , "Ordenador").setOrigin(0, 0);
         pruebaLaboratorioD.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioD.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioD.setImmovable(true)
         //pruebaElectricidadD.alpha = 0;
-
+ 
         this.blurLaboratorioD = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 + 10, "LaboratorioBlur").setOrigin(0, 0);
         this.blurLaboratorioD.displayHeight = this.game.canvas.height / 2;
         this.blurLaboratorioD.displayWidth = this.game.canvas.width;
         this.blurLaboratorioD.alpha = 0;
-
+ 
         this.crearPlataformasLaboratorio2();
-
+ 
         //POWER UPS JUGADOR 2
         this.crearSpeedUpP2(825, 300, this.escenarios[4].pos);
 
 
-
+        
         //Limites//
 
 
@@ -510,15 +531,9 @@ class Scene_play extends Phaser.Scene {
         pared4.displayWidth = 100;
         pared4.alpha = 0;
 
-
-
-
         this.plataformas = this.physics.add.staticGroup();
         this.plataformas.add(muro);
         this.plataformas.add(muro2);
-
-
-
 
         this.paredes = this.physics.add.staticGroup();
         this.paredes.add(pared1)
@@ -624,6 +639,8 @@ class Scene_play extends Phaser.Scene {
         this.cam1.ignore(this.TiempoP2);
         this.cam1.ignore(this.particlesCPD);
         this.cam2.ignore(this.TiempoP1);
+
+        
 
         //Ajustes
 
