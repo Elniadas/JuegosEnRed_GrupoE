@@ -50,9 +50,9 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 4, true);
+        this.escenarios[0] = new Escenario("Cinta",0 , true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 0, false);
+        this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
@@ -172,11 +172,14 @@ class Scene_play extends Phaser.Scene {
         this.crearPlataformasGimnasioP2();
 
         //Power Up jugador 1
-        this.crearSpeedUpP1();
+        this.crearSpeedUpP1(825, 300, this.escenarios[0].pos);
 
+        this.crearMenosTP1(60, 85, this.escenarios[0].pos);
 
         //Power Up jugador 2
-        this.crearSpeedUpP2();
+        this.crearSpeedUpP2(825, 300, this.escenarios[0].pos);        
+
+        this.crearMenosTP2(60, 85, this.escenarios[0].pos);
 
         
 
@@ -317,6 +320,12 @@ class Scene_play extends Phaser.Scene {
         //Plataformas jugador 2
         this.crearPlataformasContador2();
 
+        //Power Up jugador 1
+        this.crearMenosTP1(720, 300, this.escenarios[1].pos);
+
+        //Power Up jugador 2
+        this.crearMenosTP2(720, 300, this.escenarios[1].pos);
+
         //Escenario 3 Nieve
 
         //Parte jugador 1
@@ -379,6 +388,12 @@ class Scene_play extends Phaser.Scene {
         //Plataformas jugador 2
         this.crearPlataformasElectricidad2(that);
 
+        //Power Up jugador 1
+        this.crearMenosTP1(15, 50, this.escenarios[3].pos);
+
+        //Power Up jugador 2
+        this.crearMenosTP2(15, 50, this.escenarios[3].pos);
+
 
         //Parte jugador 2
 
@@ -430,6 +445,9 @@ class Scene_play extends Phaser.Scene {
 
         this.crearPlataformasLaboratorio1();
 
+        //POWER UPS JUGADOR 1
+        this.crearSpeedUpP1(825, 300, this.escenarios[4].pos);
+
 
         //Jugador 2
 
@@ -438,7 +456,7 @@ class Scene_play extends Phaser.Scene {
         escD5.displayHeight = this.game.canvas.height / 2;
         escD5.displayWidth = this.game.canvas.width;
 
-        let pruebaLaboratorioD = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "Ordenador").setOrigin(0, 0);
+        let pruebaLaboratorioD = this.physics.add.image(800 + 1180 * this.escenarios[4].pos, 545 , "Ordenador").setOrigin(0, 0);
         pruebaLaboratorioD.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioD.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioD.setImmovable(true)
@@ -450,6 +468,9 @@ class Scene_play extends Phaser.Scene {
         this.blurLaboratorioD.alpha = 0;
 
         this.crearPlataformasLaboratorio2();
+
+        //POWER UPS JUGADOR 2
+        this.crearSpeedUpP2(825, 300, this.escenarios[4].pos);
 
 
 
@@ -959,29 +980,7 @@ class Scene_play extends Phaser.Scene {
 
     }
 
-    //POWER UPS
-
-    crearSpeedUpP1() {
-        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100, "run").setOrigin(0, 0);
-        run.setScale(0.1)
-        this.physics.add.overlap(this.playerU, run, () => {
-            this.playerU.velocidad=500
-            run.destroy();
-            setTimeout(() => { this.playerU.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
-        }, null, this);
-    }
-
-    crearSpeedUpP2() {
-        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100+this.game.canvas.height/2, "run").setOrigin(0, 0);
-        run.setScale(0.1)
-        this.physics.add.overlap(this.playerD, run, () => {
-            this.playerD.velocidad=500
-            run.destroy();
-            setTimeout(() => { this.playerD.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
-        }, null, this);
-    }
-
-
+    
 
     pararP1() {
         if (this.end.player1 === false) {
@@ -1040,25 +1039,23 @@ class Scene_play extends Phaser.Scene {
 
 
 
+//POWER UPS
 
 
-
-    crearSpeedUpP1() {
-        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100, "run").setOrigin(0, 0);
+    crearSpeedUpP1(x, y, pos) {
+        let run = this.physics.add.image(x + 1180 * pos, y, "run").setOrigin(0, 0);
         run.setScale(0.1)
         this.physics.add.overlap(this.playerU, run, () => {
             this.playerU.velocidad = 500
             run.destroy();
-            setTimeout(() => { this.playerU.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
+            setTimeout(() => { this.playerU.velocidad = 300; console.log("Se te acabo el chollo") }, 2000)
         }, null, this);
-    }
-
-    
+    }  
 
      
 
-    crearMenosTP1() {
-        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
+    crearMenosTP1(x, y, pos) {
+        let reloj = this.physics.add.image(x + 1180 * pos, y, "menosT").setOrigin(0, 0);
         reloj.setScale(0.1)
         this.physics.add.overlap(this.playerU, reloj, () => {
             this.playerU.time += -3000;
@@ -1223,19 +1220,19 @@ class Scene_play extends Phaser.Scene {
     }
 
 
-    crearSpeedUpP2() {
-        let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "run").setOrigin(0, 0);
+    crearSpeedUpP2(x, y, pos) {
+        let run = this.physics.add.image(x + 1180 * pos, y + this.game.canvas.height / 2, "run").setOrigin(0, 0);
         run.setScale(0.1)
         this.physics.add.overlap(this.playerD, run, () => {
             this.playerD.velocidad = 500
             run.destroy();
-            setTimeout(() => { this.playerD.velocidad = 300; console.log("Se te acabo el chollo") }, 15000)
+            setTimeout(() => { this.playerD.velocidad = 300; console.log("Se te acabo el chollo") }, 2000)
         }, null, this);
     }
 
 
-    crearMenosTP2() {
-        let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+    crearMenosTP2(x, y, pos) {
+        let reloj = this.physics.add.image(x + 1180 * pos, y + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
         reloj.setScale(0.1)
         this.physics.add.overlap(this.playerD, reloj, () => {
             this.playerD.time += -3000;
@@ -1799,7 +1796,7 @@ class Scene_play extends Phaser.Scene {
             p1_2_7.alpha = p1_2_7.alpha == 1 ? 0 : 1;
             p1_2_7.alpha == 1 ? grupoP1_cont.add(p1_2_7) : grupoP1_cont.remove(p1_2_7);
         }, 2000);
-        //grupoP1_cont.add(notCheating); //descomentar, solo está comentado para hacer pruebas rápidamente
+        grupoP1_cont.add(notCheating); //descomentar, solo está comentado para hacer pruebas rápidamente
         grupoP1_cont.add(p1_2_8);
 
         this.physics.add.collider(this.playerU, grupoP1_cont);
@@ -1991,12 +1988,7 @@ class Scene_play extends Phaser.Scene {
         p1_3_6.displayHeight = 20;
         p1_3_6.displayWidth = 80;
 
-        let notCheating = this.physics.add.image(700 + 1180 * this.escenarios[3].pos, 235, "elecplatform").setImmovable(true);
-        notCheating.displayHeight = 250;
-        notCheating.displayWidth = 20;
-        notCheating.alpha = 0;
-
-        let p1_3_7 = this.physics.add.image(840 + 1180 * this.escenarios[3].pos, 250, "elecplatform").setImmovable(true);
+       let p1_3_7 = this.physics.add.image(840 + 1180 * this.escenarios[3].pos, 250, "elecplatform").setImmovable(true);
         p1_3_7.displayHeight = 20;
         p1_3_7.displayWidth = 220;
 
@@ -2016,7 +2008,6 @@ class Scene_play extends Phaser.Scene {
             p1_3_6.alpha = p1_3_6.alpha == 1 ? 0 : 1;
             p1_3_6.alpha == 1 ? grupoP1_elec.add(p1_3_6) : grupoP1_elec.remove(p1_3_6);
         }, 1500);
-        grupoP1_elec.add(notCheating);
         grupoP1_elec.add(p1_3_7);
 
 
@@ -2094,11 +2085,6 @@ class Scene_play extends Phaser.Scene {
         p2_3_6.displayHeight = 20;
         p2_3_6.displayWidth = 80;
 
-        let notCheating2 = this.physics.add.image(700 + 1180 * this.escenarios[3].pos, 595, "elecplatform").setImmovable(true);
-        notCheating2.displayHeight = 250;
-        notCheating2.displayWidth = 20;
-        notCheating2.alpha = 0;
-
         let p2_3_7 = this.physics.add.image(840 + 1180 * this.escenarios[3].pos, 610, "elecplatform").setImmovable(true);
         p2_3_7.displayHeight = 20;
         p2_3_7.displayWidth = 220;
@@ -2119,7 +2105,6 @@ class Scene_play extends Phaser.Scene {
             p2_3_6.alpha = p2_3_6.alpha == 1 ? 0 : 1;
             p2_3_6.alpha == 1 ? grupoP2_elec.add(p2_3_6) : grupoP2_elec.remove(p2_3_6);
         }, 1500);
-        grupoP2_elec.add(notCheating2);
         grupoP2_elec.add(p2_3_7);
 
 
@@ -2128,7 +2113,7 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPlataformasLaboratorio1(){
-        let p1_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 295, "labplatform").setImmovable(true);
+        let p1_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275, "labplatform").setImmovable(true);
         p1_4_1.displayHeight = 20;
         p1_4_1.displayWidth = 80;
 
@@ -2150,17 +2135,21 @@ class Scene_play extends Phaser.Scene {
         p1_4_3.displayHeight = 20;
         p1_4_3.displayWidth = 90;
 
+        let p1_4_4 = this.physics.add.image(220+ 1180 * this.escenarios[4].pos, 305, "labplatform").setImmovable(true);
+        p1_4_4.displayHeight = 20;
+        p1_4_4.displayWidth = 80;
+
         let grupoP1_Lab = this.add.group();
         grupoP1_Lab.add(p1_4_1);
         grupoP1_Lab.add(p1_4_2);
         grupoP1_Lab.add(p1_4_3);
-       
+        grupoP1_Lab.add(p1_4_4);
         
         this.physics.add.collider(this.playerU, grupoP1_Lab);
     }
 
     crearPlataformasLaboratorio2(){
-        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 655, "labplatform").setImmovable(true);
+        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 635, "labplatform").setImmovable(true);
         p2_4_1.displayHeight = 20;
         p2_4_1.displayWidth = 80;
 
@@ -2182,10 +2171,15 @@ class Scene_play extends Phaser.Scene {
         p2_4_3.displayHeight = 20;
         p2_4_3.displayWidth = 90;
 
+        let p2_4_4 = this.physics.add.image(220+ 1180 * this.escenarios[4].pos, 665, "labplatform").setImmovable(true);
+        p2_4_4.displayHeight = 20;
+        p2_4_4.displayWidth = 80;
+
         let grupoP2_Lab = this.add.group();
         grupoP2_Lab.add(p2_4_1);
         grupoP2_Lab.add(p2_4_2);
         grupoP2_Lab.add(p2_4_3);
+        grupoP2_Lab.add(p2_4_4);
        
         
         this.physics.add.collider(this.playerD, grupoP2_Lab);
