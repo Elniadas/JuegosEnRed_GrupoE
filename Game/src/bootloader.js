@@ -32,6 +32,8 @@ class Bootloader extends Phaser.Scene {
         this.load.spritesheet("PulsadorA", "./assets/PulsadorAnimacion.png", { frameWidth: 500, frameHeight: 600 });
 
         this.load.image("spriteCont", "./assets/contadorSprite.png");
+        this.load.image("contplatform", "./assets/ContPlat.png");
+        this.load.image("telon", "./assets/Telon.png");
         //Nieve//
 
         this.load.image("Nieve", "./assets/NivelHelado.png");
@@ -47,6 +49,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("PruebaElectricidadPieza3", "./assets/Piezas/Pieza2.3.png");
         this.load.image("Marco", "./assets/Piezas/Marco.png");
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
+        this.load.image("elecplatform", "./assets/PlataformasElectricidad.png");
 
         //Menu//
         this.load.image("menu", "./assets/MainMenu1.jpg");
@@ -66,6 +69,8 @@ class Bootloader extends Phaser.Scene {
         this.load.image("PruebaLaboratorioPieza3", "./assets/PiezasLab/Simbolo7.png");
         this.load.image("PruebaLaboratorioPieza4", "./assets/PiezasLab/Simbolo8.png");
         this.load.image("PruebaLaboratorioPieza5", "./assets/PiezasLab/Simbolo9.png");
+        this.load.image("labplatform", "./assets/PlataformasLaboratorio.png");
+        
 
 
       
