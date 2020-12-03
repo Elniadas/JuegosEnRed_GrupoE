@@ -57,7 +57,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("menu", "./assets/MainMenu1.jpg");
         this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
         this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 299, frameHeight: 137 }); //botón de play
-
+        this.load.spritesheet("buttonPlay", "./assets/SpriteBotones.png", {frameWidth: 440, frameHeight: 122});
 
         //Laboratorio//
 
