@@ -47,17 +47,20 @@ class Scene_play extends Phaser.Scene {
 
 
 
-            
+
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[0] = new Escenario("Cinta", 4, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 4, false);
+        this.escenarios[2] = new Escenario("Nieve", 0, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
         this.physics.world.setBounds(0, 0, 5800, this.game.canvas.height);
         var that = this;
+
+        this.end = { player1: false, player2: false };
+        
 
         //Factor de suma 1180 * this.escenarios[i].pos
 
@@ -65,8 +68,8 @@ class Scene_play extends Phaser.Scene {
 
         //Player 1//
 
-        
-        
+
+
         this.playerU = this.physics.add.sprite(0, this.game.canvas.height / 2 - 50, 'P1');
         this.playerU.play('IdleDerechaP1');
         this.playerU.setScale(0.15).refreshBody();
@@ -222,7 +225,7 @@ class Scene_play extends Phaser.Scene {
         this.particlesContPU.depth = 10
 
         this.PCuP = this.particlesContPU.createEmitter({
-            x: { min: pContU.x+35 - 50, max: pContU.x+35 + 50 },
+            x: { min: pContU.x + 35 - 50, max: pContU.x + 35 + 50 },
             y: pContU.y + 50,
             lifespan: 3000,
             speedY: { min: -60, max: -100 },
@@ -260,7 +263,7 @@ class Scene_play extends Phaser.Scene {
         pContD.displayHeight = this.game.canvas.height * 0.1;
         pContD.displayWidth = this.game.canvas.width * 0.08;
 
-        let pruebaContador2 = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 309+this.game.canvas.height/2, "muro").setOrigin(0, 0);
+        let pruebaContador2 = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 309 + this.game.canvas.height / 2, "muro").setOrigin(0, 0);
         pruebaContador2.setImmovable(true)
         pruebaContador2.displayWidth = 95;
         pruebaContador2.displayHeight = 5;
@@ -270,7 +273,7 @@ class Scene_play extends Phaser.Scene {
         this.particlesContPD.depth = 10
 
         this.PCuP = this.particlesContPD.createEmitter({
-            x: { min: pContD.x+35 - 50, max: pContD.x+35 + 50 },
+            x: { min: pContD.x + 35 - 50, max: pContD.x + 35 + 50 },
             y: pContD.y + 50,
             lifespan: 3000,
             speedY: { min: -60, max: -100 },
@@ -309,6 +312,12 @@ class Scene_play extends Phaser.Scene {
         escU3.displayHeight = this.game.canvas.height / 2;
         escU3.displayWidth = this.game.canvas.width;
 
+        let banderaU = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2 * 0.68, "logo").setOrigin(0, 0);
+        banderaU.displayHeight = this.game.canvas.height * 0.1;
+        banderaU.displayWidth = this.game.canvas.width * 0.08;
+        banderaU.setImmovable(true)
+        banderaU.alpha = 1;
+
         //Parte jugador 2
 
         let escD3 = this.add.image(0 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2, "Nieve").setOrigin(0, 0);
@@ -316,7 +325,10 @@ class Scene_play extends Phaser.Scene {
         escD3.displayHeight = this.game.canvas.height / 2;
         escD3.displayWidth = this.game.canvas.width;
 
-
+        let banderaD = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
+        banderaD.displayHeight = this.game.canvas.height * 0.1;
+        banderaD.displayWidth = this.game.canvas.width * 0.08;
+        banderaD.setImmovable(true)
 
 
 
@@ -533,12 +545,16 @@ class Scene_play extends Phaser.Scene {
         this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, null, this);
         this.LP1 = this.physics.add.overlap(this.playerU, pruebaLaboratorioU, () => { this.Prueba(this.playerU) }, null, this);
         this.LP2 = this.physics.add.overlap(this.playerD, pruebaLaboratorioD, () => { this.Prueba(this.playerD) }, null, this);
+        this.BP1 = this.physics.add.overlap(this.playerU, banderaU, () => { this.endP1(banderaU) }, null, this);
+        this.BP2 = this.physics.add.overlap(this.playerD, banderaD, () => { this.endP2(banderaD) }, null, this);
 
 
         //Cronometro
 
-        this.play = false;
-        this.cro = 0;
+        this.playP1 = false;
+        this.playP2 = false;
+        this.croP1 = 0;
+        this.croP2 = 0;
 
         this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP1.setScrollFactor(0, 0)
@@ -658,7 +674,8 @@ class Scene_play extends Phaser.Scene {
             console.log("Iniciando pausa")
             this.keyLockP2 = true;
             this.keyboardP2.ESC.isDown = false;
-            this.parar();
+            this.pararP1();
+            this.pararP2();
             this.scene.launch("Pause", { escena: this })
             //this.keyboardP2.ESC.isDown=true;
         }
@@ -782,35 +799,43 @@ class Scene_play extends Phaser.Scene {
     //Funciones Cronometro
 
     empezar() {
-        if (this.play == false) {
-            let emp = new Date();                                            //Fecha en la que empezamos
-            this.elcrono = setInterval(() => { this.tiempo(emp) }, 10);       //Funcion temporizador cada 10 ms llama a la funcion tiempo
-            this.play = true;                                               //Reloj puesta en marcha
+        if (this.playP1 === false) {
+            let empP1 = new Date();
+            this.elcronoP1 = setInterval(() => { this.tiempoP1(empP1) }, 10);
+            this.playP1 = true;                                               //Reloj puesta en marcha
+        }
+        if (this.playP2 === false) {
+            let empP2 = new Date();
+            this.elcronoP2 = setInterval(() => { this.tiempoP2(empP2) }, 10);
+            this.playP2 = true;
         }
     }
 
-    tiempo(emp) {
-        let actual = new Date();                                   //Tiempo actual
-        this.cro = actual - emp;                                   //Tiempo transcurrido
-        let cr = new Date();                                       //Por si se para para continuar                        
-        cr.setTime(this.cro);                                        //Coje el tiempo actual
-        let time = cr.getTime() + this.playerU.time;
-        let time2 = cr.getTime() + this.playerD.time
+    tiempoP1(empP1) {
+
+        let actual = new Date();
+        let cr = new Date();
+
+        //Player 1
+        this.croP1 = actual - empP1;
+        cr.setTime(this.croP1);
+
+        let timeP1 = cr.getTime() + this.playerU.time
         //Transformar
-        let cs1 = time % 1000;
+        let cs1 = timeP1 % 1000;
         cs1 = cs1 / 10;
         cs1 = Math.round(cs1);
-        let sg1 = time / 1000
+        let sg1 = timeP1 / 1000
         //sg1 = sg1 % 100;
         sg1 = Math.trunc(sg1)
-        let mn1 = time / 60000;
+        let mn1 = timeP1 / 60000;
         mn1 = Math.trunc(mn1)
 
 
         if (cs1 < 10) {
             cs1 = "0" + cs1;
         }
-        
+
         if (sg1 > 59) {
             sg1 = sg1 % 60;
             //sg1 = "0" + sg1;
@@ -825,31 +850,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        let cs2 = time2 % 1000;
-        cs2 = cs2 / 10;
-        cs2 = Math.round(cs2);
-        let sg2 = time2 / 1000
-        sg2 = Math.trunc(sg2)
-        let mn2 = time2 / 60000;
-        mn2 = Math.trunc(mn2)
 
-        if (cs2 < 10) {
-            cs2 = "0" + cs2;
-        }
-       
-        if (sg2 > 59) {
-            sg2 = sg2 % 60;
-            //sg2 = "0" + sg2;
-        }
-
-        if (sg2 < 10) {
-            sg2 = "0" + sg2;
-        }
-
-
-        if (mn2 < 10) {
-            mn2 = "0" + mn2;
-        }
         // this.textoCronometro.setText([
         //     'Tiempo: ' + ho + " : " + mn + " : " + sg + " : " + cs
         // ]);
@@ -864,11 +865,114 @@ class Scene_play extends Phaser.Scene {
             mn1 + " : " + sg1 + " : " + cs1
         ]);
 
+
+
+    }
+
+    tiempoP2(empP2) {
+
+        let actual = new Date();
+        let cr = new Date();
+        //Player 2                                
+        this.croP2 = actual - empP2;
+        cr.setTime(this.croP2);
+
+        let timeP2 = cr.getTime() + this.playerD.time;
+        //Transformar
+        let cs2 = timeP2 % 1000;
+        cs2 = cs2 / 10;
+        cs2 = Math.round(cs2);
+        let sg2 = timeP2 / 1000
+        //sg1 = sg1 % 100;
+        sg2 = Math.trunc(sg2)
+        let mn2 = timeP2 / 60000;
+        mn2 = Math.trunc(mn2)
+
+        if (cs2 < 10) {
+            cs2 = "0" + cs2;
+        }
+
+        if (sg2 > 59) {
+            sg2 = sg2 % 60;
+            //sg2 = "0" + sg2;
+        }
+
+        if (sg2 < 10) {
+            sg2 = "0" + sg2;
+        }
+
+
+        if (mn2 < 10) {
+            mn2 = "0" + mn2;
+        }
+
         this.TiempoP2.setText([
             mn2 + " : " + sg2 + " : " + cs2
         ]);
 
     }
+
+
+
+    pararP1() {
+        if (this.end.player1 === false) {
+            if (this.playP1 === true) {
+                clearInterval(this.elcronoP1);
+                this.playP1 = false;
+            }
+        }
+    }
+
+    continuarP1() {
+        if (this.end.player1 === false) {
+            if (this.playP1 === false) {
+
+                let emp2 = new Date();
+                emp2 = emp2.getTime();
+
+                let emp3 = emp2 - this.croP1
+
+                let emp = new Date();
+                emp.setTime(emp3);
+                this.elcronoP1 = setInterval(() => { this.tiempoP1(emp) }, 10);
+                this.playP1 = true;
+            }
+        }
+    }
+
+    pararP2() {
+        if (this.end.player2 === false) {
+            if (this.playP2 === true) {
+                clearInterval(this.elcronoP2);
+                this.playP2 = false;
+            }
+        }
+    }
+
+    continuarP2() {
+
+        if (this.end.player2 === false) {
+            if (this.playP2 === false) {
+
+                let emp2 = new Date();
+                emp2 = emp2.getTime();
+
+                let emp3 = emp2 - this.croP1
+
+                let emp = new Date();
+                emp.setTime(emp3);
+                this.elcronoP2 = setInterval(() => { this.tiempoP2(emp) }, 10);
+                this.playP2 = true;
+            }
+        }
+    }
+
+
+
+
+
+
+
 
     crearSpeedUpP1() {
         let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100, "run").setOrigin(0, 0);
@@ -1764,27 +1868,7 @@ class Scene_play extends Phaser.Scene {
     }
 
 
-    parar() {
-        if (this.play === true) {
-            clearInterval(this.elcrono);
-            this.play = false;
-        }
-    }
 
-    continuar() {
-        if (this.play === false) {
-
-            let emp2 = new Date();
-            emp2 = emp2.getTime();
-
-            let emp3 = emp2 - this.cro
-
-            let emp = new Date();
-            emp.setTime(emp3);
-            this.elcrono = setInterval(() => { this.tiempo(emp) }, 10);
-            this.play = true;
-        }
-    }
 
 
     borrarIntervalos() {
@@ -1794,6 +1878,32 @@ class Scene_play extends Phaser.Scene {
             window.clearInterval(i);
         //for clearing all intervals
     }
+
+    endP1(bandera) {
+        console.log("bandera p1")
+        this.pararP1();
+        this.end.player1 = true;
+        
+        if (this.end.player1 === true && this.end.player2 === true) {
+            this.borrarIntervalos();
+            this.scene.launch("MAINMENU");
+        }
+        bandera.destroy();
+        this.BP1.destroy();
+    }
+
+    endP2(bandera) {
+        console.log("bandera p2")
+        this.pararP2();
+        this.end.player2 = true;
+        if (this.end.player1 === true && this.end.player2 === true) {
+            this.borrarIntervalos();
+            this.scene.launch("MAINMENU");
+        }
+        bandera.destroy();
+        this.BP2.destroy();
+    }
+
 
 }
 

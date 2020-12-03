@@ -38,7 +38,8 @@ class Pause extends Phaser.Scene {
         reanudar.on("pointerup", () => {
             if (this.scene.isPaused("Scene_play")) {
                 this.scene.resume("Scene_play");
-                this.data.escena.continuar();
+                this.data.escena.continuarP1();
+                this.data.escena.continuarP2();
                 this.scene.stop("Pause");
             }
         })
@@ -67,7 +68,8 @@ class Pause extends Phaser.Scene {
 
         if (this.keyboard.ESC.isDown === true) {
             this.scene.resume("Scene_play");
-            this.data.escena.continuar();
+            this.data.escena.continuarP1();
+            this.data.escena.continuarP2();
             this.scene.stop("Pause");
         }
 

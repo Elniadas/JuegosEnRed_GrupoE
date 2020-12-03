@@ -29,7 +29,7 @@ class ContadorP1 extends Phaser.Scene {
 
 
 
-        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,A');
+        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,S');
 
 
         this.play = false;
@@ -42,7 +42,7 @@ class ContadorP1 extends Phaser.Scene {
 
 
         this.input.keyboard.on('keyup-' + 'D', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'A', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
 
         this.keyLock = false;
 
@@ -59,7 +59,7 @@ class ContadorP1 extends Phaser.Scene {
 
     update() {
 
-        if (this.keyboard.A.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
+        if (this.keyboard.S.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
             this.keyLock = true
             this.parar();
             this.pintarTiempo();
