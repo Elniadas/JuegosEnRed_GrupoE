@@ -97,6 +97,7 @@ class ElectricidadP2 extends Phaser.Scene {
         this.input.keyboard.on('keyup-'+'RIGHT', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'UP', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'DOWN', this.unlock.bind(this));
+        this.keyLock = false;
 
     }
     unlock() {

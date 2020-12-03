@@ -14,6 +14,7 @@ import ElectricidadP2V2 from './scenes/ElectricidadP2V2.js';
 import LaboratorioP1 from './scenes/LaboratorioP1.js';
 import LaboratorioP2 from './scenes/LaboratorioP2.js';
 import Pause from './scenes/Pause.js';
+import Tutorial from './scenes/Tutorial.js';
 
 const config = {
     type: Phaser.AUTO,
@@ -58,7 +59,8 @@ const config = {
         ElectricidadP2V2,
         LaboratorioP1,
         LaboratorioP2,
-        Pause
+        Pause,
+        Tutorial
     ]
 }
 

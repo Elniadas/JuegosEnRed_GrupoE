@@ -103,6 +103,7 @@ class LaboratorioP1 extends Phaser.Scene {
         this.input.keyboard.on('keyup-' + 'W', this.unlock.bind(this));
         this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
         this.input.keyboard.on('keyup-' + 'Q', this.unlock.bind(this));
+        this.keyLock = false;
 
 
     }

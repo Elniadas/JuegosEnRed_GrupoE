@@ -50,20 +50,25 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 3, true);
+        this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
-        this.escenarios[4] = new Escenario("Laboratorio", 0, false);
+        this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
         this.physics.world.setBounds(0, 0, 5800, this.game.canvas.height);
         var that = this;
+
+        this.end = { player1: false, player2: false };
+        
 
         //Factor de suma 1180 * this.escenarios[i].pos
 
         //Esquema : this.add.image( PosicionX + Factor de suma, PosicionX, "Nombre")
 
         //Player 1//
+
+
 
         this.playerU = this.physics.add.sprite(0, this.game.canvas.height / 2 - 50, 'P1');
         this.playerU.play('IdleDerechaP1');
@@ -72,6 +77,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.id = 0;
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
+        this.playerU.setacc
         this.playerU.setDepth(1000);
 
         //Player 2//
@@ -102,14 +108,15 @@ class Scene_play extends Phaser.Scene {
         this.blurGU.displayWidth = this.game.canvas.width;
         this.blurGU.alpha = 0;
 
+        let cinU = this.add.image(1030 + 1180 * this.escenarios[0].pos, 89, "cintaSprite")
 
-        //se ha modificado la posición de la colisión de la cinta para moverla junto a un sprite
-        //let cintaU = this.physics.add.image(900+ 1180 * this.escenarios[0].pos, 311, "cintaSprite") //esta no es la oficial, es para pasar más rápido al siguiente nivel
-        let cintaU = this.physics.add.image(1030 + 1180 * this.escenarios[0].pos, 89, "cintaSprite")
-        //cintaU.displayHeight = 97;
-        //cintaU.displayWidth = 80;
-        cintaU.setScale(0.30);
-        cintaU.setImmovable(true);
+        let cintaU = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 121, "muro")
+        cintaU.displayHeight = 5;
+        cintaU.displayWidth = 78
+
+
+        cinU.setScale(0.30);
+
 
 
         let groupCintaU = this.add.group()
@@ -117,32 +124,22 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        var particles = this.add.particles('flares')
-        particles.depth = -10
+        this.particlesCPU = this.add.particles('flares')
+        this.particlesCPU.depth = -10
 
-        /*
-        var xd = particles.createEmitter({
-            x: cintaU.x,
-            y: cintaU.y + 100,
-            lifespan: 2500,
-            speedX: { min: -100, max: +100 },
-            speedY: { min: -100, max: -150, steps: 1 },
-            scale: { start: 0.1, end: 0.8 },
-            blendMode: 'ADD'
+        this.PCU = this.particlesCPU.createEmitter({
+            x: { min: cinU.x - 50, max: cinU.x + 50 },
+            y: cintaU.y + 50,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x2ECC71,
+            blendMode: 'ADD',
+
         });
-        //*/
-
-        // let pCintaU= particles.createEmitter({
-        //     x: { min: cintaU.x-50, max: cintaU.x+50 },
-        //     y: cintaU.y+100,
-        //     lifespan: 3000,
-        //     speedY: { min: -60, max: -100 },
-        //     scale: { start: 0.3, end: 0 },
-        //     quantity: 1,
-        //     frame:'yellow',
-        //     frequency: 300,
-        //     blendMode: 'ADD'
-        // });
 
 
         //Parte jugador 2
@@ -153,15 +150,20 @@ class Scene_play extends Phaser.Scene {
         gimD.displayWidth = this.game.canvas.width;
         gimD.setDepth(-9999)
 
-        this.blurGD = this.add.image(0 + 1180 * this.escenarios[0].pos, this.game.canvas.height / 2 + 10, "GimnasioBlur").setOrigin(0, 0);
+        this.blurGD = this.add.image(0 + 1180 * this.escenarios[0].pos, this.game.canvas.height / 2, "GimnasioBlur").setOrigin(0, 0);
         this.blurGD.displayHeight = this.game.canvas.height / 2;
         this.blurGD.displayWidth = this.game.canvas.width;
         this.blurGD.alpha = 0;
 
         //se ha modificado la posición de la colisión de la cinta para junto a un sprite
-        let cintaD = this.physics.add.image(1030 + 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
-        //let cintaD = this.physics.add.image(this.game.canvas.width * 0.68 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.84, "logo")
-        cintaD.setScale(0.30);
+        let cintaD = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 483, "muro")
+
+        cintaD.displayHeight = 5;
+        cintaD.displayWidth = 78
+
+        let cinD = this.add.image(1030 + 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
+
+        cinD.setScale(0.30);
 
         //Plataformas jugador 1
         this.crearPlataformasGimnasioP1();
@@ -172,18 +174,9 @@ class Scene_play extends Phaser.Scene {
         //Power Up jugador 1
         this.crearSpeedUpP1();
 
-        //this.crearMenosTP1();
-
-        //this.crearBlindP1();
-
-        //this.crearFrostP1();
-        //this.crearRayosP1();
 
         //Power Up jugador 2
         this.crearSpeedUpP2();
-        //this.crearMenosTP2();
-        //this.crearBlindP2();
-        //this.crearRayosP2();
 
         //Power Up jugador 2
         this.crearSpeedUpP2();
@@ -202,17 +195,23 @@ class Scene_play extends Phaser.Scene {
         // });
 
 
-        // let pCintaD= particles.createEmitter({
-        //     x: { min: cintaD.x-50, max: cintaD.x+50 },
-        //     y: cintaD.y+100,
-        //     lifespan: 3000,
-        //     speedY: { min: -60, max: -100 },
-        //     scale: { start: 0.3, end: 0 },
-        //     quantity: 1,
-        //     frame:'white',
-        //     frequency: 300,
-        //     blendMode: 'ADD'
-        // });
+
+        this.particlesCPD = this.add.particles('flares')
+        this.particlesCPD.depth = -10
+
+        this.PCD = this.particlesCPD.createEmitter({
+            x: { min: cinD.x - 50, max: cinD.x + 50 },
+            y: cintaD.y + 50,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x2ECC71,
+            blendMode: 'ADD',
+
+        });
 
 
 
@@ -225,17 +224,45 @@ class Scene_play extends Phaser.Scene {
         escU2.displayHeight = this.game.canvas.height / 2;
         escU2.displayWidth = this.game.canvas.width;
 
-        let pruebaContador = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 242, "spriteCont").setOrigin(0, 0);
-        pruebaContador.displayHeight = this.game.canvas.height * 0.1;
-        pruebaContador.displayWidth = this.game.canvas.width * 0.08;
+
+        let pContU = this.add.image(830 + 1180 * this.escenarios[1].pos, 242, "spriteCont").setOrigin(0, 0);
+        pContU.displayHeight = this.game.canvas.height * 0.1;
+        pContU.displayWidth = this.game.canvas.width * 0.08;
+
+        let pruebaContador = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 309, "muro").setOrigin(0, 0);
         pruebaContador.setImmovable(true)
+        pruebaContador.displayWidth = 95;
+        pruebaContador.displayHeight = 5;
+        pruebaContador.alpha = 0;
+
+
+        this.particlesContPU = this.add.particles('flares')
+        this.particlesContPU.depth = 10
+
+        this.PCuP = this.particlesContPU.createEmitter({
+            x: { min: pContU.x + 35 - 50, max: pContU.x + 35 + 50 },
+            y: pContU.y + 50,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x2ECC71,
+            blendMode: 'ADD',
+
+        });
+
+
+
 
 
         this.escBU2 = this.add.image(0 + 1180 * this.escenarios[1].pos, 0, "ContadorBlur").setOrigin(0, 0)
-
         this.escBU2.displayHeight = this.game.canvas.height / 2;
         this.escBU2.displayWidth = this.game.canvas.width;
         this.escBU2.alpha = 0;
+        this.escBU2.setDepth(11);
+
 
 
         //Parte jugador 2
@@ -245,10 +272,36 @@ class Scene_play extends Phaser.Scene {
         escD2.displayHeight = this.game.canvas.height / 2;
         escD2.displayWidth = this.game.canvas.width;
 
-        let pruebaContador2 = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 602, "spriteCont").setOrigin(0, 0);
-        pruebaContador2.displayHeight = this.game.canvas.height * 0.1;
-        pruebaContador2.displayWidth = this.game.canvas.width * 0.08;
+
+
+        let pContD = this.add.image(830 + 1180 * this.escenarios[1].pos, 602, "spriteCont").setOrigin(0, 0);
+        pContD.displayHeight = this.game.canvas.height * 0.1;
+        pContD.displayWidth = this.game.canvas.width * 0.08;
+
+        let pruebaContador2 = this.physics.add.image(830 + 1180 * this.escenarios[1].pos, 309 + this.game.canvas.height / 2, "muro").setOrigin(0, 0);
         pruebaContador2.setImmovable(true)
+        pruebaContador2.displayWidth = 95;
+        pruebaContador2.displayHeight = 5;
+        pruebaContador2.alpha = 0;
+
+        this.particlesContPD = this.add.particles('flares')
+        this.particlesContPD.depth = 10
+
+        this.PCuP = this.particlesContPD.createEmitter({
+            x: { min: pContD.x + 35 - 50, max: pContD.x + 35 + 50 },
+            y: pContD.y + 50,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x2ECC71,
+            blendMode: 'ADD',
+
+        });
+
+
 
 
         this.escBU22 = this.add.image(0 + 1180 * this.escenarios[1].pos, this.game.canvas.height / 2, "ContadorBlur").setOrigin(0, 0)
@@ -256,6 +309,7 @@ class Scene_play extends Phaser.Scene {
         this.escBU22.displayHeight = this.game.canvas.height / 2;
         this.escBU22.displayWidth = this.game.canvas.width;
         this.escBU22.alpha = 0;
+        this.escBU22.setDepth(11)
 
 
         //Plataformas jugador 1
@@ -273,6 +327,12 @@ class Scene_play extends Phaser.Scene {
         escU3.displayHeight = this.game.canvas.height / 2;
         escU3.displayWidth = this.game.canvas.width;
 
+        let banderaU = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2 * 0.68, "logo").setOrigin(0, 0);
+        banderaU.displayHeight = this.game.canvas.height * 0.1;
+        banderaU.displayWidth = this.game.canvas.width * 0.08;
+        banderaU.setImmovable(true)
+        banderaU.alpha = 1;
+
         //Parte jugador 2
 
         let escD3 = this.add.image(0 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2, "Nieve").setOrigin(0, 0);
@@ -280,7 +340,10 @@ class Scene_play extends Phaser.Scene {
         escD3.displayHeight = this.game.canvas.height / 2;
         escD3.displayWidth = this.game.canvas.width;
 
-
+        let banderaD = this.physics.add.image(this.game.canvas.width * 0.85 + 1180 * this.escenarios[2].pos, this.game.canvas.height / 2 * 0.68 + this.game.canvas.height / 2, "logo").setOrigin(0, 0);
+        banderaD.displayHeight = this.game.canvas.height * 0.1;
+        banderaD.displayWidth = this.game.canvas.width * 0.08;
+        banderaD.setImmovable(true)
 
 
 
@@ -306,84 +369,6 @@ class Scene_play extends Phaser.Scene {
         this.blurElectricidadU.alpha = 0;
         //Plataformas jugador 
 
-        /*
-        let p1_3_1 = this.physics.add.image(108 + 1180 * this.escenarios[3].pos, 300, "gymplatform").setImmovable(true);
-        p1_3_1.displayHeight = 20;
-        p1_3_1.displayWidth = 80;
-
-        let p1_3_2 = this.physics.add.image(290 + 1180 * this.escenarios[3].pos, 180, "gymplatform").setImmovable(true);
-        p1_3_2.displayHeight = 20;
-        p1_3_2.displayWidth = 80;
-
-        this.tweens.timeline({
-            targets: p1_3_2.body.velocity,
-            loop: -1,
-            tweens: [
-                { x: -30, y: 30, duration: 2200, ease: 'Stepped' },
-                { x: 30, y: -30, duration: 2200, ease: 'Stepped' }
-
-            ]
-        });
-
-        let p1_3_3 = this.physics.add.image(190 + 1180 * this.escenarios[3].pos, 180, "gymplatform").setImmovable(true);
-        p1_3_3.displayHeight = 20;
-        p1_3_3.displayWidth = 80;
-
-        this.tweens.timeline({
-            targets: p1_3_3.body.velocity,
-            loop: -1,
-            tweens: [
-                { x: -30, y: -30, duration: 2200, ease: 'Stepped' },
-                { x: 30, y: 30, duration: 2200, ease: 'Stepped' }
-
-            ]
-        });
-
-        let p1_3_4 = this.physics.add.image(40 + 1180 * this.escenarios[3].pos, 115, "gymplatform").setImmovable(true);
-        p1_3_4.displayHeight = 20;
-        p1_3_4.displayWidth = 80;
-
-        //let p1_3_5=this.physics.add.image( 500 ,115, "gymplatform").setImmovable(true);   
-
-        let p1_3_5 = this.physics.add.image(500 + 1180 * this.escenarios[3].pos, 200, "gymplatform").setImmovable(true).setVelocity(0, 100);
-        p1_3_5.displayHeight = 20;
-        p1_3_5.displayWidth = 80;
-
-        this.tweens.timeline({
-
-            targets: p1_3_5.body.velocity,
-            loop: -1,
-            duration: 1000,
-
-            tweens: [
-                { x: { value: -100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
-                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: -100, ease: 'Sine.easeOut' } },
-                { x: { value: 100, ease: 'Sine.easeOut' }, y: { value: 0, ease: 'Sine.easeIn' } },
-                { x: { value: 0, ease: 'Sine.easeIn' }, y: { value: 100, ease: 'Sine.easeOut' } },
-
-            ],
-            onLoop: function () {
-                //p1_3_5.body.reset(500,115);
-                p1_3_5.body.reset(500 + 1180 * that.escenarios[3].pos, 200);
-            }
-        });
-
-
-
-        let grupoP1_elec = this.add.group();
-        grupoP1_elec.add(p1_3_1);
-        var intermitence = setInterval(() => {
-            p1_3_1.alpha = p1_3_1.alpha == 1 ? 0 : 1;
-            p1_3_1.alpha == 1 ? grupoP1_elec.add(p1_3_1) : grupoP1_elec.remove(p1_3_1);
-        }, 1000);
-        grupoP1_elec.add(p1_3_2);
-        grupoP1_elec.add(p1_3_3);
-        grupoP1_elec.add(p1_3_4);
-
-
-        //Colisión plataformas electricidad
-        this.physics.add.collider(this.playerU, grupoP1_elec);
-        */
 
         //Parte jugador 2
 
@@ -517,6 +502,8 @@ class Scene_play extends Phaser.Scene {
 
         this.input.keyboard.on('keyup-' + 'ESC', this.unlockP2.bind(this));
 
+        this.keyLockP2 = false;
+
         //Player 1
 
         this.keyboardP1 = this.input.stopPropagation().keyboard.addKeys('D,A,W,S,E');
@@ -572,21 +559,27 @@ class Scene_play extends Phaser.Scene {
         this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, null, this);
         this.LP1 = this.physics.add.overlap(this.playerU, pruebaLaboratorioU, () => { this.Prueba(this.playerU) }, null, this);
         this.LP2 = this.physics.add.overlap(this.playerD, pruebaLaboratorioD, () => { this.Prueba(this.playerD) }, null, this);
+        this.BP1 = this.physics.add.overlap(this.playerU, banderaU, () => { this.endP1(banderaU) }, null, this);
+        this.BP2 = this.physics.add.overlap(this.playerD, banderaD, () => { this.endP2(banderaD) }, null, this);
 
 
         //Cronometro
 
-        this.play = false;
-        this.cro = 0;
+        this.playP1 = false;
+        this.playP2 = false;
+        this.croP1 = 0;
+        this.croP2 = 0;
 
-
-        //this.TiempoP1=this.add.bitmapText(this.cam1.midPoint.x+350, this.cam1.midPoint.y-90, 'Digitalism', "00:00:00", 20)
         this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP1.setScrollFactor(0, 0)
 
         this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP2.setScrollFactor(0, 0)
+
+        //Ignorasiones
+
         this.cam1.ignore(this.TiempoP2);
+        this.cam1.ignore(this.particlesCPD);
         this.cam2.ignore(this.TiempoP1);
 
         //Ajustes
@@ -690,11 +683,17 @@ class Scene_play extends Phaser.Scene {
         }
 
 
-        /*  
-        if (this.keyboardP2.ESC.isDown === true) {
-            this.playerD.setVelocityY(-750);
+
+        if (this.keyboardP2.ESC.isDown === true && this.keyLockP2 === false) {
+            console.log("Iniciando pausa")
+            this.keyLockP2 = true;
+            this.keyboardP2.ESC.isDown = false;
+            this.pararP1();
+            this.pararP2();
+            this.scene.launch("Pause", { escena: this })
+            //this.keyboardP2.ESC.isDown=true;
         }
-    */
+
 
 
 
@@ -817,40 +816,50 @@ class Scene_play extends Phaser.Scene {
     //Funciones Cronometro
 
     empezar() {
-        if (this.play == false) {
-            let emp = new Date();                      //Fecha en la que empezamos
-            let elcrono = setInterval(() => { this.tiempo(emp) }, 10);   //Funcion temporizador cada 10 ms llama a la funcion tiempo
-            this.play = true;                         //Reloj puesta en marcha
+        if (this.playP1 === false) {
+            let empP1 = new Date();
+            this.elcronoP1 = setInterval(() => { this.tiempoP1(empP1) }, 10);
+            this.playP1 = true;                                               //Reloj puesta en marcha
+        }
+        if (this.playP2 === false) {
+            let empP2 = new Date();
+            this.elcronoP2 = setInterval(() => { this.tiempoP2(empP2) }, 10);
+            this.playP2 = true;
         }
     }
 
-    tiempo(emp) {
-        let actual = new Date();                                   //Tiempo actual
-        this.cro = actual - emp;                                   //Tiempo transcurrido
-        let cr = new Date();                                       //Por si se para para continuar                        
-        cr.setTime(this.cro);                                        //Coje el tiempo actual
-        let time = cr.getTime() + this.playerU.time;
-        let time2 = cr.getTime() + this.playerD.time
+    tiempoP1(empP1) {
+
+        let actual = new Date();
+        let cr = new Date();
+
+        //Player 1
+        this.croP1 = actual - empP1;
+        cr.setTime(this.croP1);
+
+        let timeP1 = cr.getTime() + this.playerU.time
         //Transformar
-        let cs1 = time % 1000;
+        let cs1 = timeP1 % 1000;
         cs1 = cs1 / 10;
         cs1 = Math.round(cs1);
-        let sg1 = time / 1000
+        let sg1 = timeP1 / 1000
         //sg1 = sg1 % 100;
         sg1 = Math.trunc(sg1)
-        let mn1 = time / 60000;
+        let mn1 = timeP1 / 60000;
         mn1 = Math.trunc(mn1)
 
 
         if (cs1 < 10) {
             cs1 = "0" + cs1;
         }
-        if (sg1 < 10) {
-            sg1 = "0" + sg1;
-        }
+
         if (sg1 > 59) {
             sg1 = sg1 % 60;
             //sg1 = "0" + sg1;
+        }
+
+        if (sg1 < 10) {
+            sg1 = "0" + sg1;
         }
         if (mn1 < 10) {
             mn1 = "0" + mn1;
@@ -858,30 +867,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        let cs2 = time2 % 1000;
-        cs2 = cs2 / 10;
-        cs2 = Math.round(cs2);
-        let sg2 = time2 / 1000
-        sg2 = Math.trunc(sg2)
-        let mn2 = time2 / 60000;
-        mn2 = Math.trunc(mn2)
 
-        if (cs2 < 10) {
-            cs2 = "0" + cs2;
-        }
-        if (sg2 < 10) {
-            sg2 = "0" + sg2;
-        }
-        if (sg2 > 59) {
-            sg2 = sg2 % 60;
-            //sg2 = "0" + sg2;
-        }
-        if (mn2 < 10) {
-            mn2 = "0" + mn2;
-        }
-        //let mn2 = mn1;
-        //let sg2 = sg1;
-        //let cs2 = cs1;
         // this.textoCronometro.setText([
         //     'Tiempo: ' + ho + " : " + mn + " : " + sg + " : " + cs
         // ]);
@@ -895,6 +881,47 @@ class Scene_play extends Phaser.Scene {
         this.TiempoP1.setText([
             mn1 + " : " + sg1 + " : " + cs1
         ]);
+
+
+
+    }
+
+    tiempoP2(empP2) {
+
+        let actual = new Date();
+        let cr = new Date();
+        //Player 2                                
+        this.croP2 = actual - empP2;
+        cr.setTime(this.croP2);
+
+        let timeP2 = cr.getTime() + this.playerD.time;
+        //Transformar
+        let cs2 = timeP2 % 1000;
+        cs2 = cs2 / 10;
+        cs2 = Math.round(cs2);
+        let sg2 = timeP2 / 1000
+        //sg1 = sg1 % 100;
+        sg2 = Math.trunc(sg2)
+        let mn2 = timeP2 / 60000;
+        mn2 = Math.trunc(mn2)
+
+        if (cs2 < 10) {
+            cs2 = "0" + cs2;
+        }
+
+        if (sg2 > 59) {
+            sg2 = sg2 % 60;
+            //sg2 = "0" + sg2;
+        }
+
+        if (sg2 < 10) {
+            sg2 = "0" + sg2;
+        }
+
+
+        if (mn2 < 10) {
+            mn2 = "0" + mn2;
+        }
 
         this.TiempoP2.setText([
             mn2 + " : " + sg2 + " : " + cs2
@@ -926,6 +953,68 @@ class Scene_play extends Phaser.Scene {
         }, null, this);
     }
 
+
+
+    pararP1() {
+        if (this.end.player1 === false) {
+            if (this.playP1 === true) {
+                clearInterval(this.elcronoP1);
+                this.playP1 = false;
+            }
+        }
+    }
+
+    continuarP1() {
+        if (this.end.player1 === false) {
+            if (this.playP1 === false) {
+
+                let emp2 = new Date();
+                emp2 = emp2.getTime();
+
+                let emp3 = emp2 - this.croP1
+
+                let emp = new Date();
+                emp.setTime(emp3);
+                this.elcronoP1 = setInterval(() => { this.tiempoP1(emp) }, 10);
+                this.playP1 = true;
+            }
+        }
+    }
+
+    pararP2() {
+        if (this.end.player2 === false) {
+            if (this.playP2 === true) {
+                clearInterval(this.elcronoP2);
+                this.playP2 = false;
+            }
+        }
+    }
+
+    continuarP2() {
+
+        if (this.end.player2 === false) {
+            if (this.playP2 === false) {
+
+                let emp2 = new Date();
+                emp2 = emp2.getTime();
+
+                let emp3 = emp2 - this.croP1
+
+                let emp = new Date();
+                emp.setTime(emp3);
+                this.elcronoP2 = setInterval(() => { this.tiempoP2(emp) }, 10);
+                this.playP2 = true;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
     crearSpeedUpP1() {
         let run = this.physics.add.image(50 + 1180 * this.escenarios[0].pos, 100, "run").setOrigin(0, 0);
         run.setScale(0.1)
@@ -953,34 +1042,34 @@ class Scene_play extends Phaser.Scene {
         //let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
         //reloj.setScale(0.1)
         //this.physics.add.overlap(this.playerU, reloj, () => {
-            this.playerD.setVelocityX(0);
-            this.escenasActivas[1] = true;
-            if (this.game.scene.isActive("CintaP2")) {
-                this.game.scene.stop("CintaP2");
-                this.blurGD.alpha = 0;
-            }
-            if (this.game.scene.isActive("CintaP2V2")) {
-                this.game.scene.stop("CintaP2V2");
-                this.blurGD.alpha = 0;
-            }
-            if (this.game.scene.isActive("ContadorP2")) {
-                this.game.scene.stop("ContadorP2");
-                this.escBU22.alpha = 0;
-            }
-            if (this.game.scene.isActive("ElectricidadP2")) {
-                this.game.scene.stop("ElectricidadP2");
-                this.blurElectricidadD.alpha = 0;
-            }
-            if (this.game.scene.isActive("ElectricidadP2V2")) {
-                this.game.scene.stop("ElectricidadP2V2");
-                this.blurElectricidadD.alpha = 0;
-            }
-            if (this.game.scene.isActive("LaboratorioP2")) {
-                this.game.scene.stop("LaboratorioP2");
-                this.blurLaboratorioD.alpha = 0;
-            }
-            setTimeout(() => { this.escenasActivas[1] = false; }, 6000)
-            //reloj.destroy();
+        this.playerD.setVelocityX(0);
+        this.escenasActivas[1] = true;
+        if (this.game.scene.isActive("CintaP2")) {
+            this.game.scene.stop("CintaP2");
+            this.blurGD.alpha = 0;
+        }
+        if (this.game.scene.isActive("CintaP2V2")) {
+            this.game.scene.stop("CintaP2V2");
+            this.blurGD.alpha = 0;
+        }
+        if (this.game.scene.isActive("ContadorP2")) {
+            this.game.scene.stop("ContadorP2");
+            this.escBU22.alpha = 0;
+        }
+        if (this.game.scene.isActive("ElectricidadP2")) {
+            this.game.scene.stop("ElectricidadP2");
+            this.blurElectricidadD.alpha = 0;
+        }
+        if (this.game.scene.isActive("ElectricidadP2V2")) {
+            this.game.scene.stop("ElectricidadP2V2");
+            this.blurElectricidadD.alpha = 0;
+        }
+        if (this.game.scene.isActive("LaboratorioP2")) {
+            this.game.scene.stop("LaboratorioP2");
+            this.blurLaboratorioD.alpha = 0;
+        }
+        setTimeout(() => { this.escenasActivas[1] = false; }, 6000)
+        //reloj.destroy();
         //}, null, this);
     }
 
@@ -1142,37 +1231,37 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearFrostP2() {
-       // let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
+        // let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
         //reloj.setScale(0.1)
         //this.physics.add.overlap(this.playerD, reloj, () => {
-            this.playerU.setVelocityX(0);
-            this.escenasActivas[0] = true;
-            if (this.game.scene.isActive("CintaP1")) {
-                this.game.scene.stop("CintaP1");
-                this.blurGU.alpha = 0;
-            }
-            if (this.game.scene.isActive("CintaP2V1")) {
-                this.game.scene.stop("CintaP2V1");
-                this.blurGU.alpha = 0;
-            }
-            if (this.game.scene.isActive("ContadorP1")) {
-                this.game.scene.stop("ContadorP1");
-                this.escBU2.alpha = 0;
-            }
-            if (this.game.scene.isActive("ElectricidadP1")) {
-                this.game.scene.stop("ElectricidadP1");
-                this.blurElectricidadU.alpha = 0;
-            }
-            if (this.game.scene.isActive("ElectricidadP1V2")) {
-                this.game.scene.stop("ElectricidadP1V2");
-                this.blurElectricidadU.alpha = 0;
-            }
-            if (this.game.scene.isActive("LaboratorioP1")) {
-                this.game.scene.stop("LaboratorioP1");
-                this.blurLaboratorioU.alpha = 0;
-            }
-            setTimeout(() => { this.escenasActivas[0] = false; }, 6000)
-           // reloj.destroy();
+        this.playerU.setVelocityX(0);
+        this.escenasActivas[0] = true;
+        if (this.game.scene.isActive("CintaP1")) {
+            this.game.scene.stop("CintaP1");
+            this.blurGU.alpha = 0;
+        }
+        if (this.game.scene.isActive("CintaP2V1")) {
+            this.game.scene.stop("CintaP2V1");
+            this.blurGU.alpha = 0;
+        }
+        if (this.game.scene.isActive("ContadorP1")) {
+            this.game.scene.stop("ContadorP1");
+            this.escBU2.alpha = 0;
+        }
+        if (this.game.scene.isActive("ElectricidadP1")) {
+            this.game.scene.stop("ElectricidadP1");
+            this.blurElectricidadU.alpha = 0;
+        }
+        if (this.game.scene.isActive("ElectricidadP1V2")) {
+            this.game.scene.stop("ElectricidadP1V2");
+            this.blurElectricidadU.alpha = 0;
+        }
+        if (this.game.scene.isActive("LaboratorioP1")) {
+            this.game.scene.stop("LaboratorioP1");
+            this.blurLaboratorioU.alpha = 0;
+        }
+        setTimeout(() => { this.escenasActivas[0] = false; }, 6000)
+        // reloj.destroy();
         //}, null, this);
     }
 
@@ -1633,6 +1722,10 @@ class Scene_play extends Phaser.Scene {
         p1_2_8.displayHeight = 20;
         p1_2_8.displayWidth = 80;
 
+        let sueloPrueba = this.physics.add.image(932 + 1180 * this.escenarios[1].pos, 337, "gymplatform").setImmovable(true);
+        sueloPrueba.displayHeight = 43
+        sueloPrueba.displayWidth = 290
+        sueloPrueba.alpha = 0;
 
 
         let grupoP1_cont = this.add.group();
@@ -1648,6 +1741,7 @@ class Scene_play extends Phaser.Scene {
         grupoP1_cont.add(p1_2_5);
         grupoP1_cont.add(p1_2_6);
         grupoP1_cont.add(p1_2_7);
+        grupoP1_cont.add(sueloPrueba);
         var intermitence = setInterval(() => {
             p1_2_7.alpha = p1_2_7.alpha == 1 ? 0 : 1;
             p1_2_7.alpha == 1 ? grupoP1_cont.add(p1_2_7) : grupoP1_cont.remove(p1_2_7);
@@ -1739,6 +1833,12 @@ class Scene_play extends Phaser.Scene {
         p2_2_8.displayHeight = 20;
         p2_2_8.displayWidth = 80;
 
+        let sueloPrueba = this.physics.add.image(932 + 1180 * this.escenarios[1].pos, 337 + this.game.canvas.height / 2, "gymplatform").setImmovable(true);
+        sueloPrueba.displayHeight = 43
+        sueloPrueba.displayWidth = 290
+        sueloPrueba.alpha = 0;
+
+
 
 
         let grupoP2_cont = this.add.group();
@@ -1750,16 +1850,20 @@ class Scene_play extends Phaser.Scene {
             p2_2_3.alpha = p2_2_3.alpha == 1 ? 0 : 1;
             p2_2_3.alpha == 1 ? grupoP2_cont.add(p2_2_3) : grupoP2_cont.remove(p2_2_3);
         }, 2500);
+
         grupoP2_cont.add(p2_2_4);
         grupoP2_cont.add(p2_2_5);
         grupoP2_cont.add(p2_2_6);
         grupoP2_cont.add(p2_2_7);
+
         var intermitence = setInterval(() => {
             p2_2_7.alpha = p2_2_7.alpha == 1 ? 0 : 1;
             p2_2_7.alpha == 1 ? grupoP2_cont.add(p2_2_7) : grupoP2_cont.remove(p2_2_7);
         }, 2000);
+
         grupoP2_cont.add(notCheating2);
         grupoP2_cont.add(p2_2_8);
+        grupoP2_cont.add(sueloPrueba);
 
 
         this.physics.add.collider(this.playerD, grupoP2_cont);
@@ -1803,6 +1907,45 @@ class Scene_play extends Phaser.Scene {
         this.playerD.setGravityY(3000);
         this.empezar();
     }
+
+
+
+
+
+    borrarIntervalos() {
+        var interval_id = window.setInterval("", 9999); // Get a reference to the last
+        // interval +1
+        for (var i = 1; i < interval_id; i++)
+            window.clearInterval(i);
+        //for clearing all intervals
+    }
+
+    endP1(bandera) {
+        console.log("bandera p1")
+        this.pararP1();
+        this.end.player1 = true;
+        
+        if (this.end.player1 === true && this.end.player2 === true) {
+            this.borrarIntervalos();
+            this.scene.launch("MAINMENU");
+        }
+        bandera.destroy();
+        this.BP1.destroy();
+    }
+
+    endP2(bandera) {
+        console.log("bandera p2")
+        this.pararP2();
+        this.end.player2 = true;
+        if (this.end.player1 === true && this.end.player2 === true) {
+            this.borrarIntervalos();
+            this.scene.launch("MAINMENU");
+        }
+        bandera.destroy();
+        this.BP2.destroy();
+    }
+
+
 }
 
 /*
@@ -1821,6 +1964,7 @@ class Scene_play extends Phaser.Scene {
 
   window.xd = xd;
   //*/
+
 
 
 
