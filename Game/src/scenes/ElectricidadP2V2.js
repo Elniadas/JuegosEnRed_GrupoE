@@ -15,7 +15,6 @@ class ElectricidadP2V2 extends Phaser.Scene {
     create() {
 
 
-
         this.prueba = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height *0.75, 'PruebaElectricidad2');
         this.prueba.displayHeight = this.prueba.height * 0.55
         this.prueba.displayWidth = this.prueba.width * 0.55
@@ -170,6 +169,7 @@ class ElectricidadP2V2 extends Phaser.Scene {
         if (this.keyboard.UP.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle+=90;
+            this.sound.play('electricidad');
             this.completado();
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
@@ -177,6 +177,7 @@ class ElectricidadP2V2 extends Phaser.Scene {
         if (this.keyboard.DOWN.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle-=90;
+            this.sound.play('electricidad');
             this.completado();
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }

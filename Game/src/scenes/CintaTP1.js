@@ -1,6 +1,6 @@
-class CintaP1V2 extends Phaser.Scene {
+class CintaTP1 extends Phaser.Scene {
     constructor() {
-        super({ key: "CintaP1V2" });
+        super({ key: "CintaTP1" });
 
     }
     init(data) {
@@ -8,7 +8,7 @@ class CintaP1V2 extends Phaser.Scene {
     }
 
     preload() {
-        this.data.escena.blurGU.alpha = 1;
+        this.data.escena.gimBU.alpha = 1;
     }
 
 
@@ -37,10 +37,10 @@ class CintaP1V2 extends Phaser.Scene {
         this.contF = 0;
         this.puntuacion = 0;
         this.keyLock = false;
-        this.tope = 50;
+        this.tope = 20;
         this.texto = this.add.text(this.game.canvas.width/2-30, 75).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
         this.keyLock = false;
-     
+      
 
     }
     unlock() {
@@ -90,7 +90,6 @@ class CintaP1V2 extends Phaser.Scene {
                 this.puntuacion++;
 
 
-                //this.audioCinta.play();
                 this.sound.play('Paso1');
 
                 if (this.contF >= 3)
@@ -109,15 +108,9 @@ class CintaP1V2 extends Phaser.Scene {
             this.teclaChupa = this.teclado[0];
 
         }
-        if (this.puntuacion >= this.tope) {
-
-            this.data.escena.escenasActivas[0] = false;
-            this.data.escena.blurGU.alpha = 0;
-            this.data.escena.escenarios[0].completadoP1D=true;
-            this.data.escena.particlesCPU.destroy()
-            this.data.escena.CP1.destroy()
-            this.data.escena.crearRayosP1()
-            console.log("Saliendo")
+        if (this.puntuacion >= this.tope) { 
+            this.data.escena.escenasActivas[0] = false;      
+            this.data.escena.gimBU.alpha = 0;     
             this.scene.stop(this);
         }
         //console.log(this.keyLock)
@@ -130,4 +123,4 @@ class CintaP1V2 extends Phaser.Scene {
 
 
 }
-export default CintaP1V2;
+export default CintaTP1;

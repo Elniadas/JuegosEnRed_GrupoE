@@ -179,14 +179,18 @@ class ElectricidadP1V2 extends Phaser.Scene {
         if (this.keyboard.W.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle+=90;
+            this.sound.play('electricidad'); 
             this.completado();
+            
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
 
         if (this.keyboard.S.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle-=90;
+            this.sound.play('electricidad'); 
             this.completado();
+           
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
 

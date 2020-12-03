@@ -1,6 +1,6 @@
-class ContadorP2 extends Phaser.Scene {
+class ContadorTP1 extends Phaser.Scene {
     constructor() {
-        super({ key: "ContadorP2" });
+        super({ key: "ContadorTP1" });
 
     }
     init(data) {
@@ -8,17 +8,17 @@ class ContadorP2 extends Phaser.Scene {
     }
 
     preload() {
-        this.data.escena.escBU22.alpha = 1;
+        this.data.escena.gimBU.alpha = 1;
     }
 
 
     create() {
 
-        this.pulsador = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4*3, 'Pulsador');
+        this.pulsador = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'Pulsador');
         this.pulsador.displayHeight = this.pulsador.height * 0.55;
         this.pulsador.displayWidth = this.pulsador.width * 0.55;
 
-        this.pulsadorA = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4*3, 'PulsadorC').setDepth(100);
+        this.pulsadorA = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'PulsadorC').setDepth(100);
         this.pulsadorA.play('PulsadorP')
 
         this.pulsadorA.displayHeight = this.pulsadorA.height * 0.55;
@@ -27,13 +27,7 @@ class ContadorP2 extends Phaser.Scene {
         this.pulsar = false
 
 
-
-
-        this.cursor = this.input.keyboard.createCursorKeys();
-        this.keyboard = this.input.keyboard.addKeys('DOWN,RIGHT');
-
-        this.input.keyboard.on('keyup-'+'DOWN', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-'+'RIGHT', this.unlock.bind(this));
+        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,A');
 
 
         this.play = false;
@@ -42,10 +36,12 @@ class ContadorP2 extends Phaser.Scene {
         this.textoCronometro = this.add.text(32, 32).setScrollFactor(0).setFontSize(32).setColor('#ffffff').setDepth(-1);
 
 
-        this.TiempoP1 = this.add.bitmapText(this.game.canvas.width * 0.46, this.game.canvas.height * 0.28+this.game.canvas.height/2, 'Digitalism', "00 : 00", 45);
+        this.TiempoP1 = this.add.bitmapText(this.game.canvas.width * 0.46, this.game.canvas.height * 0.28, 'Digitalism', "00 : 00", 45);
 
 
-        
+        this.input.keyboard.on('keyup-' + 'D', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'A', this.unlock.bind(this));
+
         this.keyLock = false;
 
         setTimeout(() => { this.empezar() }, 1200);
@@ -61,8 +57,7 @@ class ContadorP2 extends Phaser.Scene {
 
     update() {
 
-
-        if (this.keyboard.DOWN.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
+        if (this.keyboard.A.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
             this.keyLock = true
             this.parar();
             this.pintarTiempo();
@@ -72,28 +67,19 @@ class ContadorP2 extends Phaser.Scene {
 
             console.log(this.Marca)
             if (this.Marca >= 650 && this.Marca <= 750) {
-                console.log("Has ganadoun abrazo");
+                console.log("Has ganado puto un abrazo");
                 this.completado=true
-                this.data.escena.particlesContPD.destroy();
             }
-            else if (this.css >= 698 && this.css<=702) {
-               this.completado=true
-               this.data.escena.particlesContPD.destroy();
-               this.data.escena.crearMasTP2(); 
+            else if (this.css == 700) {
+                console.log("Te la has sacado hermano")
+                this.completado=true;
             } else {
-                console.log("Loose te toca probar de nuevo")
+                console.log("Vaya looser, te toca probar de nuevo")
             }
 
             setTimeout(() => {
-                this.data.escena.escenasActivas[1] = false;
-                this.data.escena.escBU22.alpha = 0;
-              
-                
-                if(this.completado===true){
-                    this.data.escena.escenarios[1].completadoP2U=true;
-                    this.data.escena.CoP2.destroy();
-                    this.data.escena.crearPortalPulsadorP2();
-                }
+                this.data.escena.escenasActivas[0] = false;
+                this.data.escena.gimBU.alpha = 0;
                 this.scene.stop(this)
             }, 1200);
 
@@ -108,12 +94,12 @@ class ContadorP2 extends Phaser.Scene {
         if (this.play == false) {
             this.emp = new Date();                      //Fecha en la que empezamos
             this.elcrono = setInterval(() => { this.tiempo() }, 10);   //Funcion temporizador cada 10 ms llama a la funcion tiempo
-            this.play = true;                         //Reloj puesta en marcha
-            this.sound.play('Reloj');                 //Sonido
+            this.play = true;                           //Reloj puesta en marcha
+            this.sound.play('Reloj');                  //Poner el audio del reloj
         }
     }
 
-    tiempo() {
+    tiempo(emp) {
         let actual = new Date();                    //Tiempo actual
         this.cro = actual - this.emp;                     //Tiempo transcurrido
         let cr = new Date();                        //Por si se para para continuar                        
@@ -161,10 +147,8 @@ class ContadorP2 extends Phaser.Scene {
         }
     }
 
-    
-
 
 
 
 }
-export default ContadorP2;
+export default ContadorTP1;

@@ -1,6 +1,6 @@
-class ContadorP2 extends Phaser.Scene {
+class ContadorTP2 extends Phaser.Scene {
     constructor() {
-        super({ key: "ContadorP2" });
+        super({ key: "ContadorTP2" });
 
     }
     init(data) {
@@ -8,7 +8,7 @@ class ContadorP2 extends Phaser.Scene {
     }
 
     preload() {
-        this.data.escena.escBU22.alpha = 1;
+        this.data.escena.gimBD.alpha = 1;
     }
 
 
@@ -30,9 +30,9 @@ class ContadorP2 extends Phaser.Scene {
 
 
         this.cursor = this.input.keyboard.createCursorKeys();
-        this.keyboard = this.input.keyboard.addKeys('DOWN,RIGHT');
+        this.keyboard = this.input.keyboard.addKeys('LEFT,RIGHT');
 
-        this.input.keyboard.on('keyup-'+'DOWN', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-'+'LEFT', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'RIGHT', this.unlock.bind(this));
 
 
@@ -62,7 +62,7 @@ class ContadorP2 extends Phaser.Scene {
     update() {
 
 
-        if (this.keyboard.DOWN.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
+        if (this.keyboard.LEFT.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
             this.keyLock = true
             this.parar();
             this.pintarTiempo();
@@ -72,28 +72,18 @@ class ContadorP2 extends Phaser.Scene {
 
             console.log(this.Marca)
             if (this.Marca >= 650 && this.Marca <= 750) {
-                console.log("Has ganadoun abrazo");
+                console.log("Has ganado puto un abrazo");
                 this.completado=true
-                this.data.escena.particlesContPD.destroy();
             }
-            else if (this.css >= 698 && this.css<=702) {
+            else if (this.css == 700) {
                this.completado=true
-               this.data.escena.particlesContPD.destroy();
-               this.data.escena.crearMasTP2(); 
             } else {
-                console.log("Loose te toca probar de nuevo")
+                console.log("Vaya looser, te toca probar de nuevo")
             }
 
             setTimeout(() => {
                 this.data.escena.escenasActivas[1] = false;
-                this.data.escena.escBU22.alpha = 0;
-              
-                
-                if(this.completado===true){
-                    this.data.escena.escenarios[1].completadoP2U=true;
-                    this.data.escena.CoP2.destroy();
-                    this.data.escena.crearPortalPulsadorP2();
-                }
+                this.data.escena.gimBD.alpha = 0;
                 this.scene.stop(this)
             }, 1200);
 
@@ -113,7 +103,7 @@ class ContadorP2 extends Phaser.Scene {
         }
     }
 
-    tiempo() {
+    tiempo(emp) {
         let actual = new Date();                    //Tiempo actual
         this.cro = actual - this.emp;                     //Tiempo transcurrido
         let cr = new Date();                        //Por si se para para continuar                        
@@ -161,10 +151,8 @@ class ContadorP2 extends Phaser.Scene {
         }
     }
 
-    
-
 
 
 
 }
-export default ContadorP2;
+export default ContadorTP2;

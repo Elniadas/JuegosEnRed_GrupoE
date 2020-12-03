@@ -38,7 +38,7 @@ class CintaP1 extends Phaser.Scene {
         this.puntuacion = 0;
         this.keyLock = false;
         this.tope = 20;
-        this.texto = this.add.text(32, 32).setScrollFactor(0).setFontSize(32).setColor('#00000');
+        this.texto = this.add.text(this.game.canvas.width/2-30, 75).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
         this.keyLock = false;
       
 
@@ -120,7 +120,7 @@ class CintaP1 extends Phaser.Scene {
             this.scene.stop(this);
         }
         //console.log(this.keyLock)
-        this.texto.setText(['Puntuacion: ' + this.puntuacion, 'Tope: ' + this.tope])
+        this.texto.setText([this.puntuacion+'/' + this.tope])
     }
 
 
