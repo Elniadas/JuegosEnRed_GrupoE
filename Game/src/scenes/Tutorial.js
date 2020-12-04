@@ -6,10 +6,16 @@ class Tutorial extends Phaser.Scene {
         this.escenarios = [];
     }
 
+    init(data){
+        this.soundManager=data.soundManager;
+      
+    }
+
     create() {
 
+        console.log(this.data.soundManager)
         console.log("tutorial init")
-        this.physics.world.setBounds(0, 0, 3000, this.game.canvas.height);
+        this.physics.world.setBounds(0, 0, 1353, this.game.canvas.height);
         this.end = { player1: false, player2: false };
 
         //Player 1//
@@ -22,9 +28,9 @@ class Tutorial extends Phaser.Scene {
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
         this.playerU.setDepth(1000);
-   
+
         //Player 2//
-   
+
         this.playerD = this.physics.add.sprite(0, this.game.canvas.height - 50, 'P2');
         this.playerD.play('IdleDerechaP2');
         this.playerD.setScale(0.15).refreshBody();
@@ -34,33 +40,34 @@ class Tutorial extends Phaser.Scene {
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
 
+        this.keyLockP2 = false;
 
-            
-        let gimU = this.add.image(0  , 0, "Tutorial").setOrigin(0, 0);
+
+        let gimU = this.add.image(0, 0, "Tutorial").setOrigin(0, 0);
         gimU.displayHeight = this.game.canvas.height / 2;
         //gimU.displayWidth = this.game.canvas.width;
         gimU.setDepth(-9999)
 
-        this.gimBU = this.add.image(0  , 0, "TutorialBlur").setOrigin(0, 0);
+        this.gimBU = this.add.image(0, 0, "TutorialBlur").setOrigin(0, 0);
         this.gimBU.displayHeight = this.game.canvas.height / 2;
         //this.gimBU.displayWidth = this.game.canvas.width;
         this.gimBU.setDepth(20)
         this.gimBU.alpha = 0;
 
 
-        let gimD = this.add.image(0  , this.game.canvas.height / 2, "Tutorial").setOrigin(0, 0);
+        let gimD = this.add.image(0, this.game.canvas.height / 2, "Tutorial").setOrigin(0, 0);
         gimD.displayHeight = this.game.canvas.height / 2;
         //gimD.displayWidth = this.game.canvas.width;
         gimD.setDepth(-9999)
 
-        this.gimBD = this.add.image(0  , this.game.canvas.height / 2, "TutorialBlur").setOrigin(0, 0);
+        this.gimBD = this.add.image(0, this.game.canvas.height / 2, "TutorialBlur").setOrigin(0, 0);
         this.gimBD.displayHeight = this.game.canvas.height / 2;
         //this.gimBD.displayWidth = this.game.canvas.width;
         this.gimBD.setDepth(20)
         this.gimBD.alpha = 0;
 
 
-           
+
         //Controles//
 
         //Player 2
@@ -86,20 +93,7 @@ class Tutorial extends Phaser.Scene {
         this.input.keyboard.on('keyup-' + 'E', this.unlockP1.bind(this));
 
 
-        //Cargar sonido
-        this.music = this.sound.add('Musica_fondo');
 
-        var musicConfig = {
-            mute: false,
-            volume: 0.0086,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false, 
-            delay: 0
-        }
-
-        this.music.play(musicConfig);
 
 
         //Camaras
@@ -126,7 +120,7 @@ class Tutorial extends Phaser.Scene {
 
 
         //Suelo jugador 1
-      
+
         let muro = this.add.image(0, this.game.canvas.height / 2, "muro").setOrigin(0, 0);
         muro.displayHeight = 1;
         muro.displayWidth = 5800;
@@ -145,6 +139,7 @@ class Tutorial extends Phaser.Scene {
         this.plataformas = this.physics.add.staticGroup();
         this.plataformas.add(muro);
         this.plataformas.add(muro2);
+        
 
 
         //Fisicas//
@@ -172,19 +167,19 @@ class Tutorial extends Phaser.Scene {
         cintaU.setImmovable(true);
 
         //Cinta jugador 2
-        let cintaD = this.physics.add.image(200, 670, "cintaSprite") 
+        let cintaD = this.physics.add.image(200, 670, "cintaSprite")
         cintaD.setScale(0.30);
         cintaD.setImmovable(true);
 
         //Prueba 2
 
         //Contador jugador 1
-        let pulsador = this.physics.add.sprite(this.game.canvas.width/2.25 , this.game.canvas.height / 2.65, 'spriteCont');
+        let pulsador = this.physics.add.sprite(this.game.canvas.width / 2.25, this.game.canvas.height / 2.65, 'spriteCont');
         pulsador.displayHeight = pulsador.height * 0.4;
         pulsador.displayWidth = pulsador.width * 0.4;
 
         //Contador jugador 2
-        let pulsador2 = this.physics.add.sprite(this.game.canvas.width/2.25, this.game.canvas.height / 2.65+this.game.canvas.height/2, 'spriteCont');
+        let pulsador2 = this.physics.add.sprite(this.game.canvas.width / 2.25, this.game.canvas.height / 2.65 + this.game.canvas.height / 2, 'spriteCont');
         pulsador2.displayHeight = pulsador2.height * 0.4;
         pulsador2.displayWidth = pulsador2.width * 0.4;
 
@@ -194,10 +189,10 @@ class Tutorial extends Phaser.Scene {
         let prueba = this.physics.add.sprite(this.game.canvas.width / 1.44, this.game.canvas.height / 2.42, 'Enchufe');
         prueba.displayHeight = prueba.height * 0.29;
         prueba.displayWidth = prueba.width * 0.29;
-        
+
 
         //Jugador 2
-        let prueba2 = this.physics.add.sprite(this.game.canvas.width / 1.44, this.game.canvas.height / 2.42+this.game.canvas.height/2, 'Enchufe');
+        let prueba2 = this.physics.add.sprite(this.game.canvas.width / 1.44, this.game.canvas.height / 2.42 + this.game.canvas.height / 2, 'Enchufe');
         prueba2.displayHeight = prueba2.height * 0.29;
         prueba2.displayWidth = prueba2.width * 0.29;
 
@@ -209,23 +204,23 @@ class Tutorial extends Phaser.Scene {
         ordenador.displayWidth = ordenador.width * 0.9;
 
         //Simbolos jugador 2
-        let ordenador2 = this.physics.add.sprite(this.game.canvas.width / 1.09, this.game.canvas.height / 2.4+this.game.canvas.height/2, 'Ordenador');
+        let ordenador2 = this.physics.add.sprite(this.game.canvas.width / 1.09, this.game.canvas.height / 2.4 + this.game.canvas.height / 2, 'Ordenador');
         ordenador2.displayHeight = ordenador2.height * 0.9;
         ordenador2.displayWidth = ordenador2.width * 0.9;
 
         //Prueba 5
 
         //Bandera jugador 1
-        let banderaU =  this.physics.add.sprite(this.game.canvas.width / 0.85, this.game.canvas.height / 2.27, 'Bandera');
+        let banderaU = this.physics.add.sprite(this.game.canvas.width / 0.85, this.game.canvas.height / 2.27, 'Bandera');
         banderaU.displayHeight = ordenador2.height * 0.9;
         banderaU.displayWidth = ordenador2.width * 0.9;
 
         //Bandera jugador 2
-        let banderaD =  this.physics.add.sprite(this.game.canvas.width / 0.85, this.game.canvas.height / 2.27+this.game.canvas.height/2, 'Bandera');
+        let banderaD = this.physics.add.sprite(this.game.canvas.width / 0.85, this.game.canvas.height / 2.27 + this.game.canvas.height / 2, 'Bandera');
         banderaD.displayHeight = ordenador2.height * 0.9;
         banderaD.displayWidth = ordenador2.width * 0.9;
 
-         
+
 
 
         this.CP1 = this.physics.add.overlap(this.playerU, cintaU, () => { this.Prueba(this.playerU, "Cinta") }, null, this);
@@ -238,7 +233,12 @@ class Tutorial extends Phaser.Scene {
         this.LP2 = this.physics.add.overlap(this.playerD, ordenador2, () => { this.Prueba(this.playerD, "Laboratorio") }, null, this);
         this.BP1 = this.physics.add.overlap(this.playerU, banderaU, () => { this.endP1(banderaU) }, null, this);
         this.BP2 = this.physics.add.overlap(this.playerD, banderaD, () => { this.endP2(banderaD) }, null, this);
-        
+
+
+        this.soundManager.play('Musica_fondo');
+
+
+
 
     }
 
@@ -331,9 +331,22 @@ class Tutorial extends Phaser.Scene {
 
         }
 
+
+
+        if (this.keyboardP2.ESC.isDown === true && this.keyLockP2 === false) {
+            console.log("Iniciando pausa")
+            this.keyLockP2 = true;
+            this.keyboardP2.ESC.isDown = false;
+            this.scene.launch("Pause", { escena: this })
+        }
+
+
+
+
+
     }
 
-    Prueba(player,prueba) {
+    Prueba(player, prueba) {
 
         let pos = (player.x + 1180) / 1180
         pos = Math.trunc(pos) - 1
@@ -354,16 +367,16 @@ class Tutorial extends Phaser.Scene {
     PruebaP1(prueba) {
         if (this.keyboardP1.E.isDown === true && !this.escenasActivas[0]) {
 
-                this.scene.launch(prueba + "TP1", { escena: this });
-                this.escenasActivas[0] = true;
+            this.scene.launch(prueba + "TP1", { escena: this,soundManager:this.soundManager });
+            this.escenasActivas[0] = true;
 
         }
     }
     PruebaP2(prueba) {
-        if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {  
+        if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {
 
-                this.scene.launch(prueba + "TP2", { escena: this });
-                this.escenasActivas[1] = true;
+            this.scene.launch(prueba + "TP2", { escena: this,soundManager:this.soundManager });
+            this.escenasActivas[1] = true;
         }
 
     }
@@ -371,27 +384,15 @@ class Tutorial extends Phaser.Scene {
     endP1(bandera) {
         console.log("bandera p1")
         this.end.player1 = true;
-        
+
         if (this.end.player1 === true && this.end.player2 === true) {
             //this.borrarIntervalos();
-            this.music = this.sound.add('campanas');
 
-        var musicConfig = {
-            mute: false,
-            volume: 0.0086,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false, 
-            delay: 0
-        }
-
-        this.music.play(musicConfig);
-            this.scene.launch("Scene_play");
-            this.scene.stop("Tutorial");
+            this.scene.start("Scene_play");
+            this.soundManager.play('campanas');
             console.log("Iniciando");
         }
-        bandera.destroy();        
+        bandera.destroy();
         this.BP1.destroy();
     }
 
@@ -401,24 +402,11 @@ class Tutorial extends Phaser.Scene {
 
         if (this.end.player1 === true && this.end.player2 === true) {
             //this.borrarIntervalos();
-            this.music = this.sound.add('campanas');
-
-        var musicConfig = {
-            mute: false,
-            volume: 0.0086,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false, 
-            delay: 0
-        }
-
-        this.music.play(musicConfig);
-            this.scene.launch("Scene_play");
-            this.scene.stop("Tutorial");
+            this.scene.start("Scene_play",{escena:null,soundManager:this.soundManager});
+            this.soundManager.play('campanas');
             console.log("Iniciando");
         }
-        bandera.destroy();        
+        bandera.destroy();
         this.BP2.destroy();
     }
 

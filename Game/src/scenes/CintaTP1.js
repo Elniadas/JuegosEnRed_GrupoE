@@ -5,6 +5,7 @@ class CintaTP1 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -90,7 +91,7 @@ class CintaTP1 extends Phaser.Scene {
                 this.puntuacion++;
 
 
-                this.sound.play('Paso1');
+                this.soundManager.play('Paso1');
 
                 if (this.contF >= 3)
                     this.contF = 0;

@@ -5,9 +5,7 @@ class CintaP2V2 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
-    
-
-
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -35,7 +33,7 @@ class CintaP2V2 extends Phaser.Scene {
         this.puntuacion = 0;
       
         this.tope = 50;
-        this.texto = this.add.text(this.game.canvas.width/2-30, 75).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
+        this.texto = this.add.text(this.game.canvas.width/2-30, 75+this.game.canvas.height/2).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
         this.keyLock = false;
 
 
@@ -80,7 +78,7 @@ class CintaP2V2 extends Phaser.Scene {
                 this.contF++;
                 this.puntuacion++;
                 //Sonido
-                this.sound.play('Paso1');
+                this.soundManager.play('Paso1');
                 
                 if (this.contF >= 3)
                     this.contF = 0;

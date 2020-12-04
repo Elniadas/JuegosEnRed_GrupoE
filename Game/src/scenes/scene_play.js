@@ -6,8 +6,8 @@ class Scene_play extends Phaser.Scene {
 
         this.escenarios = [];
     }
-    load() {
-
+    init(data) {
+        this.soundManager = data.soundManager;
     }
     preload() {
         // let aux = [0, 1];
@@ -50,7 +50,7 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta",0 , true);
+        this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
@@ -60,7 +60,7 @@ class Scene_play extends Phaser.Scene {
         var that = this;
 
         this.end = { player1: false, player2: false };
-        
+
 
         //Factor de suma 1180 * this.escenarios[i].pos
 
@@ -89,21 +89,10 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
-        
+
         //Cargar sonido
-        this.music = this.sound.add('Musica_fondo');
 
-        var musicConfig = {
-            mute: false,
-            volume: 0.0086,
-            rate: 1,
-            detune: 0,
-            seek: 0,
-            loop: false, 
-            delay: 0
-        }
-
-        this.music.play(musicConfig);
+        this.soundManager.play('Musica_fondo')
 
 
         //Escenario 1 Gimnasio
@@ -191,11 +180,11 @@ class Scene_play extends Phaser.Scene {
         this.crearMenosTP1(60, 85, this.escenarios[0].pos);
 
         //Power Up jugador 2
-        this.crearSpeedUpP2(825, 300, this.escenarios[0].pos);        
+        this.crearSpeedUpP2(825, 300, this.escenarios[0].pos);
 
         this.crearMenosTP2(60, 85, this.escenarios[0].pos);
 
-        
+
 
 
         // let pCintaD= particles.createEmitter({
@@ -444,57 +433,57 @@ class Scene_play extends Phaser.Scene {
 
 
         //Escenario yiieePUm Laboratorio
- 
+
         //Jugador 1
- 
+
         let escU5 = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "Laboratorio").setOrigin(0, 0);
- 
+
         escU5.displayHeight = this.game.canvas.height / 2;
         escU5.displayWidth = this.game.canvas.width;
- 
- 
+
+
         let pruebaLaboratorioU = this.physics.add.image(800 + 1180 * this.escenarios[4].pos, 185, "Ordenador").setOrigin(0, 0);
         pruebaLaboratorioU.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioU.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioU.setImmovable(true)
- 
- 
+
+
         this.blurLaboratorioU = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "LaboratorioBlur").setOrigin(0, 0);
         this.blurLaboratorioU.displayHeight = this.game.canvas.height / 2 - 10;
         this.blurLaboratorioU.displayWidth = this.game.canvas.width;
         this.blurLaboratorioU.alpha = 0;
- 
+
         this.crearPlataformasLaboratorio1();
- 
+
         //POWER UPS JUGADOR 1
         this.crearSpeedUpP1(825, 300, this.escenarios[4].pos);
- 
- 
+
+
         //Jugador 2
- 
+
         let escD5 = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2, "Laboratorio").setOrigin(0, 0);
- 
+
         escD5.displayHeight = this.game.canvas.height / 2;
         escD5.displayWidth = this.game.canvas.width;
- 
-        let pruebaLaboratorioD = this.physics.add.image(800 + 1180 * this.escenarios[4].pos, 545 , "Ordenador").setOrigin(0, 0);
+
+        let pruebaLaboratorioD = this.physics.add.image(800 + 1180 * this.escenarios[4].pos, 545, "Ordenador").setOrigin(0, 0);
         pruebaLaboratorioD.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioD.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioD.setImmovable(true)
         //pruebaElectricidadD.alpha = 0;
- 
+
         this.blurLaboratorioD = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 + 10, "LaboratorioBlur").setOrigin(0, 0);
         this.blurLaboratorioD.displayHeight = this.game.canvas.height / 2;
         this.blurLaboratorioD.displayWidth = this.game.canvas.width;
         this.blurLaboratorioD.alpha = 0;
- 
+
         this.crearPlataformasLaboratorio2();
- 
+
         //POWER UPS JUGADOR 2
         this.crearSpeedUpP2(825, 300, this.escenarios[4].pos);
 
 
-        
+
         //Limites//
 
 
@@ -640,7 +629,7 @@ class Scene_play extends Phaser.Scene {
         this.cam1.ignore(this.particlesCPD);
         this.cam2.ignore(this.TiempoP1);
 
-        
+
 
         //Ajustes
 
@@ -750,7 +739,7 @@ class Scene_play extends Phaser.Scene {
             this.keyboardP2.ESC.isDown = false;
             this.pararP1();
             this.pararP2();
-            this.scene.launch("Pause", { escena: this })
+            this.scene.launch("Pause", { escena: this, soundManager: this.soundManager })
             //this.keyboardP2.ESC.isDown=true;
         }
 
@@ -793,13 +782,13 @@ class Scene_play extends Phaser.Scene {
             }
 
             if (this.escenarios[e].completadoP1U === false) {
-                this.scene.launch(p + "P1", { escena: this });
+                this.scene.launch(p + "P1", { escena: this, soundManager: this.soundManager });
                 this.escenasActivas[0] = true;
             }
             if (this.escenarios[e].completadoP1U === true && this.escenarios[e].doble === true) {
                 if (this.escenarios[e].completadoP1D === false) {
                     console.log("INICIANDO PARTE 2")
-                    this.scene.launch(p + "P1V2", { escena: this });
+                    this.scene.launch(p + "P1V2", { escena: this, soundManager: this.soundManager });
                     this.escenasActivas[0] = true;
                 }
             }
@@ -821,14 +810,14 @@ class Scene_play extends Phaser.Scene {
 
 
             if (this.escenarios[e].completadoP2U === false) {
-                this.scene.launch(p + "P2", { escena: this });
+                this.scene.launch(p + "P2", { escena: this, soundManager: this.soundManager });
                 this.escenasActivas[1] = true;
 
             }
             if (this.escenarios[e].completadoP2U === true && this.escenarios[e].doble === true) {
                 if (this.escenarios[e].completadoP2D === false) {
                     console.log("INICIANDO PARTE 2")
-                    this.scene.launch(p + "P2V2", { escena: this });
+                    this.scene.launch(p + "P2V2", { escena: this, soundManager: this.soundManager });
                     this.escenasActivas[1] = true;
                 }
             }
@@ -854,7 +843,8 @@ class Scene_play extends Phaser.Scene {
             camara.setBounds(0 + 1180 * (factor + 1), 0, this.game.canvas.width, this.game.canvas.height / 2)
 
             //Sonido
-            this.sound.play('TeletransporteFinal');
+            this.soundManager.play('TeletransporteFinal')
+
         }
 
     }
@@ -997,7 +987,7 @@ class Scene_play extends Phaser.Scene {
 
     }
 
-    
+
 
     pararP1() {
         if (this.end.player1 === false) {
@@ -1056,7 +1046,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-//POWER UPS
+    //POWER UPS
 
 
     crearSpeedUpP1(x, y, pos) {
@@ -1067,9 +1057,9 @@ class Scene_play extends Phaser.Scene {
             run.destroy();
             setTimeout(() => { this.playerU.velocidad = 300; console.log("Se te acabo el chollo") }, 2000)
         }, null, this);
-    }  
+    }
 
-     
+
 
     crearMenosTP1(x, y, pos) {
         let reloj = this.physics.add.image(x + 1180 * pos, y, "menosT").setOrigin(0, 0);
@@ -1289,8 +1279,8 @@ class Scene_play extends Phaser.Scene {
             this.game.scene.stop("CintaP1");
             this.blurGU.alpha = 0;
         }
-        if (this.game.scene.isActive("CintaP2V1")) {
-            this.game.scene.stop("CintaP2V1");
+        if (this.game.scene.isActive("CintaP1V2")) {
+            this.game.scene.stop("CintaP1V2");
             this.blurGU.alpha = 0;
         }
         if (this.game.scene.isActive("ContadorP1")) {
@@ -1419,7 +1409,7 @@ class Scene_play extends Phaser.Scene {
     }
 
 
-//PORTALES
+    //PORTALES
 
 
     crearPortalGimnasioP1() {
@@ -1521,7 +1511,7 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[3].pos, this.cam2) }, null, this); console.log(this.portal)
     }
 
-    
+
     crearPortalLaboratorioP2() {
         let spritePortal2 = this.add.sprite(1038 + 1180 * this.escenarios[4].pos, this.game.canvas.height * 0.84, "portal");
         spritePortal2.play("portalAnim");
@@ -1533,9 +1523,9 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[4].pos, this.cam2) }, null, this); console.log(this.portal)
     }
 
-//plataformas
+    //plataformas
 
-    
+
 
     crearPlataformasGimnasioP1() {
         let p1_1_1 = this.physics.add.image(100 + 1180 * this.escenarios[0].pos, this.game.canvas.height * 0.42, "gymplatform").setImmovable(true);
@@ -1715,7 +1705,7 @@ class Scene_play extends Phaser.Scene {
         let p1_2_1 = this.physics.add.image(100 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.42, "contplatform").setImmovable(true);
         p1_2_1.displayHeight = 20;
         p1_2_1.displayWidth = 80;
-        
+
         this.tweens.timeline({
             targets: p1_2_1.body.velocity,
             loop: -1,
@@ -1729,7 +1719,7 @@ class Scene_play extends Phaser.Scene {
         let p1_2_2 = this.physics.add.image(275 + 1180 * this.escenarios[1].pos, 220, "contplatform").setImmovable(true);
         p1_2_2.displayHeight = 20;
         p1_2_2.displayWidth = 80;
-        
+
         this.tweens.timeline({
             targets: p1_2_2.body.velocity,
             loop: -1,
@@ -1784,7 +1774,7 @@ class Scene_play extends Phaser.Scene {
         let notCheating = this.physics.add.image(790 + 1180 * this.escenarios[1].pos, 235, "telon").setImmovable(true);
         notCheating.displayHeight = 250;
         notCheating.displayWidth = 20;
-        
+
         let p1_2_8 = this.physics.add.image(720 + 1180 * this.escenarios[1].pos, 150, "contplatform").setImmovable(true);
         p1_2_8.displayHeight = 20;
         p1_2_8.displayWidth = 80;
@@ -1823,7 +1813,7 @@ class Scene_play extends Phaser.Scene {
         let p2_2_1 = this.physics.add.image(100 + 1180 * this.escenarios[1].pos, this.game.canvas.height * 0.42 + 360, "contplatform").setImmovable(true);
         p2_2_1.displayHeight = 20;
         p2_2_1.displayWidth = 80;
-        
+
 
         this.tweens.timeline({
             targets: p2_2_1.body.velocity,
@@ -1838,7 +1828,7 @@ class Scene_play extends Phaser.Scene {
         let p2_2_2 = this.physics.add.image(275 + 1180 * this.escenarios[1].pos, 580, "contplatform").setImmovable(true);
         p2_2_2.displayHeight = 20;
         p2_2_2.displayWidth = 80;
-        
+
 
         this.tweens.timeline({
             targets: p2_2_2.body.velocity,
@@ -1894,7 +1884,7 @@ class Scene_play extends Phaser.Scene {
         let notCheating2 = this.physics.add.image(790 + 1180 * this.escenarios[1].pos, 595, "telon").setImmovable(true);
         notCheating2.displayHeight = 250;
         notCheating2.displayWidth = 20;
-        
+
 
         let p2_2_8 = this.physics.add.image(720 + 1180 * this.escenarios[1].pos, 510, "contplatform").setImmovable(true);
         p2_2_8.displayHeight = 20;
@@ -2005,7 +1995,7 @@ class Scene_play extends Phaser.Scene {
         p1_3_6.displayHeight = 20;
         p1_3_6.displayWidth = 80;
 
-       let p1_3_7 = this.physics.add.image(840 + 1180 * this.escenarios[3].pos, 250, "elecplatform").setImmovable(true);
+        let p1_3_7 = this.physics.add.image(840 + 1180 * this.escenarios[3].pos, 250, "elecplatform").setImmovable(true);
         p1_3_7.displayHeight = 20;
         p1_3_7.displayWidth = 220;
 
@@ -2129,7 +2119,7 @@ class Scene_play extends Phaser.Scene {
         this.physics.add.collider(this.playerD, grupoP2_elec);
     }
 
-    crearPlataformasLaboratorio1(){
+    crearPlataformasLaboratorio1() {
         let p1_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275, "labplatform").setImmovable(true);
         p1_4_1.displayHeight = 20;
         p1_4_1.displayWidth = 80;
@@ -2144,15 +2134,15 @@ class Scene_play extends Phaser.Scene {
             ]
         });
 
-        let p1_4_2 = this.physics.add.image(745+ 1180 * this.escenarios[4].pos, 315, "labplatform").setImmovable(true);
+        let p1_4_2 = this.physics.add.image(745 + 1180 * this.escenarios[4].pos, 315, "labplatform").setImmovable(true);
         p1_4_2.displayHeight = 20;
         p1_4_2.displayWidth = 80;
 
-        let p1_4_3 = this.physics.add.image(845+ 1180 * this.escenarios[4].pos, 275, "labplatform").setImmovable(true);
+        let p1_4_3 = this.physics.add.image(845 + 1180 * this.escenarios[4].pos, 275, "labplatform").setImmovable(true);
         p1_4_3.displayHeight = 20;
         p1_4_3.displayWidth = 90;
 
-        let p1_4_4 = this.physics.add.image(220+ 1180 * this.escenarios[4].pos, 305, "labplatform").setImmovable(true);
+        let p1_4_4 = this.physics.add.image(220 + 1180 * this.escenarios[4].pos, 305, "labplatform").setImmovable(true);
         p1_4_4.displayHeight = 20;
         p1_4_4.displayWidth = 80;
 
@@ -2161,11 +2151,11 @@ class Scene_play extends Phaser.Scene {
         grupoP1_Lab.add(p1_4_2);
         grupoP1_Lab.add(p1_4_3);
         grupoP1_Lab.add(p1_4_4);
-        
+
         this.physics.add.collider(this.playerU, grupoP1_Lab);
     }
 
-    crearPlataformasLaboratorio2(){
+    crearPlataformasLaboratorio2() {
         let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 635, "labplatform").setImmovable(true);
         p2_4_1.displayHeight = 20;
         p2_4_1.displayWidth = 80;
@@ -2180,15 +2170,15 @@ class Scene_play extends Phaser.Scene {
             ]
         });
 
-        let p2_4_2 = this.physics.add.image(745+ 1180 * this.escenarios[4].pos, 675, "labplatform").setImmovable(true);
+        let p2_4_2 = this.physics.add.image(745 + 1180 * this.escenarios[4].pos, 675, "labplatform").setImmovable(true);
         p2_4_2.displayHeight = 20;
         p2_4_2.displayWidth = 80;
 
-        let p2_4_3 = this.physics.add.image(845+ 1180 * this.escenarios[4].pos, 635, "labplatform").setImmovable(true);
+        let p2_4_3 = this.physics.add.image(845 + 1180 * this.escenarios[4].pos, 635, "labplatform").setImmovable(true);
         p2_4_3.displayHeight = 20;
         p2_4_3.displayWidth = 90;
 
-        let p2_4_4 = this.physics.add.image(220+ 1180 * this.escenarios[4].pos, 665, "labplatform").setImmovable(true);
+        let p2_4_4 = this.physics.add.image(220 + 1180 * this.escenarios[4].pos, 665, "labplatform").setImmovable(true);
         p2_4_4.displayHeight = 20;
         p2_4_4.displayWidth = 80;
 
@@ -2197,143 +2187,143 @@ class Scene_play extends Phaser.Scene {
         grupoP2_Lab.add(p2_4_2);
         grupoP2_Lab.add(p2_4_3);
         grupoP2_Lab.add(p2_4_4);
-       
-        
+
+
         this.physics.add.collider(this.playerD, grupoP2_Lab);
     }
 
-    crearPlataformasNieve1(){
-        let p1_5_1=this.physics.add.image(100 + 1180 * this.escenarios[2].pos, 295, "snowplat").setImmovable(true);
-        p1_5_1.displayHeight=20;
-        p1_5_1.displayWidth=80;
-        p1_5_1.body.friction.x=0.3; 
-        
+    crearPlataformasNieve1() {
+        let p1_5_1 = this.physics.add.image(100 + 1180 * this.escenarios[2].pos, 295, "snowplat").setImmovable(true);
+        p1_5_1.displayHeight = 20;
+        p1_5_1.displayWidth = 80;
+        p1_5_1.body.friction.x = 0.3;
+
 
         this.tweens.timeline({
             targets: p1_5_1.body.velocity,
             loop: -1,
             tweens: [
-                {x: 60, duration: 1000, ease: 'Stepped'},
-                {x:-60, duration: 1000, ease:'Stepped'}
-                            
+                { x: 60, duration: 1000, ease: 'Stepped' },
+                { x: -60, duration: 1000, ease: 'Stepped' }
+
             ]
-          });
+        });
 
-        let p1_5_2=this.physics.add.image(300 + 1180 * this.escenarios[2].pos, 225, "snowplat").setImmovable(true);
-        p1_5_2.displayHeight=20;
-        p1_5_2.displayWidth=80;
-        
+        let p1_5_2 = this.physics.add.image(300 + 1180 * this.escenarios[2].pos, 225, "snowplat").setImmovable(true);
+        p1_5_2.displayHeight = 20;
+        p1_5_2.displayWidth = 80;
 
-        let p1_5_3=this.physics.add.image(495 + 1180 * this.escenarios[2].pos, 225, "snowplat").setImmovable(true);
-        p1_5_3.displayHeight=20;
-        p1_5_3.displayWidth=80;
-        p1_5_3.body.friction.x=0.3; 
+
+        let p1_5_3 = this.physics.add.image(495 + 1180 * this.escenarios[2].pos, 225, "snowplat").setImmovable(true);
+        p1_5_3.displayHeight = 20;
+        p1_5_3.displayWidth = 80;
+        p1_5_3.body.friction.x = 0.3;
 
         this.tweens.timeline({
             targets: p1_5_3.body.velocity,
             loop: -1,
             tweens: [
-                {x: -70, duration: 1500, ease: 'Stepped'},
-                {x:70, duration: 1500, ease:'Stepped'}
-                            
+                { x: -70, duration: 1500, ease: 'Stepped' },
+                { x: 70, duration: 1500, ease: 'Stepped' }
+
             ]
-          });
+        });
 
-        let p1_5_4=this.physics.add.image(595 + 1180 * this.escenarios[2].pos, 185, "snowplat").setImmovable(true);
-        p1_5_4.displayHeight=20;
-        p1_5_4.displayWidth=40;
+        let p1_5_4 = this.physics.add.image(595 + 1180 * this.escenarios[2].pos, 185, "snowplat").setImmovable(true);
+        p1_5_4.displayHeight = 20;
+        p1_5_4.displayWidth = 40;
 
-        let p1_5_5=this.physics.add.image(975 + 1180 * this.escenarios[2].pos, 210, "snowplat").setImmovable(true);
-        p1_5_5.displayHeight=20;
-        p1_5_5.displayWidth=80;
-        p1_5_5.body.friction.x=0.2; 
+        let p1_5_5 = this.physics.add.image(975 + 1180 * this.escenarios[2].pos, 210, "snowplat").setImmovable(true);
+        p1_5_5.displayHeight = 20;
+        p1_5_5.displayWidth = 80;
+        p1_5_5.body.friction.x = 0.2;
 
         this.tweens.timeline({
             targets: p1_5_5.body.velocity,
             loop: -1,
             tweens: [
-                {x: -95, duration: 2500, ease: 'Stepped'},
-                {x:95, duration: 2500, ease:'Stepped'}
-                            
+                { x: -95, duration: 2500, ease: 'Stepped' },
+                { x: 95, duration: 2500, ease: 'Stepped' }
+
             ]
-          });
-        
+        });
 
-          let grupoP1_snow=this.add.group();
-          grupoP1_snow.add(p1_5_1);
-          grupoP1_snow.add(p1_5_2);
-          grupoP1_snow.add(p1_5_3);
-          grupoP1_snow.add(p1_5_4);
-          grupoP1_snow.add(p1_5_5);
 
-          this.physics.add.collider(this.playerU, grupoP1_snow);
+        let grupoP1_snow = this.add.group();
+        grupoP1_snow.add(p1_5_1);
+        grupoP1_snow.add(p1_5_2);
+        grupoP1_snow.add(p1_5_3);
+        grupoP1_snow.add(p1_5_4);
+        grupoP1_snow.add(p1_5_5);
+
+        this.physics.add.collider(this.playerU, grupoP1_snow);
     }
 
-    crearPlataformasNieve2(){
-        let p2_5_1=this.physics.add.image(100 + 1180 * this.escenarios[2].pos, 655, "snowplat").setImmovable(true);
-        p2_5_1.displayHeight=20;
-        p2_5_1.displayWidth=80;
-        p2_5_1.body.friction.x=0.3; 
-        
+    crearPlataformasNieve2() {
+        let p2_5_1 = this.physics.add.image(100 + 1180 * this.escenarios[2].pos, 655, "snowplat").setImmovable(true);
+        p2_5_1.displayHeight = 20;
+        p2_5_1.displayWidth = 80;
+        p2_5_1.body.friction.x = 0.3;
+
 
         this.tweens.timeline({
             targets: p2_5_1.body.velocity,
             loop: -1,
             tweens: [
-                {x: 60, duration: 1000, ease: 'Stepped'},
-                {x:-60, duration: 1000, ease:'Stepped'}
-                            
+                { x: 60, duration: 1000, ease: 'Stepped' },
+                { x: -60, duration: 1000, ease: 'Stepped' }
+
             ]
-          });
+        });
 
-        let p2_5_2=this.physics.add.image(300 + 1180 * this.escenarios[2].pos, 585, "snowplat").setImmovable(true);
-        p2_5_2.displayHeight=20;
-        p2_5_2.displayWidth=80;
-        
+        let p2_5_2 = this.physics.add.image(300 + 1180 * this.escenarios[2].pos, 585, "snowplat").setImmovable(true);
+        p2_5_2.displayHeight = 20;
+        p2_5_2.displayWidth = 80;
 
-        let p2_5_3=this.physics.add.image(495 + 1180 * this.escenarios[2].pos, 585, "snowplat").setImmovable(true);
-        p2_5_3.displayHeight=20;
-        p2_5_3.displayWidth=80;
-        p2_5_3.body.friction.x=0.3; 
+
+        let p2_5_3 = this.physics.add.image(495 + 1180 * this.escenarios[2].pos, 585, "snowplat").setImmovable(true);
+        p2_5_3.displayHeight = 20;
+        p2_5_3.displayWidth = 80;
+        p2_5_3.body.friction.x = 0.3;
 
         this.tweens.timeline({
             targets: p2_5_3.body.velocity,
             loop: -1,
             tweens: [
-                {x: -70, duration: 1500, ease: 'Stepped'},
-                {x:70, duration: 1500, ease:'Stepped'}
-                            
+                { x: -70, duration: 1500, ease: 'Stepped' },
+                { x: 70, duration: 1500, ease: 'Stepped' }
+
             ]
-          });
+        });
 
-        let p2_5_4=this.physics.add.image(595 + 1180 * this.escenarios[2].pos, 545, "snowplat").setImmovable(true);
-        p2_5_4.displayHeight=20;
-        p2_5_4.displayWidth=40;
+        let p2_5_4 = this.physics.add.image(595 + 1180 * this.escenarios[2].pos, 545, "snowplat").setImmovable(true);
+        p2_5_4.displayHeight = 20;
+        p2_5_4.displayWidth = 40;
 
-        let p2_5_5=this.physics.add.image(975 + 1180 * this.escenarios[2].pos, 210 + this.game.canvas.height/2, "snowplat").setImmovable(true);
-        p2_5_5.displayHeight=20;
-        p2_5_5.displayWidth=80;
-        p2_5_5.body.friction.x=0.2; 
+        let p2_5_5 = this.physics.add.image(975 + 1180 * this.escenarios[2].pos, 210 + this.game.canvas.height / 2, "snowplat").setImmovable(true);
+        p2_5_5.displayHeight = 20;
+        p2_5_5.displayWidth = 80;
+        p2_5_5.body.friction.x = 0.2;
 
         this.tweens.timeline({
             targets: p2_5_5.body.velocity,
             loop: -1,
             tweens: [
-                {x: -95, duration: 2500, ease: 'Stepped'},
-                {x:95, duration: 2500, ease:'Stepped'}
-                            
+                { x: -95, duration: 2500, ease: 'Stepped' },
+                { x: 95, duration: 2500, ease: 'Stepped' }
+
             ]
-          });
-        
+        });
 
-          let grupoP2_snow=this.add.group();
-          grupoP2_snow.add(p2_5_1);
-          grupoP2_snow.add(p2_5_2);
-          grupoP2_snow.add(p2_5_3);
-          grupoP2_snow.add(p2_5_4);
-          grupoP2_snow.add(p2_5_5);
 
-          this.physics.add.collider(this.playerD, grupoP2_snow);
+        let grupoP2_snow = this.add.group();
+        grupoP2_snow.add(p2_5_1);
+        grupoP2_snow.add(p2_5_2);
+        grupoP2_snow.add(p2_5_3);
+        grupoP2_snow.add(p2_5_4);
+        grupoP2_snow.add(p2_5_5);
+
+        this.physics.add.collider(this.playerD, grupoP2_snow);
     }
 
 
@@ -2380,7 +2370,7 @@ class Scene_play extends Phaser.Scene {
         console.log("bandera p1")
         this.pararP1();
         this.end.player1 = true;
-        
+
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
             this.scene.launch("MAINMENU");

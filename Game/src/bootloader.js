@@ -7,8 +7,16 @@ class Bootloader extends Phaser.Scene {
     }
     preload() {
         this.load.on("complete", () => {
-            this.scene.start("MAINMENU");
+            this.scene.start("MAINMENU",{escena:null,soundManager:this.soundManager});
         });
+
+        //Plugins
+        this.load.scenePlugin({
+            key: 'rexuiplugin',
+            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            sceneKey: 'rexUI'
+        });
+
 
         //Fuente texto//
 
@@ -100,11 +108,11 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
         this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
-        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg");
+        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.mp3");
         this.load.audio("Laser1","./assets/Sonidos/Laser1.mp3");
         this.load.audio("electricidad","./assets/Sonidos/electricidad.mp3");
         this.load.audio("campanas","./assets/Sonidos/campanas.mp3");
-        
+        this.soundManager=this.sound;
         //Animaciones//
 
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
@@ -524,6 +532,17 @@ class Bootloader extends Phaser.Scene {
             repeat: 0,
             frameRate: 8
         })
+
+
+        //Sonidos
+
+       
+        this.soundManager.add('campanas');
+        this.soundManager.add('Paso1')
+        this.soundManager.add('Reloj')
+        this.soundManager.add('Musica_fondo');
+        this.soundManager.add('TeletransporteFinal');
+        this.soundManager.volume=1;
 
 
 

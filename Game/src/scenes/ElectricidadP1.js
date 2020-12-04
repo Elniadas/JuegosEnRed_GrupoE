@@ -5,6 +5,7 @@ class ElectricidadP1 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -149,7 +150,7 @@ class ElectricidadP1 extends Phaser.Scene {
         if (this.keyboard.W.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle+=90;
-            this.sound.play('electricidad');
+            this.soundManager.play('electricidad');
             this.completado();
 
             
@@ -159,7 +160,7 @@ class ElectricidadP1 extends Phaser.Scene {
         if (this.keyboard.S.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle-=90;
-            this.sound.play('electricidad');
+            this.soundManager.play('electricidad');
             this.completado();
 
             

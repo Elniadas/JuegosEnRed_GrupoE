@@ -5,6 +5,7 @@ class ElectricidadTP2 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -146,7 +147,7 @@ class ElectricidadTP2 extends Phaser.Scene {
             this.piezas[this.posicion].angle+=90;
             this.completado();
             
-            this.sound.play('electricidad');  //Sonido cada vez que mueves la pieza
+            this.soundManager.play('electricidad');  //Sonido cada vez que mueves la pieza
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
         //*/

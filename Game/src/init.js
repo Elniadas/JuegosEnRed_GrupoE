@@ -67,7 +67,6 @@ const config = {
         ElectricidadP2V2,
         LaboratorioP1,
         LaboratorioP2,
-        Pause,
         Tutorial,
         CintaTP1,
         CintaTP2,
@@ -76,7 +75,8 @@ const config = {
         ElectricidadTP1,
         ElectricidadTP2,
         LaboratorioTP1,
-        LaboratorioTP2
+        LaboratorioTP2,
+        Pause
     ]
 }
 

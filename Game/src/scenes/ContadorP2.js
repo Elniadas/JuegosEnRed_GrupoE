@@ -5,6 +5,7 @@ class ContadorP2 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -109,7 +110,7 @@ class ContadorP2 extends Phaser.Scene {
             this.emp = new Date();                      //Fecha en la que empezamos
             this.elcrono = setInterval(() => { this.tiempo() }, 10);   //Funcion temporizador cada 10 ms llama a la funcion tiempo
             this.play = true;                         //Reloj puesta en marcha
-            this.sound.play('Reloj');                 //Sonido
+            this.soundManager.play('Reloj');                  //Sonido
         }
     }
 
