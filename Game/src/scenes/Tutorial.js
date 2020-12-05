@@ -386,10 +386,10 @@ class Tutorial extends Phaser.Scene {
         this.end.player1 = true;
 
         if (this.end.player1 === true && this.end.player2 === true) {
-            //this.borrarIntervalos();
+            
 
-            this.scene.start("Scene_play");
-            this.soundManager.play('campanas');
+            this.scene.start("MAINMENU",{escena:null,soundManager:this.soundManager});
+            
             console.log("Iniciando");
         }
         bandera.destroy();
@@ -401,9 +401,9 @@ class Tutorial extends Phaser.Scene {
         this.end.player2 = true;
 
         if (this.end.player1 === true && this.end.player2 === true) {
-            //this.borrarIntervalos();
-            this.scene.start("Scene_play",{escena:null,soundManager:this.soundManager});
-            this.soundManager.play('campanas');
+            
+            this.scene.start("MAINMENU",{escena:null,soundManager:this.soundManager});
+           
             console.log("Iniciando");
         }
         bandera.destroy();

@@ -23,6 +23,9 @@ import ElectricidadTP1 from './scenes/ElectricidadTP1.js';
 import ElectricidadTP2 from './scenes/ElectricidadTP2.js';
 import LaboratorioTP1 from './scenes/LaboratorioTP1.js';
 import LaboratorioTP2 from './scenes/LaboratorioTP2.js';
+import Victoria from './scenes/Victoria.js';
+import Lobby from './scenes/Lobby.js';
+
 
 const config = {
     type: Phaser.AUTO,
@@ -76,6 +79,8 @@ const config = {
         ElectricidadTP2,
         LaboratorioTP1,
         LaboratorioTP2,
+        Victoria,
+        Lobby,
         Pause
     ]
 }

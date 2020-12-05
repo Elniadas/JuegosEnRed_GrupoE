@@ -8,6 +8,9 @@ class Scene_play extends Phaser.Scene {
     }
     init(data) {
         this.soundManager = data.soundManager;
+        this.data=data;
+      
+        
     }
     preload() {
         // let aux = [0, 1];
@@ -50,9 +53,9 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[0] = new Escenario("Cinta", 4, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 4, false);
+        this.escenarios[2] = new Escenario("Nieve", 0, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
@@ -78,6 +81,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
         this.playerU.setDepth(1000);
+        this.playerU.id=this.data.names.p1;
 
         //Player 2//
 
@@ -89,11 +93,16 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
+        this.playerD.id=this.data.names.p2;
 
         //Cargar sonido
 
+        
         this.soundManager.play('Musica_fondo')
 
+            // this.soundManager.once('looped',()=>{
+            //     this.soundManager.play('Musica_fondo')
+            // })
 
         //Escenario 1 Gimnasio
 
@@ -2373,7 +2382,7 @@ class Scene_play extends Phaser.Scene {
 
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.launch("MAINMENU");
+            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:2,name:this.playerD.id});
         }
         bandera.destroy();
         this.BP1.destroy();
@@ -2385,7 +2394,7 @@ class Scene_play extends Phaser.Scene {
         this.end.player2 = true;
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.launch("MAINMENU");
+            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:1,name:this.playerU.id});
         }
         bandera.destroy();
         this.BP2.destroy();

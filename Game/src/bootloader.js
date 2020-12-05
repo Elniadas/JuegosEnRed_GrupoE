@@ -128,7 +128,8 @@ class Bootloader extends Phaser.Scene {
         //MenuPausa//
         this.load.image('menuPausa', './assets/MenuPausa.jpg');
         this.load.image('botonPausa', './assets/botonPausa.png');
-
+        //VICTORIA//
+        this.load.image('Victoria','./assets/Victoria.jpg')
 
 
         
