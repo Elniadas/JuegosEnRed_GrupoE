@@ -5,6 +5,7 @@ class LaboratorioP2 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {

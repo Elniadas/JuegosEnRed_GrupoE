@@ -5,6 +5,7 @@ class CintaP1V2 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -38,9 +39,9 @@ class CintaP1V2 extends Phaser.Scene {
         this.puntuacion = 0;
         this.keyLock = false;
         this.tope = 50;
-        this.texto = this.add.text(32, 32).setScrollFactor(0).setFontSize(32).setColor('#00000');
+        this.texto = this.add.text(this.game.canvas.width/2-30, 75).setScrollFactor(0).setFontSize(21).setColor('#2874A6');
         this.keyLock = false;
-        window.keylock = this.keyLock
+     
 
     }
     unlock() {
@@ -90,8 +91,7 @@ class CintaP1V2 extends Phaser.Scene {
                 this.puntuacion++;
 
 
-                //this.audioCinta.play();
-                this.sound.play('Paso1');
+                this.soundManager.play('Paso1');
 
                 if (this.contF >= 3)
                     this.contF = 0;
@@ -114,13 +114,14 @@ class CintaP1V2 extends Phaser.Scene {
             this.data.escena.escenasActivas[0] = false;
             this.data.escena.blurGU.alpha = 0;
             this.data.escena.escenarios[0].completadoP1D=true;
-          
+            this.data.escena.particlesCPU.destroy()
             this.data.escena.CP1.destroy()
-            console.log("Saliendo klk")
+            this.data.escena.crearRayosP1()
+            console.log("Saliendo")
             this.scene.stop(this);
         }
         //console.log(this.keyLock)
-        this.texto.setText(['Puntuacion: ' + this.puntuacion, 'Tope: ' + this.tope])
+        this.texto.setText([this.puntuacion+'/' + this.tope])
     }
 
 

@@ -5,6 +5,7 @@ class ElectricidadP2V2 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -15,7 +16,6 @@ class ElectricidadP2V2 extends Phaser.Scene {
     create() {
 
 
-console.log("AFEITANDONOS")
         this.prueba = this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height *0.75, 'PruebaElectricidad2');
         this.prueba.displayHeight = this.prueba.height * 0.55
         this.prueba.displayWidth = this.prueba.width * 0.55
@@ -64,6 +64,35 @@ console.log("AFEITANDONOS")
         this.pieza7.displayWidth=5;
         this.pieza7.angle=90;
 
+
+        this.bombilla=this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'BombillaEncendida');
+        this.bombilla.scale=0.6
+        this.bombilla.y=282+this.game.canvas.height*0.5;
+        this.bombilla.x=534;
+        this.bombilla.alpha=0;
+
+
+        this.bombilla2=this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'BombillaEncendida');
+        this.bombilla2.scale=0.6
+        this.bombilla2.y=202+this.game.canvas.height*0.5;
+        this.bombilla2.x=463;
+        this.bombilla2.alpha=0;
+
+        this.bombilla3=this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'BombillaEncendida');
+        this.bombilla3.scale=0.6
+        this.bombilla3.y=210+this.game.canvas.height*0.5;
+        this.bombilla3.x=624;
+        this.bombilla3.alpha=0;
+
+        this.bombilla4=this.add.sprite(this.game.canvas.width / 2, this.game.canvas.height / 4, 'BombillaEncendida');
+        this.bombilla4.scale=0.6
+        this.bombilla4.y=288+this.game.canvas.height*0.5;
+        this.bombilla4.x=624;
+        this.bombilla4.alpha=0;
+
+
+
+
         this.piezas=new Array();
         this.piezas[0]=this.pieza1
         this.piezas[1]=this.pieza4
@@ -86,11 +115,13 @@ console.log("AFEITANDONOS")
         this.marco.scale=0.33;
         this.posicion=2;
 
-        this.keyboard = this.input.keyboard.addKeys('LEFT,RIGHT,UP');
+        this.keyboard = this.input.keyboard.addKeys('LEFT,RIGHT,UP,DOWN');
 
         this.input.keyboard.on('keyup-'+'LEFT', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'RIGHT', this.unlock.bind(this));
         this.input.keyboard.on('keyup-'+'UP', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-'+'DOWN', this.unlock.bind(this));
+        this.keyLock = false;
 
     }
     unlock() {
@@ -139,11 +170,20 @@ console.log("AFEITANDONOS")
         if (this.keyboard.UP.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle+=90;
+            this.soundManager.play('electricidad');
             this.completado();
-
-            this.sound.play('electricidad');  //Sonido cada vez que mueves la pieza
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
+
+        if (this.keyboard.DOWN.isDown === true && this.keyLock == false) {
+            this.keyLock = true;
+            this.piezas[this.posicion].angle-=90;
+            this.soundManager.play('electricidad');
+            this.completado();
+            //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
+        }
+
+
         //*/
     }
 
@@ -179,7 +219,10 @@ console.log("AFEITANDONOS")
         if(casos[0]==true && casos[1]==true&&casos[2]==true&&casos[3]==true&&casos[4]==true && casos[5]==true&& casos[6]==true){
   
 
-            //this.bombilla.alpha=1;
+            this.bombilla.alpha=1;
+            this.bombilla2.alpha=1;
+            this.bombilla3.alpha=1;
+            this.bombilla4.alpha=1;
 
             
 
@@ -189,6 +232,7 @@ console.log("AFEITANDONOS")
                 this.keyLock = true;
                 this.data.escena.blurElectricidadD.alpha = 0;
                 this.data.escena.EP2.destroy();
+                this.data.escena.crearBlindP2();
                 this.scene.stop(this)
             },500);
         }

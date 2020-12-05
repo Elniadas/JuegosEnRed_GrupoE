@@ -5,6 +5,7 @@ class ElectricidadP1 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -94,11 +95,13 @@ class ElectricidadP1 extends Phaser.Scene {
         this.marco.scale=0.33;
         this.posicion=2;
 
-        this.keyboard = this.input.stopPropagation().keyboard.addKeys('A,D,Q,F');
+        this.keyboard = this.input.stopPropagation().keyboard.addKeys('A,D,Q,W,S');
         this.input.keyboard.on('keyup-' + 'A', this.unlock.bind(this));
         this.input.keyboard.on('keyup-' + 'D', this.unlock.bind(this));
         this.input.keyboard.on('keyup-' + 'Q', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'F', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'W', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
+        this.keyLock = false;
 
 
     }
@@ -144,12 +147,23 @@ class ElectricidadP1 extends Phaser.Scene {
         }
         //*/
 
-        if (this.keyboard.F.isDown === true && this.keyLock == false) {
+        if (this.keyboard.W.isDown === true && this.keyLock == false) {
             this.keyLock = true;
             this.piezas[this.posicion].angle+=90;
+            this.soundManager.play('electricidad');
             this.completado();
 
-            this.sound.play('electricidad');  //Sonido cada vez que mueves la pieza
+            
+            //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
+        }
+        
+        if (this.keyboard.S.isDown === true && this.keyLock == false) {
+            this.keyLock = true;
+            this.piezas[this.posicion].angle-=90;
+            this.soundManager.play('electricidad');
+            this.completado();
+
+            
             //console.log("La pieza: " +this.posicion+" tiene este angulo : "+this.piezas[this.posicion].angle);
         }
 

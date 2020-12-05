@@ -7,8 +7,16 @@ class Bootloader extends Phaser.Scene {
     }
     preload() {
         this.load.on("complete", () => {
-            this.scene.start("MAINMENU");
+            this.scene.start("MAINMENU",{escena:null,soundManager:this.soundManager});
         });
+
+        //Plugins
+        this.load.scenePlugin({
+            key: 'rexuiplugin',
+            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            sceneKey: 'rexUI'
+        });
+
 
         //Fuente texto//
 
@@ -35,12 +43,16 @@ class Bootloader extends Phaser.Scene {
         this.load.image("ContadorBlur", "./assets/ContadorBlur.png");
         this.load.image("Contador", "./assets/Contador2.png")
         this.load.spritesheet("PulsadorA", "./assets/PulsadorAnimacion.png", { frameWidth: 500, frameHeight: 600 });
-        this.load.image("spriteCont", "./assets/contadorSprite.png");
 
+        this.load.image("spriteCont", "./assets/contadorSprite.png");
+        this.load.image("contplatform", "./assets/ContPlat.png");
+        this.load.image("telon", "./assets/Telon.png");
         //Nieve//
 
         this.load.image("Bandera","./assets/Bandera.png");
         this.load.image("Nieve", "./assets/NivelHelado.png");
+        this.load.image("snowplat", "./assets/PlataformasNieve.png");
+        this.load.image("flag", "./assets/Bandera.png");
 
         //Electricidad//
 
@@ -53,13 +65,20 @@ class Bootloader extends Phaser.Scene {
         this.load.image("PruebaElectricidadPieza3", "./assets/Piezas/Pieza2.3.png");
         this.load.image("Marco", "./assets/Piezas/Marco.png");
         this.load.image("BombillaEncendida", "./assets/Piezas/BombillaEncendida.png");
+        this.load.image("elecplatform", "./assets/PlataformasElectricidad.png");
         this.load.image("Enchufe", "./assets/Enchufe.png");
+
+        //Menu//
+        this.load.image("menu", "./assets/MainMenu1.jpg");
+        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
+        this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 299, frameHeight: 137 }); //botón de play
+        this.load.spritesheet("buttonPlay", "./assets/SpriteBotones.png", {frameWidth: 440, frameHeight: 122});
 
         //Laboratorio//
 
-        this.load.image("Ordenador","./assets/Ordenador.png");
         this.load.image("Laboratorio", "./assets/Laboratorio.png");
         this.load.image("LaboratorioBlur", "./assets/LaboratorioBlur.png");
+        this.load.image("Ordenador", "./assets/Ordenador.png");
         this.load.image("PruebaLaboratorio", "./assets/OrdenadorPrueba.png");
         this.load.image("FlechaSelect", "./assets/PiezasLab/FlechaSelect.png");
         this.load.image("PruebaLaboratorioPieza1", "./assets/PiezasLab/Simbolo1.png");
@@ -67,12 +86,11 @@ class Bootloader extends Phaser.Scene {
         this.load.image("PruebaLaboratorioPieza3", "./assets/PiezasLab/Simbolo7.png");
         this.load.image("PruebaLaboratorioPieza4", "./assets/PiezasLab/Simbolo8.png");
         this.load.image("PruebaLaboratorioPieza5", "./assets/PiezasLab/Simbolo9.png");
+        this.load.image("labplatform", "./assets/PlataformasLaboratorio.png");
+        
 
-        //Menu//
-        this.load.image("menu", "./assets/MainMenu.jpg");
-        this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
-        this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 792, frameHeight: 410 }); //botón de play
-        this.load.spritesheet("Mute", "./assets/SpriteSheetSound.png", { frameWidth: 300, frameHeight: 300 }); //botón sonido
+
+      
 
         //Otros//
 
@@ -90,10 +108,12 @@ class Bootloader extends Phaser.Scene {
         this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
         this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
-        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.ogg");
+        this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.mp3");
         this.load.audio("Laser1","./assets/Sonidos/Laser1.mp3");
         this.load.audio("electricidad","./assets/Sonidos/electricidad.mp3");
-        
+        this.load.audio("campanas","./assets/Sonidos/campanas.mp3");
+        this.load.audio("Congelar","./assets/Sonidos/Congelar.mp3"); 
+        this.soundManager=this.sound;
         //Animaciones//
 
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
@@ -101,8 +121,19 @@ class Bootloader extends Phaser.Scene {
         this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", { frameWidth: 168, frameHeight: 310 });
 
         //PoweUps//
-        
         this.load.image('run', './assets/RUN.png');
+        this.load.image('menosT', './assets/relojArena.png');
+        this.load.image('Foco', './assets/foco.png');
+        this.load.image('laser', './assets/laser.png');
+        this.load.spritesheet("timeMAS", "./assets/Time++SSheet.png", {frameWidth: 437, frameHeight: 678});
+        //MenuPausa//
+        this.load.image('menuPausa', './assets/MenuPausa.jpg');
+        this.load.image('botonPausa', './assets/botonPausa.png');
+        //VICTORIA//
+        this.load.image('Victoria','./assets/Victoria.jpg')
+
+
+        
 
 
 
@@ -433,6 +464,14 @@ class Bootloader extends Phaser.Scene {
             frameRate: 6
         })
 
+        //TimePLUS
+        this.anims.create({
+            key: "timePlus",
+            frames: this.anims.generateFrameNumbers("timeMAS", {frames: [0, 1, 2]}),
+            repeat: -1,
+            frameRate: 3
+        })
+
 
 
         //Particulas
@@ -495,6 +534,18 @@ class Bootloader extends Phaser.Scene {
             repeat: 0,
             frameRate: 8
         })
+
+
+        //Sonidos
+
+       
+        this.soundManager.add('campanas');
+        this.soundManager.add('Paso1')
+        this.soundManager.add('Reloj')
+        this.soundManager.add('Musica_fondo');
+        this.soundManager.add('TeletransporteFinal');
+        this.soundManager.add('Congelar');
+        this.soundManager.volume=1;
 
 
 

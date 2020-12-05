@@ -13,6 +13,7 @@ import ElectricidadP1V2 from './scenes/ElectricidadP1V2.js';
 import ElectricidadP2V2 from './scenes/ElectricidadP2V2.js';
 import LaboratorioP1 from './scenes/LaboratorioP1.js';
 import LaboratorioP2 from './scenes/LaboratorioP2.js';
+import Pause from './scenes/Pause.js';
 import Tutorial from './scenes/Tutorial.js';
 import CintaTP1 from './scenes/CintaTP1.js';
 import CintaTP2 from './scenes/CintaTP2.js';
@@ -22,6 +23,9 @@ import ElectricidadTP1 from './scenes/ElectricidadTP1.js';
 import ElectricidadTP2 from './scenes/ElectricidadTP2.js';
 import LaboratorioTP1 from './scenes/LaboratorioTP1.js';
 import LaboratorioTP2 from './scenes/LaboratorioTP2.js';
+import Victoria from './scenes/Victoria.js';
+import Lobby from './scenes/Lobby.js';
+
 
 const config = {
     type: Phaser.AUTO,
@@ -74,7 +78,10 @@ const config = {
         ElectricidadTP1,
         ElectricidadTP2,
         LaboratorioTP1,
-        LaboratorioTP2
+        LaboratorioTP2,
+        Victoria,
+        Lobby,
+        Pause
     ]
 }
 
