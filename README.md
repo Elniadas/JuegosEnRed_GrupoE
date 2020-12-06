@@ -86,8 +86,9 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > ### 2.3 Cámara
 
 > - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
-
+<p align="center">
 ![Diagrama](/Images/PrimerPlano.PNG)
+ </p>
 
 > - En cuanto al movimiento del jugador y el mundo del juego, este se desarrolla horizontalmente o con un desplazamiento horizontal (propio de juegos como Mario Bros o Sonic entre otros), también denominado Scroll lateral.
 
