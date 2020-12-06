@@ -121,14 +121,20 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 ![Interfaz](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Interfaz.png)
 
 > - Pantalla de pausa: Con los botones de "Reanudar" para continuar la partida, "Sonido" para ajustar el volumen y "Salir" para volver al menú
+
+
 ![Pausa](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Pausa.png)
 
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
-![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial.gif)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorialControles.gif)
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial2.gif)
 
 > - Pantalla de ajuste de sonido: para ajustar el volumen
 ![Sonidos](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Sonido.png)
+
+> - Pantalla de victoria
+
+![Victoria](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Victoria.gif)
 
 
 
