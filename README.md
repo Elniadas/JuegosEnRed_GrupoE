@@ -60,9 +60,9 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Se activan al instante, al terminar con éxito una prueba secundaria. Algunos de estos pueden ser:
 
-> - Blindsighted: Durante un breve periodo de tiempo, el jugador contrario verá reducido su campo de visión. (Prueba de electricidad)
-> - Laser Storm: A lo largo del circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida (Prueba de gimnasio)
-> - Time++: Suma tiempo al contador del jugador contrario. (Prueba de contador)
+> - Blindsighted: Durante un breve periodo de tiempo, el jugador contrario verá reducido su campo de visión. (Obtenido en prueba de electricidad)
+> - Laser Storm: A lo largo del circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida (Obtenido en prueba de gimnasio)
+> - Time++: Suma tiempo al contador del jugador contrario. (Obtenido en prueba de contador)
 
 > ### 2.2 Flujo del Juego
 
@@ -71,7 +71,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
 > - Si desean comenzar una partida deben acceder al botón de "Jugar".
 > - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de "Como Jugar".
-> - Si desea ajustar el volumen, los jugadores podrán acceder a ello mediante el botón de Configuración.
+> - Si desea ajustar el volumen, los jugadores podrán acceder a ello mediante el botón de "Sonido".
 
 
 > - Si se accionó el botón de Jugar, el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
@@ -80,7 +80,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 
 
-![Diagrama](/Images/Diagrama1.jpeg)
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Diagrama.jpeg)
 ![Diagrama](/Images/Diagrama2.jpeg)
 
 > ### 2.3 Cámara
