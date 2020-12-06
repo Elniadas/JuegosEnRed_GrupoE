@@ -103,19 +103,21 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan interactuado con la puerta que lleva al siguiente nivel / siguiente prueba. 
 > ## 3. Interfaces
-> - Pantalla principal: con los botones Jugar, Historial de Partidas y Configuración como se ha mencionado en el apartado del Flujo del Juego.
-![Diagrama](/Images/Pantalla_principal.png)
-> - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar, cambiar su nickname y se mostrarán los controles que deberán usar cada uno de ellos. 
-![Diagrama](/Images/Players.png)
+> - Pantalla principal: con los botones Jugar, Como Jugar y Sonido como se ha mencionado en el apartado del Flujo del Juego.
+![Diagrama](/Game/assets/MenuPrincipalFase2.png)
+> - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar y cambiar su nickname. 
+![Diagrama](/Game/assets/NicknameFase2.png)
 > - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de abajo la del 2. Ambas tienen el tiempo que llevan consumido. Arriba a la derecha hay un botón para poder pausar el juego. 
 ![Diagrama](/Images/Juego.png)
 > - Pantalla de pausa: aparece cuando se decide pausar el juego y contiene los botones: 
 > - Continuar: para salir y continuar con la partida
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
+![Diagrama](/Game/assets/TutorialFase2.png)
+![Diagrama](/Game/assets/TutorialFase2.2.png)
 > - Ajustes: para configurar sonidos…
+![Diagrama](/Game/assets/SonidoFase2.png)
 > - Salir: para salir y volver a la pantalla principal.
-
-![Diagrama](/Images/Pausa.png)
+![Diagrama](/Game/assets/PauseFase2.png)
 
 > ## 4. Pruebas
 
