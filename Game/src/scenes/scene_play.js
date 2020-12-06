@@ -53,11 +53,11 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 3, true);
+        this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
-        this.escenarios[4] = new Escenario("Laboratorio", 0, false);
+        this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
         this.physics.world.setBounds(0, 0, 5800, this.game.canvas.height);
         var that = this;
@@ -199,17 +199,6 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        // let pCintaD= particles.createEmitter({
-        //     x: { min: cintaD.x-50, max: cintaD.x+50 },
-        //     y: cintaD.y+100,
-        //     lifespan: 3000,
-        //     speedY: { min: -60, max: -100 },
-        //     scale: { start: 0.3, end: 0 },
-        //     quantity: 1,
-        //     frame:'white',
-        //     frequency: 300,
-        //     blendMode: 'ADD'
-        // });
 
 
         //Power Up jugador 2
@@ -231,19 +220,6 @@ class Scene_play extends Phaser.Scene {
             blendMode: 'ADD',
 
         });
-
-        // let pCintaD= particles.createEmitter({
-        //     x: { min: cintaD.x-50, max: cintaD.x+50 },
-        //     y: cintaD.y+100,
-        //     lifespan: 3000,
-        //     speedY: { min: -60, max: -100 },
-        //     scale: { start: 0.3, end: 0 },
-        //     quantity: 1,
-        //     frame:'white',
-        //     frequency: 300,
-        //     blendMode: 'ADD'
-        // });
-
 
 
         //Escenario 2 Contador
@@ -703,19 +679,22 @@ class Scene_play extends Phaser.Scene {
         let cronoJ1= this.add.image(792,100,"cronoP1")
         cronoJ1.displayHeight=30;
         cronoJ1.displayWidth=95
-
+        cronoJ1.setDepth(10)
         cronoJ1.setScrollFactor(0,0)
         let cronoJ2= this.add.image(792,100,"cronoP2")
         cronoJ2.setScrollFactor(0,0)
         cronoJ2.displayHeight=30;
         cronoJ2.displayWidth=95
+        cronoJ2.setDepth(10)
 
 
-        this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
+        this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP1.setScrollFactor(0, 0)
+        
 
-        this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
+        this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP2.setScrollFactor(0, 0)
+        
 
        
         //Ignorasiones
@@ -936,7 +915,7 @@ class Scene_play extends Phaser.Scene {
             player.x = (1180 * (factor + 1) + 25);
 
 
-            player.y = this.game.canvas.height / 2 - 50;
+            player.y = this.game.canvas.height / 2 - 55;
             camara.setBounds(0 + 1180 * (factor + 1), 0, this.game.canvas.width, this.game.canvas.height / 2)
 
             //Sonido
@@ -953,7 +932,7 @@ class Scene_play extends Phaser.Scene {
             player.x = (1180 * (factor + 1) + 25);
 
 
-            player.y = this.game.canvas.height - 50;
+            player.y = this.game.canvas.height - 55;
             camara.setBounds(0 + 1180 * (factor + 1), this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2)
 
             //Sonido
