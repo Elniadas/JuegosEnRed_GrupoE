@@ -25,6 +25,7 @@ import LaboratorioTP1 from './scenes/LaboratorioTP1.js';
 import LaboratorioTP2 from './scenes/LaboratorioTP2.js';
 import Victoria from './scenes/Victoria.js';
 import Lobby from './scenes/Lobby.js';
+import TeamScreen from './scenes/TeamScreen.js';
 
 
 const config = {
@@ -81,6 +82,7 @@ const config = {
         LaboratorioTP2,
         Victoria,
         Lobby,
+        TeamScreen,
         Pause
     ]
 }

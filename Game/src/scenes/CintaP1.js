@@ -126,8 +126,7 @@ class CintaP1 extends Phaser.Scene {
     }
 
 
-
-
+    
 
 
 }
