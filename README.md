@@ -86,11 +86,13 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > ### 2.3 Cámara
 
 > - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
-<p align="center">
+
 ![Diagrama](/Images/PrimerPlano.PNG)
- </p>
+
 
 > - En cuanto al movimiento del jugador y el mundo del juego, este se desarrolla horizontalmente o con un desplazamiento horizontal (propio de juegos como Mario Bros o Sonic entre otros), también denominado Scroll lateral.
+
+![Image from Gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Scroll.gif)
 
 
 
@@ -142,8 +144,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Realizar la prueba secundaria (partículas rojas): Se deberá realizar la misma prueba, pero con un mayor número de pulsaciones. Si se supera satisfactoriamente, se le aplicará al jugador contrario el power up "Laser storm"; el jugador que toque los rayos tendrá su velocidad de movimiento reducida durante un tiempo determinado
 
-![contador](/Game/assets/PruebaCorrerFase2.png)
-![contador](/Game/assets/CintaFase2.png)
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Cinta.gif)
 
 > ### 4.2. Prueba de electricidad 
 
@@ -155,8 +157,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará parcialmente la visión del jugador rival por unos instantes.
 
-![contador](/Game/assets/PruebaElectricidadFase2.png)
-![contador](/Game/assets/ElectricidadFase2.png)
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Electricidad.gif)
 
 > ### 4.3. Prueba del contador
 
@@ -168,8 +170,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Si el jugador consigue parar el contador en el segundo 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
 
-![contador](/Game/assets/PruebaContadorFase2.png)
-![contador](/Game/assets/ContadorFase2.png)
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Contador.gif)
 
 > ### 4.4. Prueba de los símbolos
 
@@ -180,8 +182,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Si los jugadores (1 y 2) olvidan el orden de los símbolos, podrán salir de la prueba respectivamente con las teclas "Q" y "M". 
 
 
-![contador](/Game/assets/PruebaSimbolosFase2.png)
-![contador](/Game/assets/OrdenadorFase2.png)
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Ordenador.gif)
 
 > ### 4.4. Escenario de Nieve (final)
 
