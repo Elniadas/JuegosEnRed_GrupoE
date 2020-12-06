@@ -125,6 +125,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial.gif)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial2.gif)
 
 > - Pantalla de ajuste de sonido: para ajustar el volumen
 ![Sonidos](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Sonido.png)
