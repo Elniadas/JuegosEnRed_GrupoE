@@ -81,7 +81,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
         this.playerU.setDepth(1000);
-        this.playerU.id=this.data.names.p1;
+        this.playerU.name=this.data.names.p1;
 
         //Player 2//
 
@@ -93,7 +93,7 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
-        this.playerD.id=this.data.names.p2;
+        this.playerD.name=this.data.names.p2;
 
         //Cargar sonido
 
@@ -2386,7 +2386,7 @@ class Scene_play extends Phaser.Scene {
 
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:2,name:this.playerD.id});
+            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:2,name:this.playerD.name});
         }
         bandera.destroy();
         this.BP1.destroy();
@@ -2398,7 +2398,7 @@ class Scene_play extends Phaser.Scene {
         this.end.player2 = true;
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:1,name:this.playerU.id});
+            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:1,name:this.playerU.name});
         }
         bandera.destroy();
         this.BP2.destroy();
