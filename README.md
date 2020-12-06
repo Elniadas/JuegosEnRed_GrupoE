@@ -51,7 +51,12 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Power Ups de nivel bajo: estos se encuentran sueltos por el mapa, alrededor del circuito de pruebas (escondidos o en lo alto de plataformas). Los efectos de estos power ups afectarán en el jugador que los recoja y no en el contrincante. 
 
 > - +Movement speed: el jugador se mueve con mayor rapidez
+
+![Diagrama](/Images/Movement++.PNG)
+
 > - -Time: el jugador podrá restar pocos segundos a su marcador
+
+![Diagrama](/Images/Time--.PNG)
 
 > - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Se activan al instante, al terminar con éxito una prueba secundaria. Algunos de estos pueden ser:
 
@@ -82,7 +87,11 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
 
+![Diagrama](/Images/PrimerPlano.PNG)
+
 > - En cuanto al movimiento del jugador y el mundo del juego, este se desarrolla horizontalmente o con un desplazamiento horizontal (propio de juegos como Mario Bros o Sonic entre otros), también denominado Scroll lateral.
+
+
 
 > ### 2.4 Sonido
 
