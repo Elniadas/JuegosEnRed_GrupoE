@@ -126,6 +126,7 @@ class Pause extends Phaser.Scene {
                 this.scene.stop("Pause");
             }
         })
+        reanudar.texto=this.add.text(reanudar.x-40,reanudar.y-15,'Reanudar').setFontSize(30)
 
         return reanudar;
 
@@ -136,6 +137,7 @@ class Pause extends Phaser.Scene {
         let salir = this.add.image(this.game.canvas.width / 2, this.game.canvas.height * 0.6, "botonPausa");
         salir.displayHeight = this.game.canvas.height * 0.1;
         salir.displayWidth = this.game.canvas.width * 0.2;
+        salir.texto=this.add.text(salir.x-40,salir.y-15,'Salir').setFontSize(30)
         salir.setInteractive();
         salir.on("pointerup", () => {
             if (this.scene.isPaused("Tutorial")) {
@@ -163,9 +165,9 @@ class Pause extends Phaser.Scene {
         config.displayHeight = this.game.canvas.height * 0.1;
         config.displayWidth = this.game.canvas.width * 0.2;
         config.setInteractive();
-        let coso = 2
         let r = reanudar;
         let s = salir;
+        let texConfig=this.add.text(config.x-40,config.y-15,'Sonido').setFontSize(30)
 
 
         config.on("pointerup", () => {
@@ -188,8 +190,12 @@ class Pause extends Phaser.Scene {
                 })
 
                 config.destroy();
+                texConfig.destroy();
+                r.texto.destroy();
                 r.destroy();
+                s.texto.destroy();
                 s.destroy();
+                
                 this.createSliderSound();
             }
 
@@ -212,7 +218,10 @@ class Pause extends Phaser.Scene {
                 })
 
                 config.destroy();
+                texConfig.destroy();
+                r.texto.destroy();
                 r.destroy();
+                s.texto.destroy();
                 s.destroy();
                 this.createSliderSound();
             }

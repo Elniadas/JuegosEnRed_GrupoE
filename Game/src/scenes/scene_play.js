@@ -53,11 +53,11 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[0] = new Escenario("Cinta", 3, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
         this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
-        this.escenarios[4] = new Escenario("Laboratorio", 3, false);
+        this.escenarios[4] = new Escenario("Laboratorio", 0, false);
 
         this.physics.world.setBounds(0, 0, 5800, this.game.canvas.height);
         var that = this;
@@ -2242,7 +2242,7 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPlataformasLaboratorio2() {
-        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 635, "labplatform").setImmovable(true);
+        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275+this.game.canvas.height/2, "labplatform").setImmovable(true);
         p2_4_1.displayHeight = 20;
         p2_4_1.displayWidth = 80;
 
