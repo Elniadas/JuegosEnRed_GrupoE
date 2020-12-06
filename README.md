@@ -45,7 +45,7 @@
 > - Pruebas secundarias / opcionales: Al terminar una prueba principal y antes de fijar la marca de tiempo, cada jugador optará a realizar una variante de esta (generalmente más difícil o engorrosa). 
 
 > - Si se termina con éxito, los jugadores obtendrán power ups de alto nivel (se hablan de ellos más adelante) con los cuales podrán perjudicar al contrario. 
-Los jugadores pueden decidir cuándo hacer uso de su power up, afectando a su rival al instante y en tiempo real, aunque esté realizando su prueba. 
+El power up se activa al terminar la prueba secundaria, afectando a su rival al instante y en tiempo real, aunque esté realizando su prueba. 
 Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenientes, ocupando más tiempo de los jugadores antes de fijar la marca de tiempo en cada escenario, por lo que conviene valorar el beneficio / riesgo de realizarla o no.
 
 > - Power Ups de nivel bajo: estos se encuentran sueltos por el mapa, alrededor del circuito de pruebas (escondidos o en lo alto de plataformas). Los efectos de estos power ups afectarán en el jugador que los recoja y no en el contrincante. 
@@ -53,29 +53,26 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - +Movement speed: el jugador se mueve con mayor rapidez
 > - -Time: el jugador podrá restar pocos segundos a su marcador
 
-> - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Los jugadores pueden decidir el momento en que quieran activarlo. Algunos de estos pueden ser:
+> - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Se activan al instante, al terminar con éxito una prueba secundaria. Algunos de estos pueden ser:
 
-> - Blindsighted: Durante un breve periodo de tiempo, el jugador contrario no podrá ver nada en su lado de la pantalla.
-> - Confusión: El jugador que lo active podrá intercambiar posiciones con el jugador contrario, pudiendo realizar tan solo las pruebas que le faltaban.
-> - Zeus: A lo largo del circuito del jugador contrario al que lo active, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida
-> - Time++: Suma tiempo al contador del jugador contrario.
-> - King of the Frost Giants: congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
+> - Blindsighted: Durante un breve periodo de tiempo, el jugador contrario verá reducido su campo de visión. (Prueba de electricidad)
+> - Laser Storm: A lo largo del circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida (Prueba de gimnasio)
+> - Time++: Suma tiempo al contador del jugador contrario. (Prueba de contador)
 
 > ### 2.2 Flujo del Juego
 
 > - En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
 
 > - Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
-> - Si desean comenzar una partida deben acceder al botón de Jugar.
-> - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de Como Jugar.
-> - Si desean ajustar el volumen o acceder a la configuración del juego y controles, podrán acceder a ello mediante el botón de Configuración.
-> - Cada vez que se finaliza una partida, se guarda la puntuación de tiempo de todos los jugadores junto a sus nombres, por tanto, si desean acceder a ver el historial de  puntuaciones deberán acceder al botón de Historial de Partidas.
+> - Si desean comenzar una partida deben acceder al botón de "Jugar".
+> - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de "Como Jugar".
+> - Si desea ajustar el volumen, los jugadores podrán acceder a ello mediante el botón de Configuración.
+
 
 > - Si se accionó el botón de Jugar, el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
 
-> - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador, guardando la puntuación en el Historial de Partidas.
+> - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador.
 
-> - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
 
 
 ![Diagrama](/Images/Diagrama1.jpeg)
@@ -89,19 +86,19 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > ### 2.4 Sonido
 
-> - Al inciarse el juego, podremos escuchar una música de fondo como de acción para activar a los jugadores y que sientan un poco esa experiencia de una carrera de verdad. Al darle a jugar se podrán escuchar las campanas típicas como cuando empieza un combate de lucha libre. Posteriormente cada prueba tendrá su sonido propio. En la máquina de correr escucharemos los pasos de una persona corriendo en una cinta de correr. En la prueba del contador, se escuchará un reloj de fondo. En la prueba de electricidad, cada vez que movemos una pieza de sitio escucharemos un chispazo para generar esa sensación de estar arreglándolo uno mismo. En todos los niveles, cada vez que aparezca el portal se y lo utilicemos, se escuchará como si de un teletransporte se tratase. Por último se ha querido añadir un sonido de congelación para cuando el power up de congelar este activo y de esta manera hacéserlo saber a los jugadores.
+> - El Menú principal y el resto del juego tendrá una misma banda sonora y el gameplay da comienzo con el sonido de unas campanas de boxeo. Los distintos escenarios de las distintas pruebas traen consigo sonidos ambientales para una mayor inmersión (pasos en una cinta de correr, cuenta atrás de un reloj, sonidos de chispazos en un escenario de electricidad, efectos de teletransporte al sobrepasar un portal...).
 
 > ### 2.5 Controles
 
 > - Las teclas principales de movimiento del jugador son: “D” (Movimiento hacia derecha), “A” (Movimiento hacia izquierda), “W” (Salto), “E” (Interactuar con una prueba para realizarla). Para un segundo jugador, las teclas de movimiento serán: “Flecha derecha” (Movimiento hacia derecha), “Flecha izquierda” (Movimiento hacia izquierda), “Flecha arriba” (Salto), “Espacio” (Interactuar con una prueba para realizarla)
 
-> - Dentro de las pruebas con las que se interactúe, los controles serán los mismos que los anteriores, los de movimiento servirán en este caso para desplazarnos por la prueba y el botón de interacción para realizar las distintas acciones.
+> - Dentro de las pruebas con las que se interactúe, los controles serán los mismos que los anteriores, exceptuando el botón de acción; los de movimiento servirán para que los jugadores se desplacen por las pruebas, y los de acción varían dependiendo de la prueba.
 
 > ### 2.6 Puntuación
 
 > - Como se ha mencionado anteriormente, al final de cada partida se guarda el tiempo total que ambos jugadores han tardado en completar el recorrido de pruebas y el sistema decide quién es el ganador.
 
-> - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan interactuado con la puerta que lleva al siguiente nivel / siguiente prueba. 
+> - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan llegado al final del último escenario.
 > ## 3. Interfaces
 > - Pantalla principal: con los botones Jugar, Como Jugar y Sonido como se ha mencionado en el apartado del Flujo del Juego.
 ![Diagrama](/Game/assets/MenuPrincipalFase2.png)
@@ -127,60 +124,60 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - El jugador se acercará a la cinta eléctrica que está colocada al final del nivel encima de una plataforma.
 
-> - El objetivo de esta prueba es presionar 20 veces 2 teclas simultáneamente reflejando que se está corriendo en una cinta eléctrica. 
+> - El objetivo inicial de la prueba es presionar 20 veces 2 teclas alternativamente reflejando que se está corriendo en una cinta eléctrica. 
 
-> - El jugador tiene 2 opciones (se indicarán con una señal al lado de la cinta eléctrica):
+> - El jugador tiene 2 opciones (se indica según el color de las partículas de cada prueba):
 
-> - Realizar la prueba principal: será más sencilla y rápida de realizar, ya que consiste en presionar lo más rápido posible 2 teclas cercanas a su alcance (por ejemplo A y D / izquierda derecha). Si se supera de este modo no se obtendrá un power up para pifiar al contrincante. 
+> - Realizar la prueba principal (partículas verdes): es más rápida de realizar, ya que se debe llevar a cabo un número menor de pulsaciones de teclas (20). 
 
-> - Realizar la prueba secundaria: Será realizar la misma prueba sólo que el jugador deberá de realizar un número mayor de pulsaciones. Si se supera de este modo se obtendrá el power up Zeus que hará que a lo largo del próximo circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida, por lo que irá más lento por un tiempo determinado. 
+> - Realizar la prueba secundaria (partículas rojas): Se deberá realizar la misma prueba, pero con un mayor número de pulsaciones. Si se supera satisfactoriamente, se le aplicará al jugador contrario el power up "Laser storm"; el jugador que toque los rayos tendrá su velocidad de movimiento reducida durante un tiempo determinado
 
 ![contador](/Game/assets/PruebaCorrerFase2.png)
 ![contador](/Game/assets/CintaFase2.png)
 
 > ### 4.2. Prueba de electricidad 
 
-> - El objetivo de esta prueba será llevar la corriente de un punto a otro del recorrido girando las partes de los cables mal colocadas. Los jugadores podrán desplazarse a lo largo del circuito con las teclas de movimiento (A,D y las flechas de izquierda y derecha) e interactuar con los cables mal orientados con las teclas W,S y las flechas de arriba y abajo.
+> - El objetivo de esta prueba será llevar la corriente de un punto a otro del recorrido girando las partes de los cables mal colocados. Los jugadores podrán desplazarse a lo largo del circuito con las teclas de movimiento (A,D y las flechas de izquierda y derecha) e interactuar con los cables mal orientados con las teclas W,S y las flechas de arriba y abajo (giro en ambos sentidos).
 
-> - Una vez terminado el primer circuito se le ofrece al jugador la opción de realizar un segundo circuito (la prueba secundaria).
+> - Una vez terminado el primer circuito se le ofrece al jugador la opción de realizar un segundo circuito (la prueba secundaria, con partícular rojas).
 
 > - Si decide realizarla, se le presentará al usuario un circuito generalmente más complejo y con un objetivo extra; A lo largo del nuevo circuito se colocarán unas bombillas, y los jugadores tienen que llevar la corriente al otro extremo del circuito y además dejar las bombillas encendidas.
 
-> - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará completamente la visión del jugador rival por unos instantes.
+> - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará parcialmente la visión del jugador rival por unos instantes.
 
 ![contador](/Game/assets/PruebaElectricidadFase2.png)
 ![contador](/Game/assets/ElectricidadFase2.png)
 
 > ### 4.3. Prueba del contador
 
-> - El jugador se acercará al pulsador que está en el medio de la sala con un público a modo de espectadores. 
+> - El jugador se acercará al pulsador del final del escenario tras haber realizado el recorrido de plataformas. 
 
-> - Aparecerá una pantalla con un contador que empezará en 00:00. Empezará una cuenta progresiva como si fuese un cronómetro y cuando llegue al 04:00 la pantalla se cierra. 
+> - Aparecerá una pantalla con un contador que empezará en 00:00 y empezará a sumar tiempo un cronómetro; al llegar al segundo 04:00 la pantalla se cierra. 
 
-> - El objetivo es que el jugador lleve la cuenta del cronómetro en su cabeza y que intente acercarse al número 7.00 pulsando las teclas E y 0. Las respuestas válidas son las que se encuentran entre el 6.5 y el 7.5. 
+> - El objetivo es que el jugador lleve la cuenta del cronómetro en su cabeza y que intente acercarse al número 7.00 pulsando las teclas S y "flecha de abajo". Las respuestas válidas para superar la prueba son las que se encuentran entre el 6.5 y el 7.5. 
 
-> - Si el jugador lo clava y hace 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
+> - Si el jugador consigue parar el contador en el segundo 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
 
 ![contador](/Game/assets/PruebaContadorFase2.png)
 ![contador](/Game/assets/ContadorFase2.png)
 
 > ### 4.4. Prueba de los símbolos
 
-> - Los jugadores se encontrarán en un laboratorio.
+> - Los jugadores comienzan el nivel en un laboratorio; en él, hay una pizarra con símbolos cambiados de orientación. Al final del escenario, encontrarán un ordenador en el que aparecerán estos símbolos descolocados y en la orientación correcta. Los jugadores deberán colocar los símbolos en el orden correcto para completar la prueba (para este escenario, no hay prueba secundaria).
 
-> - Al entrar en él podrán visualizar una especie de símbolos que deberán memorizar. Al pasar al otro lado del nivel, encontrarán un ordenador donde al interactuar con él aparecerán estos símbolos descolocados. Tendrán que colocarlos en el orden en el que aparecían para completarla.
+>- El desplazamiento dentro del ordenador se realiza con las teclas "A" y "D" (jugador 1), y "Flecha Izquierda" y "Flecha Derecha" (jugador 2). Para elegir cada símbolo se hará uso de las teclas "W" y "S" (jugador 1), y "Flecha Arriba" y "Flecha Abajo" (jugador 2).
 
-> - Si se te olvida el orden, siempre puedes salir de la prueba y volver a hacerlo. 
+> - Si los jugadores (1 y 2) olvidan el orden de los símbolos, podrán salir de la prueba respectivamente con las teclas "Q" y "M". 
 
 
 ![contador](/Game/assets/PruebaSimbolosFase2.png)
 ![contador](/Game/assets/OrdenadorFase2.png)
 
-> ### 4.4. Prueba de la nieve
+> ### 4.4. Escenario de Nieve (final)
 
-> - Ésta será la prueba final donde los jugadores tendrán que llegar a una bandera final. 
+> - Éste será el último escenario donde los jugadores tendrán que llegar a una bandera final. 
 
-> - Al coger esta bandera se fijará el tiempo de los jugadores para al final ver quién es el ganador.
+> - Al coger esta bandera se fijará el tiempo de cada jugador individualmente para comprobar el ganador.
 
 
 ![contador](/Game/assets/PruebaNieveFase2.png)
