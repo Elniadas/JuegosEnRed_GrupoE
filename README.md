@@ -108,7 +108,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar y cambiar su nickname. 
 ![Diagrama](/Game/assets/NicknameFase2.png)
 > - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de abajo la del 2. Ambas tienen el tiempo que llevan consumido. Arriba a la derecha hay un botón para poder pausar el juego. 
-![Diagrama](/Images/Juego.png)
+![Diagrama](/Game/assets/InicioFase2.png)
 > - Pantalla de pausa: aparece cuando se decide pausar el juego y contiene los botones: 
 > - Continuar: para salir y continuar con la partida
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
@@ -135,8 +135,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Realizar la prueba secundaria: Será realizar la misma prueba sólo que el jugador deberá de realizar un número mayor de pulsaciones. Si se supera de este modo se obtendrá el power up Zeus que hará que a lo largo del próximo circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida, por lo que irá más lento por un tiempo determinado. 
 
-![contador](/Images/Pruebagimnasio.jpg)
-![contador](/Images/Pruebacinta.jpg)
+![contador](/Game/assets/PruebaCorrerFase2.jpg)
+![contador](/Game/assets/CintaFase2.jpg)
 
 > ### 4.2. Prueba de electricidad 
 
@@ -148,8 +148,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará completamente la visión del jugador rival por unos instantes.
 
-![Electrica](/Images/Eléctrica.jpg)
-![Electrica](/Images/Electricidad_2.png)
+![contador](/Game/assets/PruebaElectricidadFase2.jpg)
+![contador](/Game/assets/ElectricidadFase2.jpg)
 
 > ### 4.3. Prueba del contador
 
@@ -161,9 +161,8 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Si el jugador lo clava y hace 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
 
-![contador](/Images/contador.jpg)
-
-![contador](/Images/Cronometro.png)
+![contador](/Game/assets/PruebaContadorFase2.jpg)
+![contador](/Game/assets/ContadorFase2.jpg)
 
 > ### 4.4. Prueba de los símbolos
 
@@ -173,11 +172,19 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Si se te olvida el orden, siempre puedes salir de la prueba y volver a hacerlo. 
 
+
+![contador](/Game/assets/PruebaSimbolosFase2.jpg)
+![contador](/Game/assets/OrdenadorFase2.jpg)
+
 > ### 4.4. Prueba de la nieve
 
 > - Ésta será la prueba final donde los jugadores tendrán que llegar a una bandera final. 
 
 > - Al coger esta bandera se fijará el tiempo de los jugadores para al final ver quién es el ganador.
+
+
+![contador](/Game/assets/PruebaNieveFase2.jpg)
+![contador](/Game/assets/Bandera/Bandera.jpg)
 
 
 
