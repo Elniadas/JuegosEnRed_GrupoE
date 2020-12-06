@@ -108,7 +108,8 @@ class Bootloader extends Phaser.Scene {
 
 
         //Otros//
-
+        this.load.image("cronoP1", "./assets/CronoJ1.png")
+        this.load.image("cronoP2", "./assets/CronoJ2.png")
         this.load.image("muro", "./assets/Muro.png");
         this.load.image("logo", "./assets/Logo.jpg")
         this.load.image("Crono", "./assets/Cronometro.png")
@@ -134,6 +135,7 @@ class Bootloader extends Phaser.Scene {
         this.load.atlas("P1", "./assets/RunP1.png", "./assets/RunP1.json")
         this.load.atlas("P2", "./assets/RunP2.png", "./assets/RunP2.json")
         this.load.spritesheet("portal", "./assets/SpriteSheetPortal.png", { frameWidth: 168, frameHeight: 310 });
+
 
         //PoweUps//
         this.load.image('run', './assets/RUN.png');

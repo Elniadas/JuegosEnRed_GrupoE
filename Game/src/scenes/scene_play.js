@@ -698,17 +698,33 @@ class Scene_play extends Phaser.Scene {
         this.croP1 = 0;
         this.croP2 = 0;
 
+
+
+        let cronoJ1= this.add.image(792,100,"cronoP1")
+        cronoJ1.displayHeight=30;
+        cronoJ1.displayWidth=95
+
+        cronoJ1.setScrollFactor(0,0)
+        let cronoJ2= this.add.image(792,100,"cronoP2")
+        cronoJ2.setScrollFactor(0,0)
+        cronoJ2.displayHeight=30;
+        cronoJ2.displayWidth=95
+
+
         this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP1.setScrollFactor(0, 0)
 
         this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22)
         this.TiempoP2.setScrollFactor(0, 0)
 
+       
         //Ignorasiones
 
         this.cam1.ignore(this.TiempoP2);
         this.cam1.ignore(this.particlesCPD);
+        this.cam1.ignore(cronoJ2);
         this.cam2.ignore(this.TiempoP1);
+        this.cam2.ignore(cronoJ1);
 
 
 
