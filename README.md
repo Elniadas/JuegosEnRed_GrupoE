@@ -87,7 +87,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
 
-![Diagrama](/Images/PrimerPlano.PNG)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/PrimerPlano.gif)
 
 
 > - En cuanto al movimiento del jugador y el mundo del juego, este se desarrolla horizontalmente o con un desplazamiento horizontal (propio de juegos como Mario Bros o Sonic entre otros), también denominado Scroll lateral.
@@ -111,22 +111,25 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Como se ha mencionado anteriormente, al final de cada partida se guarda el tiempo total que ambos jugadores han tardado en completar el recorrido de pruebas y el sistema decide quién es el ganador.
 
 > - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan llegado al final del último escenario.
+
 > ## 3. Interfaces
 > - Pantalla principal: con los botones Jugar, Como Jugar y Sonido como se ha mencionado en el apartado del Flujo del Juego.
-![Diagrama](/Game/assets/MenuPrincipalFase2.png)
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Menu.png)
 > - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar y cambiar su nickname. 
 ![Diagrama](/Game/assets/NicknameFase2.png)
 > - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de abajo la del 2. Ambas tienen el tiempo que llevan consumido.
-![Diagrama](/Game/assets/InicioFase2.png)
-> - Pantalla de pausa: aparece cuando se decide pausar el juego y contiene los botones: 
-> - Continuar: para salir y continuar con la partida
+![Interfaz](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Interfaz.png)
+
+> - Pantalla de pausa: Con los botones de "Reanudar" para continuar la partida, "Sonido" para ajustar el volumen y "Salir" para volver al menú
+![Pausa](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Pausa.png)
+
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
-![Diagrama](/Game/assets/TutorialFase2.png)
-![Diagrama](/Game/assets/TutorialFase2.2.png)
-> - Ajustes: para configurar sonidos…
-![Diagrama](/Game/assets/SonidoFase2.png)
-> - Salir: para salir y volver a la pantalla principal.
-![Diagrama](/Game/assets/PauseFase2.png)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial.gif)
+
+> - Pantalla de ajuste de sonido: para ajustar el volumen
+![Sonidos](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Sonido.png)
+
+
 
 > ## 4. Pruebas
 
@@ -192,8 +195,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - Al coger esta bandera se fijará el tiempo de cada jugador individualmente para comprobar el ganador.
 
 
-![contador](/Game/assets/PruebaNieveFase2.png)
-![contador](/Game/assets/Bandera/Bandera.png)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/EscenarioNieve.gif)
 
 
 
