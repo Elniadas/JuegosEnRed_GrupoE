@@ -52,11 +52,11 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - +Movement speed: el jugador se mueve con mayor rapidez
 
-![Diagrama](/Images/Movement++.PNG)
+![RunPowerUp](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/RUN.png)
 
 > - -Time: el jugador podrá restar pocos segundos a su marcador
 
-![Diagrama](/Images/Time--.PNG)
+![RelojArena](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/relojArena.png)
 
 > - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Se activan al instante, al terminar con éxito una prueba secundaria. Algunos de estos pueden ser:
 
