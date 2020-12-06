@@ -8,9 +8,9 @@ class Scene_play extends Phaser.Scene {
     }
     init(data) {
         this.soundManager = data.soundManager;
-        this.data=data;
-      
-        
+        this.data = data;
+
+
     }
     preload() {
         // let aux = [0, 1];
@@ -81,7 +81,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
         this.playerU.setDepth(1000);
-        this.playerU.name=this.data.names.p1;
+        this.playerU.name = this.data.names.p1;
 
         //Player 2//
 
@@ -93,16 +93,17 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
-        this.playerD.name=this.data.names.p2;
+        this.playerD.name = this.data.names.p2;
 
         //Cargar sonido
 
-        
-        this.soundManager.play('Musica_fondo',{loop:true})
 
-            // this.soundManager.once('looped',()=>{
-            //     this.soundManager.play('Musica_fondo')
-            // })
+        this.soundManager.play('Musica_fondo', { loop: true })
+        this.soundManager.play('campanas')
+
+        // this.soundManager.once('looped',()=>{
+        //     this.soundManager.play('Musica_fondo')
+        // })
 
         //Escenario 1 Gimnasio
 
@@ -125,6 +126,7 @@ class Scene_play extends Phaser.Scene {
         let cintaU = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 121, "muro")
         cintaU.displayHeight = 5;
         cintaU.displayWidth = 78
+        cintaU.alpha=0;
 
 
         cinU.setScale(0.30);
@@ -141,14 +143,14 @@ class Scene_play extends Phaser.Scene {
 
         this.PCU = this.particlesCPU.createEmitter({
             x: { min: cinU.x - 50, max: cinU.x + 50 },
-            y: cintaU.y + 50,
+            y: cintaU.y + 10,
             lifespan: 3000,
             speedY: { min: -60, max: -100 },
             scale: { start: 0.3, end: 0 },
             quantity: 1,
             frame: 'white',
             frequency: 300,
-            tint: 0x2ECC71,
+            tint: 0x008000,
             blendMode: 'ADD',
 
         });
@@ -172,6 +174,7 @@ class Scene_play extends Phaser.Scene {
 
         cintaD.displayHeight = 5;
         cintaD.displayWidth = 78
+        cintaD.alpha=0
 
         let cinD = this.add.image(1030 + 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
 
@@ -217,14 +220,14 @@ class Scene_play extends Phaser.Scene {
 
         this.PCD = this.particlesCPD.createEmitter({
             x: { min: cinD.x - 50, max: cinD.x + 50 },
-            y: cintaD.y + 50,
+            y: cintaD.y + 10,
             lifespan: 3000,
             speedY: { min: -60, max: -100 },
             scale: { start: 0.3, end: 0 },
             quantity: 1,
             frame: 'white',
             frequency: 300,
-            tint: 0x2ECC71,
+            tint: 0x008000,
             blendMode: 'ADD',
 
         });
@@ -276,7 +279,7 @@ class Scene_play extends Phaser.Scene {
             quantity: 1,
             frame: 'white',
             frequency: 300,
-            tint: 0x2ECC71,
+            tint: 0x008000,
             blendMode: 'ADD',
 
         });
@@ -323,7 +326,7 @@ class Scene_play extends Phaser.Scene {
             quantity: 1,
             frame: 'white',
             frequency: 300,
-            tint: 0x2ECC71,
+            tint: 0x008000,
             blendMode: 'ADD',
 
         });
@@ -400,7 +403,22 @@ class Scene_play extends Phaser.Scene {
         pruebaElectricidadU.setImmovable(true)
         pruebaElectricidadU.alpha = 0;
 
-        //AÑADIR LAS PARTÍCULAS A LA PRUEBA DE ELECTRICIDAD
+        this.particlesEPU = this.add.particles('flares')
+        this.particlesEPU.depth = 10
+
+        this.PEPU = this.particlesEPU.createEmitter({
+            x: { min: pruebaElectricidadU.x + 35 - 50, max: pruebaElectricidadU.x + 50 + 50 },
+            y: pruebaElectricidadU.y + 125,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x008000,
+            blendMode: 'ADD',
+
+        });
 
         this.blurElectricidadU = this.add.image(0 + 1180 * this.escenarios[3].pos, 0, "ElectricidadBlur").setOrigin(0, 0);
         this.blurElectricidadU.displayHeight = this.game.canvas.height / 2 - 10;
@@ -434,6 +452,25 @@ class Scene_play extends Phaser.Scene {
         pruebaElectricidadD.setImmovable(true)
         pruebaElectricidadD.alpha = 0;
 
+
+        this.particlesEPD = this.add.particles('flares')
+        this.particlesEPD.depth = 10
+
+        this.PEPD = this.particlesEPD.createEmitter({
+            x: { min: pruebaElectricidadD.x + 35 - 50, max: pruebaElectricidadD.x + 50 + 50 },
+            y: pruebaElectricidadD.y + 125,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x008000,
+            blendMode: 'ADD',
+
+        });
+
+
         this.blurElectricidadD = this.add.image(0 + 1180 * this.escenarios[3].pos, this.game.canvas.height / 2 + 10, "ElectricidadBlur").setOrigin(0, 0);
         this.blurElectricidadD.displayHeight = this.game.canvas.height / 2;
         this.blurElectricidadD.displayWidth = this.game.canvas.width;
@@ -455,6 +492,23 @@ class Scene_play extends Phaser.Scene {
         pruebaLaboratorioU.displayHeight = this.game.canvas.height * 0.1;
         pruebaLaboratorioU.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioU.setImmovable(true)
+
+        this.particlesLPU = this.add.particles('flares')
+        this.particlesLPU.depth = 10
+
+        this.PLPU = this.particlesLPU.createEmitter({
+            x: { min: pruebaLaboratorioU.x + 35 - 50, max: pruebaLaboratorioU.x + 50 + 50 },
+            y: pruebaLaboratorioU.y + 50,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x008000,
+            blendMode: 'ADD',
+
+        });
 
 
         this.blurLaboratorioU = this.add.image(0 + 1180 * this.escenarios[4].pos, 0, "LaboratorioBlur").setOrigin(0, 0);
@@ -480,6 +534,24 @@ class Scene_play extends Phaser.Scene {
         pruebaLaboratorioD.displayWidth = this.game.canvas.width * 0.08;
         pruebaLaboratorioD.setImmovable(true)
         //pruebaElectricidadD.alpha = 0;
+
+        this.particlesLPD = this.add.particles('flares')
+        this.particlesLPD.depth = 10
+
+        this.PLPD = this.particlesLPD.createEmitter({
+            x: { min: pruebaLaboratorioD.x + 35 - 50, max: pruebaLaboratorioD.x + 50 + 50 },
+            y: pruebaLaboratorioD.y + 50,
+            lifespan: 3000,
+            speedY: { min: -60, max: -100 },
+            scale: { start: 0.3, end: 0 },
+            quantity: 1,
+            frame: 'white',
+            frequency: 300,
+            tint: 0x008000,
+            blendMode: 'ADD',
+
+        });
+
 
         this.blurLaboratorioD = this.add.image(0 + 1180 * this.escenarios[4].pos, this.game.canvas.height / 2 + 10, "LaboratorioBlur").setOrigin(0, 0);
         this.blurLaboratorioD.displayHeight = this.game.canvas.height / 2;
@@ -607,14 +679,14 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        this.CP1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, null, this);
-        this.CP2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.Prueba(this.playerD) }, null, this);
-        this.CoP1 = this.physics.add.overlap(this.playerU, pruebaContador, () => { this.Prueba(this.playerU) }, null, this);
-        this.CoP2 = this.physics.add.overlap(this.playerD, pruebaContador2, () => { this.Prueba(this.playerD) }, null, this);
-        this.EP1 = this.physics.add.overlap(this.playerU, pruebaElectricidadU, () => { this.Prueba(this.playerU) }, null, this);
-        this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, null, this);
-        this.LP1 = this.physics.add.overlap(this.playerU, pruebaLaboratorioU, () => { this.Prueba(this.playerU) }, null, this);
-        this.LP2 = this.physics.add.overlap(this.playerD, pruebaLaboratorioD, () => { this.Prueba(this.playerD) }, null, this);
+        this.CP1 = this.physics.add.overlap(this.playerU, groupCintaU, () => { this.Prueba(this.playerU) }, this.funcionOverlapP1, this);
+        this.CP2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.Prueba(this.playerD) }, this.funcionOverlapP2, this);
+        this.CoP1 = this.physics.add.overlap(this.playerU, pruebaContador, () => { this.Prueba(this.playerU) }, this.funcionOverlapP1, this);
+        this.CoP2 = this.physics.add.overlap(this.playerD, pruebaContador2, () => { this.Prueba(this.playerD) }, this.funcionOverlapP2, this);
+        this.EP1 = this.physics.add.overlap(this.playerU, pruebaElectricidadU, () => { this.Prueba(this.playerU) }, this.funcionOverlapP1, this);
+        this.EP2 = this.physics.add.overlap(this.playerD, pruebaElectricidadD, () => { this.Prueba(this.playerD) }, this.funcionOverlapP2, this);
+        this.LP1 = this.physics.add.overlap(this.playerU, pruebaLaboratorioU, () => { this.Prueba(this.playerU) }, this.funcionOverlapP1, this);
+        this.LP2 = this.physics.add.overlap(this.playerD, pruebaLaboratorioD, () => { this.Prueba(this.playerD) }, this.funcionOverlapP2, this);
         this.BP1 = this.physics.add.overlap(this.playerU, banderaU, () => { this.endP1(banderaU) }, null, this);
         this.BP2 = this.physics.add.overlap(this.playerD, banderaD, () => { this.endP2(banderaD) }, null, this);
 
@@ -777,33 +849,33 @@ class Scene_play extends Phaser.Scene {
     }
 
     PruebaP1(code) {
-        if (this.keyboardP1.E.isDown === true && !this.escenasActivas[0]) {
 
-            let p = 0;
-            let e = 0;
 
-            for (let i = 0; i < this.escenarios.length; i++) {
-                if (code === this.escenarios[i].pos) {
-                    p = this.escenarios[i].nombre
-                    e = i;
-                }
+        let p = 0;
+        let e = 0;
 
+        for (let i = 0; i < this.escenarios.length; i++) {
+            if (code === this.escenarios[i].pos) {
+                p = this.escenarios[i].nombre
+                e = i;
             }
-
-            if (this.escenarios[e].completadoP1U === false) {
-                this.scene.launch(p + "P1", { escena: this, soundManager: this.soundManager });
-                this.escenasActivas[0] = true;
-            }
-            if (this.escenarios[e].completadoP1U === true && this.escenarios[e].doble === true) {
-                if (this.escenarios[e].completadoP1D === false) {
-                    console.log("INICIANDO PARTE 2")
-                    this.scene.launch(p + "P1V2", { escena: this, soundManager: this.soundManager });
-                    this.escenasActivas[0] = true;
-                }
-            }
-
 
         }
+
+        if (this.escenarios[e].completadoP1U === false) {
+            this.scene.launch(p + "P1", { escena: this, soundManager: this.soundManager });
+            this.escenasActivas[0] = true;
+        }
+        if (this.escenarios[e].completadoP1U === true && this.escenarios[e].doble === true) {
+            if (this.escenarios[e].completadoP1D === false) {
+                console.log("INICIANDO PARTE 2")
+                this.scene.launch(p + "P1V2", { escena: this, soundManager: this.soundManager });
+                this.escenasActivas[0] = true;
+            }
+        }
+
+
+
     }
     PruebaP2(code) {
         if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {
@@ -867,6 +939,9 @@ class Scene_play extends Phaser.Scene {
 
             player.y = this.game.canvas.height - 50;
             camara.setBounds(0 + 1180 * (factor + 1), this.game.canvas.height / 2, this.game.canvas.width, this.game.canvas.height / 2)
+
+            //Sonido
+            this.soundManager.play('TeletransporteFinal')
         }
 
     }
@@ -1087,6 +1162,7 @@ class Scene_play extends Phaser.Scene {
         //let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100, "menosT").setOrigin(0, 0);
         //reloj.setScale(0.1)
         //this.physics.add.overlap(this.playerU, reloj, () => {
+        this.soundManager.play('Congelar')
         this.playerD.setVelocityX(0);
         this.escenasActivas[1] = true;
         if (this.game.scene.isActive("CintaP2")) {
@@ -1230,7 +1306,7 @@ class Scene_play extends Phaser.Scene {
                 postion = Math.trunc(postion) - 1
                 this.RayosD(i, postion);
 
-            }, 3500);
+            }, 4500);
 
         }
     }
@@ -1282,6 +1358,7 @@ class Scene_play extends Phaser.Scene {
         // let reloj = this.physics.add.image(200 + 1180 * this.escenarios[0].pos, 100 + this.game.canvas.height / 2, "menosT").setOrigin(0, 0);
         //reloj.setScale(0.1)
         //this.physics.add.overlap(this.playerD, reloj, () => {
+        this.soundManager.play('Congelar')
         this.playerU.setVelocityX(0);
         this.escenasActivas[0] = true;
         if (this.game.scene.isActive("CintaP1")) {
@@ -1412,7 +1489,7 @@ class Scene_play extends Phaser.Scene {
                 postion = Math.trunc(postion) - 1
                 this.RayosU(i, postion);
 
-            }, 3500);
+            }, 4500);
 
         }
     }
@@ -1434,7 +1511,7 @@ class Scene_play extends Phaser.Scene {
         //pos = Math.trunc(pos) - 1
 
 
-        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[0].pos, this.cam1) }, null, this);
+        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[0].pos, this.cam1) }, this.funcionOverlapP1, this);
 
     }
 
@@ -1447,7 +1524,7 @@ class Scene_play extends Phaser.Scene {
         this.portal.displayWidth = 84; //spritePortal.width x 0.5
         this.portal.alpha = 0;
 
-        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[1].pos, this.cam1) }, null, this);
+        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[1].pos, this.cam1) }, this.funcionOverlapP1, this);
 
     }
 
@@ -1461,7 +1538,7 @@ class Scene_play extends Phaser.Scene {
         this.portal.displayWidth = 84;
         this.portal.alpha = 0;
 
-        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[3].pos, this.cam1) }, null, this);
+        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[3].pos, this.cam1) }, this.funcionOverlapP1, this);
 
     }
 
@@ -1478,7 +1555,7 @@ class Scene_play extends Phaser.Scene {
         //pos = Math.trunc(pos) - 1
 
 
-        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[4].pos, this.cam1) }, null, this);
+        this.physics.add.overlap(this.playerU, this.portal, () => { this.teletransporte(this.playerU, this.escenarios[4].pos, this.cam1) }, this.funcionOverlapP1, this);
 
     }
 
@@ -1493,7 +1570,7 @@ class Scene_play extends Phaser.Scene {
         this.portalD.displayHeight = 155; //spritePortal.height x 0.5
         this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;
-        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[0].pos, this.cam2) }, null, this); console.log(this.portal)
+        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[0].pos, this.cam2) }, this.funcionOverlapP2, this); console.log(this.portal)
     }
 
 
@@ -1505,7 +1582,7 @@ class Scene_play extends Phaser.Scene {
         this.portalD.displayHeight = 155; //spritePortal.height x 0.5
         this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;
-        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[1].pos, this.cam2) }, null, this); console.log(this.portal);
+        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[1].pos, this.cam2) }, this.funcionOverlapP2, this); console.log(this.portal);
     }
 
 
@@ -1517,7 +1594,7 @@ class Scene_play extends Phaser.Scene {
         this.portalD.displayHeight = 155;
         this.portalD.displayWidth = 84;
         this.portalD.alpha = 0;
-        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[3].pos, this.cam2) }, null, this); console.log(this.portal)
+        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[3].pos, this.cam2) }, this.funcionOverlapP2, this); console.log(this.portal)
     }
 
 
@@ -1529,7 +1606,7 @@ class Scene_play extends Phaser.Scene {
         this.portalD.displayHeight = 155; //spritePortal.height x 0.5
         this.portalD.displayWidth = 84; //spritePortal.width x 0.5
         this.portalD.alpha = 0;
-        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[4].pos, this.cam2) }, null, this); console.log(this.portal)
+        this.physics.add.overlap(this.playerD, this.portalD, () => { this.teletransporteD(this.playerD, this.escenarios[4].pos, this.cam2) }, this.funcionOverlapP2, this); console.log(this.portal)
     }
 
     //plataformas
@@ -2386,7 +2463,7 @@ class Scene_play extends Phaser.Scene {
 
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:2,name:this.playerD.name});
+            this.scene.start("Victoria", { escena: null, soundManager: this.soundManager, ganador: 2, name: this.playerD.name });
         }
         bandera.destroy();
         this.BP1.destroy();
@@ -2398,11 +2475,32 @@ class Scene_play extends Phaser.Scene {
         this.end.player2 = true;
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.start("Victoria",{escena:null,soundManager:this.soundManager,ganador:1,name:this.playerU.name});
+            this.scene.start("Victoria", { escena: null, soundManager: this.soundManager, ganador: 1, name: this.playerU.name });
         }
         bandera.destroy();
         this.BP2.destroy();
     }
+
+
+
+    funcionOverlapP1() {
+        if (this.keyboardP1.E.isDown === true && !this.escenasActivas[0]) {
+            return true
+        } else {
+            return false
+        }
+
+    }
+
+    funcionOverlapP2() {
+        if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {
+            return true
+        } else {
+            return false
+        }
+
+    }
+
 
 
 }

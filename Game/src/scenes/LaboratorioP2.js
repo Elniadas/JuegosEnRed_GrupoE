@@ -211,10 +211,11 @@ class LaboratorioP2 extends Phaser.Scene {
                 this.data.escena.escenasActivas[1] = false;
                 this.data.escena.escenarios[4].completadoP1D = true;
                 this.data.escena.LP2.destroy();
+                this.data.escena.particlesLPD.destroy()
                 this.keyLock = true;
                 this.data.escena.blurLaboratorioD.alpha = 0;
                 this.data.escena.crearPortalLaboratorioP2();
-                this.data.escena.crearFrostP2();
+                //this.data.escena.crearFrostP2();
                 this.scene.stop(this)
             }, 500);
         }

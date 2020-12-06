@@ -203,6 +203,7 @@ class ElectricidadP1 extends Phaser.Scene {
                 this.data.escena.escenasActivas[0] = false;
                 this.data.escena.escenarios[3].completadoP1U=true;
                 this.keyLock = true;
+                this.data.escena.PEPU.tint.onChange(0xE74C3C)
                 this.data.escena.blurElectricidadU.alpha = 0;
                 this.data.escena.crearPortalElectricidadP1();
                 this.scene.stop(this)

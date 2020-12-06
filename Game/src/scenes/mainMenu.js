@@ -140,6 +140,8 @@ class MainMenu extends Phaser.Scene {
             salir.displayHeight = this.game.canvas.height * 0.1;
             salir.displayWidth = this.game.canvas.width * 0.2;
             salir.setInteractive();
+            let textoSalir = this.add.text(salir.x -55, salir.y-15 ).setScrollFactor(0).setFontSize(30)
+            textoSalir.setText("Salir");
 
 
 
@@ -176,6 +178,7 @@ class MainMenu extends Phaser.Scene {
             salir.on("pointerup", () => {
                 salir.destroy();
                 pause.destroy();
+                textoSalir.destroy();
                 print0.text=''
                 this.slider.destroy();
             })
@@ -184,7 +187,7 @@ class MainMenu extends Phaser.Scene {
 
         })
 
-        this.cjCF = this.add.text(pbCG.x - 145, pbCG.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.cjCF = this.add.text(pbCG.x - 80, pbCG.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
         this.cjCF.setText("Sonido");
 
 

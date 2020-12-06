@@ -118,11 +118,12 @@ class Bootloader extends Phaser.Scene {
 
         this.load.audio("Paso1","./assets/Sonidos/Paso1.mp3",{instances: 10});
         this.load.audio("Reloj","./assets/Sonidos/Reloj.mp3");
-        this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3");
+        this.load.audio("TeletransporteFinal","./assets/Sonidos/TeletransporteFinal.mp3",{instances: 2});
         this.load.audio("Musica_fondo","./assets/Sonidos/Musica_fondo.mp3");
         this.load.audio("Laser1","./assets/Sonidos/Laser1.mp3");
-        this.load.audio("electricidad","./assets/Sonidos/electricidad.mp3");
+        this.load.audio("electricidad","./assets/Sonidos/electricidad.mp3",{instances: 10});
         this.load.audio("campanas","./assets/Sonidos/campanas.mp3");
+        this.load.audio("Congelar","./assets/Sonidos/Congelar.mp3"); 
         this.soundManager=this.sound;
         //Animaciones//
 

@@ -241,6 +241,7 @@ class ElectricidadP1V2 extends Phaser.Scene {
                 this.data.escena.escenasActivas[0] = false;
                 this.data.escena.escenarios[3].completadoP1D=true;
                 this.keyLock = true;
+                this.data.escena.particlesEPU.destroy()
                 this.data.escena.blurElectricidadU.alpha = 0;
                 this.data.escena.EP1.destroy();
                 this.data.escena.crearBlindP1();

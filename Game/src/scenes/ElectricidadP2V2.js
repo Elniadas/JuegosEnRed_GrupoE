@@ -230,6 +230,7 @@ class ElectricidadP2V2 extends Phaser.Scene {
                 this.data.escena.escenasActivas[1] = false;
                 this.data.escena.escenarios[3].completadoP2D=true;
                 this.keyLock = true;
+                this.data.escena.particlesEPD.destroy()
                 this.data.escena.blurElectricidadD.alpha = 0;
                 this.data.escena.EP2.destroy();
                 this.data.escena.crearBlindP2();
