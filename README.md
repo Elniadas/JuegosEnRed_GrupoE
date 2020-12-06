@@ -210,7 +210,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 Referencias
 
 Estructura de un GDD:
-https://github.com/dsaltares/sion-tower/blob/master/doc/gdd/gdd.pdf
-https://www.youtube.com/watch?v=z97ys0TDwDI
+<p>https://github.com/dsaltares/sion-tower/blob/master/doc/gdd/gdd.pdf</p>
+<p>https://www.youtube.com/watch?v=z97ys0TDwDI</p>
 
 
