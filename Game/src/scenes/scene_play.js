@@ -53,9 +53,9 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 4, true);
+        this.escenarios[0] = new Escenario("Cinta", 0, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 0, false);
+        this.escenarios[2] = new Escenario("Nieve", 4, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
@@ -98,7 +98,7 @@ class Scene_play extends Phaser.Scene {
         //Cargar sonido
 
         
-        this.soundManager.play('Musica_fondo')
+        this.soundManager.play('Musica_fondo',{loop:true})
 
             // this.soundManager.once('looped',()=>{
             //     this.soundManager.play('Musica_fondo')
@@ -548,7 +548,7 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        this.keyboardP2 = this.input.keyboard.addKeys('LEFT,RIGHT,UP,DOWN,SPACE,ESC');
+        this.keyboardP2 = this.input.stopPropagation().keyboard.addKeys('LEFT,RIGHT,UP,DOWN,SPACE,ESC');
 
         this.input.keyboard.on('keyup-' + 'LEFT', this.unlockP2.bind(this));
         this.input.keyboard.on('keyup-' + 'RIGHT', this.unlockP2.bind(this));
@@ -2365,9 +2365,13 @@ class Scene_play extends Phaser.Scene {
 
 
 
-
+    keyDelete() {
+        this.input.keyboard.clearCaptures();
+    }
 
     borrarIntervalos() {
+
+        this.keyDelete();
         var interval_id = window.setInterval("", 9999); // Get a reference to the last
         // interval +1
         for (var i = 1; i < interval_id; i++)

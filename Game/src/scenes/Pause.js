@@ -31,7 +31,7 @@ class Pause extends Phaser.Scene {
         let pause = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, "menuPausa");
         pause.displayHeight = this.game.canvas.height * 0.85;
         pause.displayWidth = this.game.canvas.width * 0.65;
-
+        this.print0 = this.add.text(this.game.canvas.width / 2 - 75, this.game.canvas.height / 2 - 100, '').setFontSize(45);
 
         if (this.scene.isActive("Scene_play")) {
             console.log("Iniciando pausa en Scene_play")
@@ -139,6 +139,7 @@ class Pause extends Phaser.Scene {
         salir.on("pointerup", () => {
             if (this.scene.isPaused("Tutorial")) {
                 this.scene.stop("Tutorial");
+                this.data.escena.keyDelete();
                 this.cerrarEscenas();
                 this.scene.launch("MAINMENU");
                 this.scene.stop("Pause");
@@ -175,6 +176,7 @@ class Pause extends Phaser.Scene {
                 salir.setInteractive();
 
                 salir.on("pointerup", () => {
+                    this.print0.text=''
                     salir.destroy();
                     this.slider.destroy();
                     let re = this.crearBotonRenudar();
@@ -197,6 +199,7 @@ class Pause extends Phaser.Scene {
 
 
                 salir.on("pointerup", () => {
+                    this.print0.text=''
                     salir.destroy();
                     this.slider.destroy();
                     let re = this.crearBotonRenudar();
@@ -229,7 +232,7 @@ class Pause extends Phaser.Scene {
 
     createSliderSound() {
 
-        var print0 = this.add.text(0, 0, '');
+        
         //this.cambiarSonido();
         //var cambiar= this.cambiarSonido;
         //cambiar();
@@ -253,9 +256,10 @@ class Pause extends Phaser.Scene {
             input: 'drag', // 'drag'|'click'
         }).layout();
 
-        this.slider.on('valuechange', function (newValue, oldValue, slider) {
+        this.slider.on('valuechange', function (newValue) {
             this.cambiarSonido();
-            print0.text = newValue;
+            newValue = newValue.toFixed(4)
+            this.print0.text = newValue;
         }, this);
 
 

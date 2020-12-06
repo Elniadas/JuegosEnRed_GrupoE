@@ -6,12 +6,19 @@ class Tutorial extends Phaser.Scene {
         this.escenarios = [];
     }
 
-    init(data){
-        this.soundManager=data.soundManager;
-      
+    init(data) {
+        this.soundManager = data.soundManager;
+
     }
 
     create() {
+
+        this.escenasActivas[0] = true;
+        this.escenasActivas[1] = true;
+
+        this.tut1 = false;
+        this.tut2 = false;
+
 
         console.log(this.data.soundManager)
         console.log("tutorial init")
@@ -72,7 +79,7 @@ class Tutorial extends Phaser.Scene {
 
         //Player 2
 
-        this.keyboardP2 = this.input.keyboard.addKeys('LEFT,RIGHT,UP,DOWN,SPACE,ESC');
+        this.keyboardP2 = this.input.stopPropagation().keyboard.addKeys('LEFT,RIGHT,UP,DOWN,SPACE,ESC');
 
         this.input.keyboard.on('keyup-' + 'LEFT', this.unlockP2.bind(this));
         this.input.keyboard.on('keyup-' + 'RIGHT', this.unlockP2.bind(this));
@@ -139,24 +146,6 @@ class Tutorial extends Phaser.Scene {
         this.plataformas = this.physics.add.staticGroup();
         this.plataformas.add(muro);
         this.plataformas.add(muro2);
-        
-
-
-        //Fisicas//
-
-        this.physics.add.collider(this.playerU, this.plataformas);
-        this.physics.add.collider(this.playerD, this.plataformas);
-
-
-
-        //Ajustes//
-
-        this.time.addEvent({
-            delay: 100,
-            callback: this.delayDone,
-            callbackScope: this,
-            loop: false
-        });
 
 
         //Prueba 1
@@ -221,22 +210,57 @@ class Tutorial extends Phaser.Scene {
         banderaD.displayWidth = ordenador2.width * 0.9;
 
 
+        //Fisicas//
 
+        this.physics.add.collider(this.playerU, this.plataformas);
+        this.physics.add.collider(this.playerD, this.plataformas);
 
-        this.CP1 = this.physics.add.overlap(this.playerU, cintaU, () => { this.Prueba(this.playerU, "Cinta") }, null, this);
-        this.CP2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.Prueba(this.playerD, "Cinta") }, null, this);
-        this.CoP1 = this.physics.add.overlap(this.playerU, pulsador, () => { this.Prueba(this.playerU, "Contador") }, null, this);
-        this.CoP2 = this.physics.add.overlap(this.playerD, pulsador2, () => { this.Prueba(this.playerD, "Contador") }, null, this);
-        this.EP1 = this.physics.add.overlap(this.playerU, prueba, () => { this.Prueba(this.playerU, "Electricidad") }, null, this);
-        this.EP2 = this.physics.add.overlap(this.playerD, prueba2, () => { this.Prueba(this.playerD, "Electricidad") }, null, this);
-        this.LP1 = this.physics.add.overlap(this.playerU, ordenador, () => { this.Prueba(this.playerU, "Laboratorio") }, null, this);
-        this.LP2 = this.physics.add.overlap(this.playerD, ordenador2, () => { this.Prueba(this.playerD, "Laboratorio") }, null, this);
+        this.CP1 = this.physics.add.overlap(this.playerU, cintaU, () => { this.Prueba(this.playerU, "Cinta") }, this.processCallbackP1, this);
+        this.CP2 = this.physics.add.overlap(this.playerD, cintaD, () => { this.Prueba(this.playerD, "Cinta") }, this.processCallbackP2, this);
+        this.CoP1 = this.physics.add.overlap(this.playerU, pulsador, () => { this.Prueba(this.playerU, "Contador") }, this.processCallbackP1, this);
+        this.CoP2 = this.physics.add.overlap(this.playerD, pulsador2, () => { this.Prueba(this.playerD, "Contador") }, this.processCallbackP2, this);
+        this.EP1 = this.physics.add.overlap(this.playerU, prueba, () => { this.Prueba(this.playerU, "Electricidad") }, this.processCallbackP1, this);
+        this.EP2 = this.physics.add.overlap(this.playerD, prueba2, () => { this.Prueba(this.playerD, "Electricidad") }, this.processCallbackP2, this);
+        this.LP1 = this.physics.add.overlap(this.playerU, ordenador, () => { this.Prueba(this.playerU, "Laboratorio") }, this.processCallbackP1, this);
+        this.LP2 = this.physics.add.overlap(this.playerD, ordenador2, () => { this.Prueba(this.playerD, "Laboratorio") }, this.processCallbackP2, this);
         this.BP1 = this.physics.add.overlap(this.playerU, banderaU, () => { this.endP1(banderaU) }, null, this);
         this.BP2 = this.physics.add.overlap(this.playerD, banderaD, () => { this.endP2(banderaD) }, null, this);
 
 
+
         this.soundManager.play('Musica_fondo');
 
+        //////////////////////////////////////////////////////////////////
+        //Tutorial//
+        this.controlesP1 = this.add.image(this.cam1.midPoint.x + this.game.canvas.width / 2, this.game.canvas.height * 0.25, "GeneralesJ1T")
+        this.controlesP1.displayHeight = this.game.canvas.height / 2 - 10
+        this.controlesP1.displayWidth = 300
+        this.controlesP1.setDepth(999999)
+        this.controlesP2 = this.add.image(this.game.canvas.width / 2, this.game.canvas.height * 0.75, "GeneralesJ2T")
+        this.controlesP2.displayHeight = this.game.canvas.height / 2 - 10
+        this.controlesP2.displayWidth = 300
+        this.controlesP2.setDepth(999999)
+
+
+        this.gimBU.alpha = 1;
+        this.gimBD.alpha = 1;
+
+
+
+
+
+
+
+
+
+        //Ajustes//
+
+        this.time.addEvent({
+            delay: 2000,
+            callback: this.delayDone,
+            callbackScope: this,
+            loop: false
+        });
 
 
 
@@ -365,9 +389,12 @@ class Tutorial extends Phaser.Scene {
     }
 
     PruebaP1(prueba) {
+
+
+
         if (this.keyboardP1.E.isDown === true && !this.escenasActivas[0]) {
 
-            this.scene.launch(prueba + "TP1", { escena: this,soundManager:this.soundManager });
+            this.scene.launch(prueba + "TP1", { escena: this, soundManager: this.soundManager });
             this.escenasActivas[0] = true;
 
         }
@@ -375,7 +402,7 @@ class Tutorial extends Phaser.Scene {
     PruebaP2(prueba) {
         if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {
 
-            this.scene.launch(prueba + "TP2", { escena: this,soundManager:this.soundManager });
+            this.scene.launch(prueba + "TP2", { escena: this, soundManager: this.soundManager });
             this.escenasActivas[1] = true;
         }
 
@@ -386,10 +413,10 @@ class Tutorial extends Phaser.Scene {
         this.end.player1 = true;
 
         if (this.end.player1 === true && this.end.player2 === true) {
-            
 
-            this.scene.start("MAINMENU",{escena:null,soundManager:this.soundManager});
-            
+            this.keyDelete();
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+
             console.log("Iniciando");
         }
         bandera.destroy();
@@ -401,9 +428,10 @@ class Tutorial extends Phaser.Scene {
         this.end.player2 = true;
 
         if (this.end.player1 === true && this.end.player2 === true) {
-            
-            this.scene.start("MAINMENU",{escena:null,soundManager:this.soundManager});
-           
+
+            this.keyDelete();
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+
             console.log("Iniciando");
         }
         bandera.destroy();
@@ -429,6 +457,141 @@ class Tutorial extends Phaser.Scene {
         this.playerD.body.setSize(this.playerD.width * 0.25, this.playerD.height, true)
         this.playerU.setGravityY(3000);
         this.playerD.setGravityY(3000);
+
+        this.escenasActivas[0] = false;
+        this.escenasActivas[1] = false;
+
+        this.gimBU.alpha = 0;
+        this.gimBD.alpha = 0;
+
+        this.controlesP1.destroy();
+        this.controlesP2.destroy();
+
+    }
+
+
+    processCallbackP1(obj1, obj2) {
+
+
+        let dist = Math.abs(obj1.x - obj2.x)
+
+
+        if (obj2.texture.key === "cintaSprite" && this.escenasActivas[0] === false && this.tut1 === false) {
+            console.log("SePinta")
+            this.tutP1 = this.add.image(this.cam1.midPoint.x, this.game.canvas.height * 0.25, "CintaJ1T")
+            this.tutP1.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP1.displayWidth = 300
+            this.tutP1.setDepth(999999)
+            this.tut1 = true
+        }
+        if (obj2.texture.key === "spriteCont" && this.escenasActivas[0] === false && this.tut1 === false) {
+            console.log("SePinta")
+            this.tutP1 = this.add.image(this.cam1.midPoint.x, this.game.canvas.height * 0.25, "PulsadorJ1T")
+            this.tutP1.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP1.displayWidth = 300
+            this.tutP1.setDepth(999999)
+            this.tut1 = true
+        }
+
+        if (obj2.texture.key === "Enchufe" && this.escenasActivas[0] === false && this.tut1 === false) {
+            console.log("SePinta")
+            this.tutP1 = this.add.image(this.cam1.midPoint.x, this.game.canvas.height * 0.25, "ElectricidadJ1T")
+            this.tutP1.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP1.displayWidth = 300
+            this.tutP1.setDepth(999999)
+            this.tut1 = true
+        }
+
+        if (obj2.texture.key === "Ordenador" && this.escenasActivas[0] === false && this.tut1 === false) {
+            console.log("SePinta")
+            this.tutP1 = this.add.image(this.cam1.midPoint.x, this.game.canvas.height * 0.25, "SimbolosJ1T")
+            this.tutP1.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP1.displayWidth = 300
+            this.tutP1.setDepth(999999)
+            this.tut1 = true
+        }
+
+
+
+        if (dist > 30) {
+            console.log("Se destruye")
+            this.tutP1.destroy();
+            this.tut1 = false;
+        }
+
+        if (this.keyboardP1.E.isDown === true && !this.escenasActivas[0]) {
+            this.tut1 = false
+            this.tutP1.destroy();
+            return true;
+        } else {
+            return false
+        }
+
+    }
+
+
+    processCallbackP2(obj1, obj2) {
+
+
+        let dist = Math.abs(obj1.x - obj2.x)
+        console.log("Distancia: " + dist);
+
+        if (obj2.texture.key === "cintaSprite" && this.escenasActivas[1] === false && this.tut2 === false) {
+            console.log("SePinta")
+            this.tutP2 = this.add.image(this.cam2.midPoint.x, this.game.canvas.height * 0.75, "CintaJ2T")
+            this.tutP2.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP2.displayWidth = 300
+            this.tutP2.setDepth(999999)
+            this.tut2 = true
+        }
+        if (obj2.texture.key === "spriteCont" && this.escenasActivas[1] === false && this.tut2 === false) {
+            console.log("SePinta")
+            this.tutP2 = this.add.image(this.cam2.midPoint.x, this.game.canvas.height * 0.75, "PulsadorJ2T")
+            this.tutP2.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP2.displayWidth = 300
+            this.tutP2.setDepth(999999)
+            this.tut2 = true
+        }
+
+        if (obj2.texture.key === "Enchufe" && this.escenasActivas[1] === false && this.tut2 === false) {
+            console.log("SePinta")
+            this.tutP2 = this.add.image(this.cam2.midPoint.x, this.game.canvas.height * 0.75, "ElectricidadJ2T")
+            this.tutP2.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP2.displayWidth = 300
+            this.tutP2.setDepth(999999)
+            this.tut2 = true
+        }
+
+        if (obj2.texture.key === "Ordenador" && this.escenasActivas[1] === false && this.tut2 === false) {
+            console.log("SePinta")
+            this.tutP2 = this.add.image(this.cam2.midPoint.x, this.game.canvas.height * 0.75, "SimbolosJ2T")
+            this.tutP2.displayHeight = this.game.canvas.height / 2 - 10
+            this.tutP2.displayWidth = 300
+            this.tutP2.setDepth(999999)
+            this.tut2 = true
+        }
+
+
+
+
+        if (dist > 30) {
+            console.log("Se destruye")
+            this.tutP2.destroy();
+            this.tut2 = false;
+        }
+
+        if (this.keyboardP2.SPACE.isDown === true && !this.escenasActivas[1]) {
+            this.tut2 = false
+            this.tutP2.destroy();
+            return true;
+        } else {
+            return false
+        }
+
+    }
+
+    keyDelete() {
+        this.input.keyboard.clearCaptures();
     }
 
 

@@ -8,7 +8,7 @@ class MainMenu extends Phaser.Scene {
     constructor() {
         super({ key: "MAINMENU" });
     }
-    preload(){
+    preload() {
         this.load.scenePlugin({
             key: 'rexuiplugin',
             url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
@@ -136,14 +136,14 @@ class MainMenu extends Phaser.Scene {
             pause.displayHeight = this.game.canvas.height * 0.85;
             pause.displayWidth = this.game.canvas.width * 0.65;
 
-            let salir = this.add.image(this.game.canvas.width / 2-200, this.game.canvas.height * 0.5 - 200, "botonPausa");
+            let salir = this.add.image(this.game.canvas.width / 2 - 200, this.game.canvas.height * 0.5 - 200, "botonPausa");
             salir.displayHeight = this.game.canvas.height * 0.1;
             salir.displayWidth = this.game.canvas.width * 0.2;
             salir.setInteractive();
 
-           
 
-            var print0 = this.add.text(0, 0, '');
+
+            var print0 = this.add.text(this.game.canvas.width / 2 - 75, this.game.canvas.height / 2 - 100, '').setFontSize(45);
             //this.cambiarSonido();
             //var cambiar= this.cambiarSonido;
             //cambiar();
@@ -153,12 +153,12 @@ class MainMenu extends Phaser.Scene {
                 width: 200,
                 height: 30,
                 orientation: 'x',
-    
+
                 track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
                 value: this.soundManager.volume,
                 valuechangeCallback: function (value) {
-    
+
                 },
                 space: {
                     top: 4,
@@ -166,15 +166,17 @@ class MainMenu extends Phaser.Scene {
                 },
                 input: 'drag', // 'drag'|'click'
             }).layout();
-    
+
             this.slider.on('valuechange', function (newValue) {
                 this.cambiarSonido();
+                newValue = newValue.toFixed(4)
                 print0.text = newValue;
             }, this);
-    
-            salir.on("pointerup",()=>{
+
+            salir.on("pointerup", () => {
                 salir.destroy();
                 pause.destroy();
+                print0.text=''
                 this.slider.destroy();
             })
 

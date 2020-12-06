@@ -26,6 +26,17 @@ class Bootloader extends Phaser.Scene {
 
         this.load.image("Tutorial","./assets/Tutorial.png");
         this.load.image("TutorialBlur","./assets/ComoJugarBlur.png");
+        this.load.image("CintaJ1T","./assets/Tutorial/CintaJ1.png");
+        this.load.image("CintaJ2T","./assets/Tutorial/CintaJ2.png");
+        this.load.image("ElectricidadJ1T","./assets/Tutorial/ElectricidadJ1.png");
+        this.load.image("ElectricidadJ2T","./assets/Tutorial/ElectricidadJ2.png");
+        this.load.image("GeneralesJ1T","./assets/Tutorial/GeneralesJ1.png");
+        this.load.image("GeneralesJ2T","./assets/Tutorial/GeneralesJ2.png");
+        this.load.image("PulsadorJ1T","./assets/Tutorial/PulsadorJ1.png");
+        this.load.image("PulsadorJ2T","./assets/Tutorial/PulsadorJ2.png");
+        this.load.image("SimbolosJ1T","./assets/Tutorial/SimbolosJ1.png");
+        this.load.image("SimbolosJ2T","./assets/Tutorial/SimbolosJ2.png");
+
 
         //Gimnasio//
 
