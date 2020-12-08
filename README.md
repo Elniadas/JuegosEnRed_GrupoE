@@ -70,11 +70,11 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
 > - Si desean comenzar una partida deben acceder al botón de "Jugar".
-> - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de "Como Jugar".
+> - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de "Cómo Jugar".
 > - Si desea ajustar el volumen, los jugadores podrán acceder a ello mediante el botón de "Sonido".
 
 
-> - Si se accionó el botón de Jugar, el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
+> - Si se accionó el botón de "Jugar", el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
 
 > - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador.
 
@@ -113,11 +113,11 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan llegado al final del último escenario.
 
 > ## 3. Interfaces
-> - Pantalla principal: con los botones Jugar, Como Jugar y Sonido como se ha mencionado en el apartado del Flujo del Juego.
+> - Pantalla principal: con los botones "Jugar", "Cómo Jugar" y "Sonido" como se ha mencionado en el apartado del Flujo del Juego.
 ![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Menu.png)
 > - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar y cambiar su nickname. 
-![Diagrama](/Game/assets/NicknameFase2.png)
-> - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de abajo la del 2. Ambas tienen el tiempo que llevan consumido.
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/NicknameFase2.png)
+> - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de debajo la del 2. Ambas tienen el tiempo que llevan consumido.
 ![Interfaz](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Interfaz.png)
 
 > - Pantalla de pausa: Con los botones de "Reanudar" para continuar la partida, "Sonido" para ajustar el volumen y "Salir" para volver al menú
@@ -140,7 +140,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > ## 4. Pruebas
 
-> - GüinDeReis está formado por 4 pruebas que deberán completarse lo más rápido posible con ayuda de power ups que se obtienen a lo largo del mapa, o bien realizando las pruebas secundarias como ha mencionado anteriormente. 
+> - GüinDeReis está formado por 5 escenarios, de los cuales 4 tienen pruebas, que deberán completarse lo más rápido posible con ayuda de power ups que se obtienen a lo largo del mapa, o bien realizando las pruebas secundarias como ha mencionado anteriormente. 
 
 > ### 4.1. Prueba de correr
 
@@ -178,7 +178,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - El objetivo es que el jugador lleve la cuenta del cronómetro en su cabeza y que intente acercarse al número 7.00 pulsando las teclas S y "flecha de abajo". Las respuestas válidas para superar la prueba son las que se encuentran entre el 6.5 y el 7.5. 
 
-> - Si el jugador consigue parar el contador en el segundo 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
+> - Si el jugador consigue parar el contador entre los segundos 6.98 y 7.02 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
 
 
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Contador.gif)
@@ -195,7 +195,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Ordenador.gif)
 
-> ### 4.4. Escenario de Nieve (final)
+> ### 4.5. Escenario de Nieve (final)
 
 > - Éste será el último escenario donde los jugadores tendrán que llegar a una bandera final. 
 
