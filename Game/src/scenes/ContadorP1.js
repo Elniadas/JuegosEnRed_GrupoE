@@ -73,13 +73,12 @@ class ContadorP1 extends Phaser.Scene {
                 console.log("Has ganado un abrazo");
                 this.data.escena.particlesContPU.destroy();
                 this.completado=true
+                if(this.css >= 698 && this.css<=702) {
+                    console.log("Practicamente clavao si no clavao")
+                    this.data.escena.crearMasTP1(); 
+                }
             }
-            else if (this.css >= 698 && this.css<=702) {
-                console.log("Practicamente clavao")
-                this.data.escena.crearMasTP1(); 
-                this.data.escena.particlesContPU.destroy();
-                this.completado=true;
-            } else {
+              else {
                 console.log("te toca probar de nuevo")
             }
 
