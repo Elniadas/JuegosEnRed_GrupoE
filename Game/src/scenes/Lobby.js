@@ -78,7 +78,7 @@ class Lobby extends Phaser.Scene {
 
 
         inputTextP2.on('keyup', function (event) {
-            console.log("keyUploco")
+          
             //if (event.target.name === 'playButton') {
             var inputText = this.getChildByName('nameField');
             if (event.key === 'Enter') {
