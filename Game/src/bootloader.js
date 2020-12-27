@@ -13,9 +13,9 @@ class Bootloader extends Phaser.Scene {
         //Plugins
         this.load.scenePlugin({
             key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            url: 'C:\Users\Elnidas\Desktop\Try2\JuegosEnRed_GrupoE\Game\assets\rexuiplugin.min.js',
             sceneKey: 'rexUI'
-        });
+        }); 
 
 
 
@@ -113,6 +113,8 @@ class Bootloader extends Phaser.Scene {
         this.load.image("muro", "./assets/Muro.png");
         this.load.image("logo", "./assets/Logo.jpg")
         this.load.image("Crono", "./assets/Cronometro.png")
+        this.load.image("Desconectado", "./assets/Desconectado.png")
+        this.load.image("Conectado", "./assets/Conectado.png")
 
         //Efectos//
 

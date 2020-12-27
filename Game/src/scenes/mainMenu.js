@@ -1,4 +1,4 @@
-import Sprite from '../gameObjects/Sprite.js';
+
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
@@ -11,7 +11,7 @@ class MainMenu extends Phaser.Scene {
     preload() {
         this.load.scenePlugin({
             key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            url: 'C:\Users\Elnidas\Desktop\Try2\JuegosEnRed_GrupoE\Game\assets\rexuiplugin.min.js',
             sceneKey: 'rexUI'
         });
     }
@@ -20,6 +20,10 @@ class MainMenu extends Phaser.Scene {
         console.log(this.soundManager)
     }
     create() {
+
+
+
+        
 
 
 
@@ -149,6 +153,8 @@ class MainMenu extends Phaser.Scene {
             //this.cambiarSonido();
             //var cambiar= this.cambiarSonido;
             //cambiar();
+            
+
             this.slider = this.rexUI.add.slider({
                 x: this.game.canvas.width / 2,
                 y: this.game.canvas.height / 2,

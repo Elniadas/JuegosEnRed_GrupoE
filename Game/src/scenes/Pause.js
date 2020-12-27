@@ -15,15 +15,26 @@ class Pause extends Phaser.Scene {
     preload() {
         this.load.scenePlugin({
             key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
+            url: '../gameObjects/rexuiplugin.min.js',
             sceneKey: 'rexUI'
         });
-
     }
 
 
     create() {
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
         console.log("Pausa iniciada")
         this.keyboard = this.input.keyboard.addKeys('ESC');
         this.input.keyboard.on('keyup-' + 'ESC', this.unlock.bind(this));
@@ -126,7 +137,7 @@ class Pause extends Phaser.Scene {
                 this.scene.stop("Pause");
             }
         })
-        reanudar.texto=this.add.text(reanudar.x-40,reanudar.y-15,'Reanudar').setFontSize(30)
+        reanudar.texto = this.add.text(reanudar.x - 40, reanudar.y - 15, 'Reanudar').setFontSize(30)
 
         return reanudar;
 
@@ -137,7 +148,7 @@ class Pause extends Phaser.Scene {
         let salir = this.add.image(this.game.canvas.width / 2, this.game.canvas.height * 0.6, "botonPausa");
         salir.displayHeight = this.game.canvas.height * 0.1;
         salir.displayWidth = this.game.canvas.width * 0.2;
-        salir.texto=this.add.text(salir.x-40,salir.y-15,'Salir').setFontSize(30)
+        salir.texto = this.add.text(salir.x - 40, salir.y - 15, 'Salir').setFontSize(30)
         salir.setInteractive();
         salir.on("pointerup", () => {
             if (this.scene.isPaused("Tutorial")) {
@@ -167,7 +178,7 @@ class Pause extends Phaser.Scene {
         config.setInteractive();
         let r = reanudar;
         let s = salir;
-        let texConfig=this.add.text(config.x-40,config.y-15,'Sonido').setFontSize(30)
+        let texConfig = this.add.text(config.x - 40, config.y - 15, 'Sonido').setFontSize(30)
 
 
         config.on("pointerup", () => {
@@ -177,11 +188,11 @@ class Pause extends Phaser.Scene {
                 salir.displayHeight = this.game.canvas.height * 0.1;
                 salir.displayWidth = this.game.canvas.width * 0.2;
                 salir.setInteractive();
-                this.textoSalir.text='Salir'
+                this.textoSalir.text = 'Salir'
 
                 salir.on("pointerup", () => {
-                    this.print0.text=''
-                    this.textoSalir.text=''
+                    this.print0.text = ''
+                    this.textoSalir.text = ''
                     salir.destroy();
                     this.slider.destroy();
                     let re = this.crearBotonRenudar();
@@ -195,7 +206,7 @@ class Pause extends Phaser.Scene {
                 r.destroy();
                 s.texto.destroy();
                 s.destroy();
-                
+
                 this.createSliderSound();
             }
 
@@ -205,11 +216,11 @@ class Pause extends Phaser.Scene {
                 salir.displayHeight = this.game.canvas.height * 0.1;
                 salir.displayWidth = this.game.canvas.width * 0.2;
                 salir.setInteractive();
-                this.textoSalir.text='Salir'
+                this.textoSalir.text = 'Salir'
 
                 salir.on("pointerup", () => {
-                    this.print0.text=''
-                    this.textoSalir.text=''
+                    this.print0.text = ''
+                    this.textoSalir.text = ''
                     salir.destroy();
                     this.slider.destroy();
                     let re = this.crearBotonRenudar();
@@ -245,7 +256,7 @@ class Pause extends Phaser.Scene {
 
     createSliderSound() {
 
-        
+
         //this.cambiarSonido();
         //var cambiar= this.cambiarSonido;
         //cambiar();
@@ -360,8 +371,8 @@ class Pause extends Phaser.Scene {
             this.game.scene.stop("LaboratorioTP2");
 
         }
-        this.data.escena.escenasActivas[0]=false;
-        this.data.escena.escenasActivas[1]=false; 
+        this.data.escena.escenasActivas[0] = false;
+        this.data.escena.escenasActivas[1] = false;
 
     }
 

@@ -2,7 +2,7 @@
 
 - Adrián Valiente González: a.valiente.2018@alumnos.urjc.es    | Adrian-Valiente
 - Aitor García Prádanos:    a.garciap.2018@alumnos.urjc.es     | aitoorgrc
-- Daniel Sánchez Cánovas:   d.sanchezc.2018@alumnos.urjc.es    | Elnidas
+- Daniel Sánchez Cánovas:   d.sanchezc.2018@alumnos.urjc.es    | Elniadas
 - Javier Morales Lasheras:  j.morales.2018@alumnos.urjc.es     | javixmorales
 
 # GDD - JUEGOS EN RED
@@ -35,6 +35,7 @@
 
 > - Como se ha mencionado anteriormente, GüinDeReis es un juego donde la rapidez con la que se realiza cada una de las pruebas del circuito del mundo del juego, es crucial para establecer una buena marca de tiempo. Se establece una clasificación general de las pruebas según qué destreza se necesita en cada una de ellas:
 
+> - Cada partida estará compuesta de 4 pruebas para cada jugador, más una quinta donde no habrá que realizar nada pero servirá para finalizar las partidas. Las pruebas se dividen en:
 > - Pruebas de rapidez
 > - Pruebas de destreza visual / memoria fotográfica
 > - Plataformas en el mundo del juego (no pertenece a la categoría de pruebas)
@@ -42,141 +43,174 @@
 > - Pruebas principales: Deben ser obligatoriamente realizadas por los jugadores para poder terminar el circuito y fijar una marca de tiempo. Los jugadores no podrán acabar su partida hasta haber realizado todas las pruebas.
 
 > - Pruebas secundarias / opcionales: Al terminar una prueba principal y antes de fijar la marca de tiempo, cada jugador optará a realizar una variante de esta (generalmente más difícil o engorrosa). 
+
 > - Si se termina con éxito, los jugadores obtendrán power ups de alto nivel (se hablan de ellos más adelante) con los cuales podrán perjudicar al contrario. 
-Los jugadores pueden decidir cuándo hacer uso de su power up, afectando a su rival al instante y en tiempo real, aunque esté realizando su prueba. 
+El power up se activa al terminar la prueba secundaria, afectando a su rival al instante y en tiempo real, aunque esté realizando su prueba. 
 Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenientes, ocupando más tiempo de los jugadores antes de fijar la marca de tiempo en cada escenario, por lo que conviene valorar el beneficio / riesgo de realizarla o no.
 
 > - Power Ups de nivel bajo: estos se encuentran sueltos por el mapa, alrededor del circuito de pruebas (escondidos o en lo alto de plataformas). Los efectos de estos power ups afectarán en el jugador que los recoja y no en el contrincante. 
 
 > - +Movement speed: el jugador se mueve con mayor rapidez
+
+![RunPowerUp](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/RUN.png)
+
 > - -Time: el jugador podrá restar pocos segundos a su marcador
 
-> - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Los jugadores pueden decidir el momento en que quieran activarlo. Algunos de estos pueden ser:
+![RelojArena](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/relojArena.png)
 
-> - Blindsighted: Durante un breve periodo de tiempo, el jugador contrario no podrá ver nada en su lado de la pantalla.
-> - Confusión: El jugador que lo active podrá intercambiar posiciones con el jugador contrario, pudiendo realizar tan solo las pruebas que le faltaban.
-> - Zeus: A lo largo del circuito del jugador contrario al que lo active, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida
-> - Time++: Suma tiempo al contador del jugador contrario.
-> - King of the Frost Giants: congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
+> - Power ups de alto nivel: obtenidos al realizar las pruebas secundarias. Causan un gran impacto en el circuito de pruebas del jugador contrario. Se activan al instante, al terminar con éxito una prueba secundaria. Algunos de estos pueden ser:
+
+> - Blindsighted: Durante un breve periodo de tiempo, el jugador contrario verá reducido su campo de visión. (Obtenido en prueba de electricidad)
+> - Laser Storm: A lo largo del circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida (Obtenido en prueba de gimnasio)
+> - Time++: Suma tiempo al contador del jugador contrario. (Obtenido en prueba de contador)
 
 > ### 2.2 Flujo del Juego
 
 > - En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
 
 > - Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
-> - Si desean comenzar una partida deben acceder al botón de Jugar.
-> - Si desean ajustar el volumen o acceder a la configuración del juego y controles, podrán acceder a ello mediante el botón de Configuración.
-> - Cada vez que se finaliza una partida, se guarda la puntuación de tiempo de todos los jugadores junto a sus nombres, por tanto, si desean acceder a ver el historial de  puntuaciones deberán acceder al botón de Historial de Partidas.
-
-> - Si se accionó el botón de Jugar, el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
-> - Ha llegado el momento de comenzar la partida, pero antes, ambos jugadores previsualizarán una pequeña guía o tutorial del juego mostrando los objetivos, controles y las reglas. Este tutorial se podrá saltar. Después del tutorial da comienzo la partida, donde cada jugador realizará sus pruebas de la manera más rápida posible. Tras ello, valorarán si entorpecer el transcurso de la partida del jugador contrario a cambio de más tiempo, resulta beneficioso.
-
-> - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador, guardando la puntuación en el Historial de Partidas.
-
-> - Si se vuelve a iniciar otra partida, las pruebas puede que se encuentre en un distinto orden.
+> - Si desean comenzar una partida deben acceder al botón de "Jugar".
+> - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de "Cómo Jugar".
+> - Si desea ajustar el volumen, los jugadores podrán acceder a ello mediante el botón de "Sonido".
 
 
-![Diagrama](/Images/Diagrama1.jpeg)
+> - Si se accionó el botón de "Jugar", el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
+
+> - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador.
+
+
+
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Diagrama.jpeg)
 ![Diagrama](/Images/Diagrama2.jpeg)
 
 > ### 2.3 Cámara
 
 > - Las acciones principales se desarrollan con eventos generalmente en primer plano, es decir, la cámara se sitúa directamente enfocando a la prueba que se tenga que realizar.
 
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/PrimerPlano.gif)
+
+
 > - En cuanto al movimiento del jugador y el mundo del juego, este se desarrolla horizontalmente o con un desplazamiento horizontal (propio de juegos como Mario Bros o Sonic entre otros), también denominado Scroll lateral.
 
-> ### 2.4 Controles
+![Image from Gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Scroll.gif)
 
-> - Las teclas principales de movimiento del jugador son: “D” (Movimiento hacia derecha), “A” (Movimiento hacia izquierda), “W” (Salto), “E” (Interactuar con una prueba para realizarla). Para un segundo jugador, las teclas de movimiento serán: “Flecha derecha” (Movimiento hacia derecha), “Flecha izquierda” (Movimiento hacia izquierda), “Flecha arriba” (Salto), “M” (Interactuar con una prueba para realizarla)
 
-> - Dentro de las pruebas con las que se interactúe, los controles serán los mismos que los anteriores, los de movimiento servirán en este caso para desplazarnos por la prueba y el botón de interacción para realizar las distintas acciones.
 
-> ### 2.5 Puntuación
+> ### 2.4 Sonido
+
+> - El Menú principal y el resto del juego tendrá una misma banda sonora y el gameplay da comienzo con el sonido de unas campanas de boxeo. Los distintos escenarios de las distintas pruebas traen consigo sonidos ambientales para una mayor inmersión (pasos en una cinta de correr, cuenta atrás de un reloj, sonidos de chispazos en un escenario de electricidad, efectos de teletransporte al sobrepasar un portal...).
+
+> ### 2.5 Controles
+
+> - Las teclas principales de movimiento del jugador son: “D” (Movimiento hacia derecha), “A” (Movimiento hacia izquierda), “W” (Salto), “E” (Interactuar con una prueba para realizarla). Para un segundo jugador, las teclas de movimiento serán: “Flecha derecha” (Movimiento hacia derecha), “Flecha izquierda” (Movimiento hacia izquierda), “Flecha arriba” (Salto), “Espacio” (Interactuar con una prueba para realizarla)
+
+> - Dentro de las pruebas con las que se interactúe, los controles serán los mismos que los anteriores, exceptuando el botón de acción; los de movimiento servirán para que los jugadores se desplacen por las pruebas, y los de acción varían dependiendo de la prueba.
+
+> ### 2.6 Puntuación
 
 > - Como se ha mencionado anteriormente, al final de cada partida se guarda el tiempo total que ambos jugadores han tardado en completar el recorrido de pruebas y el sistema decide quién es el ganador.
 
-> - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan interactuado con la puerta que lleva al siguiente nivel / siguiente prueba. 
-> ## 3. Interfaces
-> - Pantalla principal: con los botones Jugar, Historial de Partidas y Configuración como se ha mencionado en el apartado del Flujo del Juego.
-![Diagrama](/Images/Pantalla_principal.png)
-> - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar, cambiar su nickname y se mostrarán los controles que deberán usar cada uno de ellos. 
-![Diagrama](/Images/Players.png)
-> - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de abajo la del 2. Ambas tienen el tiempo que llevan consumido. Arriba a la derecha hay un botón para poder pausar el juego. 
-![Diagrama](/Images/Juego.png)
-> - Pantalla de pausa: aparece cuando se decide pausar el juego y contiene los botones: 
-> - Continuar: para salir y continuar con la partida
-> - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
-> - Ajustes: para configurar sonidos…
-> - Salir: para salir y volver a la pantalla principal.
+> - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan llegado al final del último escenario.
 
-![Diagrama](/Images/Pausa.png)
+> ## 3. Interfaces
+> - Pantalla principal: con los botones "Jugar", "Cómo Jugar" y "Sonido" como se ha mencionado en el apartado del Flujo del Juego.
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Menu.png)
+> - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar y cambiar su nickname. 
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/NicknameFase2.png)
+> - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de debajo la del 2. Ambas tienen el tiempo que llevan consumido.
+![Interfaz](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Interfaz.png)
+
+> - Pantalla de pausa: Con los botones de "Reanudar" para continuar la partida, "Sonido" para ajustar el volumen y "Salir" para volver al menú
+
+
+![Pausa](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Pausa.png)
+
+> - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorialControles.gif)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial2.gif)
+
+> - Pantalla de ajuste de sonido: para ajustar el volumen
+![Sonidos](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Sonido.png)
+
+> - Pantalla de victoria
+
+![Victoria](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Victoria.gif)
+
+
 
 > ## 4. Pruebas
 
-> - GüinDeReis está formado por 4 pruebas que deberán completarse lo más rápido posible con ayuda de power ups que se obtienen a lo largo del mapa, o bien realizando las pruebas secundarias como ha mencionado anteriormente. 
+> - GüinDeReis está formado por 5 escenarios, de los cuales 4 tienen pruebas, que deberán completarse lo más rápido posible con ayuda de power ups que se obtienen a lo largo del mapa, o bien realizando las pruebas secundarias como ha mencionado anteriormente. 
 
-> ### 4.1. Prueba de las flechas
+> ### 4.1. Prueba de correr
 
-> - Para comenzar con este nivel, el jugador comenzará en un mapa con forma de copo de nieve gigante que contiene plataformas, como se puede ver en la imagen. Para comenzar la prueba tendrá que saltar y encontrar una esfera plateada. Una vez se pose en la plataforma donde se encuentre la esfera la prueba de las flechas comenzará. 
+> - El jugador se acercará a la cinta eléctrica que está colocada al final del nivel encima de una plataforma.
+
+> - El objetivo inicial de la prueba es presionar 20 veces 2 teclas alternativamente reflejando que se está corriendo en una cinta eléctrica. 
+
+> - El jugador tiene 2 opciones (se indica según el color de las partículas de cada prueba):
+
+> - Realizar la prueba principal (partículas verdes): es más rápida de realizar, ya que se debe llevar a cabo un número menor de pulsaciones de teclas (20). 
+
+> - Realizar la prueba secundaria (partículas rojas): Se deberá realizar la misma prueba, pero con un mayor número de pulsaciones. Si se supera satisfactoriamente, se le aplicará al jugador contrario el power up "Laser storm"; el jugador que toque los rayos tendrá su velocidad de movimiento reducida durante un tiempo determinado
 
 
-> - La prueba se compone de una placa de hielo con forma circular girando constantemente y con el número de flechas restantes que hay que clavar.
-El objetivo de esta prueba es incrustar el número de flechas que se solicita ( mientras la placa esté dando vueltas) en los huecos disponibles sin que ninguna flecha se choque con ningún otro pulsando el botón de accion correspondiente a cada jugador. 
-> - Si una flecha se choca con una que ya está clavada, la prueba se reiniciará eliminando todas las flechas ya clavadas y teniendo que volver a empezar. 
-
-> - Una vez conseguir clavar todas las fechas, se le ofrece al jugador la opción de realizar la prueba secundaria: que consta de clavar en esta ocasión 15 flechas en una placa giratoria que ya tiene objetos clavados (por lo que no se podrán clavar en ese mismo sitio). 
-
-> - Una vez superada la prueba opcional, el jugador obtendrá el power up King of the Frost Giants, que congela completamente al jugador contrario y todo lo que esté haciendo, pero su tiempo sigue sumando. 
-
-![pruebapinchos](/Images/pruebapinchos.jpg)
-![Flecchas](/Images/Flechas.png)
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Cinta.gif)
 
 > ### 4.2. Prueba de electricidad 
 
-> - El objetivo de esta prueba será llevar la corriente de un punto a otro del recorrido girando las partes de los cables mal colocadas. Los jugadores podrán desplazarse a lo largo del circuito con las teclas de movimiento (W,A,S,D y las flechas) e interactuar con los cables mal orientados con las teclas E y 0.
+> - El objetivo de esta prueba será llevar la corriente de un punto a otro del recorrido girando las partes de los cables mal colocados. Los jugadores podrán desplazarse a lo largo del circuito con las teclas de movimiento (A,D y las flechas de izquierda y derecha) e interactuar con los cables mal orientados con las teclas W,S y las flechas de arriba y abajo (giro en ambos sentidos).
 
-> - Una vez terminado el primer circuito se le ofrece al jugador la opción de realizar un segundo circuito (la prueba secundaria).
-> - Si decide realizarla, se le presentará al usuario un     circuito generalmente más complejo y con un objetivo extra; A lo largo del nuevo circuito se colocarán unas bombillas, y los jugadores tienen que llevar la corriente al otro extremo del circuito y además dejar las bombillas encendidas.
+> - Una vez terminado el primer circuito se le ofrece al jugador la opción de realizar un segundo circuito (la prueba secundaria, con partícular rojas).
 
-> - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará completamente la visión del jugador rival por unos instantes.
+> - Si decide realizarla, se le presentará al usuario un circuito generalmente más complejo y con un objetivo extra; A lo largo del nuevo circuito se colocarán unas bombillas, y los jugadores tienen que llevar la corriente al otro extremo del circuito y además dejar las bombillas encendidas.
 
-![Electrica](/Images/Eléctrica.jpg)
-![Electrica](/Images/Electricidad_2.png)
+> - Una vez superada la prueba opcional, el jugador obtendrá el power up Blindsighted, que cegará parcialmente la visión del jugador rival por unos instantes.
+
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Electricidad.gif)
 
 > ### 4.3. Prueba del contador
-> - El jugador se acercará al pulsador que está en el medio de la sala con un público a modo de espectadores. 
 
-> - Aparecerá una pantalla con el número 7.00 y en más pequeño los números 0.00. Los números 0.00 empiezan a contarse hacia arriba como si fuese un cronómetro y cuando llegue al 4.5 la pantalla se cierra. 
+> - El jugador se acercará al pulsador del final del escenario tras haber realizado el recorrido de plataformas. 
 
-> - El objetivo es que el jugador lleve la cuenta del cronómetro en su cabeza y que intente acercarse al número 7.00 (qué es el que aparece en grande) pulsando las teclas E y 0. Las respuestas válidas son las que se encuentran entre el 6.5 y el 7.5. 
+> - Aparecerá una pantalla con un contador que empezará en 00:00 y empezará a sumar tiempo un cronómetro; al llegar al segundo 04:00 la pantalla se cierra. 
 
-> - Si el jugador lo clava y hace 7.00 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
+> - El objetivo es que el jugador lleve la cuenta del cronómetro en su cabeza y que intente acercarse al número 7.00 pulsando las teclas S y "flecha de abajo". Las respuestas válidas para superar la prueba son las que se encuentran entre el 6.5 y el 7.5. 
 
-
-![contador](/Images/contador.jpg)
-
-![contador](/Images/Cronometro.png)
+> - Si el jugador consigue parar el contador entre los segundos 6.98 y 7.02 obtendrá el power up Time++ a modo de recompensa, que sumará tiempo al contador del jugador contrario. 
 
 
-> ### 4.4. Prueba de correr
-> - El jugador se acercará a la cinta eléctrica que está colocada en el centro de un gimnasio.
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Contador.gif)
 
-> - El objetivo de esta prueba es presionar 50 veces 2 teclas simultáneamente reflejando que se está corriendo en una cinta eléctrica. 
+> ### 4.4. Prueba de los símbolos
 
-> - El jugador tiene 2 opciones (se indicarán con una señal al lado de la cinta eléctrica):
+> - Los jugadores comienzan el nivel en un laboratorio; en él, hay una pizarra con símbolos cambiados de orientación. Al final del escenario, encontrarán un ordenador en el que aparecerán estos símbolos descolocados y en la orientación correcta. Los jugadores deberán colocar los símbolos en el orden correcto para completar la prueba (para este escenario, no hay prueba secundaria).
 
-> - Realizar la prueba principal: será más sencilla y rápida de realizar, ya que consiste en presionar lo más rápido posible 2 teclas cercanas a su alcance (por ejemplo A y D / izquierda derecha). Si se supera de este modo no se obtendrá un power up para pifiar al contrincante. 
+>- El desplazamiento dentro del ordenador se realiza con las teclas "A" y "D" (jugador 1), y "Flecha Izquierda" y "Flecha Derecha" (jugador 2). Para elegir cada símbolo se hará uso de las teclas "W" y "S" (jugador 1), y "Flecha Arriba" y "Flecha Abajo" (jugador 2).
 
-> - Realizar la prueba secundaria: Será realizar la misma prueba sólo que el jugador deberá de realizar un número mayor de pulsaciones. Si se supera de este modo se obtendrá el power up Zeus que hará que a lo largo del próximo circuito del jugador contrario, spawnearán intermitentemente rayos que se deberán esquivar; el jugador que toque los rayos tendrá su velocidad de movimiento reducida, por lo que irá más lento por un tiempo determinado. 
+> - Si los jugadores (1 y 2) olvidan el orden de los símbolos, podrán salir de la prueba respectivamente con las teclas "Q" y "M". 
 
-![contador](/Images/Pruebagimnasio.jpg)
-![contador](/Images/Pruebacinta.jpg)
+
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Ordenador.gif)
+
+> ### 4.5. Escenario de Nieve (final)
+
+> - Éste será el último escenario donde los jugadores tendrán que llegar a una bandera final. 
+
+> - Al coger esta bandera se fijará el tiempo de cada jugador individualmente para comprobar el ganador.
+
+
+![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/EscenarioNieve.gif)
+
+
 
 
 Referencias
 
 Estructura de un GDD:
-https://github.com/dsaltares/sion-tower/blob/master/doc/gdd/gdd.pdf
-https://www.youtube.com/watch?v=z97ys0TDwDI
+<p>https://github.com/dsaltares/sion-tower/blob/master/doc/gdd/gdd.pdf</p>
+<p>https://www.youtube.com/watch?v=z97ys0TDwDI</p>
 
 
