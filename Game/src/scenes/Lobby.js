@@ -18,6 +18,8 @@ class Lobby extends Phaser.Scene {
 
     create() {
         //this.scene.launch("Chat");
+       
+        
         let lobby = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, 'Victoria');
         lobby.displayHeight = this.game.canvas.height
         lobby.displayWidth = this.game.canvas.width;

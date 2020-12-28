@@ -8,16 +8,7 @@ class Bootloader extends Phaser.Scene {
     preload() {
         this.load.on("complete", () => {
             this.scene.start("TeamScreen", { escena: null, soundManager: this.soundManager });
-        });
-
-        //Plugins
-        this.load.scenePlugin({
-            key: 'rexuiplugin',
-            url: 'C:\Users\Elnidas\Desktop\Try2\JuegosEnRed_GrupoE\Game\assets\rexuiplugin.min.js',
-            sceneKey: 'rexUI'
-        }); 
-
-
+        });    
 
         //Init//
   

@@ -13,27 +13,11 @@ class Pause extends Phaser.Scene {
     }
 
     preload() {
-        this.load.scenePlugin({
-            key: 'rexuiplugin',
-            url: '../gameObjects/rexuiplugin.min.js',
-            sceneKey: 'rexUI'
-        });
+
     }
 
 
     create() {
-
-
-
-
-
-
-
-
-
-
-
-
 
         console.log("Pausa iniciada")
         this.keyboard = this.input.keyboard.addKeys('ESC');
@@ -189,12 +173,12 @@ class Pause extends Phaser.Scene {
                 salir.displayWidth = this.game.canvas.width * 0.2;
                 salir.setInteractive();
                 this.textoSalir.text = 'Salir'
-
+                
                 salir.on("pointerup", () => {
                     this.print0.text = ''
                     this.textoSalir.text = ''
                     salir.destroy();
-                    this.slider.destroy();
+                    this.Slider.destroy();
                     let re = this.crearBotonRenudar();
                     let sa = this.crearBotonSalir();
                     this.crearBotonConfig(re, sa);
@@ -222,7 +206,7 @@ class Pause extends Phaser.Scene {
                     this.print0.text = ''
                     this.textoSalir.text = ''
                     salir.destroy();
-                    this.slider.destroy();
+                    this.Slider.destroy();
                     let re = this.crearBotonRenudar();
                     let sa = this.crearBotonSalir();
                     this.crearBotonConfig(re, sa);
@@ -246,45 +230,29 @@ class Pause extends Phaser.Scene {
         return config
     }
 
-    cambiarSonido() {
+    cambiarSonido(value) {
         console.log("Cambiando el sonido")
-        this.data.escena.soundManager.volume = this.slider.value;
+        this.data.escena.soundManager.volume = value;
         this.data.escena.soundManager.resumeAll();
 
         console.log(this.data.escena.soundManager.volume)
     }
 
     createSliderSound() {
-
+        var that= this
 
         //this.cambiarSonido();
         //var cambiar= this.cambiarSonido;
         //cambiar();
-        this.slider = this.rexUI.add.slider({
-            x: this.game.canvas.width / 2,
-            y: this.game.canvas.height / 2,
-            width: 200,
-            height: 30,
-            orientation: 'x',
+        let form = "<input type=\"range\" min=\"1\" max=\"100\" value=\"50\"  id=\"myRange\">"
+        this.Slider = this.add.dom(this.game.canvas.width/2, this.game.canvas.height/2).createFromHTML(form)
+        $('#myRange').change(function (e) {
+            let valor = e.currentTarget.valueAsNumber;
+            let newValue = valor / 100;
+            that.cambiarSonido(newValue);
+            that.print0.text = newValue;
 
-            track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
-            thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
-            value: this.data.escena.soundManager.volume,
-            valuechangeCallback: function (value) {
-
-            },
-            space: {
-                top: 4,
-                bottom: 4
-            },
-            input: 'drag', // 'drag'|'click'
-        }).layout();
-
-        this.slider.on('valuechange', function (newValue) {
-            this.cambiarSonido();
-            newValue = newValue.toFixed(4)
-            this.print0.text = newValue;
-        }, this);
+        });
 
 
 

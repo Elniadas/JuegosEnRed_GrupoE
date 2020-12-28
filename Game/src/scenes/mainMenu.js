@@ -9,11 +9,7 @@ class MainMenu extends Phaser.Scene {
         super({ key: "MAINMENU" });
     }
     preload() {
-        this.load.scenePlugin({
-            key: 'rexuiplugin',
-            url: 'C:\Users\Elnidas\Desktop\Try2\JuegosEnRed_GrupoE\Game\assets\rexuiplugin.min.js',
-            sceneKey: 'rexUI'
-        });
+
     }
     init(data) {
         this.soundManager = data.soundManager
@@ -21,11 +17,7 @@ class MainMenu extends Phaser.Scene {
     }
     create() {
 
-
-
-        
-
-
+        var that = this;
 
         let bg = this.add.image(0, 0, "menu").setOrigin(0, 0);
         bg.displayWidth = this.game.canvas.width;
@@ -144,7 +136,7 @@ class MainMenu extends Phaser.Scene {
             salir.displayHeight = this.game.canvas.height * 0.1;
             salir.displayWidth = this.game.canvas.width * 0.2;
             salir.setInteractive();
-            let textoSalir = this.add.text(salir.x -55, salir.y-15 ).setScrollFactor(0).setFontSize(30)
+            let textoSalir = this.add.text(salir.x - 55, salir.y - 15).setScrollFactor(0).setFontSize(30)
             textoSalir.setText("Salir");
 
 
@@ -153,40 +145,23 @@ class MainMenu extends Phaser.Scene {
             //this.cambiarSonido();
             //var cambiar= this.cambiarSonido;
             //cambiar();
-            
 
-            this.slider = this.rexUI.add.slider({
-                x: this.game.canvas.width / 2,
-                y: this.game.canvas.height / 2,
-                width: 200,
-                height: 30,
-                orientation: 'x',
-
-                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
-                value: this.soundManager.volume,
-                valuechangeCallback: function (value) {
-
-                },
-                space: {
-                    top: 4,
-                    bottom: 4
-                },
-                input: 'drag', // 'drag'|'click'
-            }).layout();
-
-            this.slider.on('valuechange', function (newValue) {
-                this.cambiarSonido();
-                newValue = newValue.toFixed(4)
+            let form = "<input type=\"range\" min=\"1\" max=\"100\" value=\"50\"  id=\"myRange\">"
+            var Slider = this.add.dom(this.game.canvas.width/2, this.game.canvas.height/2).createFromHTML(form)
+            $('#myRange').change(function (e) {
+                let valor = e.currentTarget.valueAsNumber;
+                let newValue = valor / 100;
+                that.cambiarSonido(newValue);
                 print0.text = newValue;
-            }, this);
+
+            });
 
             salir.on("pointerup", () => {
                 salir.destroy();
                 pause.destroy();
                 textoSalir.destroy();
-                print0.text=''
-                this.slider.destroy();
+                print0.text = ''
+                Slider.destroy();
             })
 
 
@@ -200,9 +175,9 @@ class MainMenu extends Phaser.Scene {
 
     }
 
-    cambiarSonido() {
-        console.log("Cambiando el sonido")
-        this.soundManager.volume = this.slider.value;
+    cambiarSonido(value) {
+        console.log(value);
+        this.soundManager.volume = value;
         this.soundManager.resumeAll();
 
     }
