@@ -27,7 +27,7 @@ class Pause extends Phaser.Scene {
         pause.displayHeight = this.game.canvas.height * 0.85;
         pause.displayWidth = this.game.canvas.width * 0.65;
         this.print0 = this.add.text(this.game.canvas.width / 2 - 75, this.game.canvas.height / 2 - 100, '').setFontSize(45)
-        this.textoSalir = this.add.text(300, 150, '').setFontSize(20).setDepth(100);;
+        this.textoSalir = this.add.text(300, 150, '').setFontSize(20).setDepth(100);
 
         if (this.scene.isActive("Scene_play")) {
             console.log("Iniciando pausa en Scene_play")

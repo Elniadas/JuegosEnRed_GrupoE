@@ -25,7 +25,7 @@ class Scene_play extends Phaser.Scene {
     }
     create() {
 
-
+        this.borrarIntervalos();
         /*        
            let tamanio=escenas.length;
              let i=0;
@@ -53,9 +53,9 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[0] = new Escenario("Cinta", 4, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 4, false);
+        this.escenarios[2] = new Escenario("Nieve", 0, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
@@ -126,7 +126,7 @@ class Scene_play extends Phaser.Scene {
         let cintaU = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 121, "muro")
         cintaU.displayHeight = 5;
         cintaU.displayWidth = 78
-        cintaU.alpha=0;
+        cintaU.alpha = 0;
 
 
         cinU.setScale(0.30);
@@ -174,7 +174,7 @@ class Scene_play extends Phaser.Scene {
 
         cintaD.displayHeight = 5;
         cintaD.displayWidth = 78
-        cintaD.alpha=0
+        cintaD.alpha = 0
 
         let cinD = this.add.image(1030 + 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
 
@@ -676,27 +676,27 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        let cronoJ1= this.add.image(792,100,"cronoP1")
-        cronoJ1.displayHeight=30;
-        cronoJ1.displayWidth=95
+        let cronoJ1 = this.add.image(792, 100, "cronoP1")
+        cronoJ1.displayHeight = 30;
+        cronoJ1.displayWidth = 95
         cronoJ1.setDepth(10)
-        cronoJ1.setScrollFactor(0,0)
-        let cronoJ2= this.add.image(792,100,"cronoP2")
-        cronoJ2.setScrollFactor(0,0)
-        cronoJ2.displayHeight=30;
-        cronoJ2.displayWidth=95
+        cronoJ1.setScrollFactor(0, 0)
+        let cronoJ2 = this.add.image(792, 100, "cronoP2")
+        cronoJ2.setScrollFactor(0, 0)
+        cronoJ2.displayHeight = 30;
+        cronoJ2.displayWidth = 95
         cronoJ2.setDepth(10)
 
 
         this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP1.setScrollFactor(0, 0)
-        
+
 
         this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP2.setScrollFactor(0, 0)
-        
 
-       
+
+
         //Ignorasiones
 
         this.cam1.ignore(this.TiempoP2);
@@ -1011,7 +1011,7 @@ class Scene_play extends Phaser.Scene {
             mn1 + " : " + sg1 + " : " + cs1
         ]);
 
-
+        this.tiempoFinalP1 = { total: timeP1, mn: mn1, sg: sg1, cs: cs1 }
 
     }
 
@@ -1024,6 +1024,7 @@ class Scene_play extends Phaser.Scene {
         cr.setTime(this.croP2);
 
         let timeP2 = cr.getTime() + this.playerD.time;
+
         //Transformar
         let cs2 = timeP2 % 1000;
         cs2 = cs2 / 10;
@@ -1052,17 +1053,12 @@ class Scene_play extends Phaser.Scene {
             mn2 = "0" + mn2;
         }
 
-        this.TiempoP2.setText([
-            mn2 + " : " + sg2 + " : " + cs2
-        ]);
 
         this.TiempoP2.setText([
             mn2 + " : " + sg2 + " : " + cs2
         ]);
 
-        this.TiempoP2.setText([
-            mn2 + " : " + sg2 + " : " + cs2
-        ]);
+        this.tiempoFinalP2 = { total: timeP2, mn: mn2, sg: sg2, cs: cs2 }
 
     }
 
@@ -2237,7 +2233,7 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPlataformasLaboratorio2() {
-        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275+this.game.canvas.height/2, "labplatform").setImmovable(true);
+        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275 + this.game.canvas.height / 2, "labplatform").setImmovable(true);
         p2_4_1.displayHeight = 20;
         p2_4_1.displayWidth = 80;
 
@@ -2443,6 +2439,7 @@ class Scene_play extends Phaser.Scene {
 
     borrarIntervalos() {
 
+       
         this.keyDelete();
         var interval_id = window.setInterval("", 9999); // Get a reference to the last
         // interval +1
@@ -2458,7 +2455,16 @@ class Scene_play extends Phaser.Scene {
 
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.start("Victoria", { escena: null, soundManager: this.soundManager, ganador: 2, name: this.playerD.name });
+
+            this.scene.start("Victoria", {
+                escena: null,
+                soundManager: this.soundManager,
+                ganador: 2,
+                nameP1: this.playerU.name,
+                nameP2: this.playerD.name,
+                tiempoP1: this.tiempoFinalP1,
+                tiempoP2: this.tiempoFinalP2
+            });
         }
         bandera.destroy();
         this.BP1.destroy();
@@ -2470,7 +2476,15 @@ class Scene_play extends Phaser.Scene {
         this.end.player2 = true;
         if (this.end.player1 === true && this.end.player2 === true) {
             this.borrarIntervalos();
-            this.scene.start("Victoria", { escena: null, soundManager: this.soundManager, ganador: 1, name: this.playerU.name });
+            this.scene.start("Victoria", {
+                escena: null,
+                soundManager: this.soundManager,
+                ganador: 1,
+                nameP1: this.playerU.name,
+                nameP2: this.playerD.name,
+                tiempoP1: this.tiempoFinalP1,
+                tiempoP2: this.tiempoFinalP2
+            });
         }
         bandera.destroy();
         this.BP2.destroy();

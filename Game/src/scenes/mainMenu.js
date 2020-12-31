@@ -33,7 +33,9 @@ class MainMenu extends Phaser.Scene {
         let hoverSprite = this.add.sprite(100, 100, "FlagSheet2");
         hoverSprite.setVisible(false);
         hoverSprite.setScale(0.80);
-        let pb2 = this.add.sprite(200, 280, "buttonPlay");
+
+        //Bonton jugar
+        let pb2 = this.add.sprite(200, 260, "buttonPlay");
         pb2.setFrame(0);
         pb2.setScale(0.75);
         pb2.setOrigin(0.48, -0.1);
@@ -77,7 +79,9 @@ class MainMenu extends Phaser.Scene {
         //soundM.setScale(0.45);
         //soundM.setInteractive();
 
-        let pbCM = this.add.sprite(200, 380, "buttonPlay");
+        //Boton como jugar
+
+        let pbCM = this.add.sprite(200, 360, "buttonPlay");
         pbCM.setFrame(0);
         pbCM.setScale(0.75);
         pbCM.setOrigin(0.48, -0.1);
@@ -104,10 +108,41 @@ class MainMenu extends Phaser.Scene {
         this.cjT = this.add.text(pbCM.x - 145, pbCM.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
         this.cjT.setText("Cómo Jugar");
 
+        //Boton Score
+        let botonHistorial = this.add.sprite(200, 460, "buttonPlay");
+        botonHistorial.setFrame(0);
+        botonHistorial.setScale(0.75);
+        botonHistorial.setOrigin(0.48, -0.1);
+        botonHistorial.setInteractive();
+
+        botonHistorial.on("pointerover", () => {
+            botonHistorial.setFrame(1);
+        })
+
+        botonHistorial.on("pointerout", () => {
+            botonHistorial.setFrame(0);
+        })
+
+        botonHistorial.on("pointerdown", () => {
+            botonHistorial.setFrame(2);
+        })
+
+        botonHistorial.on("pointerup", () => {
+            botonHistorial.setFrame(0);
+            this.scene.sleep("MAINMENU")
+            this.scene.start("Historial", { escena: null, soundManager: this.soundManager });
+        })
+
+        this.historial = this.add.text(botonHistorial.x - 130, botonHistorial.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.historial.setText("Historial");
 
 
 
-        let pbCG = this.add.sprite(200, 480, "buttonPlay");
+
+
+
+        //Boton sonido
+        let pbCG = this.add.sprite(200, 560, "buttonPlay");
         pbCG.setFrame(0);
         pbCG.setScale(0.75);
         pbCG.setOrigin(0.48, -0.1);
@@ -147,7 +182,7 @@ class MainMenu extends Phaser.Scene {
             //cambiar();
 
             let form = "<input type=\"range\" min=\"1\" max=\"100\" value=\"50\"  id=\"myRange\">"
-            var Slider = this.add.dom(this.game.canvas.width/2, this.game.canvas.height/2).createFromHTML(form)
+            var Slider = this.add.dom(this.game.canvas.width / 2, this.game.canvas.height / 2).createFromHTML(form)
             $('#myRange').change(function (e) {
                 let valor = e.currentTarget.valueAsNumber;
                 let newValue = valor / 100;

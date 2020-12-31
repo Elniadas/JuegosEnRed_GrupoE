@@ -18,8 +18,8 @@ class Lobby extends Phaser.Scene {
 
     create() {
         //this.scene.launch("Chat");
-       
-        
+
+
         let lobby = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, 'Victoria');
         lobby.displayHeight = this.game.canvas.height
         lobby.displayWidth = this.game.canvas.width;
@@ -27,8 +27,8 @@ class Lobby extends Phaser.Scene {
         let logged = [false, false]
         let p1Name;
         let p2Name;
-        var Usuario = { id: 0, user: "", status: "" };
-        var Usuario2 = { id: 0, user: "", status: "" };
+        var Usuario = { id: 0, user: "", status: "", int: 0, concetado: false };
+        var Usuario2 = { id: 0, user: "", status: "", int: 0, concetado: false };
 
         let player1 = this.add.sprite(150, 450 - 50, 'P1');
         player1.setScale(0.8)
@@ -62,6 +62,8 @@ class Lobby extends Phaser.Scene {
 
                     Usuario.user = inputText.value;
                     Usuario.status = "connecting";
+                    Usuario.id=1;
+                    Usuario.concetado=true;
                     that.conectarUsuario(Usuario, function () {
                         console.log("intentado conectarse"); that.actualizarLista(() => {
                             console.log("fasd2");
@@ -203,8 +205,11 @@ class Lobby extends Phaser.Scene {
             }
 
 
-            if (logged[0] === true && logged[1] === true)
+            if (logged[0] === true && logged[1] === true) {
+                this.borrarIntervalos();
+                this.scene.stop("Lobby");
                 this.scene.start("Scene_play", { escena: null, soundManager: this.soundManager, names: { p1: p1Name, p2: p2Name } });
+            }
         })
 
         this.cjT = this.add.text(pbCM.x - 145, pbCM.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
@@ -453,7 +458,7 @@ class Lobby extends Phaser.Scene {
         $.ajax({
             method: "POST",
             url: 'http://localhost:8080/mensaje/fileWrite',
-            data: JSON.stringify(mensaje),
+            data: mensaje,
             processData: false,
             headers: {
                 "Content-Type": "application/json"
@@ -682,7 +687,14 @@ class Lobby extends Phaser.Scene {
 
     }
 
+    borrarIntervalos() {
 
+        var interval_id = window.setInterval("", 9999); // Get a reference to the last
+        // interval +1
+        for (var i = 1; i < interval_id; i++)
+            window.clearInterval(i);
+        //for clearing all intervals
+    }
 
 
 
