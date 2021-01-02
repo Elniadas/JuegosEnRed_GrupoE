@@ -27,8 +27,8 @@ class Lobby extends Phaser.Scene {
         let logged = [false, false]
         let p1Name;
         let p2Name;
-        var Usuario = { id: 0, user: "", status: "", int: 0, concetado: false };
-        var Usuario2 = { id: 0, user: "", status: "", int: 0, concetado: false };
+        var Usuario = { id: 0, user: "", status: "" };
+        var Usuario2 = { id: 0, user: "", status: "" };
 
         let player1 = this.add.sprite(150, 450 - 50, 'P1');
         player1.setScale(0.8)
@@ -62,8 +62,6 @@ class Lobby extends Phaser.Scene {
 
                     Usuario.user = inputText.value;
                     Usuario.status = "connecting";
-                    Usuario.id=1;
-                    Usuario.concetado=true;
                     that.conectarUsuario(Usuario, function () {
                         console.log("intentado conectarse"); that.actualizarLista(() => {
                             console.log("fasd2");

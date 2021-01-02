@@ -106,6 +106,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Crono", "./assets/Cronometro.png")
         this.load.image("Desconectado", "./assets/Desconectado.png")
         this.load.image("Conectado", "./assets/Conectado.png")
+        this.load.image("Missing", "./assets/missing.png")
 
         //Efectos//
 

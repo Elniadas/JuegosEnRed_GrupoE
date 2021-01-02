@@ -62,7 +62,7 @@ class MainMenu extends Phaser.Scene {
                 duration:3000
             })*/
             //this.scene.sleep("MAINMENU")
-            this.scene.start("Lobby", { escena: null, soundManager: this.soundManager });
+            this.scene.start("SelectorDePartidas", { escena: null, soundManager: this.soundManager });
         })
 
         pb2.on("pointerdown", () => {
