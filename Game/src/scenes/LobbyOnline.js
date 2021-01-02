@@ -257,7 +257,11 @@ class LobbyOnline extends Phaser.Scene {
         //Desconectamos al usuario cuando cierra la ventana//
 
         window.addEventListener('unload', (event) => {
-            //that.clientLeaving(Usuario);
+            console.log("Salir")
+            Usuario.status = null;
+            Usuario.user = null;
+            Usuario.id = 0;
+            that.clientLeaving(Usuario);
         })
 
 
@@ -636,6 +640,26 @@ class LobbyOnline extends Phaser.Scene {
         })
     }
 
+
+    clientLeaving(player) {
+
+        let partidaID = this.partidaDatos.id;
+        $.ajax({
+            method: "PUT",
+            url: 'http://localhost:8080/partida/player/' + partidaID,
+            data: JSON.stringify(player),
+            processData: false,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).done(function (player) {
+            //console.log("Player modified: " + JSON.stringify(player));
+
+        })
+    }
+
+
+
     //Funciones de apoyo
 
     conectarUsuario(player, callback) {
@@ -756,8 +780,8 @@ class LobbyOnline extends Phaser.Scene {
     showPlayer(Usuarios) {
         var that = this;
         let test = this.chat.getChildByID('info');
-        console.log("Mostrando los estados actualizados :", Usuarios);
-        console.log("YO: ", this.yo);
+        //console.log("Mostrando los estados actualizados :", Usuarios);
+        //console.log("YO: ", this.yo);
         $(test).empty();
 
         //$('#info').append("<div> User: " + Usuarios[i].user + " Status: " + Usuarios[i].status + " </div>");
@@ -790,8 +814,6 @@ class LobbyOnline extends Phaser.Scene {
                     if (Usuarios[0].user === this.yo.user) {
                         this.borrarIntervalos();
                         this.desconectarUsuario(this.yo, () => {
-
-
                             this.yo.user = "";
                             this.yo.status = "";
                             this.yo.id = 0;
@@ -845,9 +867,8 @@ class LobbyOnline extends Phaser.Scene {
                     console.log("Desconectado pa la calle asdasdada")
                     if (Usuarios[1].user === this.yo.user) {
                         this.borrarIntervalos();
+
                         this.desconectarUsuario(this.yo, () => {
-
-
                             this.yo.user = "";
                             this.yo.status = "";
                             this.yo.id = 0;
