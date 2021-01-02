@@ -227,6 +227,49 @@ class LobbyOnline extends Phaser.Scene {
 
 
 
+        let salirBoton = this.add.sprite(800, 10, "buttonPlay");
+        salirBoton.setFrame(0);
+        salirBoton.setScale(0.75);
+        salirBoton.setOrigin(0.48, -0.1);
+        salirBoton.setInteractive();
+
+        salirBoton.on("pointerover", () => {
+            salirBoton.setFrame(1);
+        })
+
+        salirBoton.on("pointerout", () => {
+            salirBoton.setFrame(0);
+        })
+
+        salirBoton.on("pointerdown", () => {
+            salirBoton.setFrame(2);
+        })
+
+        salirBoton.on("pointerup", () => {
+            salirBoton.setFrame(0);
+            if(Usuario.user!=="" &&Usuario.user!==null){
+
+                this.desconectarUsuario(Usuario, () => {
+                    Usuario.user = "";
+                    Usuario.status = "";
+                    Usuario.id = 0;
+                    Usuario.side = 0;
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
+
+                })
+
+            }else{
+                this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
+            }
+            
+        })
+
+        let salirTexto = this.add.text(salirBoton.x - 145, salirBoton.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        salirTexto.setText("Salir");
+
+
+
+
         ////////////////////////////////
         ////////////////////////////////
         ////////////////////////////////
@@ -412,14 +455,6 @@ class LobbyOnline extends Phaser.Scene {
 
             })
         }
-
-
-
-
-
-
-
-
 
 
         function meActualizo() {
