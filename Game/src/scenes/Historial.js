@@ -87,32 +87,6 @@ class Historial extends Phaser.Scene {
 
 
 
-
-    //Metodos POST//
-
-
-    sendHistorail(callback, mensaje) {
-
-        $.ajax({
-            method: "POST",
-            url: 'http://localhost:8080/historial/fileWrite',
-            data: JSON.stringify(mensaje),
-            processData: false,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).done(function () {
-            console.log("Mensaje escrito ");
-            if (typeof callback !== 'undefined') {
-                callback(mensaje)
-            }
-        })
-    }
-
-
-
-
-
     //Funciones de apoyo
 
 

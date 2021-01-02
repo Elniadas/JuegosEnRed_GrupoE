@@ -74,7 +74,7 @@ class SelectorDePartidas extends Phaser.Scene {
 
         let salir = this.add.text(salirB.x - 130, salirB.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
         salir.setText("Salir");
-        let act = this.add.text(actualizar.x - 130, actualizar.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        let act = this.add.text(actualizar.x - 130, actualizar.y + 30).setScrollFactor(0).setFontSize(45).setColor("#000000");
         act.setText("Actualizar");
 
 
@@ -90,7 +90,40 @@ class SelectorDePartidas extends Phaser.Scene {
         })
 
 
-        
+        let offLineBoton = this.add.sprite(200, 600, "buttonPlay");
+        offLineBoton.setFrame(0);
+        offLineBoton.setScale(0.75);
+        offLineBoton.setOrigin(0.48, -0.1);
+        offLineBoton.setInteractive();
+
+        offLineBoton.on("pointerover", () => {
+            offLineBoton.setFrame(1);
+        })
+
+        offLineBoton.on("pointerout", () => {
+            offLineBoton.setFrame(0);
+        })
+
+        offLineBoton.on("pointerdown", () => {
+            offLineBoton.setFrame(2);
+        })
+
+        offLineBoton.on("pointerup", () => {
+            offLineBoton.setFrame(0);
+
+            this.scene.start("Lobby", { escena: null, soundManager: this.soundManager });
+
+        })
+
+        let offLineTexto = this.add.text(offLineBoton.x - 145, offLineBoton.y + 30).setScrollFactor(0).setFontSize(30).setColor("#000000");
+        offLineTexto.setText("Jugar sin Online");
+
+
+
+
+
+
+
     }
 
 
@@ -112,6 +145,11 @@ class SelectorDePartidas extends Phaser.Scene {
             if (typeof callback !== 'undefined') {
                 callback()
             }
+        }).fail(() => {
+
+            $("#partidas").empty();
+            $("#partidas").append("<p>El servidor no esta disponible</p>");
+
         })
     }
 
@@ -119,13 +157,21 @@ class SelectorDePartidas extends Phaser.Scene {
 
 
     getPartidas(callback) {
+        var that = this;
         $.ajax({
             url: 'http://localhost:8080/partida/',
 
         }).done(function (partidas) {
+            console.log(partidas);
+            that.generarPartidas();
             if (typeof callback !== 'undefined') {
                 callback(partidas)
             }
+        }).fail(() => {
+
+            $("#partidas").empty();
+            $("#partidas").append("<p>El servidor no esta disponible</p>");
+
         })
     }
     //Metodos Put//
@@ -146,6 +192,11 @@ class SelectorDePartidas extends Phaser.Scene {
             if (typeof callback !== 'undefined') {
                 callback(partida)
             }
+        }).fail(() => {
+
+            $("#partidas").empty();
+            $("#partidas").append("<p>El servidor no esta disponible</p>");
+
         })
     }
 
@@ -186,13 +237,8 @@ class SelectorDePartidas extends Phaser.Scene {
 
                 console.log("click")
                 if (that.arrayPartidas[index].num < 2) {
-                    that.arrayPartidas[index].num++;
-
-                    that.putPartida(that.arrayPartidas[index], () => {
-                        that.scene.stop("SelectorDePartidas")
-                        that.scene.start("LobbyOnline", { escena: null, soundManager: that.soundManager, partida: that.arrayPartidas[index] });
-                    })
-
+                    that.scene.stop("SelectorDePartidas")
+                    that.scene.start("LobbyOnline", { escena: null, soundManager: that.soundManager, partida: that.arrayPartidas[index] });
                 }
 
             });

@@ -34,12 +34,7 @@ class Victoria extends Phaser.Scene {
 
         this.writeHistorial();
 
-        this.time.addEvent({
-            delay: 5000,
-            callback: this.delayDone,
-            callbackScope: this,
-            loop: false
-        });
+
 
     }
     unlock() {
@@ -57,22 +52,22 @@ class Victoria extends Phaser.Scene {
 
         let Mensaje;
         var date = new Date;
-        
+
 
         if (this.ganador === 1) {
-            Mensaje = (date.getDate()+"/"+(date.getMonth()+1)+" | "+"Ha gando el jugador : "+this.data.nameP1+" con un tiempo de: "+this.data.tiempoP1.mn+" : "+this.data.tiempoP1.sg+" : "+this.data.tiempoP1.cs);
-        }else{
-            Mensaje = (date.getDate()+"/"+(date.getMonth()+1)+" | "+"Ha gando el jugador : "+this.data.nameP2+" con un tiempo de: "+this.data.tiempoP2.mn+" : "+this.data.tiempoP2.sg+" : "+this.data.tiempoP2.cs);
+            Mensaje = (date.getDate() + "/" + (date.getMonth() + 1) + " | " + "Ha gando el jugador : " + this.data.nameP1 + " con un tiempo de: " + this.data.tiempoP1.mn + " : " + this.data.tiempoP1.sg + " : " + this.data.tiempoP1.cs);
+        } else {
+            Mensaje = (date.getDate() + "/" + (date.getMonth() + 1) + " | " + "Ha gando el jugador : " + this.data.nameP2 + " con un tiempo de: " + this.data.tiempoP2.mn + " : " + this.data.tiempoP2.sg + " : " + this.data.tiempoP2.cs);
         }
 
 
-        this.sendHistorail(()=>{console.log("Todo enviado")}, Mensaje)
+        this.sendHistorail(() => { console.log("Todo enviado") }, Mensaje)
 
     }
 
 
     sendHistorail(callback, mensaje) {
-
+        var that = this;
         $.ajax({
             method: "POST",
             url: 'http://localhost:8080/historial/fileWrite',
@@ -84,13 +79,14 @@ class Victoria extends Phaser.Scene {
         }).done(function () {
             if (typeof callback !== 'undefined') {
                 callback(mensaje)
+                setTimeout(() => {
+                    that.scene.start("MAINMENU", { escena: null, soundManager: that.soundManager });
+                }, 3000)
             }
+        }).fail(() => {
+            alert("Los servidores no se encuentran disponibles, No se ha podido guardar los resultados");
+            this.scene.start("MAINMENU", { escena: null, soundManager: that.soundManager });
         })
-    }
-
-
-    delayDone() {
-        this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
     }
 }
 export default Victoria;

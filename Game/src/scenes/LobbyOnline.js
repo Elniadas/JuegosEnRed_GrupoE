@@ -52,36 +52,48 @@ class LobbyOnline extends Phaser.Scene {
             //if (event.target.name === 'playButton') {
             var inputText = this.getChildByName('nameField');
             if (event.key === 'Enter') {
+
                 //  Have they entered anything?
                 if (inputText.value !== '') {
                     //  Turn off the click events
-                    this.removeListener('keyup');
 
-                    //  Hide the login element
-                    this.setVisible(false);
-                    this.p1Name = inputText.value;
-                    //  Populate the text with whatever they typed in
-                    that.textP1.setText('Jugador 1 ' + inputText.value);
+                    this.p1Name = inputText.value
+                    that.getLobbyPlayers((players) => {
+                        let existe = that.existeLobby(this.p1Name, players);
+                        if (!existe) {
+                            //  Hide the login element
+                            this.setVisible(false);
+                            this.removeListener('keyup');
+                            //  Populate the text with whatever they typed in
+                            that.textP1.setText('Jugador 1 ' + inputText.value);
+                            that.logged[0] = true;
 
-                    that.logged[0] = true;
+                            Usuario.user = inputText.value;
+                            Usuario.status = "connecting";
+                            Usuario.side = 1;
+                            that.conectarUsuario(Usuario, function () {
 
-                    Usuario.user = inputText.value;
-                    Usuario.status = "connecting";
-                    Usuario.side = 1;
-                    that.conectarUsuario(Usuario, function () {
-                        that.actualizarLista(() => {
+                                that.actualizarLista(() => {
+                                })
+                            });
+                            inputText.value = ''
+                        } else {
+                            alert("Ese Usuario ya esta en uso, escoge otro")
+                            inputText.value = ''
+                            this.scene.tweens.add({
+                                targets: this.textP1,
+                                alpha: 0.2,
+                                duration: 250,
+                                ease: 'Power3',
+                                yoyo: true
+                            });
+                        }
+                    })
 
-                            if (Usuario.status === "connected") {
-                                //console.log("Cambiando sprite a conectado")
-                                //that.desconectado.setTexture("Conectado")
-                            }
-
-                        })
-                    });
-                    inputText.value = ''
                 } else {
                     console.log("Para conectarse elija un nombre de usuario válido")
                     //  Flash the prompt
+                    inputText.value = ''
                     this.scene.tweens.add({
                         targets: this.textP1,
                         alpha: 0.2,
@@ -115,33 +127,44 @@ class LobbyOnline extends Phaser.Scene {
             //if (event.target.name === 'playButton') {
             var inputText = this.getChildByName('nameField');
             if (event.key === 'Enter') {
+
                 //  Have they entered anything?
                 if (inputText.value !== '') {
                     //  Turn off the click events
-                    this.removeListener('keyup');
+
                     this.p2Name = inputText.value
-                    //  Hide the login element
-                    this.setVisible(false);
+                    that.getLobbyPlayers((players) => {
+                        let existe = that.existeLobby(this.p2Name, players);
+                        if (!existe) {
+                            //  Hide the login element
+                            this.setVisible(false);
+                            this.removeListener('keyup');
+                            //  Populate the text with whatever they typed in
+                            that.textP2.setText('Jugador 2 ' + inputText.value);
+                            that.logged[1] = true;
 
-                    //  Populate the text with whatever they typed in
-                    that.textP2.setText('Jugador 2 ' + inputText.value);
-                    that.logged[1] = true;
+                            Usuario.user = inputText.value;
+                            Usuario.status = "connecting";
+                            Usuario.side = 2;
+                            that.conectarUsuario(Usuario, function () {
 
-                    Usuario.user = inputText.value;
-                    Usuario.status = "connecting";
-                    Usuario.side = 2;
-                    that.conectarUsuario(Usuario, function () {
+                                that.actualizarLista(() => {
+                                })
+                            });
+                            inputText.value = ''
+                        } else {
+                            alert("Ese Usuario ya esta en uso, escoge otro")
+                            inputText.value = ''
+                            this.scene.tweens.add({
+                                targets: this.textP2,
+                                alpha: 0.2,
+                                duration: 250,
+                                ease: 'Power3',
+                                yoyo: true
+                            });
+                        }
+                    })
 
-                        that.actualizarLista(() => {
-                            if (Usuario.status === "connected") {
-                                //console.log("Cambiando sprite a conectado")
-                                // that.desconectado.setTexture("Conectado")
-                            }
-
-
-                        })
-                    });
-                    inputText.value = ''
                 } else {
                     //  Flash the prompt
                     console.log("Para conectarse elija un nombre de usuario válido")
@@ -247,9 +270,10 @@ class LobbyOnline extends Phaser.Scene {
 
         salirBoton.on("pointerup", () => {
             salirBoton.setFrame(0);
-            if(Usuario.user!=="" &&Usuario.user!==null){
+            this.borrarIntervalos();
+            if (Usuario.user !== "" && Usuario.user !== null) {
 
-                this.desconectarUsuario(Usuario, () => {
+                this.eliminarUsuario(Usuario, () => {
                     Usuario.user = "";
                     Usuario.status = "";
                     Usuario.id = 0;
@@ -258,14 +282,23 @@ class LobbyOnline extends Phaser.Scene {
 
                 })
 
-            }else{
+            } else {
+                Usuario.user = "";
+                Usuario.status = "";
+                Usuario.id = 0;
+                Usuario.side = 0;
                 this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
             }
-            
+
         })
 
         let salirTexto = this.add.text(salirBoton.x - 145, salirBoton.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
         salirTexto.setText("Salir");
+
+
+        let lobbyName = this.add.text(this.game.canvas.width / 2 - 100, 90).setScrollFactor(0).setFontSize(30).setColor("#000000");
+        lobbyName.setText(this.partidaDatos.nombre);
+
 
 
 
@@ -353,7 +386,7 @@ class LobbyOnline extends Phaser.Scene {
                                             setTimeout(() => {
 
                                                 actualizarSistema()
-                                            }, 12000)
+                                            }, 18000)
                                             return
                                         });
                                     } else {
@@ -364,7 +397,7 @@ class LobbyOnline extends Phaser.Scene {
                                         setTimeout(() => {
 
                                             actualizarSistema()
-                                        }, 12000)
+                                        }, 18000)
                                         return;
 
 
@@ -389,7 +422,7 @@ class LobbyOnline extends Phaser.Scene {
 
 
                                                 actualizarSistema()
-                                            }, 12000)
+                                            }, 18000)
 
                                             return
                                         });
@@ -401,7 +434,7 @@ class LobbyOnline extends Phaser.Scene {
                                         setTimeout(() => {
 
                                             actualizarSistema()
-                                        }, 12000)
+                                        }, 18000)
                                         return
 
                                     }
@@ -424,7 +457,7 @@ class LobbyOnline extends Phaser.Scene {
 
 
                                             actualizarSistema()
-                                        }, 12000)
+                                        }, 18000)
 
                                         return
                                     });
@@ -436,7 +469,7 @@ class LobbyOnline extends Phaser.Scene {
                                     setTimeout(() => {
 
                                         actualizarSistema()
-                                    }, 12000)
+                                    }, 18000)
                                     return
                                 }
                                 //
@@ -449,7 +482,7 @@ class LobbyOnline extends Phaser.Scene {
                     actualizarLista()
                     //console.log("ACTUALIZACION USUARIOS FINALIZADA")
                     console.log("TIMEOUT RANDOM KE NO DEBERIA SALIR NUNCA");
-                    setTimeout(() => { actualizarSistema() }, 12000)
+                    setTimeout(() => { actualizarSistema() }, 18000)
                 }
 
 
@@ -458,7 +491,7 @@ class LobbyOnline extends Phaser.Scene {
 
 
         function meActualizo() {
-            if (Usuario.user !== '' && windowFocus) {
+            if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected") {
 
                 Usuario.status = "connected";
                 that.putPlayer(Usuario, () => {
@@ -494,7 +527,7 @@ class LobbyOnline extends Phaser.Scene {
 
         setTimeout(() => {
             actualizarSistema();
-        }, 5000);
+        }, 9000);
 
 
         setTimeout(() => {
@@ -503,14 +536,6 @@ class LobbyOnline extends Phaser.Scene {
         }, 500);
 
 
-
-
-
-        $(this.chat.getChildByID('Actualizar')).click(function () {
-
-            that.actualizarLista(() => { console.log("Actualizado") })
-
-        })
 
         $("#summit").click(function () {
             let mensaje = $('#mensaje')
@@ -542,11 +567,12 @@ class LobbyOnline extends Phaser.Scene {
         });
         $(window).focus(function () {
             windowFocus = true;
-
-            if (that.yo.user !== '' && that.yo.user !== null) {
-                that.conectarUsuario(Usuario, function () { that.actualizarLista(() => { }) });
-                Usuario.status = "reconnecting"
-                console.log("Reconectando");
+            if (that.scene.isActive("LobbyOnline")) {
+                if (that.yo.user !== '' && that.yo.user !== null) {
+                    that.conectarUsuario(Usuario, function () { that.actualizarLista(() => { }) });
+                    Usuario.status = "reconnecting"
+                    console.log("Reconectando");
+                }
             }
 
         });
@@ -559,7 +585,35 @@ class LobbyOnline extends Phaser.Scene {
     //FUNCIONES DE TODA ESTA COSA
     //Metodos Get//
 
+    /*
     getChat(callback) {
+
+        var that = this
+        let nombrePartida = "Partida1"+".txt";
+        console.log(nombrePartida)
+
+        $.ajax({
+            url: 'http://localhost:8080/mensaje/fileRead/concreto',
+            data: nombrePartida,
+            processData: false,
+            headers: {
+                "Content-Type": "application/json"
+            }
+
+        }).done(function (mensajes) {
+            //console.log("Chat conseguido", callback)
+            if (typeof callback !== 'undefined') {
+                callback(mensajes)
+            }
+        })
+    }
+    */
+
+
+    getChat(callback) {
+
+
+
         $.ajax({
             url: 'http://localhost:8080/mensaje/fileRead',
 
@@ -570,6 +624,8 @@ class LobbyOnline extends Phaser.Scene {
             }
         })
     }
+
+
 
     getLobbyPlayers(callback) {
         var that = this
@@ -592,6 +648,14 @@ class LobbyOnline extends Phaser.Scene {
                 //console.log("Jugadores obtenidos", players)
                 callback(players)
             }
+        }).fail(() => {
+            this.borrarIntervalos();
+            alert("Los servidores no se encuentran disponibles, volviendo al menú principal");
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
         })
 
     }
@@ -615,8 +679,31 @@ class LobbyOnline extends Phaser.Scene {
         })
     }
 
+    /*
+        sendMenssage(callback, mensaje) {
+            var that = this
+            let nombrePartida = this.partidaDatos.nombre+".txt";
+            
+            $.ajax({
+                method: "POST",
+                url: 'http://localhost:8080/mensaje/fileWrite/concreto',
+                data: [nombrePartida,mensaje],
+                processData: false,
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).done(function () {
+                console.log("Mensaje escrito ");
+                if (typeof callback !== 'undefined') {
+                    callback(mensaje)
+                }
+            })
+        }
+        */
+
 
     sendMenssage(callback, mensaje) {
+
 
         $.ajax({
             method: "POST",
@@ -633,6 +720,9 @@ class LobbyOnline extends Phaser.Scene {
             }
         })
     }
+
+
+
 
     //Metodos PUT//
 
@@ -697,6 +787,11 @@ class LobbyOnline extends Phaser.Scene {
 
     //Funciones de apoyo
 
+
+
+
+
+
     conectarUsuario(player, callback) {
         var that = this
         if (player.user === '') {
@@ -708,6 +803,7 @@ class LobbyOnline extends Phaser.Scene {
 
         } else {
             if (player.status !== "connected") {
+
                 Conectar();
 
             } else {
@@ -776,6 +872,53 @@ class LobbyOnline extends Phaser.Scene {
 
     }
 
+
+    eliminarUsuario(player, callback) {
+
+
+        var that = this;
+        if ((player.user !== '' && player.user !== null)) {
+            let existeU = false;
+            this.getLobbyPlayers((players) => {
+                existeU = this.existe(player, players);
+                Eliminar(existeU);
+
+            })
+        } else {
+            console.log("Algo malo ha ocurrido en eliminar")
+            if (typeof callback !== 'undefined') {
+
+                callback(player)
+            }
+        }
+
+        function Eliminar(existe) {
+            if (existe) {
+
+                //console.log(player)
+
+                player.status = null
+                player.user = null;
+                player.id = 0;
+                that.putPlayer(player, callback)
+
+            } else {
+
+                if (typeof callback !== 'undefined') {
+                    callback(player)
+                }
+                console.log("No se puede eliminar porque no existe")
+            }
+        }
+
+
+    }
+
+
+
+
+
+
     ausentarUsuario(player, callback) {
         var that = this;
 
@@ -814,12 +957,10 @@ class LobbyOnline extends Phaser.Scene {
     //Show item in page
     showPlayer(Usuarios) {
         var that = this;
-        let test = this.chat.getChildByID('info');
+
         //console.log("Mostrando los estados actualizados :", Usuarios);
         //console.log("YO: ", this.yo);
-        $(test).empty();
 
-        //$('#info').append("<div> User: " + Usuarios[i].user + " Status: " + Usuarios[i].status + " </div>");
 
         if (Usuarios[0] !== null) {
             if (Usuarios[0].side === 1) {
@@ -843,12 +984,13 @@ class LobbyOnline extends Phaser.Scene {
                     this.inputTextP1.setVisible(false);
                 }
                 if (Usuarios[0].status === "disconected") {
-                    console.log("Desconectado pa la calle")
+                    //console.log("Desconectado pa la calle")
 
 
                     if (Usuarios[0].user === this.yo.user) {
                         this.borrarIntervalos();
-                        this.desconectarUsuario(this.yo, () => {
+                        console.log("TE SACO", this.yo);
+                        this.eliminarUsuario(this.yo, () => {
                             this.yo.user = "";
                             this.yo.status = "";
                             this.yo.id = 0;
@@ -899,11 +1041,11 @@ class LobbyOnline extends Phaser.Scene {
                     this.inputTextP2.setVisible(false);
                 }
                 if (Usuarios[1].status === "disconected") {
-                    console.log("Desconectado pa la calle asdasdada")
+                    //console.log("Desconectado pa la calle asdasdada")
                     if (Usuarios[1].user === this.yo.user) {
                         this.borrarIntervalos();
-
-                        this.desconectarUsuario(this.yo, () => {
+                        console.log("TE SACO", this.yo);
+                        this.eliminarUsuario(this.yo, () => {
                             this.yo.user = "";
                             this.yo.status = "";
                             this.yo.id = 0;
@@ -982,7 +1124,23 @@ class LobbyOnline extends Phaser.Scene {
     }
 
 
+    existeLobby(name, players) {
 
+
+        for (let i = 0; i < players.length; i++) {
+            if (players[i].user === name) {
+                if (players[i].status !== "connected" && players[i].status !== "missing") {
+
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+
+    }
 
     writeMenssage(mensaje, player) {
         var date = new Date;
