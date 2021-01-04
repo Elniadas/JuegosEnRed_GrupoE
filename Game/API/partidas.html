@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <style>
+        p {
+            font-size: 34px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            text-align: center;
+            background-image: url("/assets/BaseBoton.png");
+            background-repeat: no-repeat;
+            background-position: left;
+            background-size: cover;
+        }
+
+        .sPartidas {
+            width: 600px;
+            height: 400px;
+            background: #ffffff00;
+            overflow: hidden;
+            overflow-y: scroll;
+            position: static;
+        }
+
+        .botonJoin{
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;            
+            border-radius: 10px;
+            border-width: 4px;
+            border-color: black;
+            background-color: orange;
+            font-weight: bold;
+            padding: 7px;
+            box-shadow: 0 4px rgb(46, 46, 46);
+        }
+
+        .botonJoin:hover {
+            background-color: orangered;
+        }
+
+        .botonJoin:active{
+            box-shadow: 0 0px rgb(46, 46, 46);
+            transform: translateY(2px);
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <div id='partidas' class="sPartidas">
+        <p>El servidor no está disponible</p>
+    </div>
+
+
+
+</body>
+
+</html>

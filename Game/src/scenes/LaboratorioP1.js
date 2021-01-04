@@ -5,6 +5,7 @@ class LaboratorioP1 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -103,6 +104,7 @@ class LaboratorioP1 extends Phaser.Scene {
         this.input.keyboard.on('keyup-' + 'W', this.unlock.bind(this));
         this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
         this.input.keyboard.on('keyup-' + 'Q', this.unlock.bind(this));
+        this.keyLock = false;
 
 
     }
@@ -209,10 +211,11 @@ class LaboratorioP1 extends Phaser.Scene {
                 this.data.escena.escenasActivas[0] = false;
                 this.data.escena.escenarios[4].completadoP1U = true;
                 this.data.escena.LP1.destroy();
+                this.data.escena.particlesLPU.destroy()
                 this.keyLock = true;
                 this.data.escena.blurLaboratorioU.alpha = 0;
                 this.data.escena.crearPortalLaboratorioP1();
-                this.data.escena.crearFrostP1();
+                //this.data.escena.crearFrostP1();
                 this.scene.stop(this)
             }, 500);
         }

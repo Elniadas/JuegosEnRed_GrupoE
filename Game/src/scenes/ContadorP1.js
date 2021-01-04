@@ -5,6 +5,7 @@ class ContadorP1 extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.soundManager = data.soundManager
     }
 
     preload() {
@@ -29,7 +30,7 @@ class ContadorP1 extends Phaser.Scene {
 
 
 
-        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,A');
+        this.keyboard = this.input.stopPropagation().keyboard.addKeys('D,S');
 
 
         this.play = false;
@@ -42,7 +43,7 @@ class ContadorP1 extends Phaser.Scene {
 
 
         this.input.keyboard.on('keyup-' + 'D', this.unlock.bind(this));
-        this.input.keyboard.on('keyup-' + 'A', this.unlock.bind(this));
+        this.input.keyboard.on('keyup-' + 'S', this.unlock.bind(this));
 
         this.keyLock = false;
 
@@ -59,7 +60,7 @@ class ContadorP1 extends Phaser.Scene {
 
     update() {
 
-        if (this.keyboard.A.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
+        if (this.keyboard.S.isDown === true && this.keyLock === false && this.pulsar === true && this.pulsadorA.frame.name === 3) {
             this.keyLock = true
             this.parar();
             this.pintarTiempo();
@@ -70,13 +71,14 @@ class ContadorP1 extends Phaser.Scene {
             console.log(this.Marca)
             if (this.Marca >= 650 && this.Marca <= 750) {
                 console.log("Has ganado un abrazo");
+                this.data.escena.particlesContPU.destroy();
                 this.completado=true
+                if(this.Marca >= 698 && this.Marca<=702) {
+                    console.log("Practicamente clavao si no clavao")
+                    this.data.escena.crearMasTP1(); 
+                }
             }
-            else if (this.css >= 698 && this.css<=702) {
-                console.log("Practicamente clavao")
-                this.data.escena.crearMasTP1(); 
-                this.completado=true;
-            } else {
+              else {
                 console.log("te toca probar de nuevo")
             }
 
@@ -105,7 +107,7 @@ class ContadorP1 extends Phaser.Scene {
             this.emp = new Date();                      //Fecha en la que empezamos
             this.elcrono = setInterval(() => { this.tiempo() }, 10);   //Funcion temporizador cada 10 ms llama a la funcion tiempo
             this.play = true;                           //Reloj puesta en marcha
-            this.sound.play('Reloj');                  //Poner el audio del reloj
+            this.soundManager.play('Reloj');                  //Poner el audio del reloj
                  
         }
     }
@@ -138,7 +140,6 @@ class ContadorP1 extends Phaser.Scene {
                 "4" + " : " + "00"
             ]);
         }
-        console.log(this.css)
     }
 
 
