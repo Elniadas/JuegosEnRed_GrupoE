@@ -66,21 +66,23 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > ### 2.2 Flujo del Juego
 
-> - En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
+> - En el siguiente apartado se describirán de forma general el transcurso de una partida desde el arranque del juego, incluyendo las dependencias con el servidor y posteriormente, en el apartado de Niveles, se detalla cada una de las pruebas más específicamente.
 
 > - Los jugadores comenzarán en el Menú Principal y tendrán varias opciones:
 > - Si desean comenzar una partida deben acceder al botón de "Jugar".
+> - Si desean ver el historial de partidas previas jugadas, deben acceder al botón de "Historial". Si el servidor no está conectado, no se mostrará ninguna partida previa.
 > - Si los jugadores desean hacer una comprobación de los controles de las diferentes pruebas, podrán acceder al tutorial donde encontrarán todas las pruebas para probarlas las veces que deseen mediante el botón de "Cómo Jugar".
 > - Si desea ajustar el volumen, los jugadores podrán acceder a ello mediante el botón de "Sonido".
 
 
-> - Si se accionó el botón de "Jugar", el sistema preguntará a ambos jugadores un nickname, para poder posteriormente guardar las puntuaciones.
+> - Si se accionó el botón de "Jugar", los jugadores accederán a una lobby general. Si el servidor no está conectado, estarán disponibles las opciones "Salir", para volver al menú principal, y "Jugar sin online", para jugar en local. Si el servidor, en cambio, está conectado y disponibles, los jugadores podrán ver un selector de partidas a las que se podrán unir. Una vez seleccionada una de las partidas disponibles, éstos deberán introducir un nombre de usuario para poder chatear con otro jugador que esté conectado y se haya unido a la misma partida (o sala de chat previa a la partida). Cuando los jugadores consideren, podrán accionar el botón de "Jugar", para entrar en partida.
 
 > - Al final de la partida, el sistema lleva a cabo un recuento del tiempo total de acabado de cada jugador en cada una de las pruebas y determinará un ganador.
 
 
 
-![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Diagrama.jpeg)
+![Diagrama](/Images/DiagramaNavegacion.png)
+
 ![Diagrama](/Images/Diagrama2.jpeg)
 
 > ### 2.3 Cámara
@@ -203,6 +205,41 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/EscenarioNieve.gif)
+
+
+
+> ## 5. Diagrama de clases del servidor
+
+> El servidor tiene las siguientes clases que se listan a continuación:
+> - Clase Player: guarda el nombre de los usuarios, su estado, y el lado del jugador (Player 1 o Player 2).
+
+> - Clase Partida: Guarda los nombres de las distintas partidas de la lobby, el número de jugadores por partida.
+
+> - Clase PartidaController: Controlador de partidas; el frontend realizará peticiones para crear las distintas partidas de la lobby y pedir las distintas partidas creadas al servidor, para posteriormente mostrarlas en pantalla.
+
+> - Clase TheNidesProjectApplication: Aplicación principal de Spring
+
+> - Clase HistorialController: Clase que permite leer y escribir las distintas partidas acabadas en una sesión de juego. Las partidas se escriben y leen de un .txt.
+
+> - Clase MensajeController: Clase que permite leer y escribir los distintos mensajes del chat. Los mensajes se escriben y leen de un .txt.
+
+> - Clase SimpleCORSFilter: Clase que permite hacer llamadas AJAX a recursos que residen fuera del origen. Permite ejecutar el servidor en el navegador.
+
+![Diagrama clases backend](/Images/UML.png)
+
+
+
+> ## 6. Instrucciones para ejecutar la aplicación
+
+> El juego se ejecuta en el localhost, por lo tanto no hace falta abrir el Visual Studio para ejecutar la aplicación. Por lo tanto, los pasos para abrir el servidor y acceder al juego son los siguientes:
+
+> - 1º: Abrir la consola de comandos (cmd en el buscador de windows) y situarse en el directorio donde se encuentre el archivo .jar descargado (Si el archivo está en Descargas: "cd Downloads").
+
+> - 2º: Una vez situados en el directorio correspondiente, buscar el archivo .jar: "java -jar *NombreDelArchivo.jar*" y presionar enter.
+
+> - 3º: El servidor ya estará abierto, para acceder al juego, basta con poner en la barra de búsqueda del navegador (preferiblemente Firefox) "localhost:8080".
+
+> Una vez realizados estos pasos, ya se podrá empezar a jugar al juego
 
 
 
