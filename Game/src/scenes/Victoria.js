@@ -55,9 +55,9 @@ class Victoria extends Phaser.Scene {
 
 
         if (this.ganador === 1) {
-            Mensaje = (date.getDate() + "/" + (date.getMonth() + 1) + " | " + "Ha gando el jugador : " + this.data.nameP1 + " con un tiempo de: " + this.data.tiempoP1.mn + " : " + this.data.tiempoP1.sg + " : " + this.data.tiempoP1.cs);
+            Mensaje = (date.getDate() + "/" + (date.getMonth() + 1) + " | " + "Ha ganado el jugador : " + this.data.nameP1 + " con un tiempo de: " + this.data.tiempoP1.mn + " : " + this.data.tiempoP1.sg + " : " + this.data.tiempoP1.cs);
         } else {
-            Mensaje = (date.getDate() + "/" + (date.getMonth() + 1) + " | " + "Ha gando el jugador : " + this.data.nameP2 + " con un tiempo de: " + this.data.tiempoP2.mn + " : " + this.data.tiempoP2.sg + " : " + this.data.tiempoP2.cs);
+            Mensaje = (date.getDate() + "/" + (date.getMonth() + 1) + " | " + "Ha ganado el jugador : " + this.data.nameP2 + " con un tiempo de: " + this.data.tiempoP2.mn + " : " + this.data.tiempoP2.sg + " : " + this.data.tiempoP2.cs);
         }
 
 
