@@ -5,36 +5,38 @@
 
     <style>
         p {
-            font-size: 34px;
+            font-size: 20px;
+
+            /* margin-bottom: 20px;
+            margin-left: 100x; */
+
+            margin: 10px;
             margin-top: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-family: 'Courier New', Courier, monospace;
             font-weight: bold;
-            text-align: center;
+            text-align: left;
             background-image: url("game/assets/BaseBoton.png");
             background-repeat: no-repeat;
             background-position: left;
             background-size: cover;
+            float: left;
         }
 
-        .sPartidas {
-            width: 600px;
-            height: 400px;
-            background: #ffffff00;
-            overflow: hidden;
-            overflow-y: scroll;
-            position: static;
-        }
 
-        .botonJoin{
-            font-size: 20px;
-            font-family: 'Courier New', Courier, monospace;            
+
+        .botonJoin {
+            font-size: 15px;
+            font-family: 'Courier New', Courier, monospace;
             border-radius: 10px;
-            border-width: 4px;
+            border-width: 1px;
             border-color: black;
             background-color: orange;
             font-weight: bold;
-            padding: 7px;
+            float: left;
+            margin: 10px;
+            margin-top: 15px;
+            padding: 4px;
             box-shadow: 0 4px rgb(46, 46, 46);
         }
 
@@ -42,11 +44,46 @@
             background-color: orangered;
         }
 
-        .botonJoin:active{
+        .botonJoin:active {
             box-shadow: 0 0px rgb(46, 46, 46);
             transform: translateY(2px);
         }
 
+        .sPartidas {
+            padding: 10px;
+            width: 600px;
+            height: 400px;
+            background: #4b1b0821;
+            overflow: hidden;
+            overflow-y: scroll;
+            position: static;
+            scrollbar-color: rgb(255, 60, 0) rgba(0, 0, 0, 0);
+            scrollbar-width: thin;
+            scrollbar-highlight-color: rgb(141, 44, 15);
+
+            /* margin-left:100px; */
+
+        }
+
+        /* width */
+        .sPartidas::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        .sPartidas::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        /* Handle */
+        .sPartidas::-webkit-scrollbar-thumb {
+            background: rgb(255, 60, 0);
+        }
+
+        /* Handle on hover */
+        .sPartidas::-webkit-scrollbar-thumb:hover {
+            background: rgb(141, 44, 15);
+        }
     </style>
 </head>
 
@@ -56,6 +93,7 @@
     <div id='partidas' class="sPartidas">
         <p>El servidor no está disponible</p>
     </div>
+
 
 
 

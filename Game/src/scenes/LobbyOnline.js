@@ -310,7 +310,8 @@ class LobbyOnline extends Phaser.Scene {
                     Usuario.status = "";
                     Usuario.id = 0;
                     Usuario.side = 0;
-                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
+                    Usuario = null;
+                    this.scene.start("SelectorDePartidas", { escena: null, soundManager: this.soundManager })
 
                 })
                 //Si el jugador todavía no había puesto ningún nombre 
@@ -319,7 +320,8 @@ class LobbyOnline extends Phaser.Scene {
                 Usuario.status = "";
                 Usuario.id = 0;
                 Usuario.side = 0;
-                this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
+                Usuario = null;
+                this.scene.start("SelectorDePartidas", { escena: null, soundManager: this.soundManager })
             }
 
         })
@@ -418,7 +420,7 @@ class LobbyOnline extends Phaser.Scene {
                                 //Lo ausentamos
                                 that.ausentarUsuario(players[i], () => {
                                     //Si el jugador todavía está en la ventana de juego (windowfocus=true)
-                                    if (windowFocus) {
+                                    if (windowFocus && Usuario.status !== "ready") {
 
                                         //Lo reconectamos y le quitamos el ausente
                                         Usuario.status = "reconnecting";
@@ -465,7 +467,7 @@ class LobbyOnline extends Phaser.Scene {
                                 //Lo desconectamos cambiando su estado
                                 that.desconectarUsuario(players[i], () => {
                                     //Si está en la ventana de juego, lo volvemos a conectar
-                                    if (windowFocus) {
+                                    if (windowFocus && Usuario.status !== "ready") {
                                         Usuario.status = "reconnecting";
                                         console.log("Usuario desconectado ahora vamos a conectarlo")
                                         that.conectarUsuario(Usuario, () => {
@@ -554,16 +556,30 @@ class LobbyOnline extends Phaser.Scene {
         //Función que le manda al servidor todo el rato el estado del jugador 
         function meActualizo() {
 
-            if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected" && Usuario.status !== 'ready') {
+            if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected") {
 
-                //Estado "conectado" en el JSON
-                console.log("Me actualizo", Usuario);
-                Usuario.status = "connected";
-                //Mandamos el estado al servidor con una petición PUT 
-                that.putPlayer(Usuario, () => {
-                    that.actualizarLista(() => { setTimeout(() => { meActualizo() }, 1000) })
+                if (Usuario.status === 'ready') {
+                    console.log("Me actualizo", Usuario);
+                    Usuario.status = "ready";
+                    //Usuario.user= Usuario.user;
+                    //Mandamos el estado al servidor con una petición PUT 
+                    that.putPlayer(Usuario, () => {
+                        that.actualizarLista(() => { setTimeout(() => { meActualizo() }, 1000) })
 
-                });
+                    });
+
+                } else {
+
+                    console.log("Me actualizo", Usuario);
+                    Usuario.status = "connected";
+                    //Mandamos el estado al servidor con una petición PUT 
+                    that.putPlayer(Usuario, () => {
+                        that.actualizarLista(() => { setTimeout(() => { meActualizo() }, 1000) })
+
+                    });
+                }
+
+
             } else {
                 //console.log("No me actualizo")
                 that.actualizarLista(() => { setTimeout(() => { meActualizo() }, 1000) })
@@ -593,9 +609,9 @@ class LobbyOnline extends Phaser.Scene {
         }, 500)
 
         //La función "Update" simulada se llama cada 9 segundos
-        setTimeout(() => {
-            actualizarSistema();
-        }, 30000);
+        // setTimeout(() => {
+        //     actualizarSistema();
+        // }, 30000);
 
         //Mandamos el estado del jugador al servidor cada 500 ms
         setTimeout(() => {
@@ -632,14 +648,7 @@ class LobbyOnline extends Phaser.Scene {
         });
         $(window).focus(function () {
             windowFocus = true;
-            if (that.scene.isActive("LobbyOnline")) {
-                if (that.yo.user !== '' && that.yo.user !== null && that.yo.status !== "ready") {
-                    that.conectarUsuario(Usuario, function () { that.actualizarLista(() => { }) });
-                    Usuario.status = "reconnecting"
-                    console.log("Reconectando");
-                }
-            }
-
+           
         });
 
 
@@ -678,9 +687,9 @@ class LobbyOnline extends Phaser.Scene {
     getChat(callback) {
 
 
-
+        let idPartida = this.partidaDatos.id
         $.ajax({
-            url: 'http://localhost:8080/mensaje/fileRead',
+            url: 'http://localhost:8080/partida/fileRead/'+idPartida,
 
         }).done(function (mensajes) {
             //console.log("Chat conseguido", callback)
@@ -704,11 +713,11 @@ class LobbyOnline extends Phaser.Scene {
             if (typeof callback !== 'undefined') {
                 if (partida !== null) {
                     //asignamos la posición en la partida del jugador que se haya loggeado (P1 o P2)
-                    if (that.yo.side === 1 && partida.p1.side === 1) {
-                        that.yo = partida.p1;
-                    } else if (that.yo.side === 2 && partida.p1.side === 2) {
-                        that.yo = partida.p2;
-                    }
+                    // if (that.yo.side === 1 && partida.p1.side === 1) {
+                    //     that.yo = partida.p1;
+                    // } else if (that.yo.side === 2 && partida.p1.side === 2) {
+                    //    that.yo = partida.p2;
+                    // }
                 }
                 //Jugadores en partida (p1 y p2 en "Partida.java")
                 var players = [partida.p1, partida.p2];
@@ -725,6 +734,7 @@ class LobbyOnline extends Phaser.Scene {
             this.yo.status = "";
             this.yo.id = 0;
             this.yo.side = 0;
+            this.yo = null;
             this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
         })
 
@@ -774,10 +784,10 @@ class LobbyOnline extends Phaser.Scene {
 
     sendMenssage(callback, mensaje) {
 
-
+        let idPartida = this.partidaDatos.id
         $.ajax({
             method: "POST",
-            url: 'http://localhost:8080/mensaje/fileWrite',
+            url: 'http://localhost:8080/partida/fileWrite/'+idPartida,
             data: mensaje,
             processData: false,
             headers: {
@@ -1040,7 +1050,7 @@ class LobbyOnline extends Phaser.Scene {
                     this.inputTextP1.setVisible(false);
                 }
                 if (Usuarios[0].status === "ready") {
-                    
+
                     console.log("El usuario esta Ready");
                     //Cambiamos el icono del círculo a un círculo verde
                     that.iconoEstado.setTexture("Ready");
@@ -1053,7 +1063,7 @@ class LobbyOnline extends Phaser.Scene {
                     this.logged[0] = true;
                     //Ocultamos el campo de texto para que no vuelva a poner nombre el jugador1
                     this.inputTextP1.setVisible(false);
-                    
+
                 }
                 //Si el jugador está ausente
                 if (Usuarios[0].status === "missing") {
@@ -1084,6 +1094,7 @@ class LobbyOnline extends Phaser.Scene {
                             this.yo.status = "";
                             this.yo.id = 0;
                             this.yo.side = 0;
+                            this.yo = null;
                             this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
 
                         })
@@ -1161,6 +1172,7 @@ class LobbyOnline extends Phaser.Scene {
                             this.yo.status = "";
                             this.yo.id = 0;
                             this.yo.side = 0;
+                            this.yo = null;
                             this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager })
 
                         })
@@ -1196,7 +1208,7 @@ class LobbyOnline extends Phaser.Scene {
         }
 
         //Si estoy conectado o ausente, independientemente qué jugador sea, desactivo el campo de texto contrario, para no volver a introducir un nombre
-        if (this.yo.status === "connected" || this.yo.status === "missing"||this.yo.status === "ready") {
+        if (this.yo.status === "connected" || this.yo.status === "missing" || this.yo.status === "ready") {
             //Si soy el jugador 1
             if (this.yo.side === 1) {
                 //Desactivo el campo de texto del jugador 2
@@ -1213,7 +1225,12 @@ class LobbyOnline extends Phaser.Scene {
             console.log("Comenzado partida desde el actualizar")
             this.borrarIntervalos();
             this.scene.stop("Lobby");
-            this.scene.start("Scene_play", { escena: null, soundManager: this.soundManager, names: { p1: this.p1Name, p2: this.p2Name } });
+            if (Usuarios[0].user === that.yo.user) {
+                this.scene.start("Scene_play", { escena: null, soundManager: this.soundManager, users: { p1: Usuarios[0], p2: Usuarios[1] }, online: true, partida: this.partidaDatos, yo: Usuarios[0] });
+            } else if (Usuarios[1].user === that.yo.user) {
+                this.scene.start("Scene_play", { escena: null, soundManager: this.soundManager, users: { p1: Usuarios[0], p2: Usuarios[1] }, online: true, partida: this.partidaDatos, yo: Usuarios[1] });
+            }
+
 
         }
 

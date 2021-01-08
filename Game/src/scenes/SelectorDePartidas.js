@@ -15,7 +15,7 @@ class SelectorDePartidas extends Phaser.Scene {
 
     create() {
 
-        this.generarPartidas();//Crea todas las partidas del selector de partidas haciendo un GET al backend
+
         let bc = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, 'Victoria').setDepth(-100);
         this.soundManager.play('Musica_fondo', { loop: true })
         let salirB = this.add.sprite(200, 10, "buttonPlay");
@@ -83,13 +83,9 @@ class SelectorDePartidas extends Phaser.Scene {
         this.arrayPartidas;
 
         //Cargamos HTML "partidas.html" y se superpone sobre el canvas
-        this.partidas = this.add.dom(500, 350).createFromCache('Partidas');
+        this.partidas = this.add.dom(320, 350).createFromCache('Partidas');
         //Pide las partidas creadas en el servidor y las muestra en el div de "partidas.html"
-        that.getPartidas((partidas) => {
-            //Muestra las partidas en el div
-            that.mostarPartidas(partidas, () => { console.log("Partidas mostradas") })
-
-        })
+        refrescarLobby();
 
 
         let offLineBoton = this.add.sprite(200, 600, "buttonPlay");
@@ -112,16 +108,26 @@ class SelectorDePartidas extends Phaser.Scene {
 
         offLineBoton.on("pointerup", () => {
             offLineBoton.setFrame(0);
-
+            this.borrarIntervalos();
             this.scene.start("Lobby", { escena: null, soundManager: this.soundManager });
 
         })
 
         let offLineTexto = this.add.text(offLineBoton.x - 145, offLineBoton.y + 30).setScrollFactor(0).setFontSize(30).setColor("#000000");
-        offLineTexto.setText("Jugar sin Online");
+        offLineTexto.setText("Jugar Offline");
 
 
 
+        function refrescarLobby() {
+            that.getPartidas((partidas) => {
+                that.mostarPartidas(partidas, () => {
+                    console.log("Partidas mostradas")
+                    setTimeout(() => {
+                        refrescarLobby();
+                    }, 1000)
+                })
+            })
+        }
 
 
 
@@ -138,24 +144,6 @@ class SelectorDePartidas extends Phaser.Scene {
     //FUNCIONES DE TODA ESTA COSA
     //Metodos Get//
 
-    //Método GET que crea las partidas en el servidor (crearPartidas() en PartidaController.java)
-    generarPartidas(callback) {
-        $.ajax({
-            url: 'http://localhost:8080/partida/crearPartidas',
-
-        }).done(function () {
-            console.log("partidas creadas")
-            if (typeof callback !== 'undefined') {
-                callback()
-            }
-        }).fail(() => {
-            //Si el servidor no está disponible, mandamos mensaje
-            $("#partidas").empty();
-            $("#partidas").append("<p>El servidor no esta disponible</p>");
-
-        })
-    }
-
 
 
     //Método GET para cargar todas las partidas del servidor (getPartidas() en PartidaController.java)
@@ -167,7 +155,7 @@ class SelectorDePartidas extends Phaser.Scene {
         }).done(function (partidas) {
             console.log(partidas);
             //crea las partidas en el servidor
-            that.generarPartidas();
+
             if (typeof callback !== 'undefined') {
                 callback(partidas)
             }
@@ -178,33 +166,7 @@ class SelectorDePartidas extends Phaser.Scene {
 
         })
     }
-    //Metodos Put//
-    //Método PUT que asigna un id a una partida (ModifyPartida() en PartidaController.java)
-    putPartida(partida, callback) {
-
-        console.log(partida);
-
-        $.ajax({
-            method: "PUT",
-            url: 'http://localhost:8080/partida/' + partida.id,
-            data: JSON.stringify(partida),
-            processData: false,
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).done(function (partida) {
-            if (typeof callback !== 'undefined') {
-                callback(partida)
-            }
-        }).fail(() => {
-            //Si el servidor no está disponible, mandamos mensaje
-            $("#partidas").empty();
-            $("#partidas").append("<p>El servidor no esta disponible</p>");
-
-        })
-    }
-
-
+  
     //Funciones de apoyo
 
     //El jugador puede ver las partidas disponibles en el div de partidas.html
@@ -218,7 +180,7 @@ class SelectorDePartidas extends Phaser.Scene {
         for (let index = 0; index < partidas.length; index++) {
 
             $("#partidas").append("<p>" + partidas[index].nombre + ", Jugadores : " + partidas[index].num + "/2 </p>" +
-                "<input type=\"button\" value=\"Unirse a P" + (index+1) + "\" id=\"bp" + partidas[index].id + "\" class=\"botonJoin\">")
+                "<input type=\"button\" value=\"Unirse" + "\" id=\"bp" + partidas[index].id + "\" class=\"botonJoin\">")
         }
         if (typeof callback !== 'undefined') {
             callback()
@@ -236,7 +198,7 @@ class SelectorDePartidas extends Phaser.Scene {
         for (let index = 0; index < this.arrayPartidas.length; index++) {
 
             console.log("Asginando al boton : " + index + " la partida", this.arrayPartidas[index])
-             //Botones debajo de cada partida
+            //Botones debajo de cada partida
             let bid = "bp" + this.arrayPartidas[index].id;
             let bb = this.partidas.getChildByID(bid);
             console.log(bid)
@@ -246,6 +208,7 @@ class SelectorDePartidas extends Phaser.Scene {
                 //Mientras que la lobby no supere los 2 jugadores
                 if (that.arrayPartidas[index].num < 2) {
                     //Asigna un id a la partida y abre la lobby correspondiente
+                    that.borrarIntervalos();
                     that.scene.stop("SelectorDePartidas")
                     that.scene.start("LobbyOnline", { escena: null, soundManager: that.soundManager, partida: that.arrayPartidas[index] });
                 }
@@ -254,6 +217,17 @@ class SelectorDePartidas extends Phaser.Scene {
 
         }
     }
+
+    borrarIntervalos() {
+
+        var interval_id = window.setInterval("", 9999); // Get a reference to the last
+        // interval +1
+
+        for (var i = 1; i < interval_id; i++)
+            window.clearInterval(i);
+        //for clearing all intervals
+    }
+
 
 }
 export default SelectorDePartidas;

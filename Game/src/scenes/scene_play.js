@@ -9,7 +9,11 @@ class Scene_play extends Phaser.Scene {
     init(data) {
         this.soundManager = data.soundManager;
         this.data = data;
-
+        this.online = data.online
+        if (this.online) {
+            this.partidaDatos = data.partida;
+            this.yo = data.yo
+        }
 
     }
     preload() {
@@ -81,7 +85,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
         this.playerU.setDepth(1000);
-        this.playerU.name = this.data.names.p1;
+        this.playerU.name = this.data.users.p1.user;
 
         //Player 2//
 
@@ -93,7 +97,7 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
-        this.playerD.name = this.data.names.p2;
+        this.playerD.name = this.data.users.p2.user;
 
         //Cargar sonido
 
@@ -716,6 +720,89 @@ class Scene_play extends Phaser.Scene {
             loop: false
         });
 
+        if (this.online) {
+            console.log("Estamos online")
+            console.log("Estamos online")
+            console.log("Estamos online")
+            let windowFocus = true;
+            var Usuario = this.yo;
+
+            console.log("Ademas soy este fulano: ", Usuario)
+            function meActualizo() {
+
+                if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected") {
+
+                    console.log("Me actualizo", Usuario);
+                    Usuario.status = "connected";
+                    //Mandamos el estado al servidor con una petición PUT 
+                    that.putPlayer(Usuario, () => {
+                        that.getLobbyPlayers((players) => {
+                            that.todos(players, () => {
+                                setTimeout(() => { meActualizo() }, 1000)
+                            })
+                        })
+
+                    });
+
+                } else {
+                    //console.log("No me actualizo")
+                    that.getLobbyPlayers((players) => {
+                        that.todos(players, () => {
+                            setTimeout(() => { meActualizo() }, 1000)
+                        })
+                    })
+                }
+            }
+
+            function primera() {
+                if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected") {
+
+                    console.log("Me actualizo", Usuario);
+                    Usuario.status = "ready";
+                    //Mandamos el estado al servidor con una petición PUT 
+                    that.putPlayer(Usuario, () => {
+                        that.getLobbyPlayers((players) => {
+                            that.todos(players, () => {
+                                setTimeout(() => { meActualizo() }, 1000)
+                            })
+                        })
+
+                    });
+
+                } else {
+                    //console.log("No me actualizo")
+                    that.getLobbyPlayers((players) => {
+                        that.todos(players, () => {
+                            setTimeout(() => { meActualizo() }, 1000)
+                        })
+                    })
+                }
+            }
+
+            primera();
+
+
+
+
+            $(window).blur(function () {
+                windowFocus = false;
+
+            });
+            $(window).focus(function () {
+                windowFocus = true;
+                if (that.scene.isActive("Scene_play")) {
+                    if (that.yo.user !== '' && that.yo.user !== null && that.yo.status !== "ready") {
+                        Usuario.status = "connected"
+                        that.putPlayer(Usuario)
+                        console.log("Reconectando");
+                    }
+                }
+
+            });
+
+        }
+
+
 
 
     }
@@ -815,7 +902,12 @@ class Scene_play extends Phaser.Scene {
             this.keyboardP2.ESC.isDown = false;
             this.pararP1();
             this.pararP2();
-            this.scene.launch("Pause", { escena: this, soundManager: this.soundManager })
+            if (this.online) {
+                this.scene.launch("Pause", { escena: this, soundManager: this.soundManager, online: this.online, yo: this.yo,partida:this.partidaDatos })
+            } else {
+                this.scene.launch("Pause", { escena: this, soundManager: this.soundManager })
+            }
+
             //this.keyboardP2.ESC.isDown=true;
         }
 
@@ -2439,7 +2531,7 @@ class Scene_play extends Phaser.Scene {
 
     borrarIntervalos() {
 
-       
+
         this.keyDelete();
         var interval_id = window.setInterval("", 9999); // Get a reference to the last
         // interval +1
@@ -2510,9 +2602,143 @@ class Scene_play extends Phaser.Scene {
 
     }
 
+    //API REST COSAS//
+
+
+    getLobbyPlayers(callback) {
+        var that = this
+        let idPartida = this.partidaDatos.id
+        $.ajax({
+            url: 'http://localhost:8080/partida/' + idPartida,
+
+        }).done(function (partida) {
+            //console.log("Partida de getLobby", partida)
+            if (typeof callback !== 'undefined') {
+                if (partida !== null) {
+                    //asignamos la posición en la partida del jugador que se haya loggeado (P1 o P2)
+                    // if (that.yo.side === 1 && partida.p1.side === 1) {
+                    //     that.yo = partida.p1;
+                    // } else if (that.yo.side === 2 && partida.p1.side === 2) {
+                    //     that.yo = partida.p2;
+                    // }
+                }
+                //Jugadores en partida (p1 y p2 en "Partida.java")
+                var players = [partida.p1, partida.p2];
+                //console.log("Jugadores obtenidos", players)
+                //Devolvemos a los jugadores loggeados
+                callback(players)
+            }
+        }).fail(() => {
+            //Si el servidor no está disponible, borramos todos los intervalos de tiempo establecidos
+            this.borrarIntervalos();
+            alert("Los servidores no se encuentran disponibles, volviendo al menú principal");
+            //borramos el nombre, el estado, los ids y las posiciones del JSON, y devolvemos al jugador al menú principal
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+        })
+
+    }
+
+    putPlayer(player, callback) {
+
+        let partidaID = this.partidaDatos.id;
+        $.ajax({
+            method: "PUT",
+            url: 'http://localhost:8080/partida/player/' + partidaID,
+            data: JSON.stringify(player),
+            processData: false,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).done(function (partida) {
+            if (typeof callback !== 'undefined') {
+
+                callback(partida)
+            }
+        }).fail(() => {
+            //Si el servidor no está disponible, borramos todos los intervalos de tiempo establecidos
+            this.borrarIntervalos();
+            alert("Los servidores no se encuentran disponibles, volviendo al menú principal");
+            //borramos el nombre, el estado, los ids y las posiciones del JSON, y devolvemos al jugador al menú principal
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+        })
+    }
+
+    todos(players, callback) {
+
+        if (players[0].status === "" || players[0].status === "disconected" || players[0].status === null) {
+            this.borrarIntervalos();
+
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            alert("Player 1 desconectado, volviendo al menu principal");
+            this.eliminarUsuario(this.yo, () => {
+                this.yo=null;
+                this.eliminarUsuario(players[1], () => {
+                    console.log("borrados")
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+                })
+            })
+            return
+        }
+        if (players[1].status === "" || players[1].status === "disconected" || players[1].status === null) {
+            this.borrarIntervalos();
+
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            alert("Player 2 desconectado, volviendo al menu principal"); 
+            this.eliminarUsuario(this.yo, () => {
+                this.yo=null;
+                this.eliminarUsuario(players[0], () => {
+                    console.log("borrados")
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+                })
+            })
+            return
+        }
+
+        if (typeof callback !== 'undefined') {
+            callback()
+        }
+
+    }
+
+    eliminarUsuario(player, callback) {
+        //console.log(player)
+
+        player.status = null
+        player.user = null;
+        player.id = 0;
+        this.putPlayer(player, callback)
+
+
+    }
+
+   
+
+
 
 
 }
+
+
+
+
+
+
+
+
 
 /*
   var particles = this.add.particles('snowFlake')

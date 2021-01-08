@@ -17,6 +17,10 @@ class MainMenu extends Phaser.Scene {
     }
     create() {
 
+
+        
+
+
         var that = this;
 
         let bg = this.add.image(0, 0, "menu").setOrigin(0, 0);

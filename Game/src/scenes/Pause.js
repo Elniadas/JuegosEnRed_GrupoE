@@ -9,6 +9,11 @@ class Pause extends Phaser.Scene {
     }
     init(data) {
         this.data = data;
+        this.online = data.online
+        if (this.online) {
+            this.partidaDatos = data.partida;
+            this.yo = data.yo
+        }
 
     }
 
@@ -133,6 +138,7 @@ class Pause extends Phaser.Scene {
         salir.displayHeight = this.game.canvas.height * 0.1;
         salir.displayWidth = this.game.canvas.width * 0.2;
         salir.texto = this.add.text(salir.x - 40, salir.y - 15, 'Salir').setFontSize(30)
+
         salir.setInteractive();
         salir.on("pointerup", () => {
             if (this.scene.isPaused("Tutorial")) {
@@ -140,14 +146,26 @@ class Pause extends Phaser.Scene {
                 this.data.escena.keyDelete();
                 this.cerrarEscenas();
                 this.scene.launch("MAINMENU");
+
                 this.scene.stop("Pause");
             }
             if (this.scene.isPaused("Scene_play")) {
-                this.data.escena.borrarIntervalos();
-                this.cerrarEscenas();
-                this.scene.stop("Scene_play");
-                this.scene.start("MAINMENU");
-                this.scene.stop("Pause");
+                if (this.online) {
+                    this.data.escena.borrarIntervalos();
+                    this.cerrarEscenas();
+                    this.data.escena.eliminarUsuario(this.data.escena.yo,()=>{
+                      
+                        this.scene.start("MAINMENU", { escena: null, soundManager: this.data.escena.soundManager });
+                    })
+
+                } else {
+                    this.data.escena.borrarIntervalos();
+                    this.cerrarEscenas();
+                    this.scene.stop("Scene_play");
+                    this.scene.start("MAINMENU");
+                    this.scene.stop("Pause");
+                }
+
             }
         })
 
@@ -173,7 +191,7 @@ class Pause extends Phaser.Scene {
                 salir.displayWidth = this.game.canvas.width * 0.2;
                 salir.setInteractive();
                 this.textoSalir.text = 'Salir'
-                
+
                 salir.on("pointerup", () => {
                     this.print0.text = ''
                     this.textoSalir.text = ''
@@ -239,13 +257,13 @@ class Pause extends Phaser.Scene {
     }
 
     createSliderSound() {
-        var that= this
+        var that = this
 
         //this.cambiarSonido();
         //var cambiar= this.cambiarSonido;
         //cambiar();
         let form = "<input type=\"range\" min=\"1\" max=\"100\" value=\"50\"  id=\"myRange\">"
-        this.Slider = this.add.dom(this.game.canvas.width/2, this.game.canvas.height/2).createFromHTML(form)
+        this.Slider = this.add.dom(this.game.canvas.width / 2, this.game.canvas.height / 2).createFromHTML(form)
         $('#myRange').change(function (e) {
             let valor = e.currentTarget.valueAsNumber;
             let newValue = valor / 100;
@@ -343,6 +361,9 @@ class Pause extends Phaser.Scene {
         this.data.escena.escenasActivas[1] = false;
 
     }
+
+
+
 
 
 }
