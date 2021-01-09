@@ -115,24 +115,44 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 > - El tiempo empezará a correr al inicio de cada escenario, y se detendrá una vez los jugadores hayan llegado al final del último escenario.
 
 > ## 3. Interfaces
+
 > - Pantalla principal: con los botones "Jugar", "Cómo Jugar" y "Sonido" como se ha mencionado en el apartado del Flujo del Juego.
-![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Menu.png)
-> - Pantalla de jugadores: pantalla en la que se muestra a ambos jugadores. Podrán ver su avatar y cambiar su nickname. 
+
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Menu.PNG)
+
+> - Lobby principal: Selector de partidas que aparece sólo si el servidor está conectado
+
+![Lobby](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/SelectorPartidas.PNG)
+
+> - Partida online: Partida concreta del selector de partidas. En ella, los jugadores pueden hablar a través del chat. Hay un chat independiente por Partida. Si los jugadores no introducen un nombre (loguearse), no pueden escribir por el chat.
+
+![LobbyConcreta](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Lobby.PNG)
+
+> - Partida offline: pantalla en la que se muestra a ambos jugadores y a la que se puede acceder accionando el botón "Jugando Offline", en la Lobby principal. Podrán ver su avatar y cambiar su nickname. 
+
 ![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/NicknameFase2.png)
+
 > - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de debajo la del 2. Ambas tienen el tiempo que llevan consumido.
+
 ![Interfaz](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Interfaz.png)
 
 > - Pantalla de pausa: Con los botones de "Reanudar" para continuar la partida, "Sonido" para ajustar el volumen y "Salir" para volver al menú
 
-
-![Pausa](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Pausa.png)
+![Pausa](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Pausa.PNG)
 
 > - Cómo jugar: donde aparecen una pantalla con las instrucciones con los controles y objetivo del juego.
+
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorialControles.gif)
+
 ![Image from gyazo](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/tutorial2.gif)
 
+> - Historial de partidas: en él se almacenan las partidas previas terminadas por los jugadores.
+
+![Historial](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Historial.PNG)
+
 > - Pantalla de ajuste de sonido: para ajustar el volumen
-![Sonidos](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Sonido.png)
+
+![Sonidos](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Sonido.PNG)
 
 > - Pantalla de victoria
 
