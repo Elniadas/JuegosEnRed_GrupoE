@@ -16,6 +16,9 @@ class Bootloader extends Phaser.Scene {
         //Fuente texto//
 
         this.load.bitmapFont('Digitalism', './assets/Digitalism.png', './assets/Digitalism.xml')
+        this.load.bitmapFont('Fuente', './assets/Fuente_0.png', './assets/Fuente.xml')
+        this.load.bitmapFont('MotionControl', './assets/MotionControl_0.png', './assets/MotionControl.xml')
+
 
         //Tutorial//
 
@@ -106,7 +109,9 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Crono", "./assets/Cronometro.png")
         this.load.image("Desconectado", "./assets/Desconectado.png")
         this.load.image("Conectado", "./assets/Conectado.png")
+        this.load.image("Ready", "./assets/tick.png")
         this.load.image("Missing", "./assets/missing.png")
+        this.load.image("Botones", "./assets/BaseBoton.png")
 
         //Efectos//
 
@@ -138,7 +143,9 @@ class Bootloader extends Phaser.Scene {
         this.load.image('laser', './assets/laser.png');
         this.load.spritesheet("timeMAS", "./assets/Time++SSheet.png", { frameWidth: 437, frameHeight: 678 });
         //MenuPausa//
-        this.load.image('menuPausa', './assets/MenuPausa.jpg');
+        this.load.image("sonido", './assets/Sonido.jpg');
+        this.load.image('menuPausa', './assets/Pausa.jpg');
+        //this.load.image('menuPausa', './assets/MenuPausa.jpg');
         this.load.image('botonPausa', './assets/botonPausa.png');
         //VICTORIA//
         this.load.image('Victoria', './assets/Victoria.jpg')

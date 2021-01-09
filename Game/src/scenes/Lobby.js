@@ -78,7 +78,7 @@ class Lobby extends Phaser.Scene {
 
 
         inputTextP2.on('keyup', function (event) {
-          
+
             //if (event.target.name === 'playButton') {
             var inputText = this.getChildByName('nameField');
             if (event.key === 'Enter') {
@@ -144,7 +144,7 @@ class Lobby extends Phaser.Scene {
                 textP1.setText('Jugador 1 ' + textoP1);
                 logged[0] = true;
                 textoP1 = ''
-            } 
+            }
 
 
             if (textoP2 !== '') {
@@ -162,7 +162,7 @@ class Lobby extends Phaser.Scene {
 
 
             if (logged[0] === true && logged[1] === true)
-                this.scene.start("Scene_play", { escena: null, soundManager: this.soundManager, names: { p1: p1Name, p2: p2Name } });
+                this.scene.start("Scene_play", { escena: null, soundManager: this.soundManager, users: { p1: { user: p1Name }, p2: { user: p2Name } } });
         })
 
         this.cjT = this.add.text(pbCM.x - 145, pbCM.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
