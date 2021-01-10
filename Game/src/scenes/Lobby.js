@@ -255,7 +255,7 @@ class Lobby extends Phaser.Scene {
 
             var inputText = inputTextP1.getChildByName('nameField').value
             console.log(inputText)
-            if (inputText.value !== '') {
+            if (inputText !== '') {
                 //  Turn off the click events
                 inputTextP1.removeListener('keyup');
 
@@ -270,15 +270,9 @@ class Lobby extends Phaser.Scene {
                 ;
                 logged[0] = true;
                 inputTextP1.value = ''
-            } else {
-                //  Flash the prompt
-                this.scene.tweens.add({
-                    targets: textP1,
-                    alpha: 0.2,
-                    duration: 250,
-                    ease: 'Power3',
-                    yoyo: true
-                });
+            }else{
+                alert("Escriba un nombre de usuario")
+                
             }
 
         })
@@ -309,7 +303,7 @@ class Lobby extends Phaser.Scene {
 
             var inputText = inputTextP2.getChildByName('nameField').value
             console.log(inputText)
-            if (inputText.value !== '') {
+            if (inputText !== '') {
                 //  Turn off the click events
                 inputTextP2.removeListener('keyup');
 
@@ -326,26 +320,13 @@ class Lobby extends Phaser.Scene {
                 inputTextP2.value = ''
             } else {
                 //  Flash the prompt
-                this.scene.tweens.add({
-                    targets: textP2,
-                    alpha: 0.2,
-                    duration: 250,
-                    ease: 'Power3',
-                    yoyo: true
-                });
+                alert("Escriba un nombre de usuario")
             }
 
         })
 
         this.summitP2Texto = this.add.bitmapText(this.summitP2.x - 47, this.summitP2.y + 7, 'MotionControl', "Loguearse", -25);
         this.summitP2Texto.tint = "#000000";
-
-
-
-
-
-
-
 
     }
 
