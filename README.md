@@ -116,7 +116,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > ## 3. Interfaces
 
-> - Pantalla principal: con los botones "Jugar", "Cómo Jugar" y "Sonido" como se ha mencionado en el apartado del Flujo del Juego.
+> - Pantalla principal: con los botones "Jugar", "Cómo Jugar", "Historial" y "Sonido" como se ha mencionado en el apartado del Flujo del Juego.
 
 ![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/MenuPrincipal.png)
 
@@ -235,17 +235,15 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Clase Partida: Guarda los nombres de las distintas partidas de la lobby, el número de jugadores por partida.
 
-> - Clase PartidaController: Controlador de partidas; el frontend realizará peticiones para crear las distintas partidas de la lobby y pedir las distintas partidas creadas al servidor, para posteriormente mostrarlas en pantalla.
+> - Clase PartidaController: Controlador de partidas; el frontend realizará peticiones para crear las distintas partidas de la lobby y pedir las distintas partidas creadas al servidor, para posteriormente mostrarlas en pantalla. Adicionalmente, y como cada partida tiene su propio chat, el controlador de las partidas permite leer y escribir los distintos mensajes del chat de cada una de ellas. Cada partida tiene un chat independiente del resto de partidas (se genera un .txt por partida)
 
 > - Clase TheNidesProjectApplication: Aplicación principal de Spring
 
 > - Clase HistorialController: Clase que permite leer y escribir las distintas partidas acabadas en una sesión de juego. Las partidas se escriben y leen de un .txt.
 
-> - Clase MensajeController: Clase que permite leer y escribir los distintos mensajes del chat. Los mensajes se escriben y leen de un .txt.
-
 > - Clase SimpleCORSFilter: Clase que permite hacer llamadas AJAX a recursos que residen fuera del origen. Permite ejecutar el servidor en el navegador.
 
-![Diagrama clases backend](/Images/UML.png)
+![Diagrama clases backend](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/DiagramaClasesBackend.png)
 
 
 
@@ -261,13 +259,24 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > Una vez realizados estos pasos, ya se podrá empezar a jugar al juego
 
+> La alternativa a localhost es:
+
+> - Abrir el servidor desde la consola de comandos tal cual se especifica en la alternativa anterior
+
+> - Abrir la carpeta "TheNidesProject" -> "src" -> "main" -> "java" -> "resources" -> "static" en Visual Studio, y lanzar abrir la aplicación con la extensión "Live Share" del Visual Studio.
+
+> Con el servidor abierto desde la consola de comandos y la aplicación abierta desde el visual, también se puede empezar a jugar
 
 
 
-Referencias
+
+> ## Referencias
 
 Estructura de un GDD:
 <p>https://github.com/dsaltares/sion-tower/blob/master/doc/gdd/gdd.pdf</p>
 <p>https://www.youtube.com/watch?v=z97ys0TDwDI</p>
+
+Cambiar fuente de texto phaser:
+<p>https://youtu.be/eejnHjgiy3I<p>
 
 
