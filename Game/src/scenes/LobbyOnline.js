@@ -40,16 +40,29 @@ class LobbyOnline extends Phaser.Scene {
         //Sprites jugador y estado del jugador (conectado, desconectado o missing --> Hasta que no introduce nombre, estará en rojo)
         let player1 = this.add.sprite(150, 450 - 50, 'P1');
         player1.setScale(0.8)
-        this.textP1 = this.add.text(player1.x - 100, player1.y - 200, 'Introduce su nombre', { color: 'white', fontSize: '20px ' });
+        this.textP1 = this.add.bitmapText(player1.x - 100, player1.y - 205, 'MotionControl', "Introduzca su nombre", -30);
         //Icono rojo, círculo de desconectado
         this.iconoEstado = this.add.image(player1.x - 120, player1.y - 190, "Desconectado");
         this.iconoEstado.scale = 0.1
 
         //Campo de texto superpuesto en el canvas de "inputName.html"
-        this.inputTextP1 = this.add.dom(player1.x, player1.y + 200).createFromCache('User1');
+        this.inputTextP1 = this.add.dom(player1.x+25, player1.y + 200).createFromCache('User1');
 
 
         this.inputTextP1.addListener('keyup');
+
+
+        var inputTextpp1 = this.inputTextP1.getChildByName('nameField');
+
+        $(inputTextpp1).focus(function () {
+            console.log("Poniendo")
+            that.inputTextP1.addListener('keyup');
+        });
+
+        $(inputTextpp1).blur(function () {
+            console.log("Kitando")
+            that.inputTextP1.removeListener('keyup');
+        });
 
 
         this.inputTextP1.on('keyup', function (event) {
@@ -122,21 +135,112 @@ class LobbyOnline extends Phaser.Scene {
 
 
 
+        this.summitP1 = this.add.sprite(player1.x-5, player1.y+230, "buttonPlay");
+        this.summitP1.setFrame(0);
+        this.summitP1.setScale(0.3);
+        this.summitP1.setOrigin(0.48, -0.1);
+        this.summitP1.setInteractive();
+
+        this.summitP1.on("pointerover", () => {
+            this.summitP1.setFrame(1);
+        })
+
+        this.summitP1.on("pointerout", () => {
+            this.summitP1.setFrame(0);
+        })
+
+        this.summitP1.on("pointerdown", () => {
+            this.summitP1.setFrame(2);
+        })
+
+        this.summitP1Texto = this.add.bitmapText(this.summitP1.x - 47, this.summitP1.y + 7, 'MotionControl', "Loguearse", -25);
+        this.summitP1Texto.tint="#000000";
+        //Desconectamos al jugador si ya ha introducido un nombre
+        this.summitP1.on("pointerup", () => {
+            console.log("Pulsado")
+            this.summitP1.setFrame(0);
+            let textoP1 = this.inputTextP1.getChildByName('nameField').value
+            console.log(textoP1)
+            if (textoP1 !== '') {
+                console.log("texto diferente a vacio")
+
+                that.getLobbyPlayers((players) => {
+                    let existe = that.existeLobby(this.p1Name, players);
+                    if (!existe) {
+                        //Ocultamos el campo de texto 
+                        this.inputTextP1.setVisible(false);
+
+                        this.summitP1Texto.setVisible(false);
+                        //Quitamos los listeners
+                        this.inputTextP1.removeListener('keyup');
+                        //Actualizamos el nombre del jugador, que en el comienzo empezó vacío
+                        this.p1Name = textoP1
+                        //Cambiamos "Introducir su nombre" por el nombre que el jugador se ha puesto
+                        that.textP1.setText('Jugador 1 ' + textoP1);
+                        //El estado del jugador ahora pasa a "loggeado"
+                        that.logged[0] = true;
+
+                        //Actualizamos el json y ponemos el nombre, el estado y el lugar que ocupa el jugador ("side")
+                        Usuario.user = textoP1;
+                        Usuario.status = "connecting";
+                        Usuario.side = 1;
+
+                        //Conectamos al usuario
+                        that.conectarUsuario(Usuario, function () {
+                            //Función que actualiza el icono circular encima del jugador
+                            that.actualizarLista(() => {
+                            })
+                        });
+                        this.inputTextP1.value= ''
+                    } else {
+                        //Si no se introduce nombre y se presiona enter, el texto parpadea
+                        alert("Ese Usuario ya esta en uso, escoge otro")
+                       this. inputTextP1.value = ''
+                    }
+                })
+
+                
+
+            } else {
+                //Si no se introduce nombre y se presiona enter, el texto parpadea
+                alert("Escriba un nombre de usuario")
+                this.inputTextP1.value = ''
+
+            }
+
+        })
+
+        
+
+
+
+
+
         //MISMA CONFIGURACIÓN PERO CON EL JUGADOR 2 (logged[1], side=2, p2Name etc...)
 
         let player2 = this.add.sprite(920, 450 - 50, 'P2')
         player2.flipX = true;
         player2.setScale(0.8)
-        this.textP2 = this.add.text(player2.x - 100, player2.y - 200, 'Introduce su nombre', { color: 'white', fontSize: '20px ' });
+        this.textP2 = this.add.bitmapText(player2.x - 100, player2.y - 205, 'MotionControl', "Introduzca su nombre", -30); 
         this.iconoEstadoP2 = this.add.image(player2.x - 120, player2.y - 190, "Desconectado");
         this.iconoEstadoP2.scale = 0.1
 
 
-        this.inputTextP2 = this.add.dom(player2.x, player2.y + 200).createFromCache('User1');
+        this.inputTextP2 = this.add.dom(player2.x+25, player2.y + 200).createFromCache('User1');
 
 
         this.inputTextP2.addListener('keyup');
+        var inputTextpp2 = this.inputTextP2.getChildByName('nameField');
 
+        $(inputTextpp2).focus(function () {
+            console.log("Poniendo")
+            that.inputTextP2.addListener('keyup');
+        });
+
+        $(inputTextpp2).blur(function () {
+            console.log("Kitando")
+            that.inputTextP2.removeListener('keyup');
+        });
 
         this.inputTextP2.on('keyup', function (event) {
 
@@ -198,13 +302,88 @@ class LobbyOnline extends Phaser.Scene {
 
 
 
+        this.summitP2 = this.add.sprite(player2.x-5, player2.y+230, "buttonPlay");
+        this.summitP2.setFrame(0);
+        this.summitP2.setScale(0.3);
+        this.summitP2.setOrigin(0.48, -0.1);
+        this.summitP2.setInteractive();
+
+        this.summitP2.on("pointerover", () => {
+            this.summitP2.setFrame(1);
+        })
+
+        this.summitP2.on("pointerout", () => {
+            this.summitP2.setFrame(0);
+        })
+
+        this.summitP2.on("pointerdown", () => {
+            this.summitP2.setFrame(2);
+        })
+
+        //Desconectamos al jugador si ya ha introducido un nombre
+        this.summitP2.on("pointerup", () => {
+            console.log("Pulsado")
+            this.summitP2.setFrame(0);
+            let textoP2 = this.inputTextP2.getChildByName('nameField').value
+            console.log(textoP2)
+            if (textoP2 !== '') {
+                console.log("texto diferente a vacio")
+                
+                that.getLobbyPlayers((players) => {
+                    let existe = that.existeLobby(this.p2Name, players);
+                    if (!existe) {
+                        //Ocultamos el campo de texto 
+                        this.inputTextP2.setVisible(false);
+
+                        this.summitP2Texto.setVisible(false);
+                        //Quitamos los listeners
+                        this.inputTextP2.removeListener('keyup');
+                        //Actualizamos el nombre del jugador, que en el comienzo empezó vacío
+                        this.p2Name = textoP2
+                        //Cambiamos "Introducir su nombre" por el nombre que el jugador se ha puesto
+                        that.textP2.setText('Jugador 2 ' + textoP2);
+                        //El estado del jugador ahora pasa a "loggeado"
+                        that.logged[1] = true;
+
+                        //Actualizamos el json y ponemos el nombre, el estado y el lugar que ocupa el jugador ("side")
+                        Usuario.user = textoP2;
+                        Usuario.status = "connecting";
+                        Usuario.side = 2;
+
+                        //Conectamos al usuario
+                        that.conectarUsuario(Usuario, function () {
+                            //Función que actualiza el icono circular encima del jugador
+                            that.actualizarLista(() => {
+                            })
+                        });
+                        this.inputTextP2.value= ''
+                    } else {
+                        //Si no se introduce nombre y se presiona enter, el texto parpadea
+                        alert("Ese Usuario ya esta en uso, escoge otro")
+                       this. inputTextP2.value = ''
+                    }
+                })
+
+            } else {
+                //Si no se introduce nombre y se presiona enter, el texto parpadea
+                alert("Escriba un nombre de usuario")
+                this.inputTextP2.value = ''
+
+            }
+
+        })
+
+        this.summitP2Texto = this.add.bitmapText(this.summitP2.x - 47, this.summitP2.y + 7, 'MotionControl', "Loguearse", -25);
+        this.summitP2Texto.tint="#000000";
+
+
 
 
         //BOTÓN DE PLAY --> Si los dos jugadores no están conectados, la partida no comienza
 
-        let pbCM = this.add.sprite(200, 10, "buttonPlay");
+        let pbCM = this.add.sprite(880, 30, "buttonPlay");
         pbCM.setFrame(0);
-        pbCM.setScale(0.75);
+        pbCM.setScale(0.6);
         pbCM.setOrigin(0.48, -0.1);
         pbCM.setInteractive();
 
@@ -268,8 +447,8 @@ class LobbyOnline extends Phaser.Scene {
             // }
         })
 
-        this.cjT = this.add.text(pbCM.x - 145, pbCM.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
-        this.cjT.setText("Jugar");
+        this.cjT = this.add.bitmapText(pbCM.x - 53, pbCM.y + 10, 'MotionControl', "Jugar", -60);
+        this.cjT.tint="#000000";
 
 
         //////////////////////////////////////////////////////////////////////////
@@ -279,9 +458,9 @@ class LobbyOnline extends Phaser.Scene {
 
         //Botón para salir de la lobby
 
-        let salirBoton = this.add.sprite(880, 10, "buttonPlay");
+        let salirBoton = this.add.sprite(200, 30, "buttonPlay");
         salirBoton.setFrame(0);
-        salirBoton.setScale(0.75);
+        salirBoton.setScale(0.6);
         salirBoton.setOrigin(0.48, -0.1);
         salirBoton.setInteractive();
 
@@ -326,12 +505,13 @@ class LobbyOnline extends Phaser.Scene {
 
         })
 
-        let salirTexto = this.add.text(salirBoton.x - 145, salirBoton.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
-        salirTexto.setText("Salir");
+        let salirTexto = this.add.bitmapText(salirBoton.x - 55, salirBoton.y + 10, 'MotionControl', "Salir", -60);
+        salirTexto.tint="#000000";
 
 
-        let lobbyName = this.add.text(this.game.canvas.width / 2 - 80, 135).setScrollFactor(0).setFontSize(30).setColor("#000000").setStroke("#000000", 2);
+        let lobbyName = this.add.bitmapText(this.game.canvas.width / 2 - 80, 135, 'MotionControl', "", -55);
         lobbyName.setText(this.partidaDatos.nombre);
+        lobbyName.tint="#000000";
 
 
 
@@ -628,8 +808,13 @@ class LobbyOnline extends Phaser.Scene {
                 //console.log("Valor: " + inputMensaje);
                 mensaje.val("");
                 //Podemos escribir mensajes en el chat siempre que tengamos un nombre puesto; tenemos que estar "loggeados"
-                if (Usuario.user !== '')
+                if (Usuario.user !== '') {
                     that.writeMenssage(inputMensaje, Usuario);
+                } else {
+                    alert("Introduce un nombre de usuario antes de escribir un mensaje")
+                }
+            } else {
+                alert("Escribe un mensaje valido")
             }
         })
 
@@ -648,7 +833,7 @@ class LobbyOnline extends Phaser.Scene {
         });
         $(window).focus(function () {
             windowFocus = true;
-           
+
         });
 
 
@@ -661,11 +846,11 @@ class LobbyOnline extends Phaser.Scene {
 
     /*
     getChat(callback) {
-
+ 
         var that = this
         let nombrePartida = "Partida1"+".txt";
         console.log(nombrePartida)
-
+ 
         $.ajax({
             url: 'http://localhost:8080/mensaje/fileRead/concreto',
             data: nombrePartida,
@@ -673,7 +858,7 @@ class LobbyOnline extends Phaser.Scene {
             headers: {
                 "Content-Type": "application/json"
             }
-
+ 
         }).done(function (mensajes) {
             //console.log("Chat conseguido", callback)
             if (typeof callback !== 'undefined') {
@@ -689,7 +874,7 @@ class LobbyOnline extends Phaser.Scene {
 
         let idPartida = this.partidaDatos.id
         $.ajax({
-            url: 'http://localhost:8080/partida/fileRead/'+idPartida,
+            url: 'http://localhost:8080/partida/fileRead/' + idPartida,
 
         }).done(function (mensajes) {
             //console.log("Chat conseguido", callback)
@@ -787,7 +972,7 @@ class LobbyOnline extends Phaser.Scene {
         let idPartida = this.partidaDatos.id
         $.ajax({
             method: "POST",
-            url: 'http://localhost:8080/partida/fileWrite/'+idPartida,
+            url: 'http://localhost:8080/partida/fileWrite/' + idPartida,
             data: mensaje,
             processData: false,
             headers: {
@@ -1048,6 +1233,8 @@ class LobbyOnline extends Phaser.Scene {
                     this.logged[1] = true;
                     //Ocultamos el campo de texto para que no vuelva a poner nombre el jugador1
                     this.inputTextP1.setVisible(false);
+                    this.summitP1.setVisible(false);
+                    this.summitP1Texto.setVisible(false);
                 }
                 if (Usuarios[0].status === "ready") {
 
@@ -1063,6 +1250,8 @@ class LobbyOnline extends Phaser.Scene {
                     this.logged[0] = true;
                     //Ocultamos el campo de texto para que no vuelva a poner nombre el jugador1
                     this.inputTextP1.setVisible(false);
+                    this.summitP1.setVisible(false);
+                    this.summitP1Texto.setVisible(false);
 
                 }
                 //Si el jugador está ausente
@@ -1077,6 +1266,8 @@ class LobbyOnline extends Phaser.Scene {
                     this.logged[0] = true;
                     //Seguimos manteniendo el campo de texto oculto
                     this.inputTextP1.setVisible(false);
+                    this.summitP1.setVisible(false);
+                    this.summitP1Texto.setVisible(false);
                 }
                 //Si el jugador tiene de estado "disconnected"
                 if (Usuarios[0].status === "disconected") {
@@ -1106,8 +1297,10 @@ class LobbyOnline extends Phaser.Scene {
                         this.p1Name = ""
                         this.textP1.setText(texto)
                         this.logged[0] = false;
-                        console.log("Haciendo visible")
+                        //console.log("Haciendo visible")
                         this.inputTextP1.setVisible(true);
+                        this.summitP1.setVisible(true);
+                        this.summitP1Texto.setVisible(true);
                     }
 
 
@@ -1126,8 +1319,10 @@ class LobbyOnline extends Phaser.Scene {
                 this.p1Name = ""
                 this.textP1.setText(texto)
                 this.logged[0] = false;
-                console.log("Haciendo visible");
+                //console.log("Haciendo visible");
                 this.inputTextP1.setVisible(true);
+                this.summitP1.setVisible(true);
+                this.summitP1Texto.setVisible(true);
             }
 
             //Mismo caso, pero con el segundo jugador; Actualizamos el icono según su estado, y si está desconectado...
@@ -1140,6 +1335,8 @@ class LobbyOnline extends Phaser.Scene {
                     this.textP2.setText(texto);
                     this.logged[1] = true;
                     this.inputTextP2.setVisible(false);
+                    this.summitP2.setVisible(false);
+                    this.summitP2Texto.setVisible(false);
                 }
                 if (Usuarios[1].status === "ready") {
 
@@ -1153,6 +1350,8 @@ class LobbyOnline extends Phaser.Scene {
                     this.logged[1] = true;
 
                     this.inputTextP2.setVisible(false);
+                    this.summitP2.setVisible(false);
+                    this.summitP2Texto.setVisible(false);
                 }
                 if (Usuarios[1].status === "missing") {
                     that.iconoEstadoP2.setTexture("Missing");
@@ -1161,6 +1360,8 @@ class LobbyOnline extends Phaser.Scene {
                     this.textP2.setText(texto);
                     this.logged[1] = true;
                     this.inputTextP2.setVisible(false);
+                    this.summitP2.setVisible(false);
+                    this.summitP2Texto.setVisible(false);
                 }
                 if (Usuarios[1].status === "disconected") {
                     //console.log("Desconectado pa la calle asdasdada")
@@ -1185,6 +1386,8 @@ class LobbyOnline extends Phaser.Scene {
                         this.p2Name = ""
                         console.log("Haciendo visible");
                         this.inputTextP2.setVisible(true);
+                        this.summitP2.setVisible(true);
+                        this.summitP2Texto.setVisible(true);
                         this.logged[1] = false;
                         this.textP2.setText(texto)
                     }
@@ -1204,6 +1407,8 @@ class LobbyOnline extends Phaser.Scene {
                 this.logged[1] = false;
                 //console.log("Haciendo visible");
                 this.inputTextP2.setVisible(true);
+                this.summitP2.setVisible(true);
+                this.summitP2Texto.setVisible(true);
             }
         }
 
@@ -1213,11 +1418,16 @@ class LobbyOnline extends Phaser.Scene {
             if (this.yo.side === 1) {
                 //Desactivo el campo de texto del jugador 2
                 this.inputTextP2.setVisible(false);
+                this.summitP2.setVisible(false);
+                this.summitP2Texto.setVisible(false);
+                
             }
             //Si soy el jugador 2
             if (this.yo.side === 2) {
                 //Desactivo el campo de texto del jugador 1
                 this.inputTextP1.setVisible(false);
+                this.summitP1.setVisible(false);
+                this.summitP1Texto.setVisible(false);
             }
         }
 
@@ -1291,9 +1501,9 @@ class LobbyOnline extends Phaser.Scene {
         var that = this
 
         if (date.getMinutes() < 10) {
-            Mensaje = ("--> " + player.user + " (" + date.getHours() + " : 0" + date.getMinutes() + ") - " + mensaje);
+            Mensaje = ( player.user + " (" + date.getHours() + " : 0" + date.getMinutes() + ") - " + mensaje);
         } else {
-            Mensaje = ("--> " + player.user + " (" + date.getHours() + " : " + date.getMinutes() + ") - " + mensaje);
+            Mensaje = ( player.user + " (" + date.getHours() + " : " + date.getMinutes() + ") - " + mensaje);
         }
         //Escribimos el mensaje en un fichero de texto (fileWrite() en MensajeController.java)
         this.sendMenssage((sad) => {
@@ -1327,6 +1537,19 @@ class LobbyOnline extends Phaser.Scene {
         for (var i = 1; i < interval_id; i++)
             window.clearInterval(i);
         //for clearing all intervals
+    }
+
+    update() {
+
+
+        if (this.yo.user === "" || this.yo.user === null) {
+
+            $("#mensaje").attr('disabled', 'disabled');
+        } else {
+
+            $("#mensaje").removeAttr('disabled');
+        }
+
     }
 
 

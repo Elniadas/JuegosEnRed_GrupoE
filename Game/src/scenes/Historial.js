@@ -19,7 +19,8 @@ class Historial extends Phaser.Scene {
         this.soundManager.play('Musica_fondo', { loop: true })
         let salirB = this.add.sprite(200, 10, "buttonPlay");
         salirB.setFrame(0);
-        salirB.setScale(0.75);
+        
+        salirB.setScale(0.5, 0.75);
         salirB.setOrigin(0.48, -0.1);
         salirB.setInteractive();
 
@@ -41,9 +42,11 @@ class Historial extends Phaser.Scene {
             this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
         })
 
-        this.historial = this.add.text(salirB.x - 130, salirB.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.historial = this.add.bitmapText(salirB.x - 50, salirB.y + 20, "MotionControl", "", -60);
         this.historial.setText("Salir");
+        this.historial.tint="#000000";
 
+        //salir.x - 53, salir.y - 35, "MotionControl", "", -60
 
 
 

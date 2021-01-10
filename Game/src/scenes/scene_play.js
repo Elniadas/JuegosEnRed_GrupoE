@@ -699,6 +699,8 @@ class Scene_play extends Phaser.Scene {
         this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP2.setScrollFactor(0, 0)
 
+       
+
 
 
         //Ignorasiones

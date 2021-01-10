@@ -41,6 +41,7 @@ class MainMenu extends Phaser.Scene {
         //Bonton jugar
         let pb2 = this.add.sprite(200, 260, "buttonPlay");
         pb2.setFrame(0);
+        //pb2.setScale(0.75);
         pb2.setScale(0.75);
         pb2.setOrigin(0.48, -0.1);
         pb2.setInteractive();
@@ -73,8 +74,9 @@ class MainMenu extends Phaser.Scene {
             pb2.setFrame(2);
         })
 
-        this.playT = this.add.text(pb2.x - 75, pb2.y + 25).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.playT = this.add.bitmapText(pb2.x - 50, pb2.y + 17 , "MotionControl", "", -60);
         this.playT.setText("Jugar");
+        this.playT.tint = "#000000";
 
 
         //let soundM=this.add.sprite(950, 75, "Mute");
@@ -109,8 +111,13 @@ class MainMenu extends Phaser.Scene {
             this.scene.start("Tutorial", { escena: null, soundManager: this.soundManager });
         })
 
-        this.cjT = this.add.text(pbCM.x - 145, pbCM.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.cjT = this.add.bitmapText(pbCM.x - 111, pbCM.y + 20,  "MotionControl", "", -60);
         this.cjT.setText("Cómo Jugar");
+        this.cjT.tint = "#000000";
+
+        
+
+        
 
         //Boton Score
         let botonHistorial = this.add.sprite(200, 460, "buttonPlay");
@@ -137,8 +144,11 @@ class MainMenu extends Phaser.Scene {
             this.scene.start("Historial", { escena: null, soundManager: this.soundManager });
         })
 
-        this.historial = this.add.text(botonHistorial.x - 130, botonHistorial.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.historial = this.add.bitmapText(botonHistorial.x - 85, botonHistorial.y + 23, "MotionControl", "", -60);
         this.historial.setText("Historial");
+        this.historial.tint = "#000000";
+
+        
 
 
 
@@ -167,16 +177,32 @@ class MainMenu extends Phaser.Scene {
         pbCG.on("pointerup", () => {
             pbCG.setFrame(0);
             //CODIGO MENU
-            let pause = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, "menuPausa");
+            let pause = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, "sonido");
             pause.displayHeight = this.game.canvas.height * 0.85;
             pause.displayWidth = this.game.canvas.width * 0.65;
 
-            let salir = this.add.image(this.game.canvas.width / 2 - 200, this.game.canvas.height * 0.5 - 200, "botonPausa");
+            let salir = this.add.image(this.game.canvas.width / 2 - 200, this.game.canvas.height * 0.5 - 200, "buttonPlay");
             salir.displayHeight = this.game.canvas.height * 0.1;
             salir.displayWidth = this.game.canvas.width * 0.2;
             salir.setInteractive();
-            let textoSalir = this.add.text(salir.x - 55, salir.y - 15).setScrollFactor(0).setFontSize(30)
+
+            salir.on("pointerover", () => {
+                salir.setFrame(1);
+            })
+
+            salir.on("pointerout", () => {
+                salir.setFrame(0);
+            })
+
+            salir.on("pointerdown", () => {
+                salir.setFrame(2);
+            })
+
+            let textoSalir = this.add.bitmapText(salir.x - 53, salir.y - 35, "MotionControl", "", -60);
             textoSalir.setText("Salir");
+            textoSalir.tint = "#000000";
+
+            
 
 
 
@@ -207,8 +233,11 @@ class MainMenu extends Phaser.Scene {
 
         })
 
-        this.cjCF = this.add.text(pbCG.x - 80, pbCG.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.cjCF = this.add.bitmapText(pbCG.x - 63, pbCG.y + 20, "MotionControl", "", -60);
         this.cjCF.setText("Sonido");
+        this.cjCF.tint="#000000";
+
+        
 
 
 

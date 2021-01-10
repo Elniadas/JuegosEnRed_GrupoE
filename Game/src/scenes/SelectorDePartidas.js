@@ -15,12 +15,15 @@ class SelectorDePartidas extends Phaser.Scene {
 
     create() {
 
-
+        
         let bc = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, 'Victoria').setDepth(-100);
         this.soundManager.play('Musica_fondo', { loop: true })
-        let salirB = this.add.sprite(200, 10, "buttonPlay");
+        let lobbyTxt=this.add.bitmapText(this.game.canvas.width/2-90, 140, 'MotionControl', "Lobby", -70);
+        lobbyTxt.tint="#000000";
+        
+        let salirB = this.add.sprite(200, 30, "buttonPlay");
         salirB.setFrame(0);
-        salirB.setScale(0.75);
+        salirB.setScale(0.6, 0.6);
         salirB.setOrigin(0.48, -0.1);
         salirB.setInteractive();
 
@@ -43,7 +46,7 @@ class SelectorDePartidas extends Phaser.Scene {
         })
 
 
-        let actualizar = this.add.sprite(800, 10, "buttonPlay");
+        let actualizar = this.add.sprite(2000, 10, "buttonPlay");
         actualizar.setFrame(0);
         actualizar.setScale(0.75);
         actualizar.setOrigin(0.48, -0.1);
@@ -72,8 +75,10 @@ class SelectorDePartidas extends Phaser.Scene {
 
 
 
-        let salir = this.add.text(salirB.x - 130, salirB.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
-        salir.setText("Salir");
+        let salir = this.add.bitmapText(salirB.x - 55, salirB.y + 10, "MotionControl", "Salir", -60);
+        salir.tint="#000000";
+        
+        
         let act = this.add.text(actualizar.x - 130, actualizar.y + 30).setScrollFactor(0).setFontSize(45).setColor("#000000");
         act.setText("Actualizar");
 
@@ -88,9 +93,9 @@ class SelectorDePartidas extends Phaser.Scene {
         refrescarLobby();
 
 
-        let offLineBoton = this.add.sprite(200, 600, "buttonPlay");
+        let offLineBoton = this.add.sprite(880, 30, "buttonPlay");
         offLineBoton.setFrame(0);
-        offLineBoton.setScale(0.75);
+        offLineBoton.setScale(0.6);
         offLineBoton.setOrigin(0.48, -0.1);
         offLineBoton.setInteractive();
 
@@ -113,8 +118,9 @@ class SelectorDePartidas extends Phaser.Scene {
 
         })
 
-        let offLineTexto = this.add.text(offLineBoton.x - 145, offLineBoton.y + 30).setScrollFactor(0).setFontSize(30).setColor("#000000");
-        offLineTexto.setText("Jugar Offline");
+        let offLineTexto = this.add.bitmapText(offLineBoton.x - 105, offLineBoton.y + 15, 'MotionControl', "Jugar Offline", -50);
+        offLineTexto.tint="#000000";
+ 
 
 
 
@@ -211,6 +217,8 @@ class SelectorDePartidas extends Phaser.Scene {
                     that.borrarIntervalos();
                     that.scene.stop("SelectorDePartidas")
                     that.scene.start("LobbyOnline", { escena: null, soundManager: that.soundManager, partida: that.arrayPartidas[index] });
+                }else{
+                    alert("Servidor completo, prueba mas tarde");
                 }
 
             });
