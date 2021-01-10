@@ -9,7 +9,11 @@ class Scene_play extends Phaser.Scene {
     init(data) {
         this.soundManager = data.soundManager;
         this.data = data;
-
+        this.online = data.online
+        if (this.online) {
+            this.partidaDatos = data.partida;
+            this.yo = data.yo
+        }
 
     }
     preload() {
@@ -25,7 +29,7 @@ class Scene_play extends Phaser.Scene {
     }
     create() {
 
-
+        this.borrarIntervalos();
         /*        
            let tamanio=escenas.length;
              let i=0;
@@ -53,9 +57,9 @@ class Scene_play extends Phaser.Scene {
 
 
         //Pensar esto un pcoo mejor
-        this.escenarios[0] = new Escenario("Cinta", 0, true);
+        this.escenarios[0] = new Escenario("Cinta", 4, true);
         this.escenarios[1] = new Escenario("Contador", 1, false);
-        this.escenarios[2] = new Escenario("Nieve", 4, false);
+        this.escenarios[2] = new Escenario("Nieve", 0, false);
         this.escenarios[3] = new Escenario("Electricidad", 2, true);
         this.escenarios[4] = new Escenario("Laboratorio", 3, false);
 
@@ -81,7 +85,7 @@ class Scene_play extends Phaser.Scene {
         this.playerU.velocidad = 300;
         this.playerU.time = 0;
         this.playerU.setDepth(1000);
-        this.playerU.name = this.data.names.p1;
+        this.playerU.name = this.data.users.p1.user;
 
         //Player 2//
 
@@ -93,7 +97,7 @@ class Scene_play extends Phaser.Scene {
         this.playerD.time = 0;
         this.playerD.velocidad = 300;
         this.playerD.setDepth(1000);
-        this.playerD.name = this.data.names.p2;
+        this.playerD.name = this.data.users.p2.user;
 
         //Cargar sonido
 
@@ -126,7 +130,7 @@ class Scene_play extends Phaser.Scene {
         let cintaU = this.physics.add.image(1024 + 1180 * this.escenarios[0].pos, 121, "muro")
         cintaU.displayHeight = 5;
         cintaU.displayWidth = 78
-        cintaU.alpha=0;
+        cintaU.alpha = 0;
 
 
         cinU.setScale(0.30);
@@ -174,7 +178,7 @@ class Scene_play extends Phaser.Scene {
 
         cintaD.displayHeight = 5;
         cintaD.displayWidth = 78
-        cintaD.alpha=0
+        cintaD.alpha = 0
 
         let cinD = this.add.image(1030 + 1180 * this.escenarios[0].pos, 449, "cintaSprite") //no oficial
 
@@ -676,27 +680,29 @@ class Scene_play extends Phaser.Scene {
 
 
 
-        let cronoJ1= this.add.image(792,100,"cronoP1")
-        cronoJ1.displayHeight=30;
-        cronoJ1.displayWidth=95
+        let cronoJ1 = this.add.image(792, 100, "cronoP1")
+        cronoJ1.displayHeight = 30;
+        cronoJ1.displayWidth = 95
         cronoJ1.setDepth(10)
-        cronoJ1.setScrollFactor(0,0)
-        let cronoJ2= this.add.image(792,100,"cronoP2")
-        cronoJ2.setScrollFactor(0,0)
-        cronoJ2.displayHeight=30;
-        cronoJ2.displayWidth=95
+        cronoJ1.setScrollFactor(0, 0)
+        let cronoJ2 = this.add.image(792, 100, "cronoP2")
+        cronoJ2.setScrollFactor(0, 0)
+        cronoJ2.displayHeight = 30;
+        cronoJ2.displayWidth = 95
         cronoJ2.setDepth(10)
 
 
         this.TiempoP1 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP1.setScrollFactor(0, 0)
-        
+
 
         this.TiempoP2 = this.add.bitmapText(750, 90, 'Digitalism', "00 : 00 : 00", 22).setDepth(10)
         this.TiempoP2.setScrollFactor(0, 0)
-        
 
-       
+
+
+
+
         //Ignorasiones
 
         this.cam1.ignore(this.TiempoP2);
@@ -715,6 +721,87 @@ class Scene_play extends Phaser.Scene {
             callbackScope: this,
             loop: false
         });
+
+        if (this.online) {
+
+            let windowFocus = true;
+            var Usuario = this.yo;
+
+            console.log("Ademas soy este fulano: ", Usuario)
+            function meActualizo() {
+
+                if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected") {
+
+                   // console.log("Me actualizo", Usuario);
+                    Usuario.status = "connected";
+                    //Mandamos el estado al servidor con una petición PUT 
+                    that.putPlayer(Usuario, () => {
+                        that.getLobbyPlayers((players) => {
+                            that.todos(players, () => {
+                                setTimeout(() => { meActualizo() }, 1000)
+                            })
+                        })
+
+                    });
+
+                } else {
+                    //console.log("No me actualizo")
+                    that.getLobbyPlayers((players) => {
+                        that.todos(players, () => {
+                            setTimeout(() => { meActualizo() }, 1000)
+                        })
+                    })
+                }
+            }
+
+            function primera() {
+                if (Usuario.user !== '' && windowFocus && Usuario.status !== "disconected") {
+
+                    console.log("Me actualizo", Usuario);
+                    Usuario.status = "ready";
+                    //Mandamos el estado al servidor con una petición PUT 
+                    that.putPlayer(Usuario, () => {
+                        that.getLobbyPlayers((players) => {
+                            that.todos(players, () => {
+                                setTimeout(() => { meActualizo() }, 1000)
+                            })
+                        })
+
+                    });
+
+                } else {
+                    //console.log("No me actualizo")
+                    that.getLobbyPlayers((players) => {
+                        that.todos(players, () => {
+                            setTimeout(() => { meActualizo() }, 1000)
+                        })
+                    })
+                }
+            }
+
+            primera();
+
+
+
+
+            $(window).blur(function () {
+                windowFocus = false;
+
+            });
+            $(window).focus(function () {
+                windowFocus = true;
+                if (that.scene.isActive("Scene_play")) {
+                    if (that.yo.user !== '' && that.yo.user !== null && that.yo.status !== "ready") {
+                        Usuario.status = "connected"
+                        that.putPlayer(Usuario)
+                        console.log("Reconectando");
+                    }
+                }
+
+            });
+
+        }
+
 
 
 
@@ -815,7 +902,12 @@ class Scene_play extends Phaser.Scene {
             this.keyboardP2.ESC.isDown = false;
             this.pararP1();
             this.pararP2();
-            this.scene.launch("Pause", { escena: this, soundManager: this.soundManager })
+            if (this.online) {
+                this.scene.launch("Pause", { escena: this, soundManager: this.soundManager, online: this.online, yo: this.yo, partida: this.partidaDatos })
+            } else {
+                this.scene.launch("Pause", { escena: this, soundManager: this.soundManager })
+            }
+
             //this.keyboardP2.ESC.isDown=true;
         }
 
@@ -1011,7 +1103,7 @@ class Scene_play extends Phaser.Scene {
             mn1 + " : " + sg1 + " : " + cs1
         ]);
 
-
+        this.tiempoFinalP1 = { total: timeP1, mn: mn1, sg: sg1, cs: cs1 }
 
     }
 
@@ -1024,6 +1116,7 @@ class Scene_play extends Phaser.Scene {
         cr.setTime(this.croP2);
 
         let timeP2 = cr.getTime() + this.playerD.time;
+
         //Transformar
         let cs2 = timeP2 % 1000;
         cs2 = cs2 / 10;
@@ -1052,17 +1145,12 @@ class Scene_play extends Phaser.Scene {
             mn2 = "0" + mn2;
         }
 
-        this.TiempoP2.setText([
-            mn2 + " : " + sg2 + " : " + cs2
-        ]);
 
         this.TiempoP2.setText([
             mn2 + " : " + sg2 + " : " + cs2
         ]);
 
-        this.TiempoP2.setText([
-            mn2 + " : " + sg2 + " : " + cs2
-        ]);
+        this.tiempoFinalP2 = { total: timeP2, mn: mn2, sg: sg2, cs: cs2 }
 
     }
 
@@ -2237,7 +2325,7 @@ class Scene_play extends Phaser.Scene {
     }
 
     crearPlataformasLaboratorio2() {
-        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275+this.game.canvas.height/2, "labplatform").setImmovable(true);
+        let p2_4_1 = this.physics.add.image(120 + 1180 * this.escenarios[4].pos, 275 + this.game.canvas.height / 2, "labplatform").setImmovable(true);
         p2_4_1.displayHeight = 20;
         p2_4_1.displayWidth = 80;
 
@@ -2443,6 +2531,7 @@ class Scene_play extends Phaser.Scene {
 
     borrarIntervalos() {
 
+
         this.keyDelete();
         var interval_id = window.setInterval("", 9999); // Get a reference to the last
         // interval +1
@@ -2452,14 +2541,47 @@ class Scene_play extends Phaser.Scene {
     }
 
     endP1(bandera) {
+        var that = this
         console.log("bandera p1")
         this.pararP1();
         this.end.player1 = true;
 
-        if (this.end.player1 === true && this.end.player2 === true) {
+        if (this.online) {
             this.borrarIntervalos();
-            this.scene.start("Victoria", { escena: null, soundManager: this.soundManager, ganador: 2, name: this.playerD.name });
+            this.yo.status="win"
+            this.putPlayer(this.yo, () => {
+                this.scene.start("Victoria", {
+                    escena: null,
+                    soundManager: this.soundManager,
+                    ganador: 1,
+                    nameP1: this.playerU.name,
+                    nameP2: this.playerD.name,
+                    tiempoP1: this.tiempoFinalP1,
+                    tiempoP2: this.tiempoFinalP2,
+                    online: this.online
+                });
+
+            })
+
+        } else {
+
+            if (this.end.player1 === true && this.end.player2 === true) {
+                this.borrarIntervalos();
+
+                this.scene.start("Victoria", {
+                    escena: null,
+                    soundManager: this.soundManager,
+                    ganador: 2,
+                    nameP1: this.playerU.name,
+                    nameP2: this.playerD.name,
+                    tiempoP1: this.tiempoFinalP1,
+                    tiempoP2: this.tiempoFinalP2,
+                    online: this.online
+                });
+            }
         }
+
+
         bandera.destroy();
         this.BP1.destroy();
     }
@@ -2468,10 +2590,39 @@ class Scene_play extends Phaser.Scene {
         console.log("bandera p2")
         this.pararP2();
         this.end.player2 = true;
-        if (this.end.player1 === true && this.end.player2 === true) {
+        if (this.online) {
+            
             this.borrarIntervalos();
-            this.scene.start("Victoria", { escena: null, soundManager: this.soundManager, ganador: 1, name: this.playerU.name });
+            this.yo.status="win"
+            this.putPlayer(this.yo, () => {
+                this.scene.start("Victoria", {
+                    escena: null,
+                    soundManager: this.soundManager,
+                    ganador: 2,
+                    nameP1: this.playerU.name,
+                    nameP2: this.playerD.name,
+                    tiempoP1: this.tiempoFinalP1,
+                    tiempoP2: this.tiempoFinalP2,
+                    online: this.online
+                });
+
+            })
+        } else {
+            if (this.end.player1 === true && this.end.player2 === true) {
+                this.borrarIntervalos();
+                this.scene.start("Victoria", {
+                    escena: null,
+                    soundManager: this.soundManager,
+                    ganador: 1,
+                    nameP1: this.playerU.name,
+                    nameP2: this.playerD.name,
+                    tiempoP1: this.tiempoFinalP1,
+                    tiempoP2: this.tiempoFinalP2,
+                    online: this.online
+                });
+            }
         }
+
         bandera.destroy();
         this.BP2.destroy();
     }
@@ -2496,9 +2647,184 @@ class Scene_play extends Phaser.Scene {
 
     }
 
+    //API REST COSAS//
+
+
+    getLobbyPlayers(callback) {
+        var that = this
+        let idPartida = this.partidaDatos.id
+        $.ajax({
+            url: 'http://localhost:8080/partida/' + idPartida,
+
+        }).done(function (partida) {
+            //console.log("Partida de getLobby", partida)
+            if (typeof callback !== 'undefined') {
+                if (partida !== null) {
+                    //asignamos la posición en la partida del jugador que se haya loggeado (P1 o P2)
+                    // if (that.yo.side === 1 && partida.p1.side === 1) {
+                    //     that.yo = partida.p1;
+                    // } else if (that.yo.side === 2 && partida.p1.side === 2) {
+                    //     that.yo = partida.p2;
+                    // }
+                }
+                //Jugadores en partida (p1 y p2 en "Partida.java")
+                var players = [partida.p1, partida.p2];
+                //console.log("Jugadores obtenidos", players)
+                //Devolvemos a los jugadores loggeados
+                callback(players)
+            }
+        }).fail(() => {
+            //Si el servidor no está disponible, borramos todos los intervalos de tiempo establecidos
+            this.borrarIntervalos();
+            alert("Los servidores no se encuentran disponibles, volviendo al menú principal");
+            //borramos el nombre, el estado, los ids y las posiciones del JSON, y devolvemos al jugador al menú principal
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+        })
+
+    }
+
+    putPlayer(player, callback) {
+
+        let partidaID = this.partidaDatos.id;
+        $.ajax({
+            method: "PUT",
+            url: 'http://localhost:8080/partida/player/' + partidaID,
+            data: JSON.stringify(player),
+            processData: false,
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).done(function (partida) {
+            if (typeof callback !== 'undefined') {
+
+                callback(partida)
+            }
+        }).fail(() => {
+            //Si el servidor no está disponible, borramos todos los intervalos de tiempo establecidos
+            this.borrarIntervalos();
+            alert("Los servidores no se encuentran disponibles, volviendo al menú principal");
+            //borramos el nombre, el estado, los ids y las posiciones del JSON, y devolvemos al jugador al menú principal
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+        })
+    }
+
+    todos(players, callback) {
+
+        if (players[0].status === "" || players[0].status === "disconected" || players[0].status === null) {
+            this.borrarIntervalos();
+
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            alert("Player 1 desconectado, volviendo al menu principal");
+            this.eliminarUsuario(this.yo, () => {
+                this.yo = null;
+                this.eliminarUsuario(players[1], () => {
+                    console.log("borrados")
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+                })
+            })
+            return
+        }
+        if (players[1].status === "" || players[1].status === "disconected" || players[1].status === null) {
+            this.borrarIntervalos();
+
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            alert("Player 2 desconectado, volviendo al menu principal");
+            this.eliminarUsuario(this.yo, () => {
+                this.yo = null;
+                this.eliminarUsuario(players[0], () => {
+                    console.log("borrados")
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+                })
+            })
+            return
+        }
+
+        if (players[0].status === "win") {
+            this.borrarIntervalos();
+            console.log(players)
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            alert("Player 1 ya ha llegado a la meta, volviendo al menu principal");
+            this.eliminarUsuario(players[0], () => {
+                this.yo = null;
+                this.eliminarUsuario(players[1], () => {
+                    console.log("borrados")
+                    console.log(players)
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+                })
+            })
+            return
+
+        }
+
+        if (players[1].status === "win") {
+            this.borrarIntervalos();
+
+            this.yo.user = "";
+            this.yo.status = "";
+            this.yo.id = 0;
+            this.yo.side = 0;
+            alert("Player 2 ya ha llegado a la meta, volviendo al menu principal");
+            this.eliminarUsuario(players[1], () => {
+                this.yo = null;
+                this.eliminarUsuario(players[0], () => {
+                    console.log("borrados")
+                    console.log(players)
+                    this.scene.start("MAINMENU", { escena: null, soundManager: this.soundManager });
+                })
+            })
+            return
+
+        }
+
+
+        if (typeof callback !== 'undefined') {
+            callback()
+        }
+
+    }
+
+    eliminarUsuario(player, callback) {
+        //console.log(player)
+
+        player.status = null
+        player.user = null;
+        player.id = 0;
+        this.putPlayer(player, callback)
+
+
+    }
+
+
+
+
 
 
 }
+
+
+
+
+
+
+
+
 
 /*
   var particles = this.add.particles('snowFlake')

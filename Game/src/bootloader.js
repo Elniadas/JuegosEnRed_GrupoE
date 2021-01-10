@@ -8,16 +8,7 @@ class Bootloader extends Phaser.Scene {
     preload() {
         this.load.on("complete", () => {
             this.scene.start("TeamScreen", { escena: null, soundManager: this.soundManager });
-        });
-
-        //Plugins
-        this.load.scenePlugin({
-            key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
-            sceneKey: 'rexUI'
-        });
-
-
+        });    
 
         //Init//
   
@@ -25,6 +16,9 @@ class Bootloader extends Phaser.Scene {
         //Fuente texto//
 
         this.load.bitmapFont('Digitalism', './assets/Digitalism.png', './assets/Digitalism.xml')
+        this.load.bitmapFont('Fuente', './assets/Fuente_0.png', './assets/Fuente.xml')
+        this.load.bitmapFont('MotionControl', './assets/MotionControl_0.png', './assets/MotionControl.xml')
+
 
         //Tutorial//
 
@@ -84,7 +78,7 @@ class Bootloader extends Phaser.Scene {
         this.load.image("Enchufe", "./assets/Enchufe.png");
 
         //Menu//
-        this.load.image("menu", "./assets/MainMenu1.jpg");
+        this.load.image("menu", "./assets/MainMenu2.jpg");
         this.load.spritesheet("FlagSheet2", "./assets/FlagSheet2.png", { frameWidth: 450, frameHeight: 300 }); //banderas
         this.load.spritesheet("Play", "./assets/Play.png", { frameWidth: 299, frameHeight: 137 }); //botón de play
         this.load.spritesheet("buttonPlay", "./assets/SpriteBotones.png", { frameWidth: 440, frameHeight: 122 });
@@ -113,6 +107,11 @@ class Bootloader extends Phaser.Scene {
         this.load.image("muro", "./assets/Muro.png");
         this.load.image("logo", "./assets/Logo.jpg")
         this.load.image("Crono", "./assets/Cronometro.png")
+        this.load.image("Desconectado", "./assets/Desconectado.png")
+        this.load.image("Conectado", "./assets/Conectado.png")
+        this.load.image("Ready", "./assets/tick.png")
+        this.load.image("Missing", "./assets/missing.png")
+        this.load.image("Botones", "./assets/BaseBoton.png")
 
         //Efectos//
 
@@ -144,7 +143,9 @@ class Bootloader extends Phaser.Scene {
         this.load.image('laser', './assets/laser.png');
         this.load.spritesheet("timeMAS", "./assets/Time++SSheet.png", { frameWidth: 437, frameHeight: 678 });
         //MenuPausa//
-        this.load.image('menuPausa', './assets/MenuPausa.jpg');
+        this.load.image("sonido", './assets/Sonido.jpg');
+        this.load.image('menuPausa', './assets/Pausa.jpg');
+        //this.load.image('menuPausa', './assets/MenuPausa.jpg');
         this.load.image('botonPausa', './assets/botonPausa.png');
         //VICTORIA//
         this.load.image('Victoria', './assets/Victoria.jpg')

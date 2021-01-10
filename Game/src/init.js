@@ -26,6 +26,9 @@ import LaboratorioTP2 from './scenes/LaboratorioTP2.js';
 import Victoria from './scenes/Victoria.js';
 import Lobby from './scenes/Lobby.js';
 import TeamScreen from './scenes/TeamScreen.js';
+import Historial from './scenes/Historial.js';
+import SelectorDePartidas from './scenes/SelectorDePartidas.js';
+import LobbyOnline from './scenes/LobbyOnline.js';
 
 
 const config = {
@@ -83,6 +86,9 @@ const config = {
         Victoria,
         Lobby,
         TeamScreen,
+        Historial,
+        SelectorDePartidas,
+        LobbyOnline,
         Pause
     ]
 }

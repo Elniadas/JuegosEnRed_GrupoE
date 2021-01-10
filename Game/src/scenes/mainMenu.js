@@ -1,4 +1,4 @@
-import Sprite from '../gameObjects/Sprite.js';
+
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
@@ -9,11 +9,7 @@ class MainMenu extends Phaser.Scene {
         super({ key: "MAINMENU" });
     }
     preload() {
-        this.load.scenePlugin({
-            key: 'rexuiplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
-            sceneKey: 'rexUI'
-        });
+
     }
     init(data) {
         this.soundManager = data.soundManager
@@ -22,6 +18,10 @@ class MainMenu extends Phaser.Scene {
     create() {
 
 
+        
+
+
+        var that = this;
 
         let bg = this.add.image(0, 0, "menu").setOrigin(0, 0);
         bg.displayWidth = this.game.canvas.width;
@@ -37,8 +37,11 @@ class MainMenu extends Phaser.Scene {
         let hoverSprite = this.add.sprite(100, 100, "FlagSheet2");
         hoverSprite.setVisible(false);
         hoverSprite.setScale(0.80);
-        let pb2 = this.add.sprite(200, 280, "buttonPlay");
+
+        //Bonton jugar
+        let pb2 = this.add.sprite(200, 260, "buttonPlay");
         pb2.setFrame(0);
+        //pb2.setScale(0.75);
         pb2.setScale(0.75);
         pb2.setOrigin(0.48, -0.1);
         pb2.setInteractive();
@@ -64,15 +67,16 @@ class MainMenu extends Phaser.Scene {
                 duration:3000
             })*/
             //this.scene.sleep("MAINMENU")
-            this.scene.start("Lobby", { escena: null, soundManager: this.soundManager });
+            this.scene.start("SelectorDePartidas", { escena: null, soundManager: this.soundManager });
         })
 
         pb2.on("pointerdown", () => {
             pb2.setFrame(2);
         })
 
-        this.playT = this.add.text(pb2.x - 75, pb2.y + 25).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.playT = this.add.bitmapText(pb2.x - 50, pb2.y + 17 , "MotionControl", "", -60);
         this.playT.setText("Jugar");
+        this.playT.tint = "#000000";
 
 
         //let soundM=this.add.sprite(950, 75, "Mute");
@@ -81,7 +85,9 @@ class MainMenu extends Phaser.Scene {
         //soundM.setScale(0.45);
         //soundM.setInteractive();
 
-        let pbCM = this.add.sprite(200, 380, "buttonPlay");
+        //Boton como jugar
+
+        let pbCM = this.add.sprite(200, 360, "buttonPlay");
         pbCM.setFrame(0);
         pbCM.setScale(0.75);
         pbCM.setOrigin(0.48, -0.1);
@@ -105,13 +111,52 @@ class MainMenu extends Phaser.Scene {
             this.scene.start("Tutorial", { escena: null, soundManager: this.soundManager });
         })
 
-        this.cjT = this.add.text(pbCM.x - 145, pbCM.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.cjT = this.add.bitmapText(pbCM.x - 111, pbCM.y + 20,  "MotionControl", "", -60);
         this.cjT.setText("Cómo Jugar");
+        this.cjT.tint = "#000000";
+
+        
+
+        
+
+        //Boton Score
+        let botonHistorial = this.add.sprite(200, 460, "buttonPlay");
+        botonHistorial.setFrame(0);
+        botonHistorial.setScale(0.75);
+        botonHistorial.setOrigin(0.48, -0.1);
+        botonHistorial.setInteractive();
+
+        botonHistorial.on("pointerover", () => {
+            botonHistorial.setFrame(1);
+        })
+
+        botonHistorial.on("pointerout", () => {
+            botonHistorial.setFrame(0);
+        })
+
+        botonHistorial.on("pointerdown", () => {
+            botonHistorial.setFrame(2);
+        })
+
+        botonHistorial.on("pointerup", () => {
+            botonHistorial.setFrame(0);
+            this.scene.sleep("MAINMENU")
+            this.scene.start("Historial", { escena: null, soundManager: this.soundManager });
+        })
+
+        this.historial = this.add.bitmapText(botonHistorial.x - 85, botonHistorial.y + 23, "MotionControl", "", -60);
+        this.historial.setText("Historial");
+        this.historial.tint = "#000000";
+
+        
 
 
 
 
-        let pbCG = this.add.sprite(200, 480, "buttonPlay");
+
+
+        //Boton sonido
+        let pbCG = this.add.sprite(200, 560, "buttonPlay");
         pbCG.setFrame(0);
         pbCG.setScale(0.75);
         pbCG.setOrigin(0.48, -0.1);
@@ -132,16 +177,32 @@ class MainMenu extends Phaser.Scene {
         pbCG.on("pointerup", () => {
             pbCG.setFrame(0);
             //CODIGO MENU
-            let pause = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, "menuPausa");
+            let pause = this.add.image(this.game.canvas.width / 2, this.game.canvas.height / 2, "sonido");
             pause.displayHeight = this.game.canvas.height * 0.85;
             pause.displayWidth = this.game.canvas.width * 0.65;
 
-            let salir = this.add.image(this.game.canvas.width / 2 - 200, this.game.canvas.height * 0.5 - 200, "botonPausa");
+            let salir = this.add.image(this.game.canvas.width / 2 - 200, this.game.canvas.height * 0.5 - 200, "buttonPlay");
             salir.displayHeight = this.game.canvas.height * 0.1;
             salir.displayWidth = this.game.canvas.width * 0.2;
             salir.setInteractive();
-            let textoSalir = this.add.text(salir.x -55, salir.y-15 ).setScrollFactor(0).setFontSize(30)
+
+            salir.on("pointerover", () => {
+                salir.setFrame(1);
+            })
+
+            salir.on("pointerout", () => {
+                salir.setFrame(0);
+            })
+
+            salir.on("pointerdown", () => {
+                salir.setFrame(2);
+            })
+
+            let textoSalir = this.add.bitmapText(salir.x - 53, salir.y - 35, "MotionControl", "", -60);
             textoSalir.setText("Salir");
+            textoSalir.tint = "#000000";
+
+            
 
 
 
@@ -149,54 +210,42 @@ class MainMenu extends Phaser.Scene {
             //this.cambiarSonido();
             //var cambiar= this.cambiarSonido;
             //cambiar();
-            this.slider = this.rexUI.add.slider({
-                x: this.game.canvas.width / 2,
-                y: this.game.canvas.height / 2,
-                width: 200,
-                height: 30,
-                orientation: 'x',
 
-                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 6, COLOR_DARK),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
-                value: this.soundManager.volume,
-                valuechangeCallback: function (value) {
-
-                },
-                space: {
-                    top: 4,
-                    bottom: 4
-                },
-                input: 'drag', // 'drag'|'click'
-            }).layout();
-
-            this.slider.on('valuechange', function (newValue) {
-                this.cambiarSonido();
-                newValue = newValue.toFixed(4)
+            let form = "<input type=\"range\" min=\"1\" max=\"100\" value=\"50\"  id=\"myRange\">"
+            var Slider = this.add.dom(this.game.canvas.width / 2, this.game.canvas.height / 2).createFromHTML(form)
+            $('#myRange').change(function (e) {
+                let valor = e.currentTarget.valueAsNumber;
+                let newValue = valor / 100;
+                that.cambiarSonido(newValue);
                 print0.text = newValue;
-            }, this);
+
+            });
 
             salir.on("pointerup", () => {
                 salir.destroy();
                 pause.destroy();
                 textoSalir.destroy();
-                print0.text=''
-                this.slider.destroy();
+                print0.text = ''
+                Slider.destroy();
             })
 
 
 
         })
 
-        this.cjCF = this.add.text(pbCG.x - 80, pbCG.y + 30).setScrollFactor(0).setFontSize(50).setColor("#000000");
+        this.cjCF = this.add.bitmapText(pbCG.x - 63, pbCG.y + 20, "MotionControl", "", -60);
         this.cjCF.setText("Sonido");
+        this.cjCF.tint="#000000";
+
+        
 
 
 
     }
 
-    cambiarSonido() {
-        console.log("Cambiando el sonido")
-        this.soundManager.volume = this.slider.value;
+    cambiarSonido(value) {
+        console.log(value);
+        this.soundManager.volume = value;
         this.soundManager.resumeAll();
 
     }
