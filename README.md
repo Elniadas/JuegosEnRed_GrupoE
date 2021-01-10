@@ -118,7 +118,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Pantalla principal: con los botones "Jugar", "Cómo Jugar" y "Sonido" como se ha mencionado en el apartado del Flujo del Juego.
 
-![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Menu.PNG)
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/MenuPrincipal.png)
 
 > - Lobby principal: Selector de partidas que aparece sólo si el servidor está conectado
 
@@ -126,7 +126,7 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Partida online: Partida concreta del selector de partidas. En ella, los jugadores pueden hablar a través del chat. Hay un chat independiente por Partida. Si los jugadores no introducen un nombre (loguearse), no pueden escribir por el chat.
 
-![LobbyConcreta](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Lobby.PNG)
+![LobbyConcreta](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/LobbyOffline)
 
 > - Partida offline: pantalla en la que se muestra a ambos jugadores y a la que se puede acceder accionando el botón "Jugando Offline", en la Lobby principal. Podrán ver su avatar y cambiar su nickname. 
 
