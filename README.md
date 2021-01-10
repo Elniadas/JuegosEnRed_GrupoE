@@ -126,11 +126,11 @@ Realizar las pruebas secundarias tiene sus ventajas pero también sus inconvenie
 
 > - Partida online: Partida concreta del selector de partidas. En ella, los jugadores pueden hablar a través del chat. Hay un chat independiente por Partida. Si los jugadores no introducen un nombre (loguearse), no pueden escribir por el chat.
 
-![LobbyConcreta](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/LobbyOffline.png)
+![LobbyConcreta](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/Lobby.PNG)
 
 > - Partida offline: pantalla en la que se muestra a ambos jugadores y a la que se puede acceder accionando el botón "Jugando Offline", en la Lobby principal. Podrán ver su avatar y cambiar su nickname. 
 
-![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/NicknameFase2.png)
+![Diagrama](https://github.com/Elniadas/JuegosEnRed_GrupoE/blob/main/Images/LobbyOffline.png)
 
 > - Pantalla de juego: la parte superior es el mapa del jugador 1 y la de debajo la del 2. Ambas tienen el tiempo que llevan consumido.
 
