@@ -244,7 +244,7 @@ class Pause extends Phaser.Scene {
                 })
         
                 salir.on("pointerdown", () => {
-                    csalir.setFrame(2);
+                    salir.setFrame(2);
                 })
 
                 this.textoSalir.text = 'Salir'
@@ -285,7 +285,7 @@ class Pause extends Phaser.Scene {
                 })
         
                 salir.on("pointerdown", () => {
-                    csalir.setFrame(2);
+                    salir.setFrame(2);
                 })
 
                 
